@@ -31,8 +31,11 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const RaceExperience = ({ imageUrl, description, title }) => {
+
+  const { t, i18n } = useTranslation();
   return (
     <div className="overflow-hidden bg-[#371F76] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
       <div className="flex justify-center items-center w-[363px] h-[282px]">
@@ -50,7 +53,7 @@ const RaceExperience = ({ imageUrl, description, title }) => {
             target="_blank" 
             rel="noopener noreferrer"
           >
-            <span className='button-slanted-content'>BOOK NOW</span>
+            <span className='button-slanted-content'>{t('BOOK NOW')}</span>
           </Link>
         </div>
       </div>

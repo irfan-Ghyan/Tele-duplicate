@@ -9,6 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import leftArrow from '../../../public/assets/images/dome/left-arrow.png'; 
 import rightArrow from '../../../public/assets/images/dome/righ-arrow.png';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const Dome = () => {
   // const { domes, loading } = useDomeData();
@@ -22,6 +23,7 @@ const Dome = () => {
     { title: 'DOME', description: 'The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.', imageUrl: '/assets/images/dome/S5.JPG' },
     { title: 'DOME', description: 'The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.', imageUrl: '/assets/images/dome/S6.JPG' },
   ];
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -70,13 +72,13 @@ const Dome = () => {
           
        <div className="absolute inset-0 bg-[#11072C] bg-opacity-60 lg:bg-opacity-30%"></div>
           <div className="relative flex flex-col items-start justify-end h-full p-9 max-w-7xl mx-auto pb-40">
-            <h2 className="text-[32px] md:text-[54px] mb-4 text-white font-black font-orbitron ">{dome.title}</h2>
-            <p className="text-[18px] mb-4 text-white font-jura font-black leading-7 text-justify">{dome.description}</p>
+            <h2 className="text-[32px] md:text-[54px] mb-4 text-white font-black font-orbitron ">{t('dome.title')}</h2>
+            <p className="text-[18px] mb-4 text-white font-jura font-black leading-7 text-justify">{t('dome.description')}</p>
             <Link
               href="/dome"
               className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
             >
-              <span className='button-slanted-content'>Discover the Dome</span>
+              <span className='button-slanted-content'>{t('Discover the Dome')}</span>
             </Link>
           </div>
           {/* <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex space-x-4">

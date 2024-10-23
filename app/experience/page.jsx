@@ -158,12 +158,15 @@ import RaceExperience from '../components/raceexperience/RaceExperince';
 import Coaching from '../components/coaching/Coaching';
 import PrivateEvents from '../components/privateevents/PrivateEvents'
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const Page = () => {
+  const { t } = useTranslation();
+
   const uniqueExperiences = [
-    { title: '20-Minute Sprint', description: 'Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.', imageUrl: '/assets/images/experience/mintue1.jpg' },
-    { title: '40-Minute Session', description: 'Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.', imageUrl: '/assets/images/experience/30mn.png' },
-    { title: '60-Minute Session', description: 'Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.', imageUrl: '/assets/images/experience/60mn.png' },
+    { title: t('20-Minute Sprint'), description: t('Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.'), imageUrl: '/assets/images/experience/mintue1.jpg' },
+    { title: t('40-Minute Session'), description: t('Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.'), imageUrl: '/assets/images/experience/30mn.png' },
+    { title: t('60-Minute Session'), description: t('Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.'), imageUrl: '/assets/images/experience/60mn.png' },
   ];
 
   return (
@@ -171,13 +174,13 @@ const Page = () => {
       <Helmet>
         <title>Experiences | Racing simulators and all-inclusive access</title>
         <meta
-          name="description"
-          content="Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill."
+          name={t("description")}
+          content={t("Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill.")}
         />
-        <meta property="og:title" content="Experiences | Teleios Dome" />
+        <meta property={t("og:title")} content="Experiences | Teleios Dome" />
         <meta
-          property="og:description"
-          content="Join us at Teleios Dome for an array of racing experiences, whether you're a beginner or a hardcore racer, we have the perfect package for you."
+          property={t("og:description")}
+          content={t("Join us at Teleios Dome for an array of racing experiences, whether you're a beginner or a hardcore racer, we have the perfect package for you.")}
         />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/assets/images/experience/30mn.png" />
@@ -203,10 +206,10 @@ const Page = () => {
       >
         <div className="text-center text-whit justify-center xl:px-80 px-2 ">
           <h1 className="font-orbitron text-[34px] lg:text-[54px] text-white font-black mb-4">
-            EXPERIENCES
+          {t('EXPERIENCES')}
           </h1>
           <p className="text-white font-jura text-[18px] font-bold px-[2px] text-justify ">
-          Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!
+          {t('Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!')}
           </p>
         </div>
       </div>
@@ -214,12 +217,12 @@ const Page = () => {
       <div className="flex flex-col min-h-screen items-center overflow-x-hidden ">
         <div className="w-full max-w-7xl">
           <div className="flex flex-wrap justify-center my-6 lg:pb-[100px] ">
-            {uniqueExperiences.map((experience, index) => (
+            {uniqueExperiences.map((uniqueExperience, index) => (
               <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '365px' }}>
                 <RaceExperience
-                   title={experience.title === '40-Minute Session' ? `⭐ ${experience.title}` : experience.title} 
-                  description={experience.description}
-                  imageUrl={experience.imageUrl}
+                   title={t('uniqueExperience.title') === '40-Minute Session' ? `⭐ ${t('uniqueExperience.title')}` : t('uniqueExperience.title')} 
+                  description={t('uniqueExperience.description')}
+                  imageUrl={uniqueExperience.imageUrl}
                 />
               </div>
             ))}

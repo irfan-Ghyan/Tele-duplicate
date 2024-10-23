@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import CardComponent from './cardcomponent/CardComponent';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 // import leftArrow from '../../../../public/assets/icons/left.png';
 // import rightArrow from '../../../../public/assets/images/rightarrow.png';
 
@@ -13,13 +14,15 @@ const Experience = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
 
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     const fetchExperiences = async () => {
       const data = [
-        { title: '20-Minute Sprint', description: 'Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.', imageUrl: '/assets/images/experience/mintue1.jpg', button:'BOOK NOW', link: 'https://feverup.com/m/187813' },
-        { title: '40-Minute Session', description: 'Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.', imageUrl: '/assets/images/experience/30mn.png', button:'BOOK NOW', link: 'https://feverup.com/m/187813' },
-        { title: '60-Minute Session', description: 'Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.', imageUrl: '/assets/images/experience/60mn.png', button:'BOOK NOW', link: 'https://feverup.com/m/187813' },
-        { title: 'Private Events', description: 'Whether it\'s a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.', imageUrl: '/assets/images/experience/privateevent.jpg', button:'ENQUIRE NOW', link: 'https://wa.me/971566628585' },
+        { title: t('20-Minute Sprint'), description: t('Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.'), imageUrl: '/assets/images/experience/mintue1.jpg', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
+        { title: t('40-Minute Session'), description: t('Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.'), imageUrl: '/assets/images/experience/30mn.png', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
+        { title: t('60-Minute Session'), description: t('Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.'), imageUrl: '/assets/images/experience/60mn.png', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
+        { title: t('Private Events'), description: t('Whether it\'s a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.'), imageUrl: '/assets/images/experience/privateevent.jpg', button:t('ENQUIRE NOW'), link: 'https://wa.me/971566628585' },
       ];
       setExperiences(data);
   
@@ -58,12 +61,12 @@ const Experience = () => {
   return (
     <div className="w-full relative py-[40px] md:py-[50px] lg:py-[100px]">
       <div className="border-solid border-b-[1px] border-white border-opacity-50 text-end">
-        <h1 className="text-[14px] text-white font-normal font-orbitron pb-4">EXPERIENCE</h1>
+        <h1 className="text-[14px] text-white font-normal font-orbitron pb-4">{t('EXPERIENCE')}</h1>
       </div>
       <div className="md:flex justify-between mt-[36px] md:mb-[41px]">
         <div>
           <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">
-            EXPERIENCES
+          {t('EXPERIENCES')}
           </h1>
         </div>
       </div>
@@ -79,10 +82,10 @@ const Experience = () => {
             style={{ minWidth: '286px', marginRight: '16px' }}
           >
             <CardComponent
-              title={experience.title === '40-Minute Session' ? `⭐ ${experience.title}` : experience.title}
-              description={experience.description}
+              title={t('experience.title') === '40-Minute Session' ? `⭐ ${t('experience.title')}` : t('experience.title')}
+              description={t('experience.description')}
               imageUrl={experience.imageUrl}
-              button={experience.button}
+              button={t('experience.button')}
               link={experience.link}
             />
           </div>

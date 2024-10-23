@@ -68,6 +68,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import '../i18n';
 
 interface RootLayoutProps {
   children: ReactNode;

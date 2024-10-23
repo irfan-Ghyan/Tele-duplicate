@@ -2,9 +2,14 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head'; 
+import { useTranslation } from 'react-i18next';
 
 const CardComponent = ({ imageUrl, title, description, button, link }) => {
+
+  const { t, i18n } = useTranslation();
+
   return (
+    
     <div className="overflow-hidden bg-[#371F76] mb-5 items-center flex flex-col h-full">
       <Head>
         <title>{title} | Teleios Dome</title>
@@ -30,7 +35,7 @@ const CardComponent = ({ imageUrl, title, description, button, link }) => {
         </div>
         <div className="pb-[22px]">
           <Link
-            href={link}  // Dynamically set the href attribute using the link prop
+            href={link} 
             target="_blank"
             rel="noopener noreferrer"
             className="custom-button button-slanted cursor-pointer w-[220px] md:w-[223px] lg:w-[223px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
@@ -38,6 +43,8 @@ const CardComponent = ({ imageUrl, title, description, button, link }) => {
             <span className="button-slanted-content">{button}</span>
           </Link>
         </div>
+
+        
       </div>
     </div>
   );

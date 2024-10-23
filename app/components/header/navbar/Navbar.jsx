@@ -8,12 +8,15 @@ import { usePathname } from 'next/navigation';
 // import logo from '../../../../public/assets/images/logo.png';
 // import closenavbar from '../../../../public/assets/icons/navbarclose.png';
 // import Dropdown from '../dropdwon/Dropdown';
+import { switchLanguage } from '../../../utils/language.js';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = ({ isTopBannerVisible }) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
   const menuRef = useRef(null);
+  const { t, i18n } = useTranslation();
 
   const hiddenRoutes = ['/experience', '/dome', '/upcomingevents',  '/corporateevents', '/education', '/enquiry-form', '/terms&conditions', '/privacy', '/menu',];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
@@ -88,6 +91,13 @@ const Navbar = ({ isTopBannerVisible }) => {
 
   const { title, description } = getDynamicMeta();
 
+  
+  const handleLanguageChange = (lng) => {
+    i18n.changeLanguage(lng); // Ensure to call this to change the language
+    switchLanguage(lng); // If you have a custom function for other purposes
+  };
+
+
   return (
     <>
       <Helmet>
@@ -129,14 +139,14 @@ const Navbar = ({ isTopBannerVisible }) => {
               className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
               onClick={closeMenu}
             >
-              EXPERIENCES
+              {t('EXPERIENCES')}
             </Link>
             <Link
               href="/dome"
               className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
               onClick={closeMenu}
             >
-              DOME
+             {t('DOME')}
             </Link>
             {/* <Link href="/upcomingevents" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
                 UPCOMING EVENTS
@@ -146,20 +156,24 @@ const Navbar = ({ isTopBannerVisible }) => {
               className="text-white text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold font-jura hover:text-[#A72CCF] mt-1"
               onClick={closeMenu}
             >
-              CORPORATE EVENTS
+              {t('CORPORATE EVENTS')}
             </Link>
             <Link
               href="/education"
               className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
               onClick={closeMenu}
             >
-              EDUCATION
+              {t('EDUCATION')}
             </Link>
             {/* <Link href="/other" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
                 OTHER
               </Link>
               <Dropdown/> */}
           </div>
+          <div className="language-switcher mx-2">
+        <button onClick={() => handleLanguageChange('en')} className='px-2'>English</button>
+        <button onClick={() => handleLanguageChange('ar')} className='px-2'>العربية</button>
+      </div>
           <div className="hidden xl:flex items-center">
             <Link
               href="https://feverup.com/m/187813"
@@ -167,9 +181,10 @@ const Navbar = ({ isTopBannerVisible }) => {
               rel="noopener noreferrer"
               className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#7E51F8] to-[#D007A6] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
-              <span className="button-slanted-content">BOOK NOW</span>
+              <span className="button-slanted-content"> {t('BOOK NOW')}</span>
             </Link>
           </div>
+          
           <div className="xl:hidden">
             <button onClick={toggleMenu} className="text-white text-4xl">
               {menuOpen ? (
@@ -191,14 +206,14 @@ const Navbar = ({ isTopBannerVisible }) => {
                 className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
                 onClick={closeMenu}
               >
-                EXPERIENCES
+                {t('EXPERIENCES')}
               </Link>
               <Link
                 href="/dome"
                 className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
                 onClick={closeMenu}
               >
-                DOME
+                {t('DOME')}
               </Link>
               {/* <Link href="/upcomingevents" className="w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]" onClick={closeMenu}>
                 UPCOMING EVENTS
@@ -208,14 +223,14 @@ const Navbar = ({ isTopBannerVisible }) => {
                 className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
                 onClick={closeMenu}
               >
-                CORPORATE EVENTS
+                {t('CORPORATE EVENTS')}
               </Link>
               <Link
                 href="/education"
                 className="block w-full text-left px-4 py-4 text-white font-jura text-[14px] font-bold hover:text-[#A72CCF]"
                 onClick={closeMenu}
               >
-                EDUCATION
+                {t('EDUCATION')}
               </Link>
               {/* <Link href="/other" className="text-left px-4 py-4 text-white font-jura text-[14px] font-bold hover:text-[#A72CCF" onClick={closeMenu}>
                 OTHER

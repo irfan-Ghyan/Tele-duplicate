@@ -381,12 +381,20 @@ import { Helmet } from 'react-helmet-async';
 import Image from 'next/image';
 import Corprate from '../../components/corporate/Corprate';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
+import { switchLanguage } from '../../utils/language.js';
 
 const Header = () => {
+  
+    const { t } = useTranslation();
   const pathname = usePathname();
   const [isTopBannerVisible, setIsTopBannerVisible] = useState(true);
-  const [showCorpratePopup, setShowCorpratePopup] = useState(false); // State to control Corprate popup visibility
-  const [isNavbarBgVisible, setIsNavbarBgVisible] = useState(false); // State to control navbar background visibility on scroll
+  const [showCorpratePopup, setShowCorpratePopup] = useState(false);
+  const [isNavbarBgVisible, setIsNavbarBgVisible] = useState(false); 
+
+  const handleLanguageChange = (lng) => {
+    switchLanguage(lng);
+  };
 
   const hiddenRoutes = [
     '/experiencedetails',
@@ -451,16 +459,20 @@ const Header = () => {
 
   return (
     <>
+    <div className="language-switcher">
+        <button onClick={() => handleLanguageChange('en')}>English</button>
+        <button onClick={() => handleLanguageChange('ar')}>العربية</button>
+      </div>
       <Helmet>
-        <title>Header | Teleios Dome</title>
+        <title>{t('Header | Teleios Dome')}</title>
         <meta
-          name="description"
-          content="Explore thrilling experiences at Teleios Dome with exciting speed challenges, group races, and VIP experiences."
+          name={t("description")}
+          content={t("Explore thrilling experiences at Teleios Dome with exciting speed challenges, group races, and VIP experiences.")}
         />
-        <meta property="og:title" content="Teleios Dome Experiences" />
+        <meta property={t("og:title")} content="Teleios Dome Experiences" />
         <meta
-          property="og:description"
-          content="Get on the most thrilling seat at Teleios Dome. Experience the excitement of speed, challenge your friends in group races, or enjoy a tailored VIP experience."
+          property={t("og:description")}
+          content={t("Get on the most thrilling seat at Teleios Dome. Experience the excitement of speed, challenge your friends in group races, or enjoy a tailored VIP experience.")}
         />
         <meta property="og:image" content="/assets/images/header-bg.jpg" />
       </Helmet>
