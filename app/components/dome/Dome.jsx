@@ -114,7 +114,7 @@ const Dome = () => {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`p-[2px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${
-                  index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50 hover:bg-opacity-100'
+                  index === currentSlide ? 'bg-white ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'
                 }`}
               />
             ))}

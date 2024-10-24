@@ -172,9 +172,9 @@ const Page = () => {
   return (
     <>
       <Helmet>
-        <title>Experiences | Racing simulators and all-inclusive access</title>
+        <title> {t('Experiences | Racing simulators and all-inclusive access')}</title>
         <meta
-          name={t("description")}
+          name={t('description')}
           content={t("Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill.")}
         />
         <meta property={t("og:title")} content="Experiences | Teleios Dome" />

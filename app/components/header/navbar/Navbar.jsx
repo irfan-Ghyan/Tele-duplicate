@@ -136,7 +136,7 @@ const Navbar = ({ isTopBannerVisible }) => {
           <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
             <Link
               href="/experience"
-              className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
+              className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1 ml-4"
               onClick={closeMenu}
             >
               {t('EXPERIENCES')}

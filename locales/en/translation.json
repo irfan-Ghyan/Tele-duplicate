@@ -26,17 +26,192 @@
     "EDUCATION & TRAININGS": "EDUCATION & TRAININGS",
     "Discover immersive learning experiences at Teleios Dome.": "Discover immersive learning experiences at Teleios Dome. From educational trips exploring our factory to safety driving lessons and group racing instruction, we offer dynamic programs to engage learners of all ages. Prepare to embark on an educational journey at Teleios Dome.",
     "FIND OUT MORE": "FIND OUT MORE",
-    
-    "EXPERIENCE_20_MINUTE": "20-Minute Sprint",
-    "EXPERIENCE_20_MINUTE_DESC": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
-    "EXPERIENCE_40_MINUTE": "40-Minute Session",
-    "EXPERIENCE_40_MINUTE_DESC": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
-    "EXPERIENCE_60_MINUTE": "60-Minute Session",
-    "EXPERIENCE_60_MINUTE_DESC": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
+   
+
+      "20-Minute Sprint": "20-Minute Sprint",
+      "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
+      "40-Minute Session": "⭐ 40-Minute Session",
+      "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
+      "60-Minute Session": "60-Minute Session",
+      "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
+      "Private Events": "Private Events",
+      "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.",
+  
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
     "BOOK NOW": "BOOK NOW",
     "ENQUIRE NOW": "ENQUIRE NOW",
-    "Discover the Dome": "Discover the Dome"
-  }
+    "Discover the Dome": "Discover the Dome",
+
+    "faq": {
+      "FAQ'S": "FAQ'S",
+      "title": "Frequently Asked Questions",
+      "question1": {
+        "title": "Do I need prior experience?",
+        "description": "No experience is necessary! Our simulators are user-friendly, and our staff is always available to assist you, practice makes perfect!"
+      },
+      "question2": {
+        "title": "What makes Teleios Dome unique?",
+        "description": "All these features! Professional-grade simulators: Experience the excitement of racing on the same simulators used by pro drivers, with advanced features like triple curved screens, F1-style controls, and authentic racing physics."
+      },
+      "question3": {
+        "title": "Who can use the simulators?",
+        "description": "Anyone aged 7 and above who meets our height requirements (110 cm to 200 cm) can experience the excitement of racing at Teleios Dome."
+      },
+      "question4": {
+        "title": "What is Teleios Dome?",
+        "description": "Teleios Dome is a state-of-the-art entertainment facility in Dubai Production City, offering an exhilarating racing simulation experience made accessible to all."
+      },
+      "question5": {
+        "title": "How do I book a session?",
+        "description": "Book online through our website or call us directly. We highly recommend booking in advance, especially during peak times."
+      },
+      "question6": {
+        "title": "Can I walk in without a booking?",
+        "description": "While we sometimes have availability for walk-ins, booking in advance is the best way to guarantee your spot."
+      },
+      "question7": {
+        "title": "Can I cancel my booking?",
+        "description": "Yes, you can cancel online bookings within 24 hours for a full refund."
+      },
+      "question8": {
+        "title": "Do you host birthday parties?",
+        "description": "Yes, we can accommodate parties of up to 100 guests. Please contact us for more details."
+      },
+      "seeMore": "SEE MORE",
+      "seeLess": "SEE LESS",
+      "otherQuestions": "Other Questions?",
+      "contactUs": "Contact us",
+      "moreInfo": "for more information or assistance..."
+    },
+
+    "WHAT PEOPLE SAY ABOUT US": "WHAT PEOPLE SAY ABOUT US",
+
+    "testimonial": {
+      "testimonials1":{
+      "title": "3ain 3osha", 
+      "description": "You can only give this place a high rating. This place for car racing games, new and up to date. The hardware is very advanced. "
+     },
+     "testimonials2":{
+      "title": "Ammar Al Tayara", 
+      "description": "Amazing place to enjoy you time, the atmosphere the food and the experience are great. You can driver your favorite Formula 1 car on your favorite track. "
+     },
+     "testimonials3":{
+      "title": "Alaa Tarawneh", 
+      "description": "One of the best places in UAE if not the whole world for real Sim Racing enthusiasts"
+     },
+     "testimonials4":{
+      "title": "Ivan Daka", 
+      "description": "Looks amazing! Recommend to visit and play some racings🏎️ it feels like you are inside the real sport car! Stuff is great and atmosphere looks amazing"
+     },
+     "testimonials5":{
+      "title": "Yahia Al Ayat", 
+      "description": "The perfect racing simulation in UAE"
+     },
+     "testimonials6":{
+      "title": "Sone leh", 
+      "description": "Amazing experience can’t wait to be back again 👊👊👊💯"
+     },
+     "testimonials7":{
+      "title": "Sam caward", 
+      "description": "Amazing place, great atmosphere and the simulators were so fun would definitely recommend for a day out with friends"
+     },
+     "testimonials8":{
+      "title": "Mirko Popovic", 
+      "description": "What a fantastic place to spend time and try an insanely real racing simulator. Gt races were so good."
+     },
+     "testimonials9":{ "title": "Alois vieujot", 
+     "description": "Incredible place to spend countless hours with friends and family! Absolutely loved it!" 
+    },
+    "testimonials10":{ 
+      "title": "JADH BIN", 
+     "description": "The best simulatiom experience. You can feel the race. This place is worth on money. The staffs are very friendly" 
+    },
+    "testimonials11":{ 
+      "title": "Rami Hamad", 
+     "description": "An amazing F1 experience !!! Certainly going back again. Highly recommended for groups and  adrenaline rush" 
+    },
+    "testimonials12":{ 
+      "title": "Mateen Mohammed", 
+     "description": "Very good experience" 
+    },
+    "testimonials13":{ 
+      "title": "Dharmesh Rathod", 
+     "description": "Wonderful and amazing place for fun with racing Simulators...." 
+    },
+    "testimonials14":{ 
+      "title": "Giorgio Max", 
+     "description": "Great simulators, amazing retro-futuristic gaming arena!!" 
+    },
+    "testimonials15":{ 
+      "title": "Federico Rossi", 
+     "description": "Best way to spend a sunday in Dubai." 
+    },
+    "testimonials16":{ 
+      "title": "Muhammad Shahzad", 
+     "description": "Amazing experience, Hats off" 
+    },
+    "testimonials17":{ 
+      "title": "Seun Ayoola", 
+     "description": "The location is easy to locate, and the simulators are amazing . Thanks Teleios" 
+    }
+    },
+
+    "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences.": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
+
+  "virtual_gp_reserve_seat": "Virtual GP - RESERVE YOUR SEAT NOW",
+
+  "experience": "Experience the thrill of speed at Teleios Dome, offering dynamic group races and exclusive VIP experiences.",
+  "quick_links": "QUICK LINKS",
+  "location_time": "LOCATION & TIME",
+  "get_in_touch": "GET IN TOUCH",
+  "address": "Address:",
+  "hours": "Hours:",
+  "phone": "Phone",
+  "email": "Email",
+  "all_rights_reserved": "All rights reserved 2024 © Teleios Dome",
+  "privacy_policy": "Privacy Policy",
+  "terms_conditions": "Terms Conditions",
+
+   "challenge_overdrive": "CHALLENGE OVERDRIVE",
+  "experience_thrill": "EXPERIENCE THE THRILL",
+
+   "join_car_racing_experience": "JOIN THE ULTIMATE CAR RACING EXPERIENCE!",
+  "book_now": "Book Now",
+
+  "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.",
   
+  "EDUCATIONAL_VISITS": "Educational visits",
+  "DESCRIPTION": "Embark on an immersive educational journey at Teleios. Explore our factory with a comprehensive tour, delving into the learning of simulator construction and operation. Then, experience the thrill of racing in a simulator competition at the Teleios Dome. Learn, engage, and have fun with Teleios Dome's educational trips.",
+  "ENQUIRY_NOW": "ENQUIRY NOW",
+  "CORPORATE_EVENTS": "CORPORATE EVENTS",
+  "BOOK_NOW": "BOOK NOW",
+
+  "Safety Driving": "Safety Driving",
+  "Safety Driving Description": "Talk with officials on road safety and experience real-world driving conditions in a safe environment. Our specialized program, tailored for ages 15+, integrates traffic simulation into our simulators. Students practice driving skills in realistic scenarios to prepare for the road with confidence.",
+ 
+  "DISCOVER_TELEIOS": "DISCOVER TELEIOS UNFORGETTABLE EDUCATIONAL EXPERIENCES",
+  "WHY_TELEIOS": "Why Teleios?",
+  "DESCRIPTION1": "Students are eager to learn about technology, and Teleios Factory provides a unique opportunity...",
+
+  "WHAT_TO_EXPECT": "WHAT TO EXPECT ",
+
+  "FirstName": "First Name",
+  "LastName": "Last Name",
+  "CompanyName": "Company Name",
+  "Phone": "Phone",
+  "Email": "Email",
+  "TripType": "Trip Type",
+  "HearAboutUs": "How did you hear about us?",
+  "Submit": "Submit",
+  "FirstNameRequired": "Enter your first name",
+  "LastNameRequired": "Enter your last name",
+  "CompanyNameRequired": "Company name is required",
+  "PhoneRequired": "Phone number is required",
+  "PhoneInvalid": "Phone number must be 10 digits",
+  "EmailRequired": "Email is required",
+  "EmailInvalid": "Email address is invalid",
+  "Get_In_Touch": "Get In Touch Today to Book Your Educational TripEXPERIENCES",
+  "SelectType": "Select Type"
+
+}

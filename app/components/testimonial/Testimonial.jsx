@@ -4,6 +4,7 @@
 import { useRef, useState, useEffect } from 'react';
 import Profile from './profile/Profile';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 // import leftArrow from '../../../public/assets/images/dome/left.png';
 // import rightArrow from '../../../public/assets/images/dome/right.png';
 
@@ -13,29 +14,108 @@ export default function Testimonial() {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [activeButton, setActiveButton] = useState(null);
+  const { t } = useTranslation(); 
 
   const testimonials = [
-    { title: '3ain 3osha', description: 'You can only give this place a high rating. This place for car racing games, new and up to date. The hardware is very advanced. ', imageUrl: '/assets/images/dome/sain.png' },
-    { title: 'Ammar Al Tayara', description: 'Amazing place to enjoy you time, the atmosphere the food and the experience are great. You can driver your favorite Formula 1 car on your favorite track.', imageUrl: '/assets/images/dome/ammar.png' },
-    { title: 'Alaa Tarawneh', description: 'One of the best places in UAE if not the whole world for real Sim Racing enthusiasts', imageUrl: '/assets/images/dome/alaa.png' },
-    { title: 'Ivan Daka', description: 'Looks amazing! Recommend to visit and play some racings🏎️ it feels like you are inside the real sport car! Stuff is great and atmosphere looks amazing', imageUrl: '/assets/images/dome/ivan.png' },
-    { title: 'Yahia Al Ayat', description: 'The perfect racing simulation in UAE', imageUrl: '/assets/images/dome/yahia.png' },
-    { title: 'Hakeem Al Hawary', description: 'First time I try these amazing simulators, and what an amazing experience, I would highly recommend all those who are into car racing.', imageUrl: '/assets/images/dome/hakeem.png' },
-    { title: 'Sone leh', description: 'Amazing experience can’t wait to be back again 👊👊👊💯', imageUrl: '/assets/images/dome/son.png' },
-    { title: 'Sam caward', description: 'Amazing place, great atmosphere and the simulators were so fun would definitely recommend for a day out with friends', imageUrl: '/assets/images/dome/s.png' },
-    { title: 'Mirko Popovic', description: 'What a fantastic place to spend time and try an insanely real racing simulator. Gt races were so good.', imageUrl: '/assets/images/dome/m.png' },
-    { title: 'Alois vieujot', description: 'Incredible place to spend countless hours with friends and family! Absolutely loved it!', imageUrl: '/assets/images/dome/a.png' },
-    { title: 'JADH BIN', description: 'The best simulatiom experience. You can feel the race. This place is worth on money. The staffs are very friendly', imageUrl: '/assets/images/dome/jadh.png' },
-    { title: 'Rami Hamad', description: 'An amazing F1 experience !!! Certainly going back again. Highly recommended for groups and  adrenaline rush', imageUrl: '/assets/images/dome/rami.png' },
-    { title: 'Mateen Mohammed', description: 'Very good experience', imageUrl: '/assets/images/dome/mateen.png' },
-    { title: 'Dharmesh Rathod', description: 'Wonderful and amazing place for fun with racing Simulators....', imageUrl: '/assets/images/dome/dharmesh.png' },
-    { title: 'Giorgio Max', description: 'Great simulators, amazing retro-futuristic gaming arena!!', imageUrl: '/assets/images/dome/giorgio.png' },
-    { title: 'Mohammed “mhdphotographer”', description: 'I like Everything there 😍', imageUrl: '/assets/images/dome/mohammed.png' },
-    { title: 'Federico Rossi', description: 'Best way to spend a sunday in Dubai.', imageUrl: '/assets/images/dome/federico.png' },
-    { title: 'Muhammad Shahzad', description: 'Amazing experience, Hats off', imageUrl: '/assets/images/dome/m.png' },
-    { title: 'Seun Ayoola', description: 'The location is easy to locate, and the simulators are amazing . Thanks Teleios', imageUrl: '/assets/images/dome/s.png' },
+   {
+      title: t('testimonial.testimonials1.title'),
+      description: t('testimonial.testimonials1.description'),
+      imageUrl: '/assets/images/dome/sain.png'
+    },
+    {
+      title: t('testimonial.testimonials2.title'),
+      description: t('testimonial.testimonials2.description'),
+      imageUrl: '/assets/images/dome/ammar.png'
+    },
+    {
+      title: t('testimonial.testimonials3.title'),
+      description: t('testimonial.testimonials3.description'),
+      imageUrl: '/assets/images/dome/alaa.png'
+    },
+    {
+      title: t('testimonial.testimonials4.title'),
+      description: t('testimonial.testimonials4.description'),
+      imageUrl: '/assets/images/dome/ivan.png'
+    },
+    {
+      title: t('testimonial.testimonials5.title'),
+      description: t('testimonial.testimonials5.description'),
+      imageUrl: '/assets/images/dome/yahia.png'
+    },
+    {
+      title: t('testimonial.testimonials6.title'),
+      description: t('testimonial.testimonials6.description'),
+      imageUrl: '/assets/images/dome/hakeem.png'
+    },
+    {
+      title: t('testimonial.testimonials7.title'),
+      description: t('testimonial.testimonials7.description'),
+      imageUrl: '/assets/images/dome/son.png'
+    },
+    {
+      title: t('testimonial.testimonials8.title'),
+      description: t('testimonial.testimonials8.description'),
+      imageUrl: '/assets/images/dome/s.png'
+    },
+    {
+      title: t('testimonial.testimonials9.title'),
+      description: t('testimonial.testimonials9.description'),
+      imageUrl: '/assets/images/dome/m.png' 
+    },
+    {
+      title: t('testimonial.testimonials10.title'),
+      description: t('ttestimonial.estimonials10.description'),
+      imageUrl: '/assets/images/dome/a.png'
+    },
+    {
+      title: t('testimonial.testimonials11.title'),
+      description: t('testimonial.testimonials11.description'),
+      imageUrl: '/assets/images/dome/jadh.png'
+    },
+    {
+      title: t('testimonial.testimonials12.title'),
+      description: t('testimonial.testimonials12.description'),
+      imageUrl: '/assets/images/dome/rami.png' 
+    },
+    {
+      title: t('testimonial.testimonials13.title'),
+      description: t('testimonial.testimonials13.description'),
+      imageUrl: '/assets/images/dome/mateen.png'
+    },
+    {
+      title: t('testimonial.testimonials14.title'),
+      description: t('testimonial.testimonials14.description'),
+      imageUrl: '/assets/images/dome/dharmesh.png' 
+    },
+    {
+      title: t('testimonial.testimonials15.title'),
+      description: t('v.testimonials15.description'),
+      imageUrl: '/assets/images/dome/giorgio.png'
+    },
+    {
+      title: t('testimonial.testimonials16.title'),
+      description: t('testimonial.testimonials16.description'),
+      imageUrl: '/assets/images/dome/mohammed.png'
+    },
+    {
+      title: t('testimonial.testimonials18.title'),
+      description: t('testimonial.testimonials18.description'),
+      imageUrl: '/assets/images/dome/m.png'
+    },
+    {
+      title: t('testimonial.testimonials19.title'),
+      description: t('testimonial.testimonials19.description'),
+      imageUrl: '/assets/images/dome/federico.png'
+    },
+    {
+      title: t('testimonial.testimonials17.title'),
+      description: t('testimonial.testimonials17.description'),
+     imageUrl: '/assets/images/dome/s.png'
+    },
+
     
   ];
+
 
   const extendedTestimonials = [...testimonials, ...testimonials, ...testimonials];
  
@@ -146,7 +226,7 @@ export default function Testimonial() {
           <div className="border-solid border-b-[1px] border-white border-opacity-50 text-end"></div>
           <div className="md:flex md:justify-between items-center mt-[36px] lg:mb-[41px]">
             <div>
-              <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">WHAT PEOPLE <br/>SAY ABOUT US</h1>
+              <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">{t('WHAT PEOPLE SAY ABOUT US')}</h1>
             </div>
             {/* Top buttons for larger screens */}
             <div className="top-buttons flex items-center">
