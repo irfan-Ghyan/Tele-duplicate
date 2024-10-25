@@ -694,9 +694,9 @@ const Form = () => {
   const handleSubmitClick = () => {
     if (validateForm()) {
   
-      setShowRadioError(false); // Hide radio button error when checked
+      setShowRadioError(false);
     } else {
-      setShowRadioError(true); // Show error if form is incomplete
+      setShowRadioError(true);
     }
   };
   
@@ -706,7 +706,7 @@ const Form = () => {
 
 
   const handleRadioClick = () => {
-    setIsRadioSelected((prevState) => !prevState); // Toggle radio button state
+    setIsRadioSelected((prevState) => !prevState);
   };
 
   return (
@@ -716,12 +716,12 @@ const Form = () => {
           {t('Get_In_Touch')}
         </h2>
 
-        <form onSubmit={handleSubmit} className="space-y-4 py-10">
+        <form onSubmit={handleSubmit} className="space-y-4 py-10 ">
         <div className="xl:flex justify-between">
-            <div>
+            <div className='mx-2'>
               <label
                 htmlFor="firstName"
-                className="block text-[14px] font-bold font-jura text-white py-2 placeholder-white placeholder-opacity-20"
+                className="block text-[14px] font-bold font-jura text-white py-2 placeholder-white placeholder-opacity-20 "
               >
                  {t('FirstName')}
               </label>
@@ -764,7 +764,7 @@ const Form = () => {
           </div>
 
           <div className="xl:flex justify-between">
-            <div>
+            <div className='mx-2'>
               <label
                 htmlFor="companyName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
@@ -811,7 +811,7 @@ const Form = () => {
           </div>
 
           <div className="xl:flex justify-between">
-            <div>
+            <div className='mx-2'>
               <label
                 htmlFor="email"
                 className="block text-[14px] font-bold font-jura text-white py-2"
