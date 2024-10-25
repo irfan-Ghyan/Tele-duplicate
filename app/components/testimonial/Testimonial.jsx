@@ -64,7 +64,7 @@ export default function Testimonial() {
     },
     {
       title: t('testimonial.testimonials10.title'),
-      description: t('ttestimonial.estimonials10.description'),
+      description: t('testimonial.testimonials10.description'),
       imageUrl: '/assets/images/dome/a.png'
     },
     {
@@ -89,7 +89,7 @@ export default function Testimonial() {
     },
     {
       title: t('testimonial.testimonials15.title'),
-      description: t('v.testimonials15.description'),
+      description: t('testimonial.testimonials15.description'),
       imageUrl: '/assets/images/dome/giorgio.png'
     },
     {
