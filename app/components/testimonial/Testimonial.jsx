@@ -97,16 +97,7 @@ export default function Testimonial() {
       description: t('testimonial.testimonials16.description'),
       imageUrl: '/assets/images/dome/mohammed.png'
     },
-    {
-      title: t('testimonial.testimonials18.title'),
-      description: t('testimonial.testimonials18.description'),
-      imageUrl: '/assets/images/dome/m.png'
-    },
-    {
-      title: t('testimonial.testimonials19.title'),
-      description: t('testimonial.testimonials19.description'),
-      imageUrl: '/assets/images/dome/federico.png'
-    },
+  
     {
       title: t('testimonial.testimonials17.title'),
       description: t('testimonial.testimonials17.description'),

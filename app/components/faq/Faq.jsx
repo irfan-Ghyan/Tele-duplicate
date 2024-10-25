@@ -233,7 +233,7 @@ const Faq = () => {
   return (
     <div className="w-full px-4 lg:px-[0px] xl:px-[0px] max-w-full overflow-hidden pb-20">
       <div className="border-solid border-b-[1px] border-white border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px] text-end">
-        <h1 className="text-[14px] text-white font-normal font-orbitron pb-4">{t(`FAQ'S`)}</h1>
+        <h1 className="text-[14px] text-white font-normal font-orbitron pb-4">{t('FAQ')}</h1>
       </div>
       <div className="flex justify-between mt-[36px] mb-[41px]">
         <div>
