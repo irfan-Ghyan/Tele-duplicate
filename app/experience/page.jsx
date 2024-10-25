@@ -209,20 +209,20 @@ const Page = () => {
           {t('EXPERIENCES')}
           </h1>
           <p className="text-white font-jura text-[18px] font-bold px-[2px] text-justify ">
-          {t('Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!')}
+          {t('Fun_For_Everyone')}
           </p>
         </div>
       </div>
 
       <div className="flex flex-col min-h-screen items-center overflow-x-hidden ">
         <div className="w-full max-w-7xl">
-          <div className="flex flex-wrap justify-center my-6 lg:pb-[100px] ">
-            {uniqueExperiences.map((uniqueExperience, index) => (
-              <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '365px' }}>
+        <div className="flex flex-wrap justify-center my-6 lg:pb-[100px]">
+             {uniqueExperiences.map((experience, index) => (
+              <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '360px' }}>
                 <RaceExperience
-                   title={t('uniqueExperience.title') === '40-Minute Session' ? `⭐ ${t('uniqueExperience.title')}` : t('uniqueExperience.title')} 
-                  description={t('uniqueExperience.description')}
-                  imageUrl={uniqueExperience.imageUrl}
+                  title={experience.title}
+                  description={experience.description}
+                  imageUrl={experience.imageUrl}
                 />
               </div>
             ))}

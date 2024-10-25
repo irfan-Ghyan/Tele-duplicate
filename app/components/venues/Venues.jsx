@@ -5,16 +5,18 @@ import Image from 'next/image';
 import leftArrow from '../../../public/assets/images/dome/left-arrow.png'; 
 import rightArrow from '../../../public/assets/images/dome/righ-arrow.png'; 
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const Dome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useTranslation();
   const domes = [
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-6.png' },
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-5.png' },
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-7.png' },
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-8.jpg' },
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-2.png' },
-    { title: 'VENUES BRANDING', imageUrl: '/assets/images/dome/bg-1.png' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-6.png' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-5.png' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-7.png' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-8.jpg' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-2.png' },
+    { title: t('VENUES_BRANDING'), imageUrl: '/assets/images/dome/bg-1.png' },
   ];
 
   useEffect(() => {
@@ -62,7 +64,7 @@ const Dome = () => {
           }}
         >
           <div className="flex flex-col px-4 lg:px-40 padding-px items-start justify-end h-full bg-opacity-50 pb-10 max-w-7xl md:px-8 mx-auto">
-            <h2 className="text-[24px] drop-shadow-lg md:text-[54px] text-white font-black font-orbitron w-[200px]">
+            <h2 className="text-[24px] drop-shadow-lg md:text-[54px] text-white font-black font-orbitron w-[400px]">
               {dome.title}
             </h2>
           </div>

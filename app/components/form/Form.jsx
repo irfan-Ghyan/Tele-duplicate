@@ -563,6 +563,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { supabase } from '../../../supabase';
 import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -576,6 +577,8 @@ const Form = () => {
     message: '',
   });
 
+  const { t } = useTranslation();
+
   const [errors, setErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isRadioSelected, setIsRadioSelected] = useState(false);
@@ -586,6 +589,7 @@ const Form = () => {
   
   const handleChange = (e) => {
     const { name, value } = e.target;
+
   
     // Clear the error for the field as the user types
     setErrors((prevErrors) => ({
@@ -709,7 +713,7 @@ const Form = () => {
     <div id="target-section" className="flex items-center justify-center py-[20px] lg:py-[40px] xl:py-[80px]">
       <div className="w-full max-w-2xl px-4">
         <h2 className="text-[32px] lg:text-[42px] text-white font-black font-orbitron">
-          Get In Touch Today to Book Your Educational Trip
+          {t('Get_In_Touch')}
         </h2>
 
         <form onSubmit={handleSubmit} className="space-y-4 py-10">
@@ -719,7 +723,7 @@ const Form = () => {
                 htmlFor="firstName"
                 className="block text-[14px] font-bold font-jura text-white py-2 placeholder-white placeholder-opacity-20"
               >
-                First Name
+                 {t('FirstName')}
               </label>
               <input
                 type="text"
@@ -740,7 +744,7 @@ const Form = () => {
                 htmlFor="lastName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Last Name
+                {t('LastName')}
               </label>
               <input
                 type="text"
@@ -765,7 +769,7 @@ const Form = () => {
                 htmlFor="companyName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Company Name
+               {t('CompanyName')}
               </label>
               <input
                 type="text"
@@ -787,7 +791,7 @@ const Form = () => {
                 htmlFor="phone"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Phone
+                {t('Phone')}
               </label>
               <input
                 type="text"
@@ -812,7 +816,7 @@ const Form = () => {
                 htmlFor="email"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Email
+                {t('Email')}
               </label>
               <input
                 type="email"
@@ -834,7 +838,7 @@ const Form = () => {
                 htmlFor="type"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Trip Type
+                {t('TripType')}
               </label>
               <select
                 name="type"
@@ -848,7 +852,7 @@ const Form = () => {
                   value=""
                   className="text-[14px] font-bold w-full xl:w-[316px] font-jura text-white placeholder-white"
                 >
-                  Select type
+                  {t('SelectType')}
                 </option>
                 <option
                   value="Type 1"
@@ -880,7 +884,7 @@ const Form = () => {
               htmlFor="hearAboutUs"
               className="block text-[14px] w-full font-bold font-jura text-white placeholder-white py-2"
             >
-              How did you hear about us?
+             {t('HearAboutUs')}
             </label>
             <select
               name="hearAboutUs"
@@ -894,7 +898,7 @@ const Form = () => {
                 value=""
                 className="text-[14px]  font-bold font-jura text-white w-full xl:w-[316px] placeholder-white "
               >
-                Select an option
+                {t('SelectOption')}
               </option>
               <option
                 value="Option 2"
@@ -962,7 +966,7 @@ const Form = () => {
               htmlFor="message"
               className="block w-full text-[14px] font-bold font-jura text-white py-2"
             >
-              Additional Information
+              {t('AdditionalInformation')}
             </label>
             <textarea
               name="message"
@@ -990,8 +994,8 @@ const Form = () => {
             <span className={`custom-radio ${isRadioSelected ? 'checked' : ''}`} />
           </label>
           <span className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? 'text-white' : 'text-[#6e6295c2]'}`}>
-            I agree to the{' '}
-            <Link href="/terms&conditions" className="underline">Terms & Conditions</Link>
+          {t('Agree')}{' '}
+            <Link href="/terms&conditions" className="underline">{t('TermsConditions')}</Link>
           </span>
         </div>
 
@@ -1002,7 +1006,7 @@ const Form = () => {
     isRadioSelected ? 'hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-white' : 'border-white text-gray-300'
   } ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center`}
 >
-  <span className="button-slanted-content" onClick={handleSubmitClick}>SUBMIT</span>
+  <span className="button-slanted-content" onClick={handleSubmitClick}>{t('Submit')}</span>
 </button>
 
         </div>

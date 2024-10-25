@@ -97,7 +97,7 @@ const Page = () => {
           <div className="text-center p-6 text-white lg:py-[80px] lg:pb-[100px] xl:px-80 lg:px-40 lg:pt-[50px]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-white font-black mb-4">{t('EDUCATION')}</h1>
             <p className="text-white font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify">
-              {t("Discover how the best racing simulator is assembled in the Teleios Factory: from raw materials and electronics to the finished state-of-the-art device. Students learn how the simulator is made and then experience firsthand its performance racing on a circuit.")}
+              {t("Discover_best_racing_simulator")}
             </p>
           </div>
         </div>

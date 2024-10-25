@@ -3,11 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const DomeData = () => {
+  const { t } = useTranslation();
 
     const domes = [
-      { title: 'GAMING ROOM', description: 'Experience the thrill of racing on our cutting-edge simulators in the gaming area. With 19 state-of-the-art simulators, gear up for an adrenaline-fueled adventure like no other' },
+      { title: t('GAMING_ROOM'), description: t('GAMING_DES')}
     ];
   return (
     <>
@@ -29,7 +31,7 @@ const DomeData = () => {
      <div className="flex items-start m-bottom">
      <div className='py-10'>
        <Link href="/experience"  className="button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
-       <span className='button-slanted-content'>VIEW OPTIONS</span>
+       <span className='button-slanted-content'>{t('VIEW_OPTIONS')}</span>
        </Link>
      </div>
    </div>

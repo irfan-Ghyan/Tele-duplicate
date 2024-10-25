@@ -5,10 +5,13 @@ import React from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 // import lounge from '../../../public/assets/images/dome/customize1.png';
+import { useTranslation } from 'react-i18next';
 
 const DomeLounge = () => {
+  const { t } = useTranslation();
+
   const domes = [
-    { title: 'LOUNGE AREA', description: 'Relax and unwind in our stylish lounge area, designed for your comfort and enjoyment. Whether you are waiting for your racing session, or catching up with friends, our lounge is the perfect spot to kick back, enjoy the mood, and recharge.' },
+    { title: t('LOUNGE_AREA'), description: t('LOUNGE_AREA_DEC') },
   ];
 
   return (

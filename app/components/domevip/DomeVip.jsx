@@ -3,11 +3,14 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 
 const DomeVip = () => {
+  const { t } = useTranslation();
+
   const domes = [
-    { title: 'VIP EXPERIENCE', description: 'Choose a first-class experience in your VIP room where two specially tailored simulators offer a premium experience for you and up to 4 friends. Enjoy unlimited pastries and beverages for 90 minutes. In this VIP room, you can compete and cheer in complete privacy.' },
+    { title: t('VIP_EXPERIENCE'), description: t('VIP_EXPERIENCE_DEC') },
   ];
 
   return (
@@ -29,7 +32,7 @@ const DomeVip = () => {
      <div className="flex items-start m-bottom">
      <div className='py-10'>
        <Link href="https://feverup.com/m/187813" target="_blank" rel="noopener noreferrer" className="button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
-       <span className='button-slanted-content'>BOOK NOW</span>
+       <span className='button-slanted-content'>{t('BOOK_NOW')}</span>
        </Link>
      </div>
    </div>

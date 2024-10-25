@@ -4,8 +4,11 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { supabase } from "../../../supabase";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 
 const Form = () => {
+
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -145,21 +148,20 @@ const Form = () => {
     <div className="flex items-center justify-center py-[20px] lg:py-[40px]">
       <div className="w-full max-w-2xl px-4">
         <h2 className="text-[32px] lg:text-[42px] text-white font-black font-orbitron text-center">
-          Get In Touch
+          {t('Get_Touch')}
         </h2>
         <p className="text-center text-[18px] font-bold font-jura text-white py-2">
-          We look forward to hosting your Event. Please complete the form and a
-          member of our team will be in touch.
+          {t('We_Look_Forward')}
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="lg:flex justify-between">
-            <div>
+          <div className="lg:flex justify-between ">
+            <div className="mx-2"> 
               <label
                 htmlFor="firstName"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-white py-2 "
               >
-                First Name
+                {t('FirstName')}
               </label>
               <input
                 type="text"
@@ -179,7 +181,7 @@ const Form = () => {
                 htmlFor="lastName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Last Name
+                {t('LastName')}
               </label>
               <input
                 type="text"
@@ -197,12 +199,12 @@ const Form = () => {
           </div>
 
           <div className="lg:flex justify-between">
-            <div>
+            <div className="mx-2">
               <label
                 htmlFor="email"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Email
+                {t('Email')}
               </label>
               <input
                 type="email"
@@ -222,7 +224,7 @@ const Form = () => {
                 htmlFor="phone"
                 className="block text-[14px] font-bold font-jura text-white py-2"
               >
-                Phone
+                {t('Phone')}
               </label>
               <input
                 type="text"
@@ -259,9 +261,9 @@ const Form = () => {
                 <span
                   className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? "text-white" : "text-[#6e6295c2]"}`}
                 >
-                  I agree to the{" "}
+                  {t('Agree')}{" "}
                   <Link href="/terms&conditions" className="underline">
-                    Terms & Conditions
+                    {t('TermsConditions')}
                   </Link>
                 </span>
               </div>
@@ -275,7 +277,7 @@ const Form = () => {
                       : "border-white text-gray-300"
                   } ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center`}
                 >
-                  <span className="button-slanted-content">SUBMIT</span>
+                  <span className="button-slanted-content">{t('Submit')}</span>
                 </button>
               </div>
             </div>

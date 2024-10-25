@@ -2,7 +2,7 @@
     "header_title": "Teleios Dome",
     "experiences": "EXPERIENCES",
     "title": "EXPERIENCES",
-    "description": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
+    "description_fun": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
     "dome": "DOME",
     "corporate_events": "CORPORATE EVENTS",
     "education": "EDUCATION",
@@ -14,8 +14,7 @@
     "experience.title": "20-Minute Sprint",
     "experience.description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
     "experience.button": "BOOK NOW",
-    "uniqueExperience.title": "20-Minute Sprint",
-    "uniqueExperience.description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
+    
     "training.title": "Private Events",
     "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
 
@@ -41,6 +40,8 @@
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
     "BOOK NOW": "BOOK NOW",
     "ENQUIRE NOW": "ENQUIRE NOW",
+
+    "Private": "Private",
     "Discover the Dome": "Discover the Dome",
 
     "faq": {
@@ -157,7 +158,7 @@
     }
     },
 
-    "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences.": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
+    "Fun_For_Everyone": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
 
   "virtual_gp_reserve_seat": "Virtual GP - RESERVE YOUR SEAT NOW",
 
@@ -178,6 +179,8 @@
 
    "join_car_racing_experience": "JOIN THE ULTIMATE CAR RACING EXPERIENCE!",
   "book_now": "Book Now",
+
+  "Discover_best_racing_simulator": "Discover how the best racing simulator is assembled in the Teleios Factory: from raw materials and electronics to the finished state-of-the-art device. Students learn how the simulator is made and then experience firsthand its performance racing on a circuit.",
 
   "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.",
   
@@ -212,6 +215,50 @@
   "EmailRequired": "Email is required",
   "EmailInvalid": "Email address is invalid",
   "Get_In_Touch": "Get In Touch Today to Book Your Educational TripEXPERIENCES",
-  "SelectType": "Select Type"
+  "SelectType": "Select Type",
+  "SelectOption": "Select an Option",
+  "AdditionalInformation": "Additional Information",
+  "Agree":"I agree to the",
+  "TermsConditions": " Terms & Conditions",
 
+  "Corporate_Events": "CORPORATE EVENTS",
+  "Teleios_Dome_Corporate": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology. Our stunning open-plan Reception and Lounge area is complemented by a Cafeteria and Private Conference Room. You and your guests can then step into our spacious Gaming Room and experience exhilarating simulator racing. For the select few, enjoy the exclusivity of our VIP room.   A blend of advanced technology with refined surroundings, book The Teleios Dome for your next Corporate Event.",
+
+  "COACHING": "Coaching",
+  "ONE_ON_ONE_COACHING": "1-1 Coaching",
+  "COACHING_DESCRIPTION": "Take your racing skills to the next level with personalized 1-to-1 coaching at Teleios Dome. Our experienced instructors provide tailored guidance using advanced telemetry data to analyze your performance in detail. Whether you're new to sim racing or preparing for real-world competitions, you'll receive expert insights to refine your technique, improve lap times, and enhance your overall racing experience.",
+
+  "VENUES_BRANDING": "VENUES BRANDING",
+
+  "Get_Touch": "Get In Touch",
+  "We_Look_Forward": "We look forward to hosting your Event. Please complete the form and a member of our team will be in touch.",
+
+  "TEAM_BUILDING": "Team Building",
+  "TEAM_BUILDING_DESC": "Boost team cohesion with a dynamic simulator challenge, combining immersive scenarios with collaborative problem-solving. Perfect for enhancing communication and teamwork.",
+  "NETWORKING": "Networking",
+  "NETWORKING_DESC": "Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement.",
+  "CONFERENCES": "Conferences",
+  "CONFERENCES_DESC": "Enhance your conference with interactive simulator sessions, blending engagement with cutting-edge technology. Perfect for dynamic presentations and networking.",
+
+  "GAMING_ROOM": "GAMING ROOM",
+  "GAMING_DES": "Experience the thrill of racing on our cutting-edge simulators in the gaming area. With 19 state-of-the-art simulators, gear up for an adrenaline-fueled adventure like no other",
+  "VIEW_OPTIONS": "VIEW OPTIONS",
+
+  "VIP_EXPERIENCE": "VIP EXPERIENCE",
+  "VIP_EXPERIENCE_DEC": "Choose a first-class experience in your VIP room where two specially tailored simulators offer a premium experience for you and up to 4 friends. Enjoy unlimited pastries and beverages for 90 minutes. In this VIP room, you can compete and cheer in complete privacy.",
+  
+
+  "PIT_STOP": "PIT - STOP",
+  "PIT_description": "Fast reactions require fuel. Recharge quickly with a wide selection of hot and cold beverages, including tea, coffee, milkshakes, and soft drinks, or grab a delicious pastry-like pain au chocolat and croissants for a quick energy boost.",
+  "VIEW_MENU": "VIEW MENU",
+
+  "SIM_CONFIGURATOR": "SIM CONFIGURATOR",
+  "SIM_CONFIGURATOR_DEC": "Dream it, build it! Create your own unique Teleios simulator in our customization area. Choose from a wide selection of colors, materials, and designs to make a one-of-a-kind masterpiece that is truly yours.",
+
+  "LOUNGE_AREA": "LOUNGE AREA",
+  "LOUNGE_AREA_DEC": "Relax and unwind in our stylish lounge area, designed for your comfort and enjoyment. Whether you are waiting for your racing session, or catching up with friends, our lounge is the perfect spot to kick back, enjoy the mood, and recharge."
+
+  
 }
+
+

@@ -3,11 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 
 const DomePit = () => {
+  const { t } = useTranslation();
   const domes = [
-    { title: 'PIT - STOP', description: 'Fast reactions require fuel. Recharge quickly with a wide selection of hot and cold beverages, including tea, coffee, milkshakes, and soft drinks, or grab a delicious pastry-like pain au chocolat and croissants for a quick energy boost.' },
+    { title: t('PIT_STOP'), description: t('PIT_description') },
   ];
 
   return (
@@ -29,7 +31,7 @@ const DomePit = () => {
      <div className="flex items-start m-bottom">
      <div className='py-10'>
        <Link href="/menu"  className="button-slanted w-[233px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
-       <span className='button-slanted-content'>VIEW MENU</span>
+       <span className='button-slanted-content'>{t('VIEW_MENU')}</span>
        </Link>
      </div>
    </div>

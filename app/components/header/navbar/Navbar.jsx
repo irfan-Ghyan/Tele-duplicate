@@ -171,9 +171,10 @@ const Navbar = ({ isTopBannerVisible }) => {
               <Dropdown/> */}
           </div>
           <div className="language-switcher mx-2">
-        <button onClick={() => handleLanguageChange('en')} className='px-2'>English</button>
-        <button onClick={() => handleLanguageChange('ar')} className='px-2'>العربية</button>
+        <button onClick={() => handleLanguageChange('en')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-white'>EN</button>
+        <button onClick={() => handleLanguageChange('ar')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-white'>العربية</button>
       </div>
+          
           <div className="hidden xl:flex items-center">
             <Link
               href="https://feverup.com/m/187813"
@@ -184,6 +185,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               <span className="button-slanted-content"> {t('BOOK NOW')}</span>
             </Link>
           </div>
+        
           
           <div className="xl:hidden">
             <button onClick={toggleMenu} className="text-white text-4xl">

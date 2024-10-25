@@ -3,11 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 
 const DomeData = () => {
+  const { t } = useTranslation();
 
     const domes = [
-      { title: 'CORPORATE EVENTS', description: 'The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology. Our stunning open-plan Reception and Lounge area is complemented by a Cafeteria and Private Conference Room. You and your guests can then step into our spacious Gaming Room and experience exhilarating simulator racing. For the select few, enjoy the exclusivity of our VIP room.   A blend of advanced technology with refined surroundings, book The Teleios Dome for your next Corporate Event.' },
+      { title: t('Corporate_Events'), description: t('Teleios_Dome_Corporate') },
     ];
   return (
     <>

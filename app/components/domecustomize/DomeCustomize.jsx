@@ -5,11 +5,14 @@ import React from 'react';
 
 import Image from 'next/image';
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 // import customize from '../../../public/assets/images/dome/customize-1.png';
 
 const DomeCustomize= () => {
+
+  const { t } = useTranslation();
   const domes = [
-    { title: 'SIM CONFIGURATOR', description: 'Dream it, build it! Create your own unique Teleios simulator in our customization area. Choose from a wide selection of colors, materials, and designs to make a one-of-a-kind masterpiece that is truly yours.' },
+    { title: t('SIM_CONFIGURATOR'), description: t('SIM_CONFIGURATOR_DEC') },
   ];
 
   return (
