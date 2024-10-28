@@ -259,7 +259,7 @@ const Form = () => {
                   />
                 </label>
                 <span
-                  className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? "text-white" : "text-[#6e6295c2]"}`}
+                  className={`ml-4 text-[14px] font-medium font-jura mt-1 mr-4 ${isRadioSelected ? "text-white" : "text-[#6e6295c2]"}`}
                 >
                   {t('Agree')}{" "}
                   <Link href="/terms&conditions" className="underline">

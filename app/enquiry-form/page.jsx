@@ -328,7 +328,7 @@ const Form = () => {
             <select
               name="hearAboutUs"
               id="hearAboutUs"
-              className="mt-1 p-4 block w-full xl:w-[646px] bg-[#2C1864C2] text-white py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] text-white py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.hearAboutUs}
               onChange={handleChange}
              
@@ -411,7 +411,7 @@ const Form = () => {
               id="message"
               placeholder="Select event type"
               rows="4"
-              className="mt-1 p-4 block w-full xl:w-[646px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.message}
               onChange={handleChange}
             ></textarea>

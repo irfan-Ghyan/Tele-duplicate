@@ -594,7 +594,7 @@ const Form = () => {
     // Clear the error for the field as the user types
     setErrors((prevErrors) => ({
       ...prevErrors,
-      [name]: value ? '' : prevErrors[name], // Clear error if input is not empty
+      [name]: value ? '' : prevErrors[name], 
     }));
   
     setFormData({
@@ -739,7 +739,7 @@ const Form = () => {
                 <p className="text-red-500 text-xs">{errors.firstName}</p>
               )}
             </div>
-            <div className="xl:ml-[14px]">
+            <div className="">
               <label
                 htmlFor="lastName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
@@ -786,7 +786,7 @@ const Form = () => {
                 <p className="text-red-500 text-xs">{errors.companyName}</p>
               )}
             </div>
-            <div className="xl:ml-[14px]">
+            <div className="">
               <label
                 htmlFor="phone"
                 className="block text-[14px] font-bold font-jura text-white py-2"
@@ -833,7 +833,7 @@ const Form = () => {
                 <p className="text-red-500 text-xs">{errors.email}</p>
               )}
             </div>
-            <div className="xl:ml-[14px]">
+            <div className="">
               <label
                 htmlFor="type"
                 className="block text-[14px] font-bold font-jura text-white py-2"
@@ -889,7 +889,7 @@ const Form = () => {
             <select
               name="hearAboutUs"
               id="hearAboutUs"
-              className="mt-1 p-4 block w-full xl:w-[646px] bg-[#2C1864C2] text-white py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] text-white py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.hearAboutUs}
               onChange={handleChange}
               
@@ -973,7 +973,7 @@ const Form = () => {
               id="message"
               placeholder="Select event type"
               rows="4"
-              className="mt-1 p-4 block w-full xl:w-[646px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.message}
               onChange={handleChange}
             ></textarea>
@@ -989,11 +989,11 @@ const Form = () => {
               value="phone"
               checked={isRadioSelected}
               onClick={handleRadioClick} 
-              onChange={handleCheckboxChange} // Optional, if you want to perform any action on change
+              onChange={handleCheckboxChange}
             />
             <span className={`custom-radio ${isRadioSelected ? 'checked' : ''}`} />
           </label>
-          <span className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? 'text-white' : 'text-[#6e6295c2]'}`}>
+          <span className={`ml-4 text-[14px] font-medium font-jura mt-1 mr-4 ${isRadioSelected ? 'text-white' : 'text-[#6e6295c2]'}`}>
           {t('Agree')}{' '}
             <Link href="/terms&conditions" className="underline">{t('TermsConditions')}</Link>
           </span>
