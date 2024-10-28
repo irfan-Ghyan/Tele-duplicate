@@ -718,7 +718,7 @@ const Form = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 py-10 ">
         <div className="xl:flex justify-between">
-            <div className='mx-2'>
+            <div className=''>
               <label
                 htmlFor="firstName"
                 className="block text-[14px] font-bold font-jura text-white py-2 placeholder-white placeholder-opacity-20 "
@@ -764,7 +764,7 @@ const Form = () => {
           </div>
 
           <div className="xl:flex justify-between">
-            <div className='mx-2'>
+            <div className=''>
               <label
                 htmlFor="companyName"
                 className="block text-[14px] font-bold font-jura text-white py-2"
@@ -811,7 +811,7 @@ const Form = () => {
           </div>
 
           <div className="xl:flex justify-between">
-            <div className='mx-2'>
+            <div className=''>
               <label
                 htmlFor="email"
                 className="block text-[14px] font-bold font-jura text-white py-2"

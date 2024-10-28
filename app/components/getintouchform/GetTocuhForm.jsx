@@ -156,7 +156,7 @@ const Form = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="lg:flex justify-between ">
-            <div className="mx-2"> 
+            <div className=""> 
               <label
                 htmlFor="firstName"
                 className="block text-[14px] font-bold font-jura text-white py-2 "
@@ -199,7 +199,7 @@ const Form = () => {
           </div>
 
           <div className="lg:flex justify-between">
-            <div className="mx-2">
+            <div className="">
               <label
                 htmlFor="email"
                 className="block text-[14px] font-bold font-jura text-white py-2"
