@@ -9,11 +9,9 @@ const DashboardNavbar = () => {
       </div>
       <div className="space-x-2">
         <button className="text-white px-4 py-2 hover:text-gray-200">
-          Login
+          Login | Signup
         </button>
-        <button className="text-white px-4 py-2 hover:text-gray-200">
-          Signup
-        </button>
+
       </div>
     </div>
   );

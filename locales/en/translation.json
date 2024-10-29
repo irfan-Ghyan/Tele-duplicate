@@ -256,9 +256,16 @@
   "SIM_CONFIGURATOR_DEC": "Dream it, build it! Create your own unique Teleios simulator in our customization area. Choose from a wide selection of colors, materials, and designs to make a one-of-a-kind masterpiece that is truly yours.",
 
   "LOUNGE_AREA": "LOUNGE AREA",
-  "LOUNGE_AREA_DEC": "Relax and unwind in our stylish lounge area, designed for your comfort and enjoyment. Whether you are waiting for your racing session, or catching up with friends, our lounge is the perfect spot to kick back, enjoy the mood, and recharge."
+  "LOUNGE_AREA_DEC": "Relax and unwind in our stylish lounge area, designed for your comfort and enjoyment. Whether you are waiting for your racing session, or catching up with friends, our lounge is the perfect spot to kick back, enjoy the mood, and recharge.",
 
-  
+  "titlegp": "Virtual GP",
+  "descriptiongp": "Experience the Teleios Dome Virtual Grand Prix, mirroring the 2024 Formula 1 calendar with 24 races. Compete weekly before the real F1 Grand Prix. Earn points for the overall championship. Thursdays at 8pm precede each F1 weekend. Prizes include weekly rewards and a championship pool of 100k AED.",
+  "learnMore": "LEARN MORE ABOUT VIRTUAL GP",
+  "bookOnline": "BOOK ONLINE",
+  "bookThrough": "BOOK THROUGH",
+  "raceResults": "RACE RESULTS",
+  "calendar": "CALENDAR",
+  "standings": "STANDINGS"
 }
 
 

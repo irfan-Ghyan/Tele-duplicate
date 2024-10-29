@@ -11,20 +11,20 @@ const Login= () => {
       <div className=" bg-[#11072C] flex justify-center items-center">
           <div className="w-[1000px]">
             <div className="w-full sm:p-12.5 xl:p-17.5 p-40">
-              <h2 className="mb-9 text-2xl font-bold text-white dark:text-white sm:text-title-xl2">
-                LOGIN
+              <h2 className="mb-9 text-2xl text-white font-black font-orbitron">
+              SIGN IN
               </h2>
 
               <form>
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Email
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -48,14 +48,14 @@ const Login= () => {
                 </div>
 
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Re-type Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -86,11 +86,11 @@ const Login= () => {
                   <input
                     type="submit"
                     value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white font-black font-orbitron"
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 text-white">
+                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 text-white font-black font-orbitron">
                   <span>
                     <svg
                       width="20"
@@ -127,10 +127,10 @@ const Login= () => {
                   Sign in with Google
                 </button>
 
-                <div className="mt-6 text-center text-white">
+                <div className="mt-6 text-center text-white font-normal font-orbitron">
                   <p>
                     Don’t have any account?{" "}
-                    <Link href="/auth/signup" className="text-primary">
+                    <Link href="/auth/signup" className="text-white font-bold font-orbitron">
                       Sign Up
                     </Link>
                   </p>

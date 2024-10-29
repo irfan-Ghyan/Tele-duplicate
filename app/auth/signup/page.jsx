@@ -13,20 +13,20 @@ const SignUp= () => {
         <div className="flex flex-wrap items-center">
           <div className="w-[1000px]">
             <div className="w-full  sm:p-12.5 xl:p-17.5 p-40">
-              <h2 className="mb-9 text-2xl font-bold text-white dark:text-white sm:text-title-xl2">
+              <h2 className="mb-9 text-2xl font-Black text-white font-orbitron">
                 Sign Up
               </h2>
 
               <form>
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Name
                   </label>
                   <div className="relative">
                     <input
                       type="text"
                       placeholder="Enter your full name"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -54,14 +54,14 @@ const SignUp= () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Email
                   </label>
                   <div className="relative">
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -85,14 +85,14 @@ const SignUp= () => {
                 </div>
 
                 <div className="mb-4">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="Enter your password"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -120,14 +120,14 @@ const SignUp= () => {
                 </div>
 
                 <div className="mb-6">
-                  <label className="mb-2.5 block font-medium text-white dark:text-white">
+                  <label className="mb-2.5 block text-white font-bold font-orbitron">
                     Re-type Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="Re-enter your password"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -158,11 +158,11 @@ const SignUp= () => {
                   <input
                     type="submit"
                     value="Create account"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white font-bold font-orbitron transition hover:bg-opacity-90"
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 text-white">
+                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 text-white font-normal font-orbitron">
                   <span>
                     <svg
                       width="20"
@@ -199,7 +199,7 @@ const SignUp= () => {
                   Sign up with Google
                 </button>
 
-                <div className="mt-6 text-center text-white">
+                <div className="mt-6 text-white font-normal font-orbitron text-center">
                   <p>
                     Already have an account?{" "}
                     <Link href="/auth/login" className="text-primary">

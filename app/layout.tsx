@@ -127,9 +127,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <html lang="en">
         <body className={inter.className}>
           {/* Render Header and Footer only if not on /dashboard or its sub-routes */}
-          {!pathname.startsWith("/booking") && <Header />}
+          {!pathname.startsWith("/dashboard") && <Header />}
           {children}
-          {!pathname.startsWith("/booking") && <Footer />}
+          {!pathname.startsWith("/dashboard") && <Footer />}
 
           {/* WhatsApp Icon Button */}
           <Link

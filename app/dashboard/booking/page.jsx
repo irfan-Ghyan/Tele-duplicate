@@ -1,8 +1,8 @@
 
 import React from 'react';
-import Sidebar from '../components/siderbar/Sidebar';
-import DashboardNavbar from '../components/dashboardnavbar/Dashboardnavbar';
-import DashboardData from '../components/dashboarddata/DashboardData'
+import Sidebar from '../../components/siderbar/Sidebar';
+import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
+import DashboardData from '../../components/dashboarddata/DashboardData'
 
 
 

@@ -148,9 +148,9 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
              {t('DOME')}
             </Link>
-            {/* <Link href="/upcomingevents" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
+            <Link href="/upcomingevents" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
                 UPCOMING EVENTS
-              </Link> */}
+              </Link>
             <Link
               href="/corporateevents"
               className="text-white text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold font-jura hover:text-[#A72CCF] mt-1"
