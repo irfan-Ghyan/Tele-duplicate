@@ -1,14 +1,13 @@
+
 'use client'
 
 import React from 'react';
 import Link from 'next/link';
 import Sidebar from '../../components/siderbar/Sidebar';
 import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
-import DashboardGaming from '../../components/dashboardgaming/DashboardGaming';
-import DashboardVip from '../../components/dashboardvip/DashboardVip';
-import DashboardStop from '../../components/dashboardstop/DashboardStop';
-import DashboardSim from '../../components/dashboardsim/DashboardSim';
-import DashboardLounge from '../../components/dashboardlounge/DashboardLounge';
+import DashboardSafetyDriving from '../../components/dashboardsafetydriving/DashboardSafetyDriving';
+import DashboardEducationalVisit from '../../components/dashboardeducationalvisit/DashboardEducationalVisit';
+import DashboardWhyTeleios from '../../components/dashboardwhyteleios/DashboardWhyTeleios'
 
 
 const Page = () => {
@@ -20,7 +19,7 @@ const Page = () => {
         <Sidebar />
         <div className='w-full'>
         <nav className=" bg-white text-black py-4 px-6 flex justify-center space-x-8 border-b-2 border-color-100">
-        <Link href="/dashboard/content" className="text-[#A62ED1] text-[13px]">
+            <Link href="/dashboard/content" className="text-[#A62ED1] text-[13px]">
             HOME
             </Link>
             <Link href="/dashboard/experience" className='hover:text-[#A62ED1] text-[13px]'> 
@@ -39,42 +38,32 @@ const Page = () => {
             <Link href="/dashboard/education" className='hover:text-[#A62ED1] text-[13px]'> 
             EDUCATION
             </Link>
+            
         </nav>
+
         <div className='p-40'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>GAMING ROOM</h1>
+        <h1 className='text-4xl text-black font-black font-orbitron'>EDUCATIONAL VISIT</h1>
         <div className=''>
-        <DashboardGaming />
+        <DashboardEducationalVisit />
+        </div>
+        </div>
+
+
+        <div className='p-40 bg-white border-t-2 border-gray-200'>
+        <h1 className='text-4xl text-black font-black font-orbitron'>SAFETY DRIVING</h1>
+        <div className=''>
+        <DashboardSafetyDriving />
         </div>
         </div>
 
         <div className='p-40 bg-white border-t-2 border-gray-200'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>VIP EXPERIENCE</h1>
+        <h1 className='text-4xl text-black font-black font-orbitron'>WHY TELEIOS</h1>
         <div className=''>
-        <DashboardVip />
-        </div>
-        </div>
-        <div className='p-40 bg-white border-t-2 border-gray-200'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>PIT STOP</h1>
-        <div className=''>
-        <DashboardStop />
-        </div>
-        </div>
-     
-
-        <div className='p-40 bg-white border-t-2 border-gray-200'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>SIM CONFIGURATOR</h1>
-        <div className=''>
-        < DashboardSim />
+        <DashboardWhyTeleios />
         </div>
         </div>
 
-        <div className='p-40 bg-white border-t-2 border-gray-200'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>LOUNGE AREA</h1>
-        <div className=''>
-        < DashboardLounge/>
-        </div>
-        </div>
-       
+    
         </div>
         </div>
       </div>

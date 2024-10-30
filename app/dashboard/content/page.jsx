@@ -6,6 +6,8 @@ import Sidebar from '../../components/siderbar/Sidebar';
 import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
 import DashboardVideo from '@/app/components/dashboardvideo/DashboardVideo';
 import DashboardSession from '@/app/components/dashboardsession/DashboardSession';
+import DashboardDomeSection from '@/app/components/dashboarddomesection/DashboardDomeSection';
+import DashboardFaq from '@/app/components/dashboardfaq/DashboardFaq';
 
 const Page = () => {
   return (
@@ -21,6 +23,9 @@ const Page = () => {
             <Link href="/dashboard/experience" className='hover:text-[#A62ED1] text-[13px]'> 
             EXPERIENCE
             </Link>
+            <Link href="/dashboard/dome" className='hover:text-[#A62ED1] text-[13px]'> 
+            DOME
+            </Link>
             <Link href="/dashboard/upcomingevents"  className="hover:text-[#A62ED1] text-[13px]">
             UPCMING EVENTS
             </Link>
@@ -28,13 +33,16 @@ const Page = () => {
             <Link href="/dashboard/corporateevents" className='hover:text-[#A62ED1] text-[13px]'>
             CORPORATE EVENTS
             </Link>
-            <Link href="/dashboard/dome" className='hover:text-[#A62ED1] text-[13px]'> 
-            DOME
+            <Link href="/dashboard/education" className='hover:text-[#A62ED1] text-[13px]'>
+            EDUCATION
             </Link>
+      
         </nav>
 
         <DashboardVideo/>
         <DashboardSession />
+        <DashboardDomeSection />
+        <DashboardFaq />
     
             </div>
         </div>

@@ -9,7 +9,7 @@ import DashboardHome from '../components/dashboardhome/DashboardHome';
 const Page = () => {
   return (
 
-        <div className="flex h-screen">
+        <div className="flex h-screen bg-white">
           
       <div className="flex-1 ">
         <DashboardNavbar />

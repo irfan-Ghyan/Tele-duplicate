@@ -24,7 +24,7 @@ const Login= () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
+                      className="w-full border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -55,7 +55,7 @@ const Login= () => {
                     <input
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
+                      className="w-full border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary text-white font-normal font-orbitron"
                     />
 
                     <span className="absolute right-4 top-4">
@@ -82,15 +82,15 @@ const Login= () => {
                   </div>
                 </div>
 
-                <div className="mb-5">
+                <div className="mb-5 mt-20">
                   <input
                     type="submit"
                     value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white font-black font-orbitron"
+                    className="w-full cursor-pointer border border-primary bg-primary p-4 text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:from-[#7E51F8] hover:to-[#D007A6]"
                   />
                 </div>
 
-                <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50 text-white font-black font-orbitron">
+                <button className="flex w-full items-center justify-center gap-3.5 border border-stroke bg-gray p-4 dark:border-strokedark dark:bg-meta-4  text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:from-[#7E51F8] hover:to-[#D007A6]">
                   <span>
                     <svg
                       width="20"

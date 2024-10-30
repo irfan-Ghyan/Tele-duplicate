@@ -5,7 +5,8 @@ import React from 'react';
 import Link from 'next/link';
 import Sidebar from '../../components/siderbar/Sidebar';
 import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
-import DashboardExperience from '../../components/dashboardExperience/DashboardExperience'
+import DashboardExperience from '../../components/dashboardexperience/DashboardExperience';
+import DashboardPrivateEvents from '../../components/dashboardprivateevents/DashboardPrivateEVents';
 
 const Page = () => {
   return (
@@ -22,6 +23,9 @@ const Page = () => {
             <Link href="/dashboard/experience" className='hover:text-[#A62ED1] text-[13px]'> 
             EXPERIENCE
             </Link>
+            <Link href="/dashboard/dome" className='hover:text-[#A62ED1] text-[13px]'> 
+            DOME
+            </Link>
             <Link href="/dashboard/upcomingevents"  className="hover:text-[#A62ED1] text-[13px]">
             UPCMING EVENTS
             </Link>
@@ -29,14 +33,21 @@ const Page = () => {
             <Link href="/dashboard/corporateevents" className='hover:text-[#A62ED1] text-[13px]'>
             CORPORATE EVENTS
             </Link>
-            <Link href="/dashboard/dome" className='hover:text-[#A62ED1] text-[13px]'> 
-            DOME
+            <Link href="/dashboard/education" className='hover:text-[#A62ED1] text-[13px]'> 
+            EDUCATION
             </Link>
         </nav>
         <div className='p-40'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>EXPERINCE</h1>
+        <h1 className='text-4xl text-black font-black font-orbitron'>SESSIONS</h1>
         <div className=''>
         <DashboardExperience />
+        </div>
+        </div>
+
+        <div className='p-40 bg-white border-t-2 border-gray-200'>
+        <h1 className='text-4xl text-black font-black font-orbitron'>PRIVATE EVENTS</h1>
+        <div className=''>
+        <DashboardPrivateEvents />
         </div>
         </div>
         </div>

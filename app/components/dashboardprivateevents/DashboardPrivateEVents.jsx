@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-const DashboardDome = () => {
+const DashboardPrivateEvents= () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
@@ -10,11 +10,11 @@ const DashboardDome = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
 
-  // Handle title and description changes
+
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
-  // Handle multiple image uploads
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => {
@@ -26,12 +26,12 @@ const DashboardDome = () => {
     setImages((prevImages) => [...prevImages, ...newImages]);
   };
 
-  // Handle image removal
+
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // Handle form submission
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -42,7 +42,7 @@ const DashboardDome = () => {
     };
 
     if (isEditing) {
-      // Update existing entry
+   
       const updatedData = [...tableData];
       updatedData[editingIndex] = newEntry;
       setTableData(updatedData);
@@ -77,14 +77,14 @@ const DashboardDome = () => {
   return (
     <div className="w-full">
         <div className='flex justify-between'>
-        <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+            <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
           <input
             type="text"
             value={title}
             onChange={handleTitleChange}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300"
             required
           />
         </div>
@@ -94,7 +94,7 @@ const DashboardDome = () => {
           <textarea
             value={description}
             onChange={handleDescriptionChange}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 "
             rows="3"
             required
           />
@@ -107,7 +107,7 @@ const DashboardDome = () => {
             accept="image/*"
             multiple
             onChange={handleImageUpload}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300"
           />
         </div>
 
@@ -128,13 +128,13 @@ const DashboardDome = () => {
 
         <button
           type="submit"
-          className="w-full p-3 bg-[#A62ED1] text-white rounded hover:bg-[#A62ED1]"
+          className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
         >
           {isEditing ? 'Update Entry' : 'Submit'}
         </button>
       </form>
 
-            <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+      <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">عنوان</label>
           <input
@@ -191,11 +191,10 @@ const DashboardDome = () => {
         </button>
       </form>
       
-      
       </div>
-     
+      
 
-
+      
           <div className='mt-20'>
       <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
       <table className="w-full border border-gray-300">
@@ -244,4 +243,4 @@ const DashboardDome = () => {
   );
 };
 
-export default DashboardDome;
+export default DashboardPrivateEvents;
