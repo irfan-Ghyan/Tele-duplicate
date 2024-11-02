@@ -8,6 +8,7 @@ import DashboardVideo from '@/app/components/dashboardvideo/DashboardVideo';
 import DashboardSession from '@/app/components/dashboardsession/DashboardSession';
 import DashboardDomeSection from '@/app/components/dashboarddomesection/DashboardDomeSection';
 import DashboardFaq from '@/app/components/dashboardfaq/DashboardFaq';
+import { FaqProvider } from '../../FaqContext';
 
 const Page = () => {
   return (
@@ -42,7 +43,10 @@ const Page = () => {
         <DashboardVideo/>
         <DashboardSession />
         <DashboardDomeSection />
-        <DashboardFaq />
+        <FaqProvider>
+          <DashboardFaq />
+        </FaqProvider>
+       
     
             </div>
         </div>

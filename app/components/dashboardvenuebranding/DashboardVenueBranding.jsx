@@ -16,10 +16,13 @@ const DashboardVenueBranding = () => {
     e.preventDefault();
 
     const newEntry = { title };
+    console.log(e.target.value);
+    console.log(tableData);
 
     if (isEditing) {
       // Update existing entry
       const updatedData = [...tableData];
+
       updatedData[editingIndex] = newEntry;
       setTableData(updatedData);
       setIsEditing(false);
@@ -48,7 +51,8 @@ const DashboardVenueBranding = () => {
 
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit} className="w-full max-w-md mt-10 mb-8">
+        <div className='flex justify-between'> 
+      <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
           <input
@@ -67,6 +71,25 @@ const DashboardVenueBranding = () => {
         </button>
       </form>
 
+      <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">عنوان</label>
+          <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            className="w-full p-2 border border-gray-300 rounded"
+            required
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full p-3 bg-[#A62ED1] text-white rounded hover:bg-[#A62ED1]"
+        >
+          {isEditing ? 'تحديث العنوان' : 'إرسال العنوان'}
+        </button>
+      </form>
+      </div>
       <div className="mt-10">
         <h2 className="text-xl font-bold mb-4">Submitted Titles</h2>
         <table className="w-full border border-gray-300">

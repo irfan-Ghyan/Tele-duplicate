@@ -11,7 +11,7 @@ const SessionCard = ({ imageUrl, title, description, button, link }) => {
     
     <div className="overflow-hidden bg-[#371F76] mb-5 items-center flex flex-col h-full">
       <Head>
-        <title>{title} | Teleios Dome</title>
+        <title>{title}</title>
         <meta name="description" content={description} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />

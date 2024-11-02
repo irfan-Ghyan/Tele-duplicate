@@ -8,6 +8,7 @@ const DashboardSession = () => {
   const [experiences, setExperiences] = useState([]);
   const [isScrolling, setIsScrolling] = useState(false);
   const [showScrollButton, setShowScrollButton] = useState(false);
+  const [showSection, setShowSection] = useState(true);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -92,12 +93,10 @@ const DashboardSession = () => {
     });
   };
 
-  // Handle delete experience
   const handleDelete = (index) => {
     setExperiences(experiences.filter((_, i) => i !== index));
   };
 
-  // Handle edit experience (for simplicity, directly setting data in form)
   const handleEdit = (index) => {
     const experience = experiences[index];
     setFormData({
@@ -106,12 +105,29 @@ const DashboardSession = () => {
       imageUrl: experience.imageUrl,
       slot: experience.slot,
     });
-    // Remove the experience being edited to avoid duplication on form submit
+
     handleDelete(index);
+  };
+
+
+  const toggleSectionVisibility = () => {
+    setShowSection(!showSection);
   };
 
   return (
     <div className="w-full relative py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
+      <div className="flex justify-end">
+        <button
+          onClick={toggleSectionVisibility}
+          className="mb-4 p-2 text-[#A62ED1]"
+        >
+          {showSection ? 'Hide' : 'Show'}
+        </button>
+      </div>
+      
+
+      {showSection && (
+        <>
       <h1 className="text-4xl text-black font-black font-orbitron">
         EXPERIENCE
       </h1>
@@ -122,10 +138,8 @@ const DashboardSession = () => {
       >
         <form
           onSubmit={handleSubmit}
-          className="w-full rounded-lg mt-10 max-w-lg"
+          className="w-full mb-8 max-w-4xl mt-10"
         >
-          <h3 className="text-lg font-semibold mb-4">Add New Experience</h3>
-
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Title
@@ -185,34 +199,17 @@ const DashboardSession = () => {
 
           <button
             type="submit"
-            className="w-full p-4 bg-[#ce21b7]  text-white hover:bg-[#ce21b7f5]  mt-8"
+            className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]  mt-8"
           >
             ADD EXPERIENCE
           </button>
         </form>
 
-        {experiences.map((experience, index) => (
-          <div
-            key={index}
-            className="card-wrapper w-full md:w-[386px] px-8"
-            style={{ minWidth: "386px", marginRight: "16px" }}
-          >
-            <SessionCard
-              title={experience.title}
-              description={experience.description}
-              imageUrl={experience.imageUrl}
-              button={experience.button}
-              link={experience.link}
-            />
-          </div>
-        ))}
 
         <form
           onSubmit={handleSubmit}
-          className="w-full rounded-lg mt-10 max-w-lg"
+          className="w-full mb-8 max-w-4xl mt-10"
         >
-          <h3 className="text-lg font-semibold mb-4">أضف تجربة جديدة</h3>
-
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-2">
               عنوان
@@ -272,7 +269,7 @@ const DashboardSession = () => {
 
           <button
             type="submit"
-            className="w-full p-4 bg-[#ce21b7]  text-white hover:bg-[#ce21b7f5]  mt-8"
+            className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]  mt-8"
           >
             أضف الخبرة
           </button>
@@ -329,12 +326,14 @@ const DashboardSession = () => {
           </tbody>
         </table>
       </div>
+      </>
+      )}
 
       {showScrollButton && (
         <div className="fixed bottom-6 right-6 md:hidden">
           <button
             onClick={scrollToTop}
-            className="bg-purple-500 text-white p-4 rounded-full shadow-lg hover:bg-purple-600 transition duration-300"
+            className="bg-[#A62ED1] text-white p-4 rounded-full shadow-lg hover:bg-[#A62ED1] transition duration-300"
           >
             <Image
               src="/assets/images/rightarrow.png"

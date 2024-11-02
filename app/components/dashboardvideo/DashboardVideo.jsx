@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 
 const DashboardVideo = () => {
-  // State to hold the current video URL
   const [currentVideo, setCurrentVideo] = useState("/assets/video/dome.webm");
-
-  // State to hold uploaded video files
   const [uploadedVideos, setUploadedVideos] = useState([]);
 
-  // Handle video file upload
   const handleVideoUpload = (event) => {
     const file = event.target.files[0];
     if (file) {
       const videoUrl = URL.createObjectURL(file);
       setUploadedVideos([...uploadedVideos, videoUrl]);
-      setCurrentVideo(videoUrl); // Optionally set the new video as the current one immediately
+      setCurrentVideo(videoUrl);
     }
   };
 
+
   return (
+    
     <div className="flex flex-col items-center bg-white p-20">
-      {/* Video Display */}
+    
       <div className="relative mb-8">
         <video
           preload="auto"
