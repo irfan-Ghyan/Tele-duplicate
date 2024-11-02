@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Head from 'next/head'; 
 
 
-const SessionCard = ({ imageUrl, title, description, button, link }) => {
+const SessionCard = ({ imageUrl, title, description }) => {
 
 
   return (
@@ -33,7 +33,6 @@ const SessionCard = ({ imageUrl, title, description, button, link }) => {
           <p className="text-white text-[14px] font-jura font-bold py-4 text-justify">{description}</p>
         </div>
 
-        
       </div>
     </div>
   );
