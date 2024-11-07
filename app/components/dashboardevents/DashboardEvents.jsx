@@ -11,6 +11,7 @@ const DashboardEvents = () => {
   const [tableData, setTableData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [showSection, setShowSection] = useState(true);
 
   // Handle input changes
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -29,52 +30,127 @@ const DashboardEvents = () => {
     setImages((prevImages) => [...prevImages, ...newImages]);
   };
 
+
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
+  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newEntry = {
-      title,
-      description,
-      images,
-      buttonText, // Add buttonText to the entry
+
+    const payload = {
+      pageName: "Dome",
+      sectionName: "Gaming Room",
+      fields: [
+        {
+          fieldName: "title",
+          fieldValue: formData.title,
+        },
+        {
+          fieldName: "description",
+          fieldValue: formData.description,
+        },
+      ],
     };
-
-    if (isEditing) {
-      const updatedData = [...tableData];
-      updatedData[editingIndex] = newEntry;
-      setTableData(updatedData);
-      setIsEditing(false);
-      setEditingIndex(null);
-    } else {
-      setTableData([...tableData, newEntry]);
+    
+    try {
+      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          pageName: "Dome",
+          sectionName: "Gaming Room",
+          body: JSON.stringify(payload),
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error("Failed to save data to the database.");
+      }
+      
+      const result = await response.json();
+      console.log("Data saved successfully:", result);
+      
+      // Clear form after submission
+      setFormData({
+        title: "",
+        description: "",
+        imageUrl: null,
+      });
+      
+    } catch (error) {
+      console.error("Error:", error);
     }
-
-    // Clear form fields
-    setTitle('');
-    setDescription('');
-    setImages([]);
-    setButtonText(''); // Reset button text
+  };
+  
+  const toggleSectionVisibility = () => {
+    setShowSection(!showSection);
   };
 
+
+  // Handle edit action
   const handleEdit = (index) => {
     const entry = tableData[index];
     setTitle(entry.title);
     setDescription(entry.description);
     setImages(entry.images);
-    setButtonText(entry.buttonText); // Set button text for editing
     setIsEditing(true);
     setEditingIndex(index);
   };
 
-  const handleDelete = (index) => {
-    setTableData((prevData) => prevData.filter((_, i) => i !== index));
-  };
+  // const handleDelete = async (keyId) => {
+  //   try {
+  //     const payload = {
+  //       pageName: "Home",
+  //       sectionName: "FAQ",
+  //       fieldName: keyId,
+  //     };
 
+  //     const response = await fetch(
+  //       "http://192.168.70.151:8000/api/content/removeSectionField",
+  //       {
+  //         method: "DELETE",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(payload),
+  //       }
+  //     );
+
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete data");
+  //     }
+
+  //     const result = await response.json();
+  //     console.log("Delete API Response:", result);
+
+  //     if (result.success) {
+  //       setFaqEntries((prevEntries) =>
+  //         prevEntries.filter((entry) => entry.question.key !== keyId)
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting data:", error);
+  //   }
+  // };
+
+ 
   return (
     <div className="w-full">
+       <div className="flex justify-end">
+        <button
+          onClick={toggleSectionVisibility}
+          className="mb-4 p-2 text-[#A62ED1]"
+        >
+          {showSection ? "Hide" : "Show"}
+        </button>
+      </div>
+
+      {showSection && (
+        <>
       <div className="flex justify-between">
         <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
           <div className="mb-4">
@@ -143,6 +219,74 @@ const DashboardEvents = () => {
             {isEditing ? 'Update Entry' : 'Submit'}
           </button>
         </form>
+
+        <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">عنوان</label>
+            <input
+              type="text"
+              value={title}
+              onChange={handleTitleChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">وصف</label>
+            <textarea
+              value={description}
+              onChange={handleDescriptionChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              rows="3"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">نص الزر</label>
+            <input
+              type="text"
+              value={buttonText}
+              onChange={handleButtonTextChange}
+              className="w-full p-2 border border-gray-300 rounded"
+              required
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">تحميل الصور</label>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              className="w-full p-2 border border-gray-300 rounded"
+            />
+          </div>
+
+          <div className="mb-4 grid grid-cols-3 gap-4">
+            {images.map((img, index) => (
+              <div key={index} className="relative">
+                <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
+                <button
+                  type="button"
+                  onClick={() => handleRemoveImage(index)}
+                  className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full p-3 bg-[#A62ED1] text-white rounded hover:bg-[#A62ED1]"
+          >
+            {isEditing ? 'تحديث الإدخال' : 'يُقدِّم'}
+          </button>
+        </form>
       </div>
 
       <div className="mt-20">
@@ -195,6 +339,8 @@ const DashboardEvents = () => {
           </tbody>
         </table>
       </div>
+      </>
+      )}
     </div>
   );
 };

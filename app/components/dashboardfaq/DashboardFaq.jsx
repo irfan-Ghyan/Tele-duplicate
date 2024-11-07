@@ -9,6 +9,7 @@ const DashboardFaq = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
   const { faqData, updateFaqData } = useFaq();
+  const [language, setLanguage] = useState('en');
 
 
 const handleInputChange = (e) => {
@@ -24,7 +25,7 @@ const handleInputChange = (e) => {
   const fetchData = async () => {
     try {
       let response = await fetch(
-        "http://192.168.70.151:8000/api/content/sections/Home"
+        "http://192.168.70.136:8000/api/content/sections/Home"
       );
       if (response.ok) {
         response = await response.json();
@@ -75,20 +76,20 @@ const handleInputChange = (e) => {
       sectionName: "FAQ",
       fields: editingIndex !== null ? [
         {
-          fieldName: editingIndex, // use the key of the entry being edited
+          fieldName: editingIndex, 
           fieldValue: formData.question,
         },
         {
-          fieldName: `a${editingIndex.slice(1)}`, // Corresponding answer field key
+          fieldName: `a${editingIndex.slice(1)}`, 
           fieldValue: formData.answer, 
         },
       ] : [
         {
-          fieldName: `q${faqEntries.length + 1}`, // For new entries
+          fieldName: `q${faqEntries.length + 1}`, 
           fieldValue: formData.question,
         },
         {
-          fieldName: `a${faqEntries.length + 1}`, // For new entries
+          fieldName: `a${faqEntries.length + 1}`, 
           fieldValue: formData.answer, 
         },
       ],
@@ -96,7 +97,7 @@ const handleInputChange = (e) => {
   
     try {
       const response = await fetch(
-        "http://192.168.70.151:8000/api/content/setMultipleFieldValues",
+        "http://192.168.70.136:8000/api/content/setMultipleFieldValues",
         {
           method: "POST",
           headers: {
@@ -135,9 +136,11 @@ const handleInputChange = (e) => {
           };
           setFaqEntries((prevEntries) => [...prevEntries, newEntry]);
         }
+
+        
   
         setFormData({ question: "", answer: "" });
-        setEditingIndex(null); // Reset editing index
+        setEditingIndex(null);
       } else {
         console.error("Error from API:", result.message || "Unknown error");
       }
@@ -145,63 +148,6 @@ const handleInputChange = (e) => {
       console.error("Error sending data:", error);
     }
   };
-  
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-    
-  //   const payload = {
-  //     pageName: "Home",
-  //     sectionName: "FAQ",
-  //     fields: [
-  //       {
-  //         fieldName: `q${faqEntries.length + 1}`,
-  //         fieldValue: formData.question,
-  //       },
-  //       {
-  //         fieldName: `a${faqEntries.length + 1}`,
-  //         fieldValue: formData.answer, 
-  //       },
-  //     ],
-  //   };
-  
-  //   try {
-  //     const response = await fetch(
-  //       "http://192.168.70.151:8000/api/content/setMultipleFieldValues",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(payload),
-  //       }
-  //     );
-  
-  //     const result = await response.json();
-  
-  //     if (result.success) {
-  //       debugger;
-  //       const newEntry = {
-  //         question: {
-  //           value: result.data[0]['key'],
-  //           value: result.data[0]['value'],
-  //         },
-  //         answer: {
-  //           value: result.data[1]['key'],
-  //           value: result.data[1]['value'],
-  //         },
-  //       };
-  
-  //       setFaqEntries((prevEntries) => [...prevEntries, newEntry]);
-  //       setFormData({ question: "", answer: "" });
-  //       setEditingIndex(null);
-  //     } else {
-  //       console.error("Error from API:", result.message || "Unknown error");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error sending data:", error);
-  //   }
-  // };
   
   
   const handleEdit = (keyId) => {
@@ -227,7 +173,7 @@ const handleInputChange = (e) => {
       };
 
       const response = await fetch(
-        "http://192.168.70.151:8000/api/content/removeSectionField",
+        "http://192.168.70.136:8000/api/content/removeSectionField",
         {
           method: "DELETE",
           headers: {
@@ -245,7 +191,6 @@ const handleInputChange = (e) => {
       console.log("Delete API Response:", result);
 
       if (result.success) {
-        // Remove the entry from the state
         setFaqEntries((prevEntries) =>
           prevEntries.filter((entry) => entry.question.key !== keyId)
         );
@@ -259,20 +204,27 @@ const handleInputChange = (e) => {
     setShowSection(!showSection);
   };
 
+  const labels = {
+    en: { heading: 'FAQ', title: 'Question', description: 'Answer', submit: 'Submit', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', edit: 'Edit', delete: 'Delete', actions: 'Actions',},
+    ar: { heading: 'التعليمات', title: 'سؤال', description: 'وصف', submit: 'إجابة', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', edit: 'يحرر', delete: 'يمسح', actions: 'الإجراءات', },
+  };
+
+  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
+
   return (
-    <div className="w-full relative py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
-      <div className="flex justify-end">
-        <button
-          onClick={toggleSectionVisibility}
-          className="mb-4 p-2 text-[#A62ED1]"
-        >
-          {showSection ? "Hide" : "Show"}
+    <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+      <div className="flex justify-between">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#A62ED1]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#A62ED1]">
+          {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
 
       {showSection && (
         <>
-          <h1 className="text-4xl text-black font-black font-orbitron">FAQ</h1>
+          <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
           <div className="flex justify-between">
             <form
               onSubmit={handleSubmit}
@@ -280,7 +232,7 @@ const handleInputChange = (e) => {
             >
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
-                  Question
+                {labels[language].title}
                 </label>
                 <textarea
                   name="question"
@@ -288,13 +240,14 @@ const handleInputChange = (e) => {
                   onChange={handleChange}
                   placeholder="Enter question"
                   className="w-full p-2 border border-gray-300"
+                  dir={getDirection()}
                   required
                 />
               </div>
 
               <div className="mb-4">
                 <label className="block text-gray-700 font-bold mb-2">
-                  Answer
+                {labels[language].description}
                 </label>
                 <textarea
                   name="answer"
@@ -302,6 +255,7 @@ const handleInputChange = (e) => {
                   onChange={handleChange}
                   placeholder="Enter answer"
                   className="w-full p-2 border border-gray-300"
+                  dir={getDirection()}
                   required
                 />
               </div>
@@ -310,49 +264,10 @@ const handleInputChange = (e) => {
                 type="submit"
                 className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
               >
-                {editingIndex !== null ? "Update" : "Submit"}
+                {editingIndex !== null ? labels[language].update : labels[language].submit}
               </button>
             </form>
 
-            <form
-              onSubmit={handleSubmit}
-              className="w-full mb-8 max-w-4xl mt-10"
-            >
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">
-                  سؤال
-                </label>
-                <textarea
-                  name="question"
-                  value={formData.question}
-                  onChange={handleChange}
-                  placeholder="Enter question"
-                  className="w-full p-2 border border-gray-300"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block text-gray-700 font-bold mb-2">
-                  إجابة
-                </label>
-                <textarea
-                  name="answer"
-                  value={formData.answer}
-                  onChange={handleChange}
-                  placeholder="Enter answer"
-                  className="w-full p-2 border border-gray-300"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full p-4 bg-[#A62ED1]  text-white hover:bg-[#A62ED1] "
-              >
-                {editingIndex !== null ? "تحديث" : "يُقدِّم"}
-              </button>
-            </form>
           </div>
 
           <div className="mt-10">
@@ -360,9 +275,9 @@ const handleInputChange = (e) => {
             <table className="w-full border border-gray-300">
               <thead>
                 <tr className="bg-gray-100">
-                  <th className="p-2 border border-gray-300">Questions</th>
-                  <th className="p-2 border border-gray-300">Answers</th>
-                  <th className="p-2 border border-gray-300">Actions</th>
+                  <th className="p-2 border border-gray-300">{labels[language].title}</th>
+                  <th className="p-2 border border-gray-300">{labels[language].description}</th>
+                  <th className="p-2 border border-gray-300">{labels[language].actions}</th>
                 </tr>
               </thead>
               <tbody>
@@ -371,21 +286,21 @@ const handleInputChange = (e) => {
                     key={entry.question.key}
                     className="border border-gray-300"
                   >
-                    <td className="p-2 text-center">{entry.question.value}</td>
-                    <td className="p-2 text-center">{entry.answer.value}</td>
-                    <td className="p-2 text-center">
+                    <td className="p-2">{entry.question.value}</td>
+                    <td className="p-2">{entry.answer.value}</td>
+                    <td className="p-2">
                       <>
                         <button
                           onClick={() => handleEdit(entry.question.key)}
                           className="mr-2 text-blue-500 hover:underline"
                         >
-                          Edit
+                          {labels[language].edit}
                         </button>
                         <button
                           onClick={() => handleDelete(entry.question.key)}
                           className="text-red-500 hover:underline"
                         >
-                          Delete
+                           {labels[language].delete}
                         </button>
                       </>
                     </td>
@@ -401,3 +316,4 @@ const handleInputChange = (e) => {
 };
 
 export default DashboardFaq;
+

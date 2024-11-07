@@ -1,360 +1,315 @@
-import React, { useRef, useState, useEffect } from "react";
-import Image from "next/image";
-import { useTranslation } from "react-i18next";
-import SessionCard from "./sessioncard/SessionCard";
+
+import React, { useState, useEffect } from 'react';
 
 const DashboardSession = () => {
-  const scrollContainerRef = useRef(null);
-  const [experiences, setExperiences] = useState([]);
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [images, setImages] = useState([]);
+  const [tableData, setTableData] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
+  const [language, setLanguage] = useState('en'); 
 
-  const [formData, setFormData] = useState({
-    title: "",
-    description: "",
-    imageUrl: null,
-    slot: "",
-  });
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleDescriptionChange = (e) => setDescription(e.target.value);
 
-  const { t } = useTranslation();
 
-  useEffect(() => {
-    const fetchExperiences = async () => {
-      const data = [
-        {
-          title: t("20-Minute Sprint"),
-          description: t(
-            "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience."
-          ),
-          imageUrl: "/assets/images/experience/mintue1.jpg",
-          slot: "20-Minute Sprint",
-        },
-      ];
-      setExperiences(data);
-    };
-
-    fetchExperiences();
-
-    const handleScroll = () => {
-      if (scrollContainerRef.current) {
-        setIsScrolling(true);
-        if (scrollContainerRef.current.scrollLeft > 100) {
-          setShowScrollButton(true);
-        } else {
-          setShowScrollButton(false);
-        }
-      }
-    };
-
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, [t]);
-
-  const scrollToTop = () => {
-    scrollContainerRef.current.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
-
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Handle file upload
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData({ ...formData, imageUrl });
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => {
+      return {
+        file,
+        previewUrl: URL.createObjectURL(file),
+      };
+    });
+    setImages((prevImages) => [...prevImages, ...newImages]);
+  };
+
+
+  const handleRemoveImage = (index) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
+
+  const handleDelete = async (keyId) => {
+    try {
+      const payload = {
+        pageName: "Home",
+        sectionName: "Experience",
+        fieldName: "title",
+        fieldName: "description"
+
+      };
+  
+      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Failed to delete data");
+      }
+  
+      const result = await response.json();
+      console.log("Delete API Response:", result);
+  
+      if (result.success) {
+        // Clear all fields under "Experience" section from table data
+        setTableData((prevEntries) =>
+          prevEntries.filter((entry) => entry.sectionName !== "Experience")
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
     }
   };
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://192.168.70.136:8000/api/content/sections/Home');
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        const sections = data?.data?.sections || [];
+  
+        const domeSection = sections.find(section => section.title === "Experience");
+  
+        if (domeSection) {
+          const titleField = domeSection.section_fields.find(field => field.key === 'title');
+          const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
+          // const imageField = domeSection.section_fields.find(field => field.key === 'image');
+  
+          setTitle(titleField?.value || '');
+          setDescription(descriptionField?.value || '');
+          // setImages(Array.isArray(imageField?.value) ? imageField.value : []);
+  
+          const sectionData = sections.map((section) => ({
+            title: section.section_fields.find(field => field.key === 'title')?.value || '',
+            description: section.section_fields.find(field => field.key === 'description')?.value || '',
+            // image: section.section_fields.find(field => field.key === 'image')?.value || '',
+          }));
+  
+          setTableData(sectionData);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setExperiences([...experiences, formData]);
-    setFormData({
-      title: "",
-      description: "",
-      imageUrl: null,
-      slot: "",
-    });
-  };
-
-  const handleDelete = (index) => {
-    setExperiences(experiences.filter((_, i) => i !== index));
+    const payload = {
+      pageName: "Home",
+      sectionName: "Experience",
+      fields: [
+        { fieldName: "title", fieldValue: title },
+        { fieldName: "description", fieldValue: description },
+        
+      ],
+    };
+  
+    try {
+      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) throw new Error("Failed to save data to the database.");
+  
+      const result = await response.json();
+      console.log("Data saved successfully:", result);
+  
+  
+      if (isEditing) {
+        setTableData((prevData) =>
+          prevData.map((entry, index) =>
+            index === editingIndex ? { title, description } : entry
+          )
+        );
+      } else {
+        setTableData((prevData) => [...prevData, { title, description }]);
+      }
+  
+      setTitle("");
+      setDescription("");
+      setImages([]);
+      setIsEditing(false);
+      setEditingIndex(null);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   const handleEdit = (index) => {
-    const experience = experiences[index];
-    setFormData({
-      title: experience.title,
-      description: experience.description,
-      imageUrl: experience.imageUrl,
-      slot: experience.slot,
-    });
-
-    handleDelete(index);
+    const entry = tableData[index];
+    setTitle(entry.title);
+    setDescription(entry.description);
+    setImages(entry.images || []); 
+    setIsEditing(true);
+    setEditingIndex(index);
+    
   };
-
-
+  
+  
   const toggleSectionVisibility = () => {
     setShowSection(!showSection);
   };
 
+
+  const labels = {
+    en: { heading: 'EXPERIENCE', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.', edit: 'Edit', delete: 'Delete' },
+    ar: { heading: 'خبرة', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
+  };
+
+  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
+
   return (
-    <div className="w-full relative py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
-      <div className="flex justify-end">
-        <button
-          onClick={toggleSectionVisibility}
-          className="mb-4 p-2 text-[#A62ED1]"
-        >
-          {showSection ? 'Hide' : 'Show'}
+    <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+      <div className="flex justify-between">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#A62ED1]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#A62ED1]">
+          {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
-      
 
       {showSection && (
         <>
-      <h1 className="text-4xl text-black font-black font-orbitron">
-        EXPERIENCE
-      </h1>
+        <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
+        <div className='flex justify-between'>
+            <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].title}</label>
+          <input
+            type="text"
+            value={title}
+            onChange={handleTitleChange}
+            className="w-full p-2 border border-gray-300"
+            dir={getDirection()}
+            required
+          />
+        </div>
 
-      <div
-        className="scroll-container flex justify-between my-66"
-        ref={scrollContainerRef}
-      >
-        <form
-          onSubmit={handleSubmit}
-          className="w-full mb-8 max-w-4xl mt-10"
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].description}</label>
+          <textarea
+            value={description}
+            onChange={handleDescriptionChange}
+            className="w-full p-2 border border-gray-300 "
+            dir={getDirection()}
+            rows="3"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].upload}</label>
+          <input
+            type="file"
+            accept="image/*"
+            multiple
+            onChange={handleImageUpload}
+            className="w-full p-2 border border-gray-300"
+          />
+        </div>
+
+        <div className="mb-4 grid grid-cols-3 gap-4">
+          {images.map((entry, index) => (
+            <div key={index} className="relative">
+              <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
+              <button
+                type="button"
+                onClick={() => handleDelete(entry.title, entry.description)}
+                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+              >
+                &times;
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <button
+          type="submit"
+          className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
         >
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Title
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-              required
-            />
-          </div>
+          {isEditing ? labels[language].update : labels[language].submit}
+        </button>
+      </form>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Description
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Slot
-            </label>
-            <select
-              name="slot"
-              value={formData.slot}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-            >
-              <option value="">Select Slot</option>
-              <option value="20-Minute Sprint">20-Minute Sprint</option>
-              <option value="40-Minute Session">40-Minute Session</option>
-              <option value="60-Minute Session">60-Minute Session</option>
-              <option value="Private Events">Private Events</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Image
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="w-full p-2 border border-gray-300"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]  mt-8"
-          >
-            ADD EXPERIENCE
-          </button>
-        </form>
-
-
-        <form
-          onSubmit={handleSubmit}
-          className="w-full mb-8 max-w-4xl mt-10"
-        >
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              عنوان
-            </label>
-            <input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              وصف
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              فتحة
-            </label>
-            <select
-              name="slot"
-              value={formData.slot}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-gray-300"
-            >
-              <option value="">حدد فتحة</option>
-              <option value="20-Minute Sprint">سباق 20 دقيقة</option>
-              <option value="40-Minute Session">جلسة مدتها 40 دقيقة</option>
-              <option value="60-Minute Session">جلسة مدتها 60 دقيقة</option>
-              <option value="Private Events">الأحداث الخاصة</option>
-            </select>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              صورة
-            </label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="w-full p-2 border border-gray-300"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]  mt-8"
-          >
-            أضف الخبرة
-          </button>
-        </form>
+      
       </div>
+    
+      <div className='mt-20'>
 
-      <div className="mt-20">
-        <h3 className="text-lg font-semibold mb-4">Experience List</h3>
-        <table className="w-full text-left border border-gray-300">
-          <thead>
-            <tr>
-              <th className="border p-2">Title</th>
-              <th className="border p-2">Description</th>
-              <th className="border p-2">Type</th>
-              <th className="border p-2">Image</th>
-              <th className="border p-2">Edit</th>
-              <th className="border p-2">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {experiences.map((experience, index) => (
-              <tr key={index}>
-                <td className="border p-2">{experience.title}</td>
-                <td className="border p-2">{experience.description}</td>
-                <td className="border p-2">{experience.slot}</td>
-                <td className="border p-2">
-                  {experience.imageUrl && (
-                    <Image
-                      src={experience.imageUrl}
-                      alt="Experience Image"
-                      width={50}
-                      height={50}
-                    />
-                  )}
-                </td>
-                <td className="border p-2">
-                  <button
-                    onClick={() => handleEdit(index)}
-                    className="text-blue-500 hover:underline"
-                  >
-                    Edit
-                  </button>
-                </td>
-                <td className="border p-2">
-                  <button
-                    onClick={() => handleDelete(index)}
-                    className="text-red-500 hover:underline"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      
+      <table className="w-full border border-gray-300">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="p-2 border">{labels[language].title}</th>
+            <th className="p-2 border">{labels[language].description}</th>
+            <th className="p-2 border">{labels[language].image}</th>
+            <th className="p-2 border">{labels[language].actions}</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+  {tableData && tableData.length > 0 ? (
+    tableData.map((entry, index) => (
+      <tr key={index} className="">
+        <td className="p-2 border">{entry.title}</td>
+        <td className="p-2 border">{entry.description}</td>
+        <td className="p-2 border">
+          {entry.images && entry.images.length > 0 && (
+            <img
+              src={entry.images[0].previewUrl}
+              alt="Entry"
+              className="w-16 h-16 object-cover"
+            />
+          )}
+        </td>
+        <td className="p-2 border">
+          <button
+            onClick={() => handleEdit(index)}
+            className="mr-2 text-blue-500"
+          >
+            {labels[language].edit}
+          </button>
+          <button
+            onClick={() => handleDelete(entry.title, entry.description)}
+            className="text-red-500"
+          >
+            {labels[language].delete}
+          </button>
+        </td>
+      </tr>
+    ))
+  ) : (
+    <tr>
+      <td colSpan="4" className="text-center p-2">{labels[language].noentries}</td>
+    </tr>
+  )}
+</tbody>
+      </table>
       </div>
       </>
-      )}
-
-      {showScrollButton && (
-        <div className="fixed bottom-6 right-6 md:hidden">
-          <button
-            onClick={scrollToTop}
-            className="bg-[#A62ED1] text-white p-4 rounded-full shadow-lg hover:bg-[#A62ED1] transition duration-300"
-          >
-            <Image
-              src="/assets/images/rightarrow.png"
-              alt="scroll to top"
-              width={24}
-              height={24}
-            />
-          </button>
-        </div>
-      )}
-
-      <style jsx>{`
-        .scroll-container {
-          scroll-snap-type: x mandatory;
-        }
-        .card-wrapper {
-          scroll-snap-align: start;
-        }
-      `}</style>
+        )}
     </div>
   );
 };
 
 export default DashboardSession;
+
+
+

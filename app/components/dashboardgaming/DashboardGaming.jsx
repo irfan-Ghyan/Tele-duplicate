@@ -1,6 +1,4 @@
-'use client'
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const DashboardGaming = () => {
   const [title, setTitle] = useState('');
@@ -9,12 +7,13 @@ const DashboardGaming = () => {
   const [tableData, setTableData] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
+  const [showSection, setShowSection] = useState(true);
+  const [language, setLanguage] = useState('en'); 
 
-  // Handle title and description changes
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
-  // Handle multiple image uploads
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => {
@@ -26,139 +25,191 @@ const DashboardGaming = () => {
     setImages((prevImages) => [...prevImages, ...newImages]);
   };
 
-  // Handle image removal
+
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
-    const newEntry = {
-      title,
-      description,
-      images,
-    };
 
-    if (isEditing) {
-      // Update existing entry
-      const updatedData = [...tableData];
-      updatedData[editingIndex] = newEntry;
-      setTableData(updatedData);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Dome');
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const data = await response.json();
+  //       const sections = data?.data?.sections || [];
+
+  //       const domeSection = sections.find(section => section.title === "Gaming Room");
+
+  //       if (domeSection) {
+  //         const titleField = domeSection.section_fields.find(field => field.key === 'title');
+  //         const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
+
+  //         setTitle(titleField?.value || '');
+  //         setDescription(descriptionField?.value || '');
+
+  //         // Populate tableData with each section's title and description
+  //         const sectionData = sections.map((section) => ({
+  //           title: section.section_fields.find(field => field.key === 'title')?.value || '',
+  //           description: section.section_fields.find(field => field.key === 'description')?.value || '',
+  //         }));
+
+  //         setTableData(sectionData);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    const payload = {
+      pageName: "Dome",
+      sectionName: "Gaming Room",
+      fields: [
+        { fieldName: "title", fieldValue: title },
+        { fieldName: "description", fieldValue: description },
+      ],
+    };
+  
+    try {
+      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+  
+      if (!response.ok) throw new Error("Failed to save data to the database.");
+  
+      const result = await response.json();
+      console.log("Data saved successfully:", result);
+  
+  
+      if (isEditing) {
+        setTableData((prevData) =>
+          prevData.map((entry, index) =>
+            index === editingIndex ? { title, description } : entry
+          )
+        );
+      } else {
+        // If not editing, add a new entry
+        setTableData((prevData) => [...prevData, { title, description }]);
+      }
+  
+      // Reset the form fields after submission
+      setTitle("");
+      setDescription("");
+      setImages([]);
       setIsEditing(false);
       setEditingIndex(null);
-    } else {
-      // Add new entry to table
-      setTableData([...tableData, newEntry]);
+    } catch (error) {
+      console.error("Error:", error);
     }
-
-    // Clear form fields
-    setTitle('');
-    setDescription('');
-    setImages([]);
   };
 
-  // Handle edit action
+  const handleDelete = async (index) => {
+    const entryToDelete = tableData[index];
+
+    const payload = {
+      pageName: "Dome",
+      sectionName: "Gaming Room",
+      fieldName: entryToDelete.title, 
+    };
+
+    try {
+      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete data");
+      }
+
+      const result = await response.json();
+      console.log("Delete API Response:", result);
+
+      if (result.success) {
+  
+        setTableData((prevEntries) => prevEntries.filter((_, idx) => idx !== index));
+      }
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+  
   const handleEdit = (index) => {
     const entry = tableData[index];
     setTitle(entry.title);
     setDescription(entry.description);
-    setImages(entry.images);
+    setImages(entry.images || []); 
     setIsEditing(true);
     setEditingIndex(index);
   };
-
-  // Handle delete action
-  const handleDelete = (index) => {
-    setTableData((prevData) => prevData.filter((_, i) => i !== index));
+  
+  
+  const toggleSectionVisibility = () => {
+    setShowSection(!showSection);
   };
 
+  const labels = {
+    en: { heading: 'GAMING ROOM', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.',edit: 'Edit', delete: 'Delete' },
+    ar: { heading: 'غرفة الألعاب', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
+  };
+
+  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
+
   return (
-    <div className="w-full">
-        <div className='flex justify-between'>
-        <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={handleTitleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
-          <textarea
-            value={description}
-            onChange={handleDescriptionChange}
-            className="w-full p-2 border border-gray-300 rounded"
-            rows="3"
-            required
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleImageUpload}
-            className="w-full p-2 border border-gray-300 rounded"
-          />
-        </div>
-
-        <div className="mb-4 grid grid-cols-3 gap-4">
-          {images.map((img, index) => (
-            <div key={index} className="relative">
-              <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage(index)}
-                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
-              >
-                &times;
-              </button>
-            </div>
-          ))}
-        </div>
-
-        <button
-          type="submit"
-          className="w-full p-3 bg-[#A62ED1] text-white rounded hover:bg-[#A62ED1]"
-        >
-          {isEditing ? 'Update Entry' : 'Submit'}
+    <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+      <div className="flex justify-between">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#A62ED1]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
-      </form>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#A62ED1]">
+          {showSection ? labels[language].hide : labels[language].show}
+        </button>
+      </div>
 
+      {showSection && (
+        <>
+        <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
+        <div className='flex justify-between'>
             <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">عنوان</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].title}</label>
           <input
             type="text"
             value={title}
             onChange={handleTitleChange}
             className="w-full p-2 border border-gray-300"
+            dir={getDirection()}
             required
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">وصف</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].description}</label>
           <textarea
             value={description}
             onChange={handleDescriptionChange}
             className="w-full p-2 border border-gray-300 "
+            dir={getDirection()}
             rows="3"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">تحميل الصور</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].upload}</label>
           <input
             type="file"
             accept="image/*"
@@ -187,17 +238,14 @@ const DashboardGaming = () => {
           type="submit"
           className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
         >
-          {isEditing ? 'Update Entry' : 'Submit'}
+          {isEditing ? labels[language].update : labels[language].submit}
         </button>
       </form>
-      
-      
+
       </div>
-     
-
-
-          <div className='mt-20'>
-      <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+{/*     
+      <div className='mt-20'>
+      
       <table className="w-full border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
@@ -207,41 +255,53 @@ const DashboardGaming = () => {
             <th className="p-2 border">Actions</th>
           </tr>
         </thead>
+        
         <tbody>
-          {tableData.map((entry, index) => (
-            <tr key={index} className="text-center">
-              <td className="p-2 border">{entry.title}</td>
-              <td className="p-2 border">{entry.description}</td>
-              <td className="p-2 border">
-                {entry.images[0] && (
-                  <img
-                    src={entry.images[0].previewUrl}
-                    alt="Preview"
-                    className="w-16 h-16 object-cover mx-auto rounded"
-                  />
-                )}
-              </td>
-              <td className="p-2 border">
-                <button
-                  onClick={() => handleEdit(index)}
-                  className="px-2 py-1 bg-green-500 text-white rounded mr-2"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(index)}
-                  className="px-2 py-1 bg-red-500 text-white rounded"
-                >
-                  Delete
-                </button>
-              </td>
+          {tableData && tableData.length > 0 ? (
+            tableData.map((entry, index) => (
+              <tr key={index} className="text-center">
+                <td className="p-2 border">{entry.title}</td>
+                <td className="p-2 border">{entry.description}</td>
+                <td className="p-2 border">
+                  {entry.images && entry.images.length > 0 && (
+                    <img
+                      src={entry.images[0].previewUrl}
+                      alt="Entry"
+                      className="w-16 h-16 object-cover"
+                    />
+                  )}
+                </td>
+                <td className="p-2 border">
+                  <button
+                    onClick={() => handleEdit(index)}
+                    className="mr-2 text-blue-500"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(index)} 
+                    className="text-red-500"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4" className="text-center p-2">No entries found.</td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
-      </div>
+      </div> */}
+      </>
+        )}
     </div>
   );
 };
 
 export default DashboardGaming;
+
+
+

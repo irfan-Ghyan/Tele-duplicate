@@ -1,9 +1,7 @@
-
-
-
 import React, { useState, useEffect } from 'react';
 
-const DashboardEducationalVisit = () => {
+
+const DashboardCoaching = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
@@ -11,7 +9,8 @@ const DashboardEducationalVisit = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
-  const [language, setLanguage] = useState('en');
+  const [language, setLanguage] = useState('en'); 
+ 
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -37,14 +36,14 @@ const DashboardEducationalVisit = () => {
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
-  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Education');
+  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Experience');
   //       if (!response.ok) {
   //         throw new Error("Network response was not ok");
   //       }
   //       const data = await response.json();
   //       const sections = data?.data?.sections || [];
 
-  //       const domeSection = sections.find(section => section.title === "Educational Visits");
+  //       const domeSection = sections.find(section => section.title === "Private Events");
 
   //       if (domeSection) {
   //         const titleField = domeSection.section_fields.find(field => field.key === 'title');
@@ -73,8 +72,8 @@ const DashboardEducationalVisit = () => {
     e.preventDefault();
   
     const payload = {
-      pageName: "Education",
-      sectionName: "Educational Visits",
+      pageName: "Experience",
+      sectionName: "Private Events",
       fields: [
         { fieldName: "title", fieldValue: title },
         { fieldName: "description", fieldValue: description },
@@ -101,11 +100,9 @@ const DashboardEducationalVisit = () => {
           )
         );
       } else {
-        // If not editing, add a new entry
         setTableData((prevData) => [...prevData, { title, description }]);
       }
   
-      // Reset the form fields after submission
       setTitle("");
       setDescription("");
       setImages([]);
@@ -116,16 +113,17 @@ const DashboardEducationalVisit = () => {
     }
   };
 
-  const handleDelete = async (index) => {
-    const entryToDelete = tableData[index];
 
-    const payload = {
-      pageName: "Education",
-      sectionName: "Educational Visits",
-      fieldName: entryToDelete.title, 
-    };
-
+  const handleDelete = async (keyId) => {
     try {
+      const payload = {
+        pageName: "Experience",
+        sectionName: "Private Events",
+        fieldName: "title",
+        fieldName: "description"
+
+      };
+  
       const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
         method: "DELETE",
         headers: {
@@ -133,22 +131,24 @@ const DashboardEducationalVisit = () => {
         },
         body: JSON.stringify(payload),
       });
-
+  
       if (!response.ok) {
         throw new Error("Failed to delete data");
       }
-
+  
       const result = await response.json();
       console.log("Delete API Response:", result);
-
-      if (result.success) {
   
-        setTableData((prevEntries) => prevEntries.filter((_, idx) => idx !== index));
+      if (result.success) {
+        setTableData((prevEntries) =>
+          prevEntries.filter((entry) => entry.sectionName !== "Private Events")
+        );
       }
     } catch (error) {
       console.error("Error deleting data:", error);
     }
   };
+  
   
   const handleEdit = (index) => {
     const entry = tableData[index];
@@ -165,10 +165,13 @@ const DashboardEducationalVisit = () => {
     setShowSection(!showSection);
   };
 
+
   const labels = {
-    en: { heading: 'EDUCATIONAL VISIT', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.',edit: 'Edit', delete: 'Delete' },
-    ar: { heading: 'زيارة تعليمية', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
+    en: { heading: 'Coaching', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.',edit: 'Edit', delete: 'Delete' },
+    ar: { heading: 'التدريب ', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
   };
+
+  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
   return (
     <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
@@ -184,8 +187,8 @@ const DashboardEducationalVisit = () => {
       {showSection && (
         <>
         <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
-        <div className='flex justify-between'>
-            <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+        <div className='flex justify-between '>
+            <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10 ">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].title}</label>
           <input
@@ -193,6 +196,7 @@ const DashboardEducationalVisit = () => {
             value={title}
             onChange={handleTitleChange}
             className="w-full p-2 border border-gray-300"
+            dir={getDirection()}
             required
           />
         </div>
@@ -203,6 +207,7 @@ const DashboardEducationalVisit = () => {
             value={description}
             onChange={handleDescriptionChange}
             className="w-full p-2 border border-gray-300 "
+            dir={getDirection()}
             rows="3"
             required
           />
@@ -220,12 +225,12 @@ const DashboardEducationalVisit = () => {
         </div>
 
         <div className="mb-4 grid grid-cols-3 gap-4">
-          {images.map((img, index) => (
+          {images.map((entry, index) => (
             <div key={index} className="relative">
               <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
               <button
                 type="button"
-                onClick={() => handleRemoveImage(index)}
+                onClick={() => handleDelete(entry.title, entry.description)}
                 className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
               >
                 &times;
@@ -241,19 +246,16 @@ const DashboardEducationalVisit = () => {
           {isEditing ? labels[language].update : labels[language].submit}
         </button>
       </form>
-
-      
       </div>
     
       {/* <div className='mt-20'>
-      
       <table className="w-full border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="p-2 border">Title</th>
-            <th className="p-2 border">Description</th>
-            <th className="p-2 border">Image</th>
-            <th className="p-2 border">Actions</th>
+            <th className="p-2 border">{labels[language].title}</th>
+            <th className="p-2 border">{labels[language].description}</th>
+            <th className="p-2 border">{labels[language].image}</th>
+            <th className="p-2 border">{labels[language].actions}</th>
           </tr>
         </thead>
         
@@ -277,20 +279,20 @@ const DashboardEducationalVisit = () => {
                     onClick={() => handleEdit(index)}
                     className="mr-2 text-blue-500"
                   >
-                    Edit
+                    {labels[language].edit}
                   </button>
                   <button
                     onClick={() => handleDelete(index)} 
                     className="text-red-500"
                   >
-                    Delete
+                   {labels[language].delete}
                   </button>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="4" className="text-center p-2">No entries found.</td>
+              <td colSpan="4" className="text-center p-2">{labels[language].noentries}</td>
             </tr>
           )}
         </tbody>
@@ -302,7 +304,4 @@ const DashboardEducationalVisit = () => {
   );
 };
 
-export default DashboardEducationalVisit;
-
-
-
+export default DashboardCoaching;
