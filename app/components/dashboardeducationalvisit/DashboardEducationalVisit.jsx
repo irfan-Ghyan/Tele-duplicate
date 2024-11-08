@@ -1,7 +1,5 @@
-
-
-
 import React, { useState, useEffect } from 'react';
+import {doPostCall} from '../../utils/api';
 
 const DashboardEducationalVisit = () => {
   const [title, setTitle] = useState('');
@@ -82,12 +80,9 @@ const DashboardEducationalVisit = () => {
     };
   
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-  
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+
       if (!response.ok) throw new Error("Failed to save data to the database.");
   
       const result = await response.json();
@@ -101,11 +96,9 @@ const DashboardEducationalVisit = () => {
           )
         );
       } else {
-        // If not editing, add a new entry
         setTableData((prevData) => [...prevData, { title, description }]);
       }
   
-      // Reset the form fields after submission
       setTitle("");
       setDescription("");
       setImages([]);

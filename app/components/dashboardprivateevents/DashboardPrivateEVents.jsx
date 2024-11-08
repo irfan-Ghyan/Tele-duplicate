@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {doPostCall} from '../../utils/api';
 
 const DashboardPrivateEvents = () => {
   const [title, setTitle] = useState('');
@@ -79,12 +80,9 @@ const DashboardPrivateEvents = () => {
     };
   
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-  
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+      
       if (!response.ok) throw new Error("Failed to save data to the database.");
   
       const result = await response.json();
@@ -112,42 +110,42 @@ const DashboardPrivateEvents = () => {
   };
 
 
-  const handleDelete = async (keyId) => {
-    try {
-      const payload = {
-        pageName: "Experience",
-        sectionName: "Private Events",
-        fieldName: "title",
-        fieldName: "description"
+  // const handleDelete = async (keyId) => {
+  //   try {
+  //     const payload = {
+  //       pageName: "Experience",
+  //       sectionName: "Private Events",
+  //       fieldName: "title",
+  //       fieldName: "description"
 
-      };
+  //     };
   
-      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+  //     const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
   
-      if (!response.ok) {
-        throw new Error("Failed to delete data");
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete data");
+  //     }
   
-      const result = await response.json();
-      console.log("Delete API Response:", result);
+  //     const result = await response.json();
+  //     console.log("Delete API Response:", result);
   
-      if (result.success) {
-        setTableData((prevEntries) =>
-          prevEntries.filter((entry) => entry.sectionName !== "Private Events")
-        );
-      }
-    } catch (error) {
-      console.error("Error deleting data:", error);
-    }
-  };
+  //     if (result.success) {
+  //       setTableData((prevEntries) =>
+  //         prevEntries.filter((entry) => entry.sectionName !== "Private Events")
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting data:", error);
+  //   }
+  // };
   
-  
+
   const handleEdit = (index) => {
     const entry = tableData[index];
     setTitle(entry.title);
@@ -156,7 +154,6 @@ const DashboardPrivateEvents = () => {
     setIsEditing(true);
     setEditingIndex(index);
   };
-  
   
   
   const toggleSectionVisibility = () => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {doPostCall} from '../../utils/api';
 
 const DashboardSim = () => {
   const [title, setTitle] = useState('');
@@ -31,40 +32,40 @@ const DashboardSim = () => {
   };
 
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://192.168.70.136:8000/api/content/sections/Dome');
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        const sections = data?.data?.sections || [];
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Dome');
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
+  //       const data = await response.json();
+  //       const sections = data?.data?.sections || [];
 
-        const domeSection = sections.find(section => section.title === "SIM Configurator");
+  //       const domeSection = sections.find(section => section.title === "SIM Configurator");
 
-        if (domeSection) {
-          const titleField = domeSection.section_fields.find(field => field.key === 'title');
-          const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
+  //       if (domeSection) {
+  //         const titleField = domeSection.section_fields.find(field => field.key === 'title');
+  //         const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
 
-          setTitle(titleField?.value || '');
-          setDescription(descriptionField?.value || '');
+  //         setTitle(titleField?.value || '');
+  //         setDescription(descriptionField?.value || '');
 
-          // Populate tableData with each section's title and description
-          const sectionData = sections.map((section) => ({
-            title: section.section_fields.find(field => field.key === 'title')?.value || '',
-            description: section.section_fields.find(field => field.key === 'description')?.value || '',
-          }));
+  //         // Populate tableData with each section's title and description
+  //         const sectionData = sections.map((section) => ({
+  //           title: section.section_fields.find(field => field.key === 'title')?.value || '',
+  //           description: section.section_fields.find(field => field.key === 'description')?.value || '',
+  //         }));
 
-          setTableData(sectionData);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  //         setTableData(sectionData);
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -79,11 +80,8 @@ const DashboardSim = () => {
     };
   
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
   
       if (!response.ok) throw new Error("Failed to save data to the database.");
   
@@ -112,39 +110,39 @@ const DashboardSim = () => {
     }
   };
 
-  const handleDelete = async (index) => {
-    const entryToDelete = tableData[index];
+  // const handleDelete = async (index) => {
+  //   const entryToDelete = tableData[index];
 
-    const payload = {
-      pageName: "Dome",
-      sectionName: "SIM Configurator",
-      fieldName: entryToDelete.title, 
-    };
+  //   const payload = {
+  //     pageName: "Dome",
+  //     sectionName: "SIM Configurator",
+  //     fieldName: entryToDelete.title, 
+  //   };
 
-    try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+  //   try {
+  //     const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(payload),
+  //     });
 
-      if (!response.ok) {
-        throw new Error("Failed to delete data");
-      }
+  //     if (!response.ok) {
+  //       throw new Error("Failed to delete data");
+  //     }
 
-      const result = await response.json();
-      console.log("Delete API Response:", result);
+  //     const result = await response.json();
+  //     console.log("Delete API Response:", result);
 
-      if (result.success) {
+  //     if (result.success) {
   
-        setTableData((prevEntries) => prevEntries.filter((_, idx) => idx !== index));
-      }
-    } catch (error) {
-      console.error("Error deleting data:", error);
-    }
-  };
+  //       setTableData((prevEntries) => prevEntries.filter((_, idx) => idx !== index));
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting data:", error);
+  //   }
+  // };
   
   const handleEdit = (index) => {
     const entry = tableData[index];

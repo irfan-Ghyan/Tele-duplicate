@@ -36,18 +36,21 @@ const DashboardSession = () => {
 
 
   const handleDelete = async (keyId) => {
+    const payload = {
+      pageName: "Home",
+      sectionName: "Experience",
+      fieldName: keyId,
+    };
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Home"
-      let response = await doGetCall(url);
-      if (!response.ok) {
-        throw new Error("Failed to delete data");
-      }
+      const url = "http://192.168.70.211:8000/api/content/removeSectionField"
+      const response = await doDeleteCall(url, payload);
+    
   
       const result = await response.json();
       console.log("Delete API Response:", result);
   
       if (result.success) {
-        // Clear all fields under "Experience" section from table data
+      
         setTableData((prevEntries) =>
           prevEntries.filter((entry) => entry.sectionName !== "Experience")
         );

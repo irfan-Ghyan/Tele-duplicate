@@ -26,7 +26,7 @@ const Page = () => {
         <DashboardVip />
         <DashboardStop />
         <DashboardSim />
-        < DashboardLounge/>       
+        <DashboardLounge/>       
         </div>
         </div>
       </div>
