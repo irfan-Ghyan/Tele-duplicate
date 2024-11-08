@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { useFaq } from "../../FaqContext";
+import {doPostCall} from '../../utils/api';
+import {doGetCall} from '../../utils/api';
+import {doDeleteCall} from '../../utils/api';
 
 const DashboardFaq = () => {
   const [formData, setFormData] = useState({ question: "", answer: "" });
@@ -24,9 +27,11 @@ const handleInputChange = (e) => {
 
   const fetchData = async () => {
     try {
-      let response = await fetch(
-        "http://192.168.70.136:8000/api/content/sections/Home"
-      );
+      const url = "http://192.168.70.211:8000/api/content/sections/Home"
+      let response = await doGetCall(url);
+      // let response = await fetch(
+      //   "http://192.168.70.211:8000/api/content/sections/Home"
+      // );
       if (response.ok) {
         response = await response.json();
         if (response.success) {
@@ -96,16 +101,18 @@ const handleInputChange = (e) => {
     };
   
     try {
-      const response = await fetch(
-        "http://192.168.70.136:8000/api/content/setMultipleFieldValues",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+      // const response = await fetch(
+      //   "http://192.168.70.211:8000/api/content/setMultipleFieldValues",
+      //   {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(payload),
+      //   }
+      // );
   
       const result = await response.json();
   
@@ -166,22 +173,25 @@ const handleInputChange = (e) => {
 
   const handleDelete = async (keyId) => {
     try {
+      
       const payload = {
         pageName: "Home",
         sectionName: "FAQ",
         fieldName: keyId,
       };
 
-      const response = await fetch(
-        "http://192.168.70.136:8000/api/content/removeSectionField",
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const url = "http://192.168.70.211:8000/api/content/removeSectionField"
+      const response = await doDeleteCall(url, payload);
+      // const response = await fetch(
+      //   "http://192.168.70.211:8000/api/content/removeSectionField",
+      //   {
+      //     method: "DELETE",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify(payload),
+      //   }
+      // );
 
       if (!response.ok) {
         throw new Error("Failed to delete data");

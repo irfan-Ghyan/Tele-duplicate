@@ -1,6 +1,10 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import {doPostCall} from '../../utils/api';
+import {doGetCall} from '../../utils/api';
+
+
 
 const DashboardDomeSection = () => {
   const [title, setTitle] = useState('');
@@ -15,7 +19,9 @@ const DashboardDomeSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.70.136:8000/api/content/sections/Home');
+        const url = "http://192.168.70.211:8000/api/content/sections/Home"
+      let response = await doGetCall(url);
+        // const response = await fetch('http://192.168.70.136:8000/api/content/sections/Home');
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -77,13 +83,15 @@ const DashboardDomeSection = () => {
     };
   
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+      // const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(payload),
+      // });
   
       if (!response.ok) {
         throw new Error("Failed to save data to the database.");
@@ -114,43 +122,6 @@ const DashboardDomeSection = () => {
     setIsEditing(true);
     setEditingIndex(index);
   };
-
-  // const handleDelete = async (keyId) => {
-  //   try {
-  //     const payload = {
-  //       pageName: "Home",
-  //       sectionName: "FAQ",
-  //       fieldName: keyId,
-  //     };
-
-  //     const response = await fetch(
-  //       "http://192.168.70.151:8000/api/content/removeSectionField",
-  //       {
-  //         method: "DELETE",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(payload),
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete data");
-  //     }
-
-  //     const result = await response.json();
-  //     console.log("Delete API Response:", result);
-
-  //     if (result.success) {
-  //       setFaqEntries((prevEntries) =>
-  //         prevEntries.filter((entry) => entry.question.key !== keyId)
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting data:", error);
-  //   }
-  // };
-
 
   const labels = {
     en: { heading: 'DOME', title: 'Title', description: 'Description', submit: 'Submit', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images' },

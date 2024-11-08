@@ -19,8 +19,7 @@ const Page = () => {
         <Sidebar />
         <div className='w-full'>
         <DashboardMainNavbar/>
-      
-          <DashboardExperience />
+        <DashboardExperience />
         <DashboardPrivateEvents />
         <DashboardCoaching />
 

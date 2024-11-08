@@ -1,5 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
+import {doPostCall} from '../../utils/api';
+import {doGetCall} from '../../utils/api';
+import {doDeleteCall} from '../../utils/api';
 
 const DashboardSession = () => {
   const [title, setTitle] = useState('');
@@ -34,22 +37,8 @@ const DashboardSession = () => {
 
   const handleDelete = async (keyId) => {
     try {
-      const payload = {
-        pageName: "Home",
-        sectionName: "Experience",
-        fieldName: "title",
-        fieldName: "description"
-
-      };
-  
-      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-  
+      const url = "http://192.168.70.211:8000/api/content/sections/Home"
+      let response = await doGetCall(url);
       if (!response.ok) {
         throw new Error("Failed to delete data");
       }
@@ -71,7 +60,8 @@ const DashboardSession = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.70.136:8000/api/content/sections/Home');
+        const url = "http://192.168.70.211:8000/api/content/sections/Home"
+        const response = await doGetCall(url);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -119,11 +109,8 @@ const DashboardSession = () => {
     };
   
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
   
       if (!response.ok) throw new Error("Failed to save data to the database.");
   

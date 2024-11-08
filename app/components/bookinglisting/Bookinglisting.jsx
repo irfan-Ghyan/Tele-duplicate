@@ -25,7 +25,7 @@ const BookingListing = () => {
 
   const fetchBookings = async () => {
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/bookings");
+      const response = await fetch("http://192.168.70.211:8000/api/bookings");
       const data = await response.json();
       setBookings(data.data || []);
     } catch (error) {
@@ -72,7 +72,7 @@ const BookingListing = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/bookings", {
+      const response = await fetch("http://192.168.70.211:8000/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
