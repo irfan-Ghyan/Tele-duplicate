@@ -154,6 +154,25 @@ const BookingListing = () => {
     setLanguage((prev) => (prev === "en" ? "ar" : "en"));
   };
 
+  const handleDelete = async (id) => {
+    const deleteUrl = `http://192.168.70.211:8000/api/bookings/${id}`;
+    
+    if (window.confirm("Are you sure you want to delete this booking?")) {
+      try {
+        const response = await fetch(deleteUrl, { method: "DELETE" });
+  
+        if (response.ok) {
+
+          setBookings(prevBookings => prevBookings.filter(booking => booking.id !== id));
+        } else {
+          console.error("Failed to delete booking");
+        }
+      } catch (error) {
+        console.error("Error deleting booking:", error);
+      }
+    }
+  };
+  
 
   const translations = {
     en: {
@@ -211,6 +230,10 @@ const BookingListing = () => {
       <div className="mb-4">
         <label>{translations[language].noOfPeople}</label>
         <input type="number" name="no_of_people" value={formData.no_of_people} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+      </div>
+      <div className="mb-4">
+        <label>{translations[language].type}</label>
+        <input type="number" name="type" value={formData.type} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
       </div>
       <div className="mb-4">
         <label>{translations[language].duration}</label>
@@ -298,7 +321,7 @@ const BookingListing = () => {
               <td className="border p-2">{item.time}</td>
               <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900 border border-gray-300">
                  <button className="text-blue-500" onClick={() => handleEditClick(item)}>Edit</button>
-                 <button className="text-red-500 ml-2">Delete</button>
+                 <button className="text-red-500 ml-2" onClick={() => handleDelete(item.id)}>Delete</button>
                </td>
             </tr>
           ))}

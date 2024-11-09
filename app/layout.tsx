@@ -1,57 +1,60 @@
 
+// "use client";
 
-// "use client"
+// import React, { ReactNode, useEffect, useState } from "react";
+// import { usePathname } from "next/navigation"; 
+// import { HelmetProvider } from "react-helmet-async";
+// import { Inter } from "next/font/google";
+// import "./globals.css";
+// import Header from "../app/components/header/Header";
+// import Footer from "./components/footer/Footer";
+// import Link from "next/link";
+// import Image from "next/image";
+// import "../i18n";
 
-// import React, { ReactNode } from 'react';
-// import { Inter } from 'next/font/google';
-// import './globals.css';
-// import Header from '../app/components/header/Header';
-// import Footer from './components/footer/Footer';
-// import { HelmetProvider } from 'react-helmet-async'; 
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import { useEffect, useState } from 'react';
-// import '../i18n';
+// const inter = Inter({ subsets: ["latin"] });
 
 // interface RootLayoutProps {
 //   children: ReactNode;
 // }
 
 // export default function RootLayout({ children }: RootLayoutProps) {
-
 //   const [showNotice, setShowNotice] = useState(false);
+//   const pathname = usePathname(); 
 
 //   useEffect(() => {
-//     if (!localStorage.getItem('cookiesAccepted')) {
+//     if (!localStorage.getItem("cookiesAccepted")) {
 //       setShowNotice(true);
 //     }
 //   }, []);
 
 //   const acceptCookies = () => {
-//     localStorage.setItem('cookiesAccepted', 'true');
+//     localStorage.setItem("cookiesAccepted", "true");
 //     setShowNotice(false);
 //   };
 
 //   const declineCookies = () => {
-//     localStorage.setItem('cookiesAccepted', 'false');
+//     localStorage.setItem("cookiesAccepted", "false");
 //     setShowNotice(false);
 //   };
 
+  
 
+  
 //   return (
 //     <HelmetProvider>
 //       <html lang="en">
-//         <body>
+//         <body className={inter.className}>
+//           {/* Render Header and Footer only if not on /dashboard or its sub-routes */}
+//           {!pathname.startsWith("/dashboard") && <Header />}
           
-//           <Header />
 //           {children}
-          
-//           <Footer />
+//           {!pathname.startsWith("/dashboard") && <Footer />}
 
-//            {/* WhatsApp Icon Button */}
-//           <Link 
-//             href="https://api.whatsapp.com/send/?phone=971566628585&text&type=phone_number&app_absent=0" 
-//             target="_blank" 
+//           {/* WhatsApp Icon Button */}
+//           <Link
+//             href="https://api.whatsapp.com/send/?phone=971566628585&text&type=phone_number&app_absent=0"
+//             target="_blank"
 //             rel="noopener noreferrer"
 //             className="fixed bottom-4 right-4 z-50"
 //           >
@@ -65,15 +68,21 @@
 //           </Link>
 
 //           {showNotice && (
-//         <div id="cookie-notice" >
-//           <p className='py-8'>
-//           Our website uses cookies to enhance your experience. These include necessary cookies to operate the site, as well as analytics and advertising cookies. By accepting, you agree to the use of all cookies. 
-//            {/* <a href="/cookie-policy">Cookie Policy</a>. */}
-//           </p>
-//           <button className="button" onClick={acceptCookies}>Accept</button>
-//           <button className="button11" onClick={declineCookies}>Decline</button>
-//         </div>
-//       )}
+//             <div id="cookie-notice">
+//               <p className="py-8">
+//                 Our website uses cookies to enhance your experience. These
+//                 include necessary cookies to operate the site, as well as
+//                 analytics and advertising cookies. By accepting, you agree to
+//                 the use of all cookies.
+//               </p>
+//               <button className="button" onClick={acceptCookies}>
+//                 Accept
+//               </button>
+//               <button className="button11" onClick={declineCookies}>
+//                 Decline
+//               </button>
+//             </div>
+//           )}
 //         </body>
 //       </html>
 //     </HelmetProvider>
@@ -81,11 +90,10 @@
 // }
 
 
-
 "use client";
 
 import React, { ReactNode, useEffect, useState } from "react";
-import { usePathname } from "next/navigation"; 
+import { usePathname } from "next/navigation";
 import { HelmetProvider } from "react-helmet-async";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -103,7 +111,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const [showNotice, setShowNotice] = useState(false);
-  const pathname = usePathname(); 
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!localStorage.getItem("cookiesAccepted")) {
@@ -121,15 +129,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
     setShowNotice(false);
   };
 
-  
+  // Check if the current path is either /login or /dashboard
+  const hideHeaderFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard");
+
   return (
     <HelmetProvider>
       <html lang="en">
         <body className={inter.className}>
-          {/* Render Header and Footer only if not on /dashboard or its sub-routes */}
-          {!pathname.startsWith("/dashboard") && <Header />}
+          {/* Render Header and Footer only if not on /login or /dashboard paths */}
+          {!hideHeaderFooter && <Header />}
+
           {children}
-          {!pathname.startsWith("/dashboard") && <Footer />}
+
+          {!hideHeaderFooter && <Footer />}
 
           {/* WhatsApp Icon Button */}
           <Link

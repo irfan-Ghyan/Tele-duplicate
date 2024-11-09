@@ -10,8 +10,20 @@ import DashboardNetworking from '../../components/dashboardnetworking/DashboardN
 import DashboardConference from '../../components/dashboardconference/DashboardConference';
 import DashboardVenueBranding from '../../components/dashboardvenuebranding/DashboardVenueBranding';
 import DashboardMainNavbar from '../../components/dashboardmainnavbar/DashboardMainNavbar';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      router.push('/login'); 
+    }
+  }, [router]);
+  
   return (
     <div className=" flex flex-col h-screen bg-white">
 

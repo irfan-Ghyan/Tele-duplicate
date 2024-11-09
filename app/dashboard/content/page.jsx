@@ -10,8 +10,19 @@ import DashboardDomeSection from '@/app/components/dashboarddomesection/Dashboar
 import DashboardFaq from '@/app/components/dashboardfaq/DashboardFaq';
 import { FaqProvider } from '../../FaqContext';
 import DashboardMainNavbar from '../../components/dashboardmainnavbar/DashboardMainNavbar';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      router.push('/login'); 
+    }
+  }, [router]);
   return (
     <div className=" flex flex-col h-screen">
         <DashboardNavbar />

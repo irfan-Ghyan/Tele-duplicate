@@ -9,8 +9,19 @@ import DashboardExperience from '../../components/dashboardexperience/DashboardE
 import DashboardPrivateEvents from '../../components/dashboardprivateevents/DashboardPrivateEvents';
 import DashboardMainNavbar from '@/app/components/dashboardmainnavbar/DashboardMainNavbar';
 import DashboardCoaching from '@/app/components/dashboardcoaching/DashboardCoaching';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    
+    const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
+    if (!isAuthenticated) {
+      router.push('/login'); 
+    }
+  }, [router]);
   return (
     <div className=" flex flex-col h-screen bg-white">
 
