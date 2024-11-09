@@ -39,21 +39,19 @@ const DashboardSession = () => {
     const payload = {
       pageName: "Home",
       sectionName: "Experience",
-      fieldName: keyId,
+      fieldName: keyId, 
     };
     try {
-      const url = "http://192.168.70.211:8000/api/content/removeSectionField"
+      const url = "http://192.168.70.211:8000/api/content/removeSectionField";
       const response = await doDeleteCall(url, payload);
-    
-  
+      
       const result = await response.json();
       console.log("Delete API Response:", result);
-  
-      if (result.success) {
       
-        setTableData((prevEntries) =>
-          prevEntries.filter((entry) => entry.sectionName !== "Experience")
-        );
+      if (result.success) {
+        setTableData((prevEntries) => prevEntries.filter((entry) => entry.title !== keyId)); 
+      } else {
+        console.error("Failed to delete the entry");
       }
     } catch (error) {
       console.error("Error deleting data:", error);
@@ -221,7 +219,7 @@ const DashboardSession = () => {
               <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
               <button
                 type="button"
-                onClick={() => handleDelete(entry.title, entry.description)}
+                onClick={() => handleDelete(entry.title)} 
                 className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
               >
                 &times;

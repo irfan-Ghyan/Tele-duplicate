@@ -3,10 +3,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Sidebar from '../../components/siderbar/Sidebar';
-import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
-import DashboardExperience from '../../components/dashboardexperience/DashboardExperience';
-import DashboardPrivateEvents from '../../components/dashboardprivateevents/DashboardPrivateEvents';
+import Sidebar from '@/app/components/siderbar/Sidebar';
+import DashboardNavbar from '@/app/components/dashboardnavbar/Dashboardnavbar';
+import DashboardExperience from '@/app/components/dashboardexperience/DashboardExperience';
+import DashboardPrivateEvents from '@/app/components/dashboardprivateevents/DashboardPrivateEvents';
 import DashboardMainNavbar from '@/app/components/dashboardmainnavbar/DashboardMainNavbar';
 import DashboardCoaching from '@/app/components/dashboardcoaching/DashboardCoaching';
 import { useEffect } from 'react';

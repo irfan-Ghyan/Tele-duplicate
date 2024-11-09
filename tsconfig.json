@@ -32,7 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/layout.jsx",
+    "app/layout.tsx",
     "app/page.jsx",
     "build/types/**/*.ts"
   ],
