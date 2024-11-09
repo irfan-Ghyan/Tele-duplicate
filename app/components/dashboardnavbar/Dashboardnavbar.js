@@ -26,9 +26,37 @@ import { useRouter } from 'next/navigation';
 const DashboardNavbar = () => {
   const router = useRouter();
 
-  const handleLogout = () => {
-    localStorage.removeItem('isAuthenticated');
-    router.push('/login'); 
+  const handleLogout = async () => {
+    // Get the token from localStorage or wherever it's stored
+    const token = localStorage.getItem('authToken');
+
+    // If token is available, send a logout request to the API
+    if (token) {
+      try {
+        const response = await fetch('http://192.168.70.211:8000/api/logout', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          // Clear local storage and redirect to login page if logout is successful
+          localStorage.removeItem('authToken');  // Or 'isAuthenticated', based on your storage
+          localStorage.removeItem('isAuthenticated');
+          router.push('/login');  // Redirect to login page
+        } else {
+          // Handle error, for example, showing a message
+          console.error('Logout failed', response.status);
+        }
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    } else {
+      console.log('No token found');
+      router.push('/login'); 
+    }
   };
 
   return (
@@ -50,3 +78,4 @@ const DashboardNavbar = () => {
 };
 
 export default DashboardNavbar;
+
