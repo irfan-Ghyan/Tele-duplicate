@@ -156,7 +156,6 @@
 // export default Login;
 
 
-
 "use client";
 
 import { useState } from "react";
@@ -171,42 +170,50 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     setError(null);
-
+  
     try {
+      // Make the login request
       const response = await fetch("http://192.168.70.211:8000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": "Bearer 26|tYcan0KEVT9thwGk7MORnlSBLp7zPIFnsRMHR5cZ7a19334f", 
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, password }), // Send credentials
       });
-
+  
+      // Check if the response status is 200 (successful)
       if (response.status === 200) {
-        const data = await response.json();
-        localStorage.setItem("isAuthenticated", "true");
-        localStorage.setItem("token", data.token); 
-        router.push("/dashboard"); 
-      } 
-      else if (response.status === 401) {
+        const data = await response.json(); // Parse the JSON response
+  
+        // Check if the access_token is present in the response
+        if (data.access_token) {
+          // Store the token and authentication status in localStorage
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("token", data.access_token); // Store the access_token
+  
+          // Redirect to the dashboard after successful login
+          router.push("/dashboard");
+        } else {
+          setError("Login failed: Token not found.");
+        }
+      } else if (response.status === 401) {
+        // Handle unauthorized response (wrong credentials)
         setError("Unauthorized: Invalid credentials");
-        router.push("/login");
-      } 
-
-      else {
+      } else {
+        // Handle other errors
         throw new Error("An error occurred. Please try again.");
       }
     } catch (err) {
       setError(err.message || "Failed to login");
     }
   };
-
+  
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
       <div className="w-full max-w-lg space-y-6 bg-white py-20 px-10">
         <h2 className="text-2xl font-bold text-gray-800">LOGIN</h2>
-        {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500">{error}</p>} {/* Show error messages */}
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label className="block mb-2 text-sm font-bold text-gray-600" htmlFor="username">
@@ -247,4 +254,3 @@ const Login = () => {
 };
 
 export default Login;
-
