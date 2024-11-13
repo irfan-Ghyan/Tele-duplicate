@@ -1,59 +1,117 @@
-
-
 // import React, { useRef, useState, useEffect } from 'react';
 // import CardComponent from './cardcomponent/CardComponent';
 // import Image from 'next/image';
 // import { useTranslation } from 'react-i18next';
-// // import leftArrow from '../../../../public/assets/icons/left.png';
-// // import rightArrow from '../../../../public/assets/images/rightarrow.png';
+// import RaceExperience from '../../raceexperience/RaceExperince';
 
 // const Experience = () => {
 //   const scrollContainerRef = useRef(null);
 //   const [experiences, setExperiences] = useState([]);
-//   // const [loading, setLoading] = useState(true);
 //   const [isScrolling, setIsScrolling] = useState(false);
 //   const [showScrollButton, setShowScrollButton] = useState(false);
-
-//   const { t, i18n } = useTranslation();
-
-//   useEffect(() => {
-//     const fetchExperiences = async () => {
-//       const data = [
-//         { title: t('20-Minute Sprint'), description: t('Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.'), imageUrl: '/assets/images/experience/mintue1.jpg', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
-//         { title: t('40-Minute Session'), description: t('Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.'), imageUrl: '/assets/images/experience/30mn.png', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
-//         { title: t('60-Minute Session'), description: t('Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.'), imageUrl: '/assets/images/experience/60mn.png', button:t('BOOK NOW'), link: 'https://feverup.com/m/187813' },
-//         { title: t('Private Events'), description: t('Whether it\'s a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.'), imageUrl: '/assets/images/experience/privateevent.jpg', button:t('ENQUIRE NOW'), link: 'https://wa.me/971566628585' },
-//       ];
-//       setExperiences(data);
   
-//     };
+//   const { t } = useTranslation();
 
-//     fetchExperiences();
+//   // useEffect(() => {
+//   //   const fetchExperiences = async () => {
+//   //     const data = [
+//   //       {
+//   //         title: t('20-Minute Sprint'),
+//   //         description: t('Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.'),
+//   //         imageUrl: '/assets/images/experience/mintue1.jpg',
+//   //         button: t('BOOK NOW'),
+//   //         link: 'https://feverup.com/m/187813'
+//   //       },
+//   //       {
+//   //         title: t('40-Minute Session'),
+//   //         description: t('Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.'),
+//   //         imageUrl: '/assets/images/experience/30mn.png',
+//   //         button: t('BOOK NOW'),
+//   //         link: 'https://feverup.com/m/187813'
+//   //       },
+//   //       {
+//   //         title: t('60-Minute Session'),
+//   //         description: t('Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.'),
+//   //         imageUrl: '/assets/images/experience/60mn.png',
+//   //         button: t('BOOK NOW'),
+//   //         link: 'https://feverup.com/m/187813'
+//   //       },
+//   //       {
+//   //         title: t('Private Events'),
+//   //         description: t('Whether it\'s a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.'),
+//   //         imageUrl: '/assets/images/experience/privateevent.jpg',
+//   //         button: t('ENQUIRE NOW'),
+//   //         link: 'https://wa.me/971566628585'
+//   //       },
+//   //     ];
+//   //     setExperiences(data);
+//   //   };
 
-//     const handleScroll = () => {
-//       if (scrollContainerRef.current) {
-//         setIsScrolling(true);
-//         if (scrollContainerRef.current.scrollLeft > 100) {
-//           setShowScrollButton(true);
-//         } else {
-//           setShowScrollButton(false);
-//         }
-//       }
-//     };
+//   //   fetchExperiences();
 
-//     if (scrollContainerRef.current) {
-//       scrollContainerRef.current.addEventListener('scroll', handleScroll);
-//     }
+//   //   const handleScroll = () => {
+//   //     if (scrollContainerRef.current) {
+//   //       setIsScrolling(true);
+//   //       if (scrollContainerRef.current.scrollLeft > 100) {
+//   //         setShowScrollButton(true);
+//   //       } else {
+//   //         setShowScrollButton(false);
+//   //       }
+//   //     }
+//   //   };
 
-//     return () => {
-//       if (scrollContainerRef.current) {
-//         scrollContainerRef.current.removeEventListener('scroll', handleScroll);
-//       }
-//     };
+//   //   if (scrollContainerRef.current) {
+//   //     scrollContainerRef.current.addEventListener('scroll', handleScroll);
+//   //   }
+
+//   //   return () => {
+//   //     if (scrollContainerRef.current) {
+//   //       scrollContainerRef.current.removeEventListener('scroll', handleScroll);
+//   //     }
+//   //   };
+//   // }, [t]);
+
+//   const [experienceEntries, setExperiencesEntries] = useState([]);
+//   useEffect(() => {
+//     fetchData();
 //   }, []);
 
- 
-
+//   const fetchData = async () => {
+//     try {
+//       const url = "http://192.168.70.211:8000/api/content/sections/Experience";
+//       const response = await fetch(url);
+  
+//       if (response.ok) {
+//         const data = await response.json();
+//         console.log(data);
+  
+//         if (data.success) {
+//           const faqSection = data.data.sections.find((section) => section.title === "Session");
+  
+//           if (faqSection) {
+//             const faqData = faqSection.section_fields.reduce((acc, field, index, fields) => {
+//               if (field.key.startsWith("title")) {
+//                 const descriptionField = fields.find((f, i) => i > index && f.key === "description");
+//                 if (descriptionField) {
+//                   acc.push({
+//                     title: field.value,
+//                     description: descriptionField.value,
+//                     imageUrl: field.imageUrl || "",  // add imageUrl if available
+//                   });
+//                 }
+//               }
+//               return acc;
+//             }, []);
+  
+//             setExperiencesEntries(faqData.reverse());
+//           }
+//         }
+//       }
+//     } catch (error) {
+//       console.error("Error fetching data:", error);
+//     }
+//   };
+  
 //   const scrollToTop = () => {
 //     scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 //   };
@@ -66,7 +124,7 @@
 //       <div className="md:flex justify-between mt-[36px] md:mb-[41px]">
 //         <div>
 //           <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">
-//           {t('EXPERIENCES')}
+//             {t('EXPERIENCES')}
 //           </h1>
 //         </div>
 //       </div>
@@ -75,29 +133,39 @@
 //         className="scroll-container flex flex-wrap justify-center overflow-hidden my-66"
 //         ref={scrollContainerRef}
 //       >
-//         {experiences.map((experience, index) => (
+//         {experienceEntries.map((experience, index) => (
 //           <div
 //             key={index}
 //             className="card-wrapper w-full md:w-[286px] py-4 "
 //             style={{ minWidth: '286px', marginRight: '16px' }}
 //           >
-//             <CardComponent
-//               title={t('experience.title') === '40-Minute Session' ? `⭐ ${t('experience.title')}` : t('experience.title')}
-//               description={t('experience.description')}
+//             {/* <CardComponent
+//               title={experience.title === '40-Minute Session' ? `⭐ ${experience.title}` : experience.title}
+//               description={experience.description}
 //               imageUrl={experience.imageUrl}
-//               button={t('experience.button')}
+//               button={experience.button}
+//               link={experience.link}
+//             /> */}
+
+//             <RaceExperience
+//               title={experience.title === '40-Minute Session' ? `⭐ ${experience.title}` : experience.title}
+//               description={experience.description}
+//               imageUrl={experience.imageUrl}
+//               button={experience.button}
 //               link={experience.link}
 //             />
 //           </div>
 //         ))}
 //       </div>
 
+      
+
 //       {/* Mobile Scroll Button */}
 //       {showScrollButton && (
 //         <div className="fixed bottom-6 right-6 md:hidden">
 //           <button
 //             onClick={scrollToTop}
-//             className="bg-purple-500 text-white  p-4 rounded-full shadow-lg hover:bg-purple-600 transition duration-300"
+//             className="bg-purple-500 text-white p-4 rounded-full shadow-lg hover:bg-purple-600 transition duration-300"
 //           >
 //             <Image src="/assets/images/rightarrow.png" alt="scroll to top" width={24} height={24} />
 //           </button>
@@ -120,76 +188,56 @@
 
 
 import React, { useRef, useState, useEffect } from 'react';
-import CardComponent from './cardcomponent/CardComponent';
+import RaceExperience from '../../raceexperience/RaceExperince';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
 const Experience = () => {
   const scrollContainerRef = useRef(null);
-  const [experiences, setExperiences] = useState([]);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [experienceEntries, setExperienceEntries] = useState([]);
   const [showScrollButton, setShowScrollButton] = useState(false);
   
   const { t } = useTranslation();
 
   useEffect(() => {
-    const fetchExperiences = async () => {
-      const data = [
-        {
-          title: t('20-Minute Sprint'),
-          description: t('Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.'),
-          imageUrl: '/assets/images/experience/mintue1.jpg',
-          button: t('BOOK NOW'),
-          link: 'https://feverup.com/m/187813'
-        },
-        {
-          title: t('40-Minute Session'),
-          description: t('Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.'),
-          imageUrl: '/assets/images/experience/30mn.png',
-          button: t('BOOK NOW'),
-          link: 'https://feverup.com/m/187813'
-        },
-        {
-          title: t('60-Minute Session'),
-          description: t('Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.'),
-          imageUrl: '/assets/images/experience/60mn.png',
-          button: t('BOOK NOW'),
-          link: 'https://feverup.com/m/187813'
-        },
-        {
-          title: t('Private Events'),
-          description: t('Whether it\'s a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.'),
-          imageUrl: '/assets/images/experience/privateevent.jpg',
-          button: t('ENQUIRE NOW'),
-          link: 'https://wa.me/971566628585'
-        },
-      ];
-      setExperiences(data);
-    };
+    fetchData();
+  }, []);
 
-    fetchExperiences();
+  const fetchData = async () => {
+    try {
+      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
+      const response = await fetch(url);
 
-    const handleScroll = () => {
-      if (scrollContainerRef.current) {
-        setIsScrolling(true);
-        if (scrollContainerRef.current.scrollLeft > 100) {
-          setShowScrollButton(true);
-        } else {
-          setShowScrollButton(false);
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+
+        if (data.success) {
+          const faqSection = data.data.sections.find((section) => section.title === "Session");
+
+          if (faqSection) {
+            const faqData = faqSection.section_fields.reduce((acc, field, index, fields) => {
+              if (field.key.startsWith("title")) {
+                const descriptionField = fields.find((f, i) => i > index && f.key === "description");
+                if (descriptionField) {
+                  acc.push({
+                    title: field.value,
+                    description: descriptionField.value,
+                    imageUrl: field.imageUrl || "",
+                  });
+                }
+              }
+              return acc;
+            }, []);
+
+            setExperienceEntries(faqData.reverse());
+          }
         }
       }
-    };
-
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.addEventListener('scroll', handleScroll);
+    } catch (error) {
+      console.error("Error fetching data:", error);
     }
-
-    return () => {
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [t]);
+  };
 
   const scrollToTop = () => {
     scrollContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -197,12 +245,12 @@ const Experience = () => {
 
   return (
     <div className="w-full relative py-[40px] md:py-[50px] lg:py-[100px]">
-      <div className="border-solid border-b-[1px] border-white border-opacity-50 text-end">
-        <h1 className="text-[14px] text-white font-normal font-orbitron pb-4">{t('EXPERIENCE')}</h1>
+      <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-50 text-end">
+        <h1 className="text-[14px] text-[#e3ce90] font-normal font-orbitron pb-4">{t('EXPERIENCE')}</h1>
       </div>
       <div className="md:flex justify-between mt-[36px] md:mb-[41px]">
         <div>
-          <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">
+          <h1 className="text-[32px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
             {t('EXPERIENCES')}
           </h1>
         </div>
@@ -212,18 +260,18 @@ const Experience = () => {
         className="scroll-container flex flex-wrap justify-center overflow-hidden my-66"
         ref={scrollContainerRef}
       >
-        {experiences.map((experience, index) => (
+        {experienceEntries.map((experience, index) => (
           <div
             key={index}
-            className="card-wrapper w-full md:w-[286px] py-4 "
+            className="card-wrapper w-full md:w-[286px] py-4"
             style={{ minWidth: '286px', marginRight: '16px' }}
           >
-            <CardComponent
-              title={experience.title === '40-Minute Session' ? `⭐ ${experience.title}` : experience.title}
+            <RaceExperience
+              title={experience.title}
               description={experience.description}
               imageUrl={experience.imageUrl}
-              button={experience.button}
-              link={experience.link}
+              button={t('BOOK NOW')}
+              link="#"
             />
           </div>
         ))}

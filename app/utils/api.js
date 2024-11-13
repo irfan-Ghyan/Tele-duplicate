@@ -1,10 +1,20 @@
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+// const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 
-async function doGetCall(url){
+async function doGetCall(url, payload){
+  const token = localStorage.getItem('token'); 
   try{
-    return await fetch(url);
+    return await fetch(url,
+      {
+        method: "GET",
+        headers: { 
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+         },
+         body: JSON.stringify(payload),
+      });
     
   }
   catch(e){
@@ -14,26 +24,51 @@ async function doGetCall(url){
 
 
 
-async function doPostCall(url, payload){
-  try{
-    return  await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    
+async function doPostCall(url, payload, headers = null) {
+  const token = localStorage.getItem('token'); 
+  console.log("Token:", token);
+
+  // Set headers if they are null
+  if (headers === null) {
+    headers = {
+      'Authorization': `Bearer ${token}`,
+      'Accept': 'application/json',
+    };
+  } else {
+    headers['Authorization'] = `Bearer ${token}`;
   }
-  catch(e){
+
+  const isFormData = payload instanceof FormData;
+
+  // Only add Content-Type if not FormData
+  if (!isFormData) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  const options = {
+    method: "POST",
+    headers,
+    body: isFormData ? payload : JSON.stringify(payload),
+  };
+
+  try {
+    return await fetch(url, options);
+  } catch (e) {
+    console.error("Fetch error:", e);
     throw e;
   }
 }
+
 
 async function doDeleteCall(url, payload){
+  const token = localStorage.getItem('token'); 
   try{
     return  await fetch(url, {
          method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
         },
         body: JSON.stringify(payload),
       });
@@ -45,62 +80,6 @@ async function doDeleteCall(url, payload){
   }
 }
 
-// export async function fetchSections(pageName = "Home") {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/api/content/sections/${pageName}`);
-//     if (!response.ok) {
-//       throw new Error("Network response was not ok");
-//     }
-//     const data = await response.json();
-//     return data?.data?.sections || [];
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     throw error;
-//   }
-// }
-
-
-
-// export async function setMultipleFieldValues(payload) {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/api/content/setMultipleFieldValues`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(payload),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to save data to the database.");
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error("Error saving data:", error);
-//     throw error;
-//   }
-// }
-
-
-// export async function removeSectionField(payload) {
-//   try {
-//     const response = await fetch(`${API_BASE_URL}/api/content/removeSectionField`, {
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(payload),
-//     });
-
-//     if (!response.ok) {
-//       throw new Error("Failed to delete data");
-//     }
-//     return await response.json();
-//   } catch (error) {
-//     console.error("Error deleting data:", error);
-//     throw error;
-//   }
-// }
 
 module.exports = {
   doPostCall, doGetCall, doDeleteCall

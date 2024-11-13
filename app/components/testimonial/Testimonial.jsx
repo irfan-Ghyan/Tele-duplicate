@@ -445,7 +445,7 @@ export default function Testimonial() {
     if (scrollContainerRef.current) {
       const itemWidth = scrollContainerRef.current.firstChild.offsetWidth + 16;
       scrollContainerRef.current.scrollBy({ left: itemWidth, behavior: 'smooth' });
-      setActiveButton('next'); // Set active button
+      setActiveButton('next');
     }
   };
 
@@ -453,7 +453,7 @@ export default function Testimonial() {
     if (scrollContainerRef.current) {
       const itemWidth = scrollContainerRef.current.firstChild.offsetWidth + 16;
       scrollContainerRef.current.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-      setActiveButton('prev'); // Set active button
+      setActiveButton('prev'); 
     }
   };
 
@@ -461,16 +461,16 @@ export default function Testimonial() {
     <div className="w-full overflow-hidden relative flex justify-center items-center py-[40px] md:py-[50px] lg:py-[100px]">
       <div className="max-w-7xl w-full px-4 md:px-8">
         <div className="mx-auto py-8">
-          <div className="border-solid border-b-[1px] border-white border-opacity-50 text-end"></div>
+          <div className="border-solid border-b-[1px] border-[#c09e5f] border-opacity-50 text-end"></div>
           <div className="md:flex md:justify-between items-center mt-[36px] lg:mb-[41px]">
             <div>
-              <h1 className="text-[32px] md:text-[54px] text-white font-black font-orbitron">{t('WHAT PEOPLE SAY ABOUT US')}</h1>
+              <h1 className="text-[32px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">{t('WHAT PEOPLE SAY ABOUT US')}</h1>
             </div>
             <div className="top-buttons flex items-center">
               <div className="mt-[20px] md:mt-[0px] w-65 h-45">
                 <button
                   onClick={scrollPrev}
-                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-white font-jura font-bold text-white hover:bg-gradient-to-r ml-2 hover:from-[#D007A6] hover:to-[#7E51F8] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
                   <Image src="/assets/images/dome/left.png" alt="arrow" width={18} height={13} />
                 </button>
@@ -478,7 +478,7 @@ export default function Testimonial() {
               <div className="mt-[20px] md:mt-[0px] w-65 h-45">
                 <button
                   onClick={scrollNext}
-                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-white font-jura font-bold text-white hover:bg-gradient-to-r ml-2 hover:from-[#D00746] hover:to-[#7E51F8] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
                   <Image src="/assets/images/dome/right.png" alt="arrow" width={18} height={13} />
                 </button>

@@ -93,7 +93,7 @@ const Home = () => {
         <div className="w-full">
           <Training />
         </div>
-        <div className="w-full bg-[#1E123D]">
+        <div className="w-full bg-[#063828]">
           {/* <ReactGoogleReviews
                 layout="carousel"
                 featurableId="example"

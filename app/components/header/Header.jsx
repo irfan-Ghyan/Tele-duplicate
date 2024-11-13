@@ -422,14 +422,13 @@ const Header = () => {
   };
 
   const handlePlayButtonClick = () => {
-    setShowCorpratePopup(true); // Show the Corprate component as a popup
+    setShowCorpratePopup(true);
   };
 
   const handleClosePopup = () => {
-    setShowCorpratePopup(false); // Close the Corprate popup
+    setShowCorpratePopup(false); 
   };
 
-  // Scroll to target section when down arrow is clicked
   const scrollToSection = () => {
     const targetSection = document.getElementById('target-section');
     if (targetSection) {
@@ -437,11 +436,10 @@ const Header = () => {
     }
   };
 
-  // Functionality to handle showing the navbar background on scroll (other pages only)
   useEffect(() => {
     if (pathname !== '/') {
       const handleScroll = () => {
-        if (window.scrollY > 50) { // Show background after scrolling down 50px
+        if (window.scrollY > 50) { 
           setIsNavbarBgVisible(true);
         } else {
           setIsNavbarBgVisible(false);
@@ -450,7 +448,6 @@ const Header = () => {
 
       window.addEventListener('scroll', handleScroll);
 
-      // Cleanup function to remove the event listener when the component is unmounted
       return () => {
         window.removeEventListener('scroll', handleScroll);
       };
@@ -477,9 +474,6 @@ const Header = () => {
         <meta property="og:image" content="/assets/images/header-bg.jpg" />
       </Helmet>
 
-      {/* Conditional background based on home page */}
-
-     
       <Head>
         <link rel="preload" href="/assets/video/dome.mp4" as="video" />
       </Head>
@@ -505,9 +499,9 @@ const Header = () => {
         )}
 
         {/* Overlay Background */}
-        {/* {pathname === '/' && (
-          <div className="absolute inset-0 bg-[#11072C] bg-opacity-30 z-0 "></div>
-        )} */}
+        {pathname === '/' && (
+          <div className="absolute inset-0 bg-[#002718] bg-opacity-60 z-0 "></div>
+        )}
 
         {/* Play Button for video popup or other interactions - ONLY ON HOME PAGE */}
         {pathname === '/' && (
@@ -539,7 +533,7 @@ const Header = () => {
 
         {/* Corprate Component Popup */}
         {showCorpratePopup && (
-          <div className="fixed inset-0 bg-[#11072C] bg-opacity-100 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-[#002718] bg-opacity-100 z-50 flex items-center justify-center p-4">
             <div className="relative w-full max-w-7xl bg-white px-4 py-4 rounded-lg max-w-custom">
               <button
                 className="absolute top-2 right-2 text-black text-2xl"

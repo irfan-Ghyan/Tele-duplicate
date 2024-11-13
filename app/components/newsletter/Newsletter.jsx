@@ -74,12 +74,12 @@ const SearchComponent = () => {
             value={query}
             onChange={handleChange}
             placeholder="Enter your email address"
-            className="button-slanted text-white w-[240px] md:w-[423px] h-[44px] font-jura font-normal lg:font-medium bg-[#2E2545] rounded-tl-lg pl-[10px] md:pl-[54px] pr-[10px] py-[13px] mr-[-10px] lg:mr-[-30px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+            className="button-slanted text-white w-[240px] md:w-[423px] h-[44px] font-jura font-normal lg:font-medium bg-[#002718] rounded-tl-lg pl-[10px] md:pl-[54px] pr-[10px] py-[13px] mr-[-10px] lg:mr-[-30px] focus:outline-none focus:ring-0 focus:bg-[#002718] focus:text-[#ffffff]"
             required
           />
           <button
             type="submit"
-            className="button-slanted w-[100px] md:w-[158px] h-[44px] font-jura font-bold text-white bg-gradient-to-r from-[#7E51F8] to-[#D007A6] transition duration-300 rounded-tl-lg rounded-br-lg z-10"
+            className="button-slanted w-[100px] md:w-[158px] h-[44px] font-jura font-bold text-white bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg z-10"
           >
             <span className='button-slanted-content'>SUBMIT</span>
           </button>

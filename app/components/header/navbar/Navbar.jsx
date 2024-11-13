@@ -31,9 +31,9 @@ const Navbar = ({ isTopBannerVisible }) => {
 
   const handleScroll = () => {
     if (window.scrollY > 100 && isHiddenRoute) {
-      setNavbarBg('bg-[#11072C] lg:bg-[#11072C]');
+      setNavbarBg('bg-[#063828] lg:bg-[#063828]');
     } else if (window.scrollY > window.innerHeight) {
-      setNavbarBg('bg-[#11072C] lg:bg-[#11072C]');
+      setNavbarBg('bg-[#063828] lg:bg-[#063828]');
     } else {
       setNavbarBg('bg-opacity-0');
     }
@@ -93,8 +93,8 @@ const Navbar = ({ isTopBannerVisible }) => {
 
   
   const handleLanguageChange = (lng) => {
-    i18n.changeLanguage(lng); // Ensure to call this to change the language
-    switchLanguage(lng); // If you have a custom function for other purposes
+    i18n.changeLanguage(lng);
+    switchLanguage(lng);
   };
 
 
@@ -119,7 +119,7 @@ const Navbar = ({ isTopBannerVisible }) => {
       //   backgroundPosition: 'center',
       // }}
       >
-        <div className="flex justify-between items-center w-full h-auto py-4">
+        <div className="flex justify-between items-center w-full h-auto">
    
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu}>
@@ -127,40 +127,40 @@ const Navbar = ({ isTopBannerVisible }) => {
                 src="/assets/images/dome/logo.png"
                 alt="Logo"
                 width={185}
-                height={52}
+                height={90}
                 priority={true}
-                className="sm:w-[185px] sm:h-[52px] md:w-[185px] md:h-[52px] lg:w-[165px] lg:h-[42px] xl:w-[165px] xl:h-[42px]"
+                className="sm:w-[185px] sm:h-[52px] md:w-[185px] md:h-[52px] lg:w-[165px] lg:h-[92px] xl:w-[165px] xl:h-[92px]"
               />
             </Link>
           </div>
           <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
             <Link
               href="/experience"
-              className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1 ml-4"
+              className=" font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1 ml-4"
               onClick={closeMenu}
             >
               {t('EXPERIENCES')}
             </Link>
             <Link
               href="/dome"
-              className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
              {t('DOME')}
             </Link>
-            <Link href="/upcomingevents" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
+            <Link href="/upcomingevents" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1" onClick={closeMenu}>
                 UPCOMING EVENTS
               </Link>
             <Link
               href="/corporateevents"
-              className="text-white text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold font-jura hover:text-[#A72CCF] mt-1"
+              className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
               {t('CORPORATE EVENTS')}
             </Link>
             <Link
               href="/education"
-              className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
               {t('EDUCATION')}
@@ -180,7 +180,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               href="https://feverup.com/m/187813"
               target="_blank"
               rel="noopener noreferrer"
-              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#7E51F8] to-[#D007A6] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content"> {t('BOOK NOW')}</span>
             </Link>
@@ -200,19 +200,19 @@ const Navbar = ({ isTopBannerVisible }) => {
         {menuOpen && (
           <div
             ref={menuRef}
-            className=" mx-8 xl:hidden bg-[#11072C] absolute right-0 top-full "
+            className=" mx-8 xl:hidden bg-[#063828] absolute right-0 top-full "
           >
             <div className=" flex flex-col items-start px-4 py-4">
               <Link
                 href="/experience"
-                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
+                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
                 {t('EXPERIENCES')}
               </Link>
               <Link
                 href="/dome"
-                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
+                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
                 {t('DOME')}

@@ -23,9 +23,9 @@ const Page = () => {
 
         <div className="flex h-screen bg-white">
           
-      <div className="flex-1 ">
+        <div className="flex-1 ">
         <DashboardNavbar />
-        <div className='flex'>
+        <div className='flex '>
         <Sidebar />
         <DashboardHome />
       </div>

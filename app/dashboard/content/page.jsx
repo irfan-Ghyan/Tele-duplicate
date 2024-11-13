@@ -12,6 +12,7 @@ import { FaqProvider } from '../../FaqContext';
 import DashboardMainNavbar from '../../components/dashboardmainnavbar/DashboardMainNavbar';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import DashboardExperience from '@/app/components/dashboardsession/DashboardSession';
 
 const Page = () => {
   const router = useRouter();
@@ -31,7 +32,8 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
         <DashboardVideo/>
-        <DashboardSession />
+        {/* <DashboardSession /> */}
+        {/* <DashboardExperience /> */}
         <DashboardDomeSection />
         <FaqProvider>
           <DashboardFaq />

@@ -22,8 +22,6 @@ const Page = () => {
   return (
     // <div className="min-h-screen flex flex-col items-center">
         <div className="flex h-screen">
-         
-       
       <div className="flex-1 ">
         <DashboardNavbar />
         <div className='flex'>

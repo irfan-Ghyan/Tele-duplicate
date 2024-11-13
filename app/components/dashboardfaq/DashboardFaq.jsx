@@ -29,9 +29,7 @@ const handleInputChange = (e) => {
     try {
       const url = "http://192.168.70.211:8000/api/content/sections/Home"
       let response = await doGetCall(url);
-      // let response = await fetch(
-      //   "http://192.168.70.211:8000/api/content/sections/Home"
-      // );
+      
       if (response.ok) {
         response = await response.json();
         if (response.success) {
@@ -224,17 +222,17 @@ const handleInputChange = (e) => {
   return (
     <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
       <div className="flex justify-between">
-        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#A62ED1]">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
-        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#A62ED1]">
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
           {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
 
       {showSection && (
         <>
-          <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
+          <h1 className="text-4xl text-[#063828] font-black font-orbitron">{labels[language].heading}</h1>
           <div className="flex justify-between">
             <form
               onSubmit={handleSubmit}
@@ -272,7 +270,7 @@ const handleInputChange = (e) => {
 
               <button
                 type="submit"
-                className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
+                className="w-full p-4 bg-[#063828] text-white hover:bg-[#002718]"
               >
                 {editingIndex !== null ? labels[language].update : labels[language].submit}
               </button>

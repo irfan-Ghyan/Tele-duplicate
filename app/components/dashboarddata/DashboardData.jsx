@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import BookingCalendar from "../bookingcalendar/Bookingcalendar";
 import BookingListing from "../bookinglisting/Bookinglisting";
 
 const DashboardData = () => {
+  const [slotsData, setSlotsData] = useState([]);
+
+  const updateSlotData = (updatedSlots) => {
+    setSlotsData(updatedSlots);
+  };
+
   return (
     <div className="w-full bg-[#ffffff]">
        <div>
             <h1 className='text-4xl font-black px-20 pt-20'>BOOKING</h1>
           </div>
       <div className="px-20 py-10">
-     <BookingCalendar />
+     <BookingCalendar slotsData={slotsData} setSlotsData={updateSlotData} />
      </div>
      <div className="px-20 py-10">
-     <BookingListing />
+     <BookingListing slotsData={slotsData} />
      </div>
     </div>
   );
 };
 
-export default DashboardData;
+ export default DashboardData;
+

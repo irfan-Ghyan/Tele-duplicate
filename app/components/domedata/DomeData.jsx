@@ -1,16 +1,58 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
 const DomeData = () => {
   const { t } = useTranslation();
+   const [domesEntries, setDomesEntries] = useState([]);
 
-    const domes = [
-      { title: t('GAMING_ROOM'), description: t('GAMING_DES')}
-    ];
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const url = "http://192.168.70.211:8000/api/content/sections/Dome";
+      const response = await fetch(url);
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+  
+        if (data.success) {
+          const faqSection = data.data.sections.find((section) => section.title === "Gaming Room");
+  
+          if (faqSection) {
+            const faqData = faqSection.section_fields.reduce((acc, field, index, fields) => {
+              if (field.key.startsWith("title")) {
+                const descriptionField = fields.find((f, i) => i > index && f.key === "description");
+                if (descriptionField) {
+                  acc.push({
+                    title: field.value,
+                    description: descriptionField.value,
+                    imageUrl: field.imageUrl || "",  // add imageUrl if available
+                  });
+                }
+              }
+              return acc;
+            }, []);
+  
+            setDomesEntries(faqData.reverse());
+          }
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+  
+    // const domes = [
+    //   { title: t('GAMING_ROOM'), description: t('GAMING_DES')}
+    // ];
   return (
     <>
      <Head>
@@ -21,7 +63,7 @@ const DomeData = () => {
       <div className='w-full bg-[#11072C] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4'>
  <div className="bottom-0 px-4 md:flex md:flex-col md:pr-6 py-[25px] lg:py-[100px] max-w-7xl mx-auto mt-[200px] sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
    <div className='px-4 flex flex-col justify-between md:mt-[36px] md:mb-[41px]'>
-     {domes.map((dome, index) => (
+     {domesEntries.map((dome, index) => (
        <div key={index} className='py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px] '>
            {/* <h4 className='text-[34px] xl:text-[35px] text-[#D008A6] font-bold font-jura drop-shadow-4xl'>{dome.subtitle}</h4> */}
          <h1 className='text-[34px] md:text-[54px] text-white font-black font-orbitron drop-shadow-4xl'>{dome.title}</h1>

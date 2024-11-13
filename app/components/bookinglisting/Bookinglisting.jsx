@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useMemo, useCallback } from "react";
+import { doGetCall, doPostCall, doDeleteCall } from "../../utils/api.js";
 
 const BookingListing = () => {
   const [bookings, setBookings] = useState([]);
@@ -16,17 +17,19 @@ const BookingListing = () => {
     phone: "",
     email: "",
     no_of_people: "",
-    type: "",
+    booking_type: "",
     duration: "",
     date: "",
     time: "",
-    booking_type_id: "e158ffdc-96b2-11ef-88a4-6c24081c603b"
   });
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch("http://192.168.70.211:8000/api/bookings");
+      const url = "http://192.168.70.211:8000/api/bookings"
+      let response = await doGetCall(url);
+      // const response = await fetch("http://192.168.70.211:8000/api/bookings");
+
       const data = await response.json();
       setBookings(data.data || []);
     } catch (error) {
@@ -49,7 +52,7 @@ const BookingListing = () => {
     bookings.filter(item => 
       (item.name && item.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (item.phone && item.phone.includes(searchTerm)) ||
-      (item.type && item.type.includes(searchTerm)) ||
+      // (item.booking_type && item.booking_type.includes(searchTerm)) ||
       (item.email && item.email.toLowerCase().includes(searchTerm.toLowerCase()))
     ), [bookings, searchTerm]);
   
@@ -75,6 +78,7 @@ const BookingListing = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); 
 
     const formattedTime = formData.time?.slice(0, 5); 
     const url = editingId
@@ -83,12 +87,16 @@ const BookingListing = () => {
 
     const method = editingId ? "PUT" : "POST";
 
+    const payload = { ...formData, time: formattedTime };
+
     try {
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, time: formattedTime }),
-      });
+      const response = await doPostCall(url, payload, method);
+      // const response = await fetch(url, {
+      //   method,
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ ...formData, time: formattedTime }),
+      // });
+     
 
       if (response.ok) {
         setFormData({
@@ -96,11 +104,11 @@ const BookingListing = () => {
           phone: "",
           email: "",
           no_of_people: "",
-          type: "",
+          booking_type: "",
           duration: "",
           date: "",
-          time: "",
-          booking_type_id: "e158ffdc-96b2-11ef-88a4-6c24081c603b"
+          time: ""
+          
         });
         setEditingId(null);
         setShowForm(false);
@@ -111,6 +119,9 @@ const BookingListing = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
     }
+    finally {
+    setLoading(false);  
+  }
   };
   
   const handleCreateClick = () => {
@@ -121,11 +132,10 @@ const BookingListing = () => {
       phone: "",
       email: "",
       no_of_people: "",
-      type: "",
+      booking_type: "",
       duration: "",
       date: "",
       time: "",
-      booking_type_id: "e158ffdc-96b2-11ef-88a4-6c24081c603b"
     });
   };
 
@@ -135,11 +145,11 @@ const BookingListing = () => {
       phone: booking.phone,
       email: booking.email,
       no_of_people: booking.no_of_people,
-      type: booking.type,
+      booking_type: booking.type,
       duration: booking.duration,
       date: booking.date,
       time: booking.time,
-      booking_type_id: booking.booking_type_id
+      
     });
     setEditingId(booking.id);
     setShowForm(true);
@@ -159,7 +169,8 @@ const BookingListing = () => {
     
     if (window.confirm("Are you sure you want to delete this booking?")) {
       try {
-        const response = await fetch(deleteUrl, { method: "DELETE" });
+        // const response = await fetch(deleteUrl, { method: "DELETE" });
+        const response = await doDeleteCall(deleteUrl);
   
         if (response.ok) {
 
@@ -183,6 +194,7 @@ const BookingListing = () => {
       duration: "Duration (in minutes)",
       date: "Date",
       time: "Time",
+      type: "Type",
       submit: "Submit",
       create: "Create +",
       search: "Search by name, phone, or email",
@@ -201,6 +213,7 @@ const BookingListing = () => {
       duration: "المدة (بالدقائق)",
       date: "التاريخ",
       time: "الوقت",
+      type: " يكتب",
       submit: "إرسال",
       create: "إنشاء +",
       search: "ابحث بالاسم أو الهاتف أو البريد الإلكتروني",
@@ -233,7 +246,7 @@ const BookingListing = () => {
       </div>
       <div className="mb-4">
         <label>{translations[language].type}</label>
-        <input type="number" name="type" value={formData.type} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+        <input type="text" name="booking_type" value={formData.booking_type} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
       </div>
       <div className="mb-4">
         <label>{translations[language].duration}</label>
@@ -253,6 +266,8 @@ const BookingListing = () => {
     </form>
   );
 
+
+  
   return (
     <div className="w-full">
       {loading ? <div>Loading...</div> : (
@@ -315,7 +330,7 @@ const BookingListing = () => {
               <td className="border p-2">{item.phone}</td>
               <td className="border p-2">{item.email}</td>
               <td className="border p-2">{item.no_of_people}</td>
-              <td className="border p-2">{item.type}</td>
+              <td className="border p-2">{item.booking_type.name}</td>
               <td className="border p-2">{item.duration}</td>
               <td className="border p-2">{item.date}</td>
               <td className="border p-2">{item.time}</td>
@@ -346,3 +361,6 @@ const BookingListing = () => {
 };
 
 export default BookingListing;
+
+
+

@@ -1,132 +1,145 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { doGetCall } from "../../utils/api";
 
 const BookingCalendar = () => {
-  const columns = ["Time", "00", "20", "40"];
-  const rows = [
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-  ];
+  const [slotsData, setSlotsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedSlotType, setSelectedSlotType] = useState("normal");
+  const [selectedDate, setSelectedDate] = useState("10-11-2024");
+
+
+  const fetchBookings = useCallback(async () => {
+    setLoading(true);
+
+    const payload = {
+      no_of_people: "2",
+      date: selectedDate,
+      duration: "40",
+      booking_type: selectedSlotType,
+    };
+
+    const queryString = new URLSearchParams(payload).toString();
+
+    try {
+      const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+      let response = await doGetCall(url);
+      const data = await response.json();
+      console.log("Fetched data:", data); 
+      // Initialize `busy` for each slot
+      const slotsWithBusyData = data.map((slot) => ({
+        ...slot,
+        busy: 0, 
+        type: selectedSlotType,
+        date: selectedDate,
+      }));
+      setSlotsData(slotsWithBusyData);
+    } catch (error) {
+      console.error("Error fetching bookings:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedSlotType, selectedDate, setSlotsData]);
+
+  useEffect(() => {
+    fetchBookings();
+  }, [fetchBookings]);
+
+
+  const handleSlotTypeChange = (event) => {
+    setSelectedSlotType(event.target.value);
+  };
+
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
+
+  // Handle slot booking
+  const handleSlotSelection = (type, duration, index) => {
+    
+    const simsToBook = 1; 
+
+    const updatedSlots = [...slotsData];
+    
+    const slot = updatedSlots[index];
+
+    if (slot.sims >= simsToBook && (slot.sims - simsToBook) >= slot.busy) {
+      updatedSlots[index] = {
+        ...slot,
+        busy: slot.busy + simsToBook,
+        sims: slot.sims - simsToBook,
+      };
+      setSlotsData(updatedSlots);
+    } else {
+      alert("Not enough sims available");
+    }
+  };
+
+  const filteredSlots = slotsData.filter((slot) => slot.type === selectedSlotType);
 
   return (
-    <div className="w-full overflow-x-auto h-screen ">
+    <div className="w-full overflow-x-auto h-screen">
+      <div className="mb-4">
+        <label className="mr-4">Select Slot Type:</label>
+        <select
+          value={selectedSlotType}
+          onChange={handleSlotTypeChange}
+          className="p-2 border"
+        >
+          <option value="normal">Normal</option>
+          <option value="vip">VIP</option>
+          <option value="lounge">Lounge</option>
+        </select>
+      </div>
+
+      {/* Date Selector */}
+      <div className="mb-4">
+        <label className="mr-4">Select Date:</label>
+        <input
+          type="date"
+          value={selectedDate}
+          onChange={handleDateChange}
+          className="p-2 border"
+        />
+      </div>
+
       <table className="min-w-full border-collapse border border-gray-300">
         <thead>
           <tr>
-            {columns.map((column, index) => (
-              <th
-                key={index}
-                className={`border border-gray-300 p-4 bg-[#ececec] ${
-                  index === 0 ? "w-[200px] " : ""
-                }`}
-              >
-                {column}
-              </th>
-            ))}
+            <th className="border border-gray-300 p-4 bg-[#ececec]">Date</th>
+            <th className="border border-gray-300 p-4 bg-[#ececec]">Time</th>
+            <th className="border border-gray-300 p-4 bg-[#ececec]">Sims Available</th>
+            <th className="border border-gray-300 p-4 bg-[#ececec]">Busy</th>
+            <th className="border border-gray-300 p-4 bg-[#ececec]">Slot Type</th>
+         
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, rowIndex) => (
-            <tr key={rowIndex}>
-              <td
-                className={`border border-gray-300 p-2 bg-[#f8f8f8] text-center font-bold ${rowIndex === 0 ? "w-[200px]" : ""}`}
-              >
-                {row}
-              </td>
-              <td className="border border-gray-300 p-2">
-                <table className="min-w-full divide-y divide-gray-200 border border-gray-30">
-                  <thead className="bg-[#f8f7f7]">
-                    <tr>
-                      <th className="px-4 py-2 text-xs font-bold text-gray-600 text-center uppercase tracking-wider">
-                        AVIALABLE
-                      </th>
-                      <th className="px-4 py-2 text-xs font-bold text-gray-600  text-center uppercase tracking-wider">
-                        BUSY
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white  divide-y divide-gray-200 border border-gray-30" >
-                    {Array.from({ length: 3 }).map((_, index) => (
-                      <tr key={index}>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          14
-                        </td>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          0
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </td>
-              <td className="border border-gray-300 p-2">
-                <table className="min-w-full  divide-y divide-gray-200 border border-gray-30">
-                  <thead className="bg-[#f8f7f7]">
-                    <tr>
-                      <th className="px-4 py-2 text-center text-xs font-bold text-gray-600  uppercase tracking-wider">
-                        AVIALABLE
-                      </th>
-                      <th className="px-4 py-2 text-center text-xs font-bold text-gray-600  uppercase tracking-wider">
-                        BUSY
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200 border border-gray-300">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                      <tr key={index}>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          14
-                        </td>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          0
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </td>
-              <td className="border border-gray-300  p-2">
-                <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
-                  <thead className="bg-[#f8f7f7]">
-                    <tr>
-                      <th className="px-4 py-2 text-center text-xs font-bold text-gray-600 uppercase tracking-wider">
-                        AVIALABLE
-                      </th>
-                      <th className="px-4 py-2 text-center text-xs font-bold text-gray-600 uppercase tracking-wider">
-                        BUSY
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200 border border-gray-300">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                      <tr key={index}>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          14
-                        </td>
-                        <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-600 text-center">
-                          0
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </td>
+          {loading ? (
+            <tr>
+              <td colSpan="6" className="text-center p-4">Loading...</td>
             </tr>
-          ))}
+          ) : (
+            filteredSlots.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="text-center p-4">No slots available for selected type</td>
+              </tr>
+            ) : (
+              filteredSlots.map((slot, index) => (
+                <tr key={index}>
+                  <td className="border border-gray-300 p-4 text-center">{slot.date}</td>
+                  <td className="border border-gray-300 p-4 text-center">{slot.time}</td>
+                  <td className="border border-gray-300 p-4 text-center">{slot.sims}</td>
+                  <td className="border border-gray-300 p-4 text-center">{slot.busy}</td>
+                  <td className="border border-gray-300 p-4 text-center">{slot.type}</td>
+                
+                </tr>
+              ))
+            )
+          )}
         </tbody>
       </table>
     </div>
-
   );
 };
 

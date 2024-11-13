@@ -22,7 +22,7 @@ const Profile = ({ imageUrl, title, rating, description }) => {
 
   return (
     <div className="profile-container relative max-w-sm overflow-hidden mb-6 w-[328px] md:w-[320px] lg:w-[355px] xl:w-[355px] h-[322px] mx-[10px] md:mx-[4px] lg:mx-[4px] xl:mx-[8px] lg:grid-cols-4 gap-x-4">
-      <div className="mb-6 flex border-[1px] border-[#ffffff] border-opacity-30 h-[322px] flex-col p-[20px] md:p-[32px]">
+      <div className="mb-6 flex border-[1px] border-[#c09e5f] border-opacity-30 h-[322px] flex-col p-[20px] md:p-[32px]">
         <div className="flex">
           <div>
             <Image
@@ -34,7 +34,7 @@ const Profile = ({ imageUrl, title, rating, description }) => {
             />
           </div>
           <div className="flex flex-col pl-[13px] items-center justify-center">
-            <h3 className="text-white font-jura text-[18px] font-semibold mb-2">{title}</h3>
+            <h3 className="text-[#c09e5f] font-jura text-[18px] font-semibold mb-2">{title}</h3>
             <div className="flex mb-4">
               {renderStars(rating)}
               <span className="text-white font-jura font-bold text-[18px] pl-2">
@@ -44,7 +44,7 @@ const Profile = ({ imageUrl, title, rating, description }) => {
           </div>
         </div>
         <div>
-          <p className="text-white font-jura font-bold text-[18px]">{description}</p>
+          <p className="text-[#e3ce90] font-jura font-bold text-[18px]">{description}</p>
         </div>
       </div>
     </div>

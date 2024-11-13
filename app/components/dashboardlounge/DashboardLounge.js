@@ -167,17 +167,17 @@ const DashboardLounge = () => {
   return (
     <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
       <div className="flex justify-between">
-        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#A62ED1]">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
-        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#A62ED1]">
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
           {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
 
       {showSection && (
         <>
-        <h1 className="text-4xl text-black font-black font-orbitron">{labels[language].heading}</h1>
+        <h1 className="text-4xl text-[#063828] font-black font-orbitron">{labels[language].heading}</h1>
         <div className='flex justify-between'>
             <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
@@ -230,7 +230,7 @@ const DashboardLounge = () => {
 
         <button
           type="submit"
-          className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
+          className="w-full p-4 bg-[#063828] text-white hover:bg-[#063828]"
         >
          {isEditing ? labels[language].update : labels[language].submit}
         </button>
