@@ -59,10 +59,10 @@ const SearchComponent = () => {
 
   return (
     <div className="container mx-auto max-w-full overflow-hidden py-[109px] px-4 md:px-0">
-      <h1 className="text-white font-orbitron text-[24px] md:text-[42px] text-center font-black mb-2">
+      <h1 className="text-[#c09e5f] font-orbitron text-[24px] md:text-[42px] text-center font-black mb-2">
         {isSubmitted ? 'THANK YOU FOR SUBSCRIBING' : 'SIGN UP TO OUR NEWSLETTER'}
       </h1>
-      <p className="text-white font-jura text-[14px] md:text-[18px] font-bold text-center mb-6">
+      <p className="text-[#c09e5f] font-jura text-[14px] md:text-[18px] font-bold text-center mb-6">
         {isSubmitted ? 'Join our community of codemod champions & migration experts.' : 'Stay updated with our latest news and offers.'}
       </p>
       {errorMessage && <p className="text-red-500 text-center mb-6">{errorMessage}</p>}
@@ -74,12 +74,12 @@ const SearchComponent = () => {
             value={query}
             onChange={handleChange}
             placeholder="Enter your email address"
-            className="button-slanted text-white w-[240px] md:w-[423px] h-[44px] font-jura font-normal lg:font-medium bg-[#002718] rounded-tl-lg pl-[10px] md:pl-[54px] pr-[10px] py-[13px] mr-[-10px] lg:mr-[-30px] focus:outline-none focus:ring-0 focus:bg-[#002718] focus:text-[#ffffff]"
+            className="button-slanted text-[#e3ce90] w-[240px] md:w-[423px] h-[44px] font-jura font-normal lg:font-medium bg-[#002718] rounded-tl-lg pl-[10px] md:pl-[54px] pr-[10px] py-[13px] mr-[-10px] lg:mr-[-30px] focus:outline-none focus:ring-0 focus:bg-[#002718] focus:text-[#c09e5f]"
             required
           />
           <button
             type="submit"
-            className="button-slanted w-[100px] md:w-[158px] h-[44px] font-jura font-bold text-white bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg z-10"
+            className="button-slanted w-[100px] md:w-[158px] h-[44px] font-jura font-bold text-[#002718] bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg z-10"
           >
             <span className='button-slanted-content'>SUBMIT</span>
           </button>

@@ -19,9 +19,18 @@ const BookingListing = () => {
     no_of_people: "",
     booking_type: "",
     duration: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     time: "",
   });
+
+  const setTime = [
+    "09:00", "09:20", "09:40", "10:00", "10:20", "10:40", "11:00", "11:20","11:40", "12:00", 
+    "12:20","12:40", "13:00", "13:20", "13:40", "14:00", "14:20", "14:40", "15:00", "15:20", "15:40", "16:00",
+    "16:20", "16:40", "17:00", "17:00", "17:20", "17:40", "18:00", "18:20", "18:40", "19:00", "19:20", "19:40",
+    "20:00", "20:20", "20:40", "21:00", "21:20", "22:40", "23:00", "23:20", "23:40", "24:00",
+  ];
+  const [timeSlots, setTimeSlots] = useState(setTime);
+
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
@@ -31,6 +40,11 @@ const BookingListing = () => {
       // const response = await fetch("http://192.168.70.211:8000/api/bookings");
 
       const data = await response.json();
+      const formattedBookings = data.data.map((booking) => ({
+        ...booking,
+        time: booking.time ? booking.time.slice(0, 5) : "",
+      }));
+
       setBookings(data.data || []);
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -38,6 +52,36 @@ const BookingListing = () => {
       setLoading(false);
     }
   }, []);
+  
+
+
+  useEffect(() => {
+    async function fetchTimeSlots() {
+      try {
+        const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
+        if (!response.ok) {
+          console.error("Failed to fetch time slots, status:", response.status);
+          return;
+        }
+
+        const data = await response.json();
+        console.log("Fetched time slots data:", data); 
+
+        if (Array.isArray(data)) {
+          setTimeSlots(data);
+        } else {
+          console.error("Unexpected data format. Expected an array:", data);
+        }
+
+      } catch (error) {
+        console.error("Error fetching time slots:", error);
+      }
+    }
+
+    fetchTimeSlots();
+  }, []);
+
+
 
   useEffect(() => {
     fetchBookings();
@@ -158,6 +202,16 @@ const BookingListing = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+
+  if (name === 'no_of_people' && value > 2) {
+    alert('Number of people cannot exceed 10');
+    return; 
+  }
+
+  setFormData({
+    ...formData,
+    [name]: value
+  });
   };
 
   const toggleLanguage = () => {
@@ -242,25 +296,75 @@ const BookingListing = () => {
       </div>
       <div className="mb-4">
         <label>{translations[language].noOfPeople}</label>
-        <input type="number" name="no_of_people" value={formData.no_of_people} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+        <input
+    type="number"
+    name="no_of_people"
+    value={formData.no_of_people}
+    onChange={handleInputChange}
+    required
+    className="w-full p-2 border border-gray-300"
+    min="1"
+  />
       </div>
       <div className="mb-4">
-        <label>{translations[language].type}</label>
-        <input type="text" name="booking_type" value={formData.booking_type} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+      <label>Type</label>
+  <select
+    name="booking_type"
+    value={formData.booking_type}
+    onChange={handleInputChange}
+    required
+    className="w-full p-2 border border-gray-300"
+  >
+    <option value="">Select type</option>
+    <option value="normal">Normal</option>
+    <option value="vip">VIP</option>
+    <option value="lounge">Lounge</option>
+  </select>
       </div>
       <div className="mb-4">
-        <label>{translations[language].duration}</label>
-        <input type="number" name="duration" value={formData.duration} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+      <label>Duration</label>
+        <select
+          name="duration"
+          value={formData.duration}
+          onChange={handleInputChange}
+          required
+          className="w-full p-2 border border-gray-300"
+        >
+          <option value="">Select duration</option>
+          <option value="20">20 minutes</option>
+          <option value="40">40 minutes</option>
+          <option value="60">60 minutes</option>
+        </select>
       </div>
       <div className="mb-4">
-        <label>{translations[language].date}</label>
-        <input type="date" name="date" value={formData.date} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+      <label>Date</label>
+      <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleInputChange}
+          required
+          className="w-full p-2 border border-gray-300"
+        />
       </div>
       <div className="mb-4">
-        <label>{translations[language].time}</label>
-        <input type="time" name="time" value={formData.time} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
+      <label>Time</label>
+      <select
+          name="time"
+          value={formData.time}
+          onChange={handleInputChange}
+          required
+          className="w-full p-2 border border-gray-300"
+        >
+          <option value="">Select a time slot</option>
+          {timeSlots.map((slot, index) => (
+            <option key={index} value={slot}>
+              {slot}
+            </option>
+          ))}
+        </select>
       </div>
-      <button type="submit" className="w-[160px] h-[40px] bg-[#A62ED1] text-white hover:bg-[#A62ED1]">
+      <button type="submit" className="w-[160px] h-[40px] bg-[#063828] text-white">
       {editingId ? "Update" : translations[language].submit}
       </button>
     </form>
@@ -272,7 +376,7 @@ const BookingListing = () => {
     <div className="w-full">
       {loading ? <div>Loading...</div> : (
         <>
-      <button onClick={toggleLanguage} className="mb-4 p-2 text-[#A62ED1]">
+      <button onClick={toggleLanguage} className="mb-4 p-2 text-[#063828]">
         {translations[language].switchTo}
       </button>
 
@@ -298,7 +402,7 @@ const BookingListing = () => {
         </div>
 
         <button
-          className="w-[160px] h-[60px] bg-[#A62ED1] text-white hover:bg-[#A62ED1] py-4 mt-10 mb-4"
+          className="w-[160px] h-[60px] bg-[#063828] text-white py-4 mt-10 mb-4"
           onClick={handleCreateClick}
         >
           {translations[language].create}
@@ -344,13 +448,13 @@ const BookingListing = () => {
       </table>
 
       <div className="flex justify-between mt-4">
-        <button onClick={handlePrevPage} disabled={currentPage === 1} className="p-2 bg-[#A62ED1] text-white">
+        <button onClick={handlePrevPage} disabled={currentPage === 1} className="p-2 bg-[#063828] text-white px-4">
           {translations[language].previous}
         </button>
         <span className="p-2">
           {translations[language].page} {currentPage} {translations[language].of} {totalPages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="p-2 bg-[#A62ED1] text-white">
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="p-2 bg-[#063828] text-white px-4">
           {translations[language].next}
         </button>
       </div>

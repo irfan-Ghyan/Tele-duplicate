@@ -69,8 +69,8 @@ const Page = () => {
       </Head>
     <div className="flex flex-col min-h-screen items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
-        <div className="text-center text-white ">
-          <h1 className="font-orbitron text-[34px] lg:text-[54px] text-white font-black mb-4">EXPERIENCES</h1>
+        <div className="text-center text-[#e3ce90] ">
+          <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">EXPERIENCES</h1>
         </div>
       </div>
       <div className="w-full max-w-7xl ">

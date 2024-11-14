@@ -12,7 +12,7 @@ const DashboardData = () => {
   return (
     <div className="w-full bg-[#ffffff]">
        <div>
-            <h1 className='text-4xl font-black px-20 pt-20'>BOOKING</h1>
+            <h1 className='text-4xl font-black text-[#002718] px-20 pt-20'>BOOKING</h1>
           </div>
       <div className="px-20 py-10">
      <BookingCalendar slotsData={slotsData} setSlotsData={updateSlotData} />

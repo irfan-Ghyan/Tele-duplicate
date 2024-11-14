@@ -69,15 +69,15 @@ const DrivingData = () => {
               <div className="flex flex-col justify-between px-4 mt-[140px] sm:mt-[140px] md:mt-[0px] lg:mt-[0px] xl:mt-[36px] md:mb-[41px] md:items-end lg:items-end xl:items-end bg-[#11072C] bg-opacity-80 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 p-8">
                 {drivingEntries.map((driving, index) => (
                   <div key={index} className="xl:pb-[30px] xl:pt-[100px] text-left">
-                    <h1 className="text-[34px] md:text-[54px] text-white font-black font-orbitron">{driving.title}</h1>
-                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-white font-black font-jura mt-6 leading-7 text-justify">
+                    <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">{driving.title}</h1>
+                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-black font-jura mt-6 leading-7 text-justify">
                       {driving.description}
                     </p>
                   </div>
                 ))}
                 <div className="flex justify-center lg:justify-start m-bottom">
                   <div className="pt-4 pb-10">
-                    <button onClick={scrollToSection} className="button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-white hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                    <button onClick={scrollToSection} className="button-slanted text-[#c09e5f] w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-[#c09e5f] hover:bg-gradient-to-r hover:from-[#c09e5f] hover:to-[#e3ce90] hover:border-0 hover:text-[#002718] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                       <span className="button-slanted-content">{t('ENQUIRE NOW')}</span>
                     </button>
                   </div>

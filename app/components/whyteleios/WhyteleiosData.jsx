@@ -85,7 +85,7 @@ const WhyteleiosData = () => {
       </Head>
       <div className="max-w-7xl px-4 md:px-8 mx-auto">
         <div className="inset-0 px-4 md:pr-6 py-[34px] md:py-[100px]">
-          <h1 className="text-[24px] md:text-[54px] text-white font-black text-center font-orbitron">
+          <h1 className="text-[24px] md:text-[54px] text-[#c09e5f] font-black text-center font-orbitron">
             {t('DISCOVER_TELEIOS')}
           </h1>
 
@@ -93,18 +93,17 @@ const WhyteleiosData = () => {
             <div className="order-2 lg:order-1 flex flex-col lg:items-start lg:text-left w-full lg:w-1/2 lg:pr-8 lg:py-0">
             {whyEntries.map((why, index) => (
               <div className="py-[40px]">
-                <h2 className="text-[23px] text-white font-bold font-orbitron">
+                <h2 className="text-[23px] text-[#c09e5f] font-bold font-orbitron">
                   {why.title}
                 </h2>
-                <p className="w-full xl:w-[600px] md:text-[14px] lg:text-[18px] text-white font-bold font-jura py-6 pr-6 leading-18 text-justify">
+                <p className="w-full xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura py-6 pr-6 leading-18 text-justify">
                   {why.description}
                 </p>
-                <button
-                  onClick={scrollToSection}
-                  className="button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
-                >
-                  <span className="button-slanted-content">{t('ENQUIRY_NOW')}</span>
-                </button>
+                <div className="pt-4 pb-10">
+                    <button onClick={scrollToSection} className="button-slanted text-[#c09e5f] w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-[#c09e5f] hover:bg-gradient-to-r hover:from-[#c09e5f] hover:to-[#e3ce90] hover:border-0 hover:text-[#002718] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                      <span className="button-slanted-content">{t('ENQUIRE NOW')}</span>
+                    </button>
+                  </div>
               </div>
             ))}
             </div>

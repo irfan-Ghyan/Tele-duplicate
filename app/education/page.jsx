@@ -33,9 +33,9 @@ const Page = () => {
       </Helmet>
       <div className="min-h-screen flex flex-col items-center">
         <div className="flex items-center justify-center xl:px-80 sm:px-4">
-          <div className="text-center p-6 text-white lg:py-[80px] lg:pb-[100px] xl:px-80 lg:px-40 lg:pt-[50px]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-white font-black mb-4">{t('EDUCATION')}</h1>
-            <p className="text-white font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify">
+          <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] xl:px-80 lg:px-40 lg:pt-[50px]">
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">{t('EDUCATION')}</h1>
+            <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify">
               {t("Discover_best_racing_simulator")}
             </p>
           </div>
@@ -46,7 +46,7 @@ const Page = () => {
         <div className="w-full">
           <DrivingData />
         </div>
-        <div className="w-full bg-[#1E123D]">
+        <div className="w-full bg-[#063828]">
           <WhyteleiosData />
         </div>
         <div className="w-full">

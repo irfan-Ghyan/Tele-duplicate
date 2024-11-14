@@ -54,6 +54,27 @@ const DashboardDomeSection = () => {
   //   setImages((prevImages) => [...prevImages, ...newImages]);
   // };
 
+
+  const uploadImages = async () => {
+    const formData = new FormData();
+    images.forEach((image, index) => {
+      formData.append(`image${index}`, image.file);
+    });
+    formData.append("section", "dome");
+    formData.append("imageName", title);
+  
+    const url = "http://192.168.70.211:8000/api/content/uploadImages";
+    const response = await doPostCall(url, formData);
+  
+    if (!response.ok) throw new Error("Failed to upload images.");
+  
+    const result = await response.json();
+    console.log("Images uploaded successfully:", result);
+    return result.file_paths;
+  };
+
+
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     console.log(files); 
@@ -146,26 +167,12 @@ const handleSubmit = async (e) => {
   });
 
   try {
-    const uploadUrl = "http://192.168.70.211:8000/api/content/uploadImages";
-    
-    let headers = {
-     "method": "POST",
-      "Content-Type": "multipart/form-data",
-    }
-    
-    const uploadResponse = await doPostCall(uploadUrl, formData,headers);
-
-    if (!uploadResponse.ok) {
-      throw new Error("Failed to upload images.");
-    }
-
-    const uploadResult = await uploadResponse.json();
-
-    if (!uploadResult.success) {
-      throw new Error("Image upload failed: " + uploadResult.message);
-    }
-
-    const imagePaths = uploadResult.file_paths;
+    const uploadedImagePaths = await uploadImages();
+    const newEntry = {
+      title,
+      description,
+      images: uploadedImagePaths, // store uploaded image paths in the entry
+    };
 
     const payload = {
       pageName: "Home",
@@ -192,6 +199,17 @@ const handleSubmit = async (e) => {
 
     const result = await saveResponse.json();
     console.log("Data saved successfully:", result);
+
+    if (editingIndex === null) {
+      setTableData((prevData) => [...prevData, { ...newEntry, key: `title${newIndex}` }]);
+    } else {
+      setTableData((prevData) =>
+        prevData.map((entry, index) =>
+          index === editingIndex ? { ...newEntry, key: `title${newIndex}` } : entry
+        )
+      );
+    }
+    
 
     setTitle("");
     setDescription("");
@@ -290,6 +308,7 @@ const handleSubmit = async (e) => {
         <tr className="bg-gray-100">
           <th className="p-2 border border-gray-300">Title</th>
           <th className="p-2 border border-gray-300">Description</th>
+          <th className="p-2 border border-gray-300">Images</th>
           <th className="p-2 border border-gray-300">Actions</th>
         </tr>
       </thead>
@@ -298,6 +317,15 @@ const handleSubmit = async (e) => {
           <tr key={index} className="border border-gray-300">
             <td className="p-2">{entry.title}</td>
             <td className="p-2">{entry.description}</td>
+            <td className="p-2">
+                    {entry.images.length > 0 ? (
+                      entry.images.map((image, i) => (
+                        <img key={i} src={image} alt={`Image ${i}`} className="w-12 h-12 object-cover mr-2" />
+                      ))
+                    ) : (
+                      <span>No images</span>
+                    )}
+                  </td>
             <td className="p-2">
               <button onClick={() => handleEdit(index)} className="text-blue-500 mr-2">Edit</button>
               <button onClick={() => handleDelete(index)} className="text-red-500">Delete</button>

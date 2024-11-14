@@ -263,7 +263,7 @@ const Experience = () => {
         {experienceEntries.map((experience, index) => (
           <div
             key={index}
-            className="card-wrapper w-full md:w-[286px] py-4"
+            className="card-wrapper w-full md:w-[280px]"
             style={{ minWidth: '286px', marginRight: '16px' }}
           >
             <RaceExperience

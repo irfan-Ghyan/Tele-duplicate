@@ -24,19 +24,53 @@ async function doGetCall(url, payload){
 
 
 
-async function doPostCall(url, payload, headers = null) {
+// async function doPostCall(url, payload, headers = null) {
+//   const token = localStorage.getItem('token'); 
+//   console.log("Token:", token);
+
+//   // Set headers if they are null
+//   if (headers === null) {
+//     headers = {
+//       'Authorization': `Bearer ${token}`,
+//       'Accept': 'application/json',
+//     };
+//   } else {
+//     headers['Authorization'] = `Bearer ${token}`;
+//   }
+
+//   const isFormData = payload instanceof FormData;
+
+//   // Only add Content-Type if not FormData
+//   if (!isFormData) {
+//     headers['Content-Type'] = 'application/json';
+//   }
+
+//   const options = {
+//     method: "POST",
+//     headers,
+//     body: isFormData ? payload : JSON.stringify(payload),
+//   };
+
+//   try {
+//     return await fetch(url, options);
+//   } catch (e) {
+//     console.error("Fetch error:", e);
+//     throw e;
+//   }
+// }
+
+async function doPostCall(url, payload, headers = {}) {
   const token = localStorage.getItem('token'); 
   console.log("Token:", token);
 
-  // Set headers if they are null
-  if (headers === null) {
-    headers = {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
-    };
-  } else {
-    headers['Authorization'] = `Bearer ${token}`;
+  // Ensure headers is an object
+  if (typeof headers !== 'object' || headers === null) {
+    headers = {}; // Initialize headers if it's null or not an object
   }
+
+  // Set Authorization header
+  headers['Authorization'] = `Bearer ${token}`;
+  headers['Accept'] = 'application/json';
 
   const isFormData = payload instanceof FormData;
 

@@ -14,7 +14,7 @@ const Login = () => {
     setError(null);
   
     try {
-      // Make the login request
+
       const response = await fetch("http://192.168.70.211:8000/api/login", {
         method: "POST",
         headers: {
@@ -24,26 +24,21 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
   
-      // Check if the response status is 200 (successful)
       if (response.status === 200) {
-        const data = await response.json(); // Parse the JSON response
+        const data = await response.json();
   
-        // Check if the access_token is present in the response
         if (data.access_token) {
-          // Store the token and authentication status in localStorage
+
           localStorage.setItem("isAuthenticated", "true");
-          localStorage.setItem("token", data.access_token); // Store the access_token
+          localStorage.setItem("token", data.access_token);
   
-          // Redirect to the dashboard after successful login
           router.push("/dashboard");
         } else {
           setError("Login failed: Token not found.");
         }
       } else if (response.status === 401) {
-        // Handle unauthorized response (wrong credentials)
         setError("Unauthorized: Invalid credentials");
       } else {
-        // Handle other errors
         throw new Error("An error occurred. Please try again.");
       }
     } catch (err) {
@@ -55,7 +50,7 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
       <div className="w-full max-w-lg space-y-6 bg-white py-20 px-10">
         <h2 className="text-2xl font-bold text-gray-800">LOGIN</h2>
-        {error && <p className="text-red-500">{error}</p>} {/* Show error messages */}
+        {error && <p className="text-red-500">{error}</p>} 
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
             <label className="block mb-2 text-sm font-bold text-gray-600" htmlFor="username">
@@ -85,7 +80,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full cursor-pointer bg-gray-800 border border-primary bg-primary py-6 text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:bg-[#D007A6]"
+            className="w-full cursor-pointer bg-gray-800 border border-primary bg-primary py-6 text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:bg-[#063828]"
           >
             Login
           </button>
