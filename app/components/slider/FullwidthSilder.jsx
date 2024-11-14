@@ -75,7 +75,7 @@ const FullWidthSlider = () => {
 
   return (
     <div className="slider-wrapper h-auto py-[40px] lg:py-[80px]">
-      <h1 className="text-[32px] md:text-[54px] mb-4 text-white font-black text-center font-orbitron">{t('WHAT_TO_EXPECT')}</h1>
+      <h1 className="text-[32px] md:text-[54px] mb-4 text-[#c09e5f] font-black text-center font-orbitron">{t('WHAT_TO_EXPECT')}</h1>
       <div className="slider-container py-4 relative">
         <Slider {...settings}>
           <div className="slide">

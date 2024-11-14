@@ -493,15 +493,15 @@ border: none !important;
   width: 20px;
   height: 20px;
   background-color: transparent;
-  border: 1px solid #4A27AA;
+  border: 1px solid #c09e5f;
   position: relative;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .custom-radio.checked {
-  background-color: #A72CCF;
-  border: 1px solid #A72CCF;
+  background-color: #c09e5f;
+  border: 1px solid #c09e5f;
 }
 
 .custom-radio.checked::after {

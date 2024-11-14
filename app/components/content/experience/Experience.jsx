@@ -257,7 +257,7 @@ const Experience = () => {
       </div>
 
       <div
-        className="scroll-container flex flex-wrap justify-center overflow-hidden my-66"
+        className="scroll-container flex flex-wrap justify-between overflow-hidden my-66"
         ref={scrollContainerRef}
       >
         {experienceEntries.map((experience, index) => (
