@@ -6,7 +6,7 @@ import Link from 'next/link';
 import Sidebar from '../../components/siderbar/Sidebar';
 import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
 import DashboardExperience from '../../components/dashboardexperience/DashboardExperience';
-import DashboardPrivateEvents from '../../components/dashboardprivateevents/DashboardPrivateEvents';
+// import DashboardPrivateEvents from '../../components/dashboardprivateevents/DashboardPrivateEvents';
 import DashboardMainNavbar from '@/app/components/dashboardmainnavbar/DashboardMainNavbar';
 import DashboardCoaching from '@/app/components/dashboardcoaching/DashboardCoaching';
 import { useEffect } from 'react';
@@ -31,7 +31,7 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
         <DashboardExperience />
-        <DashboardPrivateEvents />
+        {/* <DashboardPrivateEvents /> */}
         <DashboardCoaching />
 
         </div>
