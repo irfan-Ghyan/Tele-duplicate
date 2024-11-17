@@ -18,7 +18,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const menuRef = useRef(null);
   const { t, i18n } = useTranslation();
 
-  const hiddenRoutes = ['/experience', '/dome', '/upcomingevents',  '/corporateevents', '/education', '/enquiry-form', '/terms&conditions', '/privacy', '/menu',];
+  const hiddenRoutes = ['/experience', '/dome', '/upcomingevents',  '/corporateevents', '/education', '/enquiry-form', '/terms&conditions', '/privacy', '/menu', '/experiencedetails'];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
 
   const toggleMenu = () => {
@@ -68,12 +68,17 @@ const Navbar = ({ isTopBannerVisible }) => {
         };
       case '/dome':
         return {
-          title: 'Dome | Teleios Dome',
+          title: 'Venue | Teleios Dome',
           description: 'Explore the ultimate immersive experience at Teleios Dome.',
+        };
+        case '/upcomingevents/':
+        return {
+          title: 'Watch Parties | Teleios Dome',
+          description: 'Host your next corporate event or celebration at Teleios Dome.',
         };
       case '/corporateevents':
         return {
-          title: 'Corporate & Celebration Events | Teleios Dome',
+          title: 'Private Events | Teleios Dome',
           description: 'Host your next corporate event or celebration at Teleios Dome.',
         };
       case '/education':
@@ -146,24 +151,24 @@ const Navbar = ({ isTopBannerVisible }) => {
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
-             {t('DOME')}
+             {t('VENUE')}
             </Link>
             <Link href="/upcomingevents" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1" onClick={closeMenu}>
-                UPCOMING EVENTS
+            {t('WATCH PARTIES')}
               </Link>
             <Link
               href="/corporateevents"
               className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
-              {t('CORPORATE EVENTS')}
+              {t('PRIVATE EVENTS')}
             </Link>
             <Link
               href="/education"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
-              {t('EDUCATION')}
+              {t('F&B')}
             </Link>
             {/* <Link href="/other" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
                 OTHER
@@ -171,8 +176,8 @@ const Navbar = ({ isTopBannerVisible }) => {
               <Dropdown/> */}
           </div>
           <div className="language-switcher mx-2">
-        <button onClick={() => handleLanguageChange('en')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-white'>EN</button>
-        <button onClick={() => handleLanguageChange('ar')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-white'>العربية</button>
+        <button onClick={() => handleLanguageChange('en')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-[#c09e5f]'>EN</button>
+        <button onClick={() => handleLanguageChange('ar')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-[#c09e5f]'>العربية</button>
       </div>
           
           <div className="hidden xl:flex items-center">
@@ -180,7 +185,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               href="https://feverup.com/m/187813"
               target="_blank"
               rel="noopener noreferrer"
-              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-[#c09e5f] transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content"> {t('BOOK NOW')}</span>
             </Link>
@@ -188,7 +193,7 @@ const Navbar = ({ isTopBannerVisible }) => {
         
           
           <div className="xl:hidden">
-            <button onClick={toggleMenu} className="text-white text-4xl">
+            <button onClick={toggleMenu} className="text-[#c09e5f] text-4xl">
               {menuOpen ? (
                 <Image src="/assets/images/dome/navbarclose.png" className="h-[30px] w-[30px]" alt="close" width={30} height={30} />
               ) : (
@@ -200,39 +205,39 @@ const Navbar = ({ isTopBannerVisible }) => {
         {menuOpen && (
           <div
             ref={menuRef}
-            className=" mx-8 xl:hidden bg-[#063828] absolute right-0 top-full "
+            className=" mx-8 xl:hidden bg-[#002718] absolute right-0 top-full "
           >
             <div className=" flex flex-col items-start px-4 py-4">
               <Link
                 href="/experience"
-                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#063828]"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
                 {t('EXPERIENCES')}
               </Link>
               <Link
                 href="/dome"
-                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#063828]"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('DOME')}
+                {t('VENUE')}
               </Link>
-              {/* <Link href="/upcomingevents" className="w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]" onClick={closeMenu}>
-                UPCOMING EVENTS
-              </Link> */}
+              <Link href="/upcomingevents" className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]" onClick={closeMenu}>
+                {('WATCH PARTIES')}
+              </Link>
               <Link
                 href="/corporateevents"
-                className="block w-full text-left px-4 py-4 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('CORPORATE EVENTS')}
+                {t('PRIVATE EVENTS')}
               </Link>
               <Link
                 href="/education"
-                className="block w-full text-left px-4 py-4 text-white font-jura text-[14px] font-bold hover:text-[#A72CCF]"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] font-jura text-[14px] font-bold hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('EDUCATION')}
+                {t('F&B')}
               </Link>
               {/* <Link href="/other" className="text-left px-4 py-4 text-white font-jura text-[14px] font-bold hover:text-[#A72CCF" onClick={closeMenu}>
                 OTHER

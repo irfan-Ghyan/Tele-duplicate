@@ -38,17 +38,17 @@ const PremierLeague = () => {
           <div className="flex flex-col items-center lg:items-start lg:ml-10 mt-6 lg:mt-0">
             <div className="text-center md:text-left">
               <div className="flex flex-col items-center lg:items-start">
-                <h1 className="text-[34px] lg:text-[54px] text-white font-black font-orbitron">
+                <h1 className="text-[34px] lg:text-[54px] text-[#c09e5f] font-black font-orbitron">
                   {dynamicContent.title}
                 </h1>
-                <p className="w-[300px] md:w-[550px] xl:w-[600px] sm:text-[14px] md:text-[18px] text-white font-bold font-jura mt-6">
+                <p className="w-[300px] md:w-[550px] xl:w-[600px] sm:text-[14px] md:text-[18px] text-[#c09e5f] font-bold font-jura mt-6">
                   {dynamicContent.description}
                 </p>
               </div>
               <div className="py-8">
                 <Link
                   href="HTTPS://wa.me/971566628585"  target="_blank" rel="noopener noreferrer"
-                  className="button-slanted w-[233px] h-[44px] px-4 py-6 button text-white font-jura font-bold bg-[#1DB054] flex items-center justify-center rounded-tl-lg rounded-br-lg"
+                  className="button-slanted w-[233px] h-[44px] px-4 py-6 button text-[#c09e5f] font-jura font-bold bg-[#1DB054] flex items-center justify-center rounded-tl-lg rounded-br-lg"
                 >
                   <span className="button-slanted-content md:text-[14px] lg:text-[18px] text-white font-bold font-jura">
                     BOOK THROUGH

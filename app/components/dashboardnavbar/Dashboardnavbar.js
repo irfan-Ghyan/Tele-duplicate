@@ -1,63 +1,3 @@
-// import React from "react";
-// import { useRouter } from 'next/navigation';
-
-// const DashboardNavbar = () => {
-//   const router = useRouter();
-
-//   const handleLogout = async () => {
-
-//     const token = localStorage.getItem('authToken');
-
-//     if (token) {
-//       try {
-//         const response = await fetch('http://192.168.70.211:8000/api/logout', {
-//           method: 'POST',
-//           headers: {
-//             'Authorization': `Bearer ${token}`,
-//             'Accept': 'application/json',
-//           },
-//         });
-
-        
-//         if (response.ok) {
-      
-//           localStorage.removeItem('authToken'); 
-//           localStorage.removeItem('isAuthenticated');
-//           router.push('/login');
-//         } else {
- 
-//           console.error('Logout failed', response.status);
-//         }
-//       } catch (error) {
-//         console.error('Error during logout:', error);
-//       }
-//     } else {
-//       console.log('No token found');
-//       router.push('/login'); 
-//     }
-//   };
-
-//   return (
-//     <div className="flex items-center justify-between bg-[#063828] text-[#e3ce90] p-4">
-//       <div className="flex items-center space-x-4 px-8">
-//         <img
-//           src="/assets/images/dome/logo.png"
-//           alt="Logo"
-//           className="sm:w-[185px] sm:h-[52px] md:w-[185px] md:h-[52px] lg:w-[165px] lg:h-[100px] xl:w-[165px] xl:h-[100px]"
-//         />
-//       </div>
-//       <div className="space-x-2">
-//         <button onClick={handleLogout} className="text-white px-4 py-2 hover:text-gray-200">
-//           Logout
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DashboardNavbar;
-
-
 import React from "react";
 import { useRouter } from 'next/navigation';
 
@@ -65,7 +5,7 @@ const DashboardNavbar = () => {
   const router = useRouter();
 
   const handleLogout = async () => {
-    const token = localStorage.getItem('token'); // 'authToken' should be 'token' based on your login code
+    const token = localStorage.getItem('token');
 
     if (token) {
       try {

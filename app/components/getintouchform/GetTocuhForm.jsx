@@ -147,10 +147,10 @@ const Form = () => {
   return (
     <div className="flex items-center justify-center py-[20px] lg:py-[40px]">
       <div className="w-full max-w-2xl px-4">
-        <h2 className="text-[32px] lg:text-[42px] text-white font-black font-orbitron text-center">
+        <h2 className="text-[32px] lg:text-[42px] text-[#c09e5f] font-black font-orbitron text-center">
           {t('Get_Touch')}
         </h2>
-        <p className="text-center text-[18px] font-bold font-jura text-white py-2">
+        <p className="text-center text-[18px] font-bold font-jura text-[#c09e5f] py-2">
           {t('We_Look_Forward')}
         </p>
 
@@ -159,7 +159,7 @@ const Form = () => {
             <div className=""> 
               <label
                 htmlFor="firstName"
-                className="block text-[14px] font-bold font-jura text-white py-2 "
+                className="block text-[14px] font-bold font-jura text-[#c09e5f] py-2 "
               >
                 {t('FirstName')}
               </label>
@@ -168,7 +168,7 @@ const Form = () => {
                 name="firstName"
                 placeholder="Enter your first name"
                 id="firstName"
-                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#c09e5f] py-[10px] text-[14px] font-bold font-jura placeholder-[#c09e5f] placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#c09e5f]"
                 value={formData.firstName}
                 onChange={handleChange}
               />
@@ -179,7 +179,7 @@ const Form = () => {
             <div className="xl:ml-[14px]">
               <label
                 htmlFor="lastName"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#c09e5f] py-2"
               >
                 {t('LastName')}
               </label>
@@ -188,7 +188,7 @@ const Form = () => {
                 name="lastName"
                 placeholder="Enter your last name"
                 id="lastName"
-                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#c09e5f] py-[10px] text-[#c09e5f] text-[14px] font-bold font-jura placeholder-[#c09e5f] placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#c09e5f]"
                 value={formData.lastName}
                 onChange={handleChange}
               />
@@ -202,7 +202,7 @@ const Form = () => {
             <div className="">
               <label
                 htmlFor="email"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#c09e5f] py-2"
               >
                 {t('Email')}
               </label>
@@ -211,7 +211,7 @@ const Form = () => {
                 name="email"
                 placeholder="Enter your email"
                 id="email"
-                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#c09e5f] py-[10px] text-[#c09e5f] text-[14px] font-bold font-jura placeholder-[#c09e5f] placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#c09e5f]"
                 value={formData.email}
                 onChange={handleChange}
               />
@@ -222,7 +222,7 @@ const Form = () => {
             <div className="xl:ml-[14px]">
               <label
                 htmlFor="phone"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#c09e5f] py-2"
               >
                 {t('Phone')}
               </label>
@@ -231,7 +231,7 @@ const Form = () => {
                 name="phone"
                 placeholder="Enter your phone"
                 id="phone"
-                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full lg:w-[316px] bg-[#c09e5f] py-[10px] text-[#c09e5f] text-[14px] font-bold font-jura placeholder-[#c09e5f] placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.phone}
                 onChange={handleChange}
               />
@@ -259,7 +259,7 @@ const Form = () => {
                   />
                 </label>
                 <span
-                  className={`ml-4 text-[14px] font-medium font-jura mt-1 mr-4 ${isRadioSelected ? "text-white" : "text-[#6e6295c2]"}`}
+                  className={`ml-4 text-[14px] font-medium font-jura mt-1 mr-4 ${isRadioSelected ? "text-[#c09e5f]" : "text-[#8f7648]"}`}
                 >
                   {t('Agree')}{" "}
                   <Link href="/terms&conditions" className="underline">
@@ -271,10 +271,10 @@ const Form = () => {
               <div className="mt-4">
                 <button
                   type="submit"
-                  className={`button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-white ${
+                  className={`button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-[#c09e5f] ${
                     isRadioSelected
-                      ? "hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-white"
-                      : "border-white text-gray-300"
+                      ? "hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-[#c09e5f]"
+                      : "border-[#c09e5f] text-gray-300"
                   } ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center`}
                 >
                   <span className="button-slanted-content">{t('Submit')}</span>

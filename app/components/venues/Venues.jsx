@@ -64,7 +64,7 @@ const Dome = () => {
           }}
         >
           <div className="flex flex-col px-4 lg:px-40 padding-px items-start justify-end h-full bg-opacity-50 pb-10 max-w-7xl md:px-8 mx-auto">
-            <h2 className="text-[24px] drop-shadow-lg md:text-[54px] text-white font-black font-orbitron w-[400px]">
+            <h2 className="text-[24px] drop-shadow-lg md:text-[54px] text-[#c09e5f] font-black font-orbitron w-[400px]">
               {dome.title}
             </h2>
           </div>
@@ -90,7 +90,7 @@ const Dome = () => {
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={`p-[2px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${
-                  index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50 hover:bg-opacity-100'
+                  index === currentSlide ? 'bg-[#c09e5f]' : 'bg-[#c09e5f] bg-opacity-50 hover:bg-opacity-100'
                 }`}
               />
             ))}

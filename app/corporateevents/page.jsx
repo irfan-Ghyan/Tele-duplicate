@@ -34,8 +34,8 @@ const Page = () => {
 
       <div className="min-h-screen flex flex-col items-center">
         <div className="xl:px-40 lg:px-20 sm:px-4">
-          <div className="text-center p-6 text-white lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-white font-black mb-4">
+          <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
             {t('Corporate_Events')}
             </h1>
           </div>

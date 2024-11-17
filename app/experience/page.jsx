@@ -40,7 +40,7 @@ const Page = () => {
                   acc.push({
                     title: field.value,
                     description: descriptionField.value,
-                    imageUrl: field.imageUrl || "",  // add imageUrl if available
+                    imageUrl: field.imageUrl || "", 
                   });
                 }
               }
@@ -74,7 +74,7 @@ const Page = () => {
         </div>
       </div>
       <div className="w-full max-w-7xl ">
-      <div className="flex flex-wrap justify-center my-6 lg:pb-[100px]" >
+      <div className="flex justify-center my-6 lg:pb-[100px]" >
         {faqEntries.map((experience, index) => (
           <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '360px'}}>
             <RaceExperience

@@ -12,6 +12,10 @@ const BookingListing = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); 
+  const [selectedDate, setSelectedDate] = useState("");
+  const [slotInterval, setSlotInterval] = useState(20);
+  const [selectedSlotType, setSelectedSlotType] = useState("normal");
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -23,14 +27,9 @@ const BookingListing = () => {
     time: "",
   });
 
-  const setTime = [
-    "09:00", "09:20", "09:40", "10:00", "10:20", "10:40", "11:00", "11:20","11:40", "12:00", 
-    "12:20","12:40", "13:00", "13:20", "13:40", "14:00", "14:20", "14:40", "15:00", "15:20", "15:40", "16:00",
-    "16:20", "16:40", "17:00", "17:00", "17:20", "17:40", "18:00", "18:20", "18:40", "19:00", "19:20", "19:40",
-    "20:00", "20:20", "20:40", "21:00", "21:20", "22:40", "23:00", "23:20", "23:40", "24:00",
-  ];
-  const [timeSlots, setTimeSlots] = useState(setTime);
-
+  const [timeSlots, setTimeSlots] = useState([]);
+  
+ 
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
@@ -54,18 +53,32 @@ const BookingListing = () => {
   }, []);
   
 
+  useEffect(() => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toISOString().split("T")[0];
+    setSelectedDate(formattedDate);
+  }, []);
 
   useEffect(() => {
+    const payload = {
+      no_of_people: "2",
+      date: selectedDate,
+      duration: slotInterval.toString(),
+      booking_type: selectedSlotType,
+    };
+
     async function fetchTimeSlots() {
+      const queryString = new URLSearchParams(payload).toString();
       try {
-        const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
+        // const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
+        const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+      let response = await doGetCall(url);
+      const data = await response.json();
+      console.log("Fetched time slotnew data:", data);
         if (!response.ok) {
           console.error("Failed to fetch time slots, status:", response.status);
           return;
         }
-
-        const data = await response.json();
-        console.log("Fetched time slots data:", data); 
 
         if (Array.isArray(data)) {
           setTimeSlots(data);
@@ -81,11 +94,12 @@ const BookingListing = () => {
     fetchTimeSlots();
   }, []);
 
-
+  
 
   useEffect(() => {
     fetchBookings();
   }, [fetchBookings]);
+
 
   const handleItemsPerPageChange = (e) => {
     setItemsPerPage(parseInt(e.target.value));
@@ -120,6 +134,111 @@ const BookingListing = () => {
     }
   };
 
+  useEffect(() => {
+    if (formData.duration && formData.date) {
+      generateTimeSlots();
+    }
+  }, [formData.duration, formData.date]);
+
+
+  const generateTimeSlots = () => {
+    const duration = parseInt(formData.duration, 10);
+    if (!duration || !formData.date) return;
+  
+    const now = new Date();
+    const selectedDate = new Date(formData.date);
+  
+    let startTime;
+  
+
+    if (selectedDate.toDateString() === now.toDateString()) {
+
+      const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+      const nextRoundedMinutes = Math.ceil(currentMinutes / 20) * 20;
+  
+      startTime = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate(),
+        Math.floor(nextRoundedMinutes / 60), 
+        nextRoundedMinutes % 60
+      );
+    } else {
+
+      startTime = new Date(selectedDate.setHours(9, 0, 0));
+    }
+  
+    const endTime = new Date(selectedDate.setHours(21, 0, 0));
+    const slots = [];
+  
+    while (startTime < endTime) {
+      slots.push(startTime.toTimeString().slice(0, 5));
+      startTime = new Date(startTime.getTime() + duration * 60 * 1000);
+    }
+  
+    setTimeSlots(slots);
+    setIsVisible(true);
+  };
+
+  const getAvailableTimes = () => {
+    const times = [];
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentMinute = now.getMinutes();
+    const selectedDate = new Date(formData.date); 
+    const isToday = selectedDate.toDateString() === now.toDateString(); 
+    
+    // Determine the selected duration
+    const durationInMinutes = parseInt(formData.duration, 10);
+  
+
+    const formatTime = (hour) => {
+      const h = hour < 10 ? `0${hour}` : hour;
+      return `${h}:00`;
+    };
+  
+
+    if (formData.booking_type === "lounge") {
+      let startHour = 9; 
+
+      if (isToday) {
+        if (currentMinute > 0) {
+          startHour = currentHour + 1;
+        } else {
+          startHour = currentHour + 1;
+        }
+      }
+  
+      let hour = startHour;
+      
+      while (hour < 24) {
+
+        times.push(formatTime(hour)); 
+        hour ++; 
+      }
+    } else {
+
+      let minutes = currentMinute >= 20 ? 40 : 20;
+      let hour = currentHour;
+      let minute = minutes;
+  
+      while (hour < 24) {
+        if (minute >= 60) {
+          minute = 0;
+          hour++;
+        }
+  
+        times.push(formatTime(hour));
+        minute = (minute === 20) ? 40 : 0;
+      }
+    }
+  
+    return times;
+  };
+  
+  
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true); 
@@ -201,10 +320,10 @@ const BookingListing = () => {
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prevData, prevFormData) => ({ ...prevFormData, ...prevData, [name]: value }));
 
-  if (name === 'no_of_people' && value > 2) {
-    alert('Number of people cannot exceed 10');
+  if (name === 'no_of_people' && value > 14) {
+    alert('Number of people cannot exceed 14');
     return; 
   }
 
@@ -282,94 +401,136 @@ const BookingListing = () => {
 
   const renderForm = () => (
     <form onSubmit={handleFormSubmit} className="mb-20 p-10 border border-gray-300 mx-20">
-      <div className="mb-4">
-        <label>{translations[language].name}</label>
-        <input type="text" name="name" value={formData.name} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
-      </div>
-      <div className="mb-4">
-        <label>{translations[language].phone}</label>
-        <input type="text" name="phone" value={formData.phone} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
-      </div>
-      <div className="mb-4">
-        <label>{translations[language].email}</label>
-        <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full p-2 border border-gray-300" />
-      </div>
-      <div className="mb-4">
-        <label>{translations[language].noOfPeople}</label>
-        <input
-    type="number"
-    name="no_of_people"
-    value={formData.no_of_people}
-    onChange={handleInputChange}
-    required
-    className="w-full p-2 border border-gray-300"
-    min="1"
-  />
-      </div>
-      <div className="mb-4">
-      <label>Type</label>
-  <select
-    name="booking_type"
-    value={formData.booking_type}
-    onChange={handleInputChange}
-    required
-    className="w-full p-2 border border-gray-300"
-  >
-    <option value="">Select type</option>
-    <option value="normal">Normal</option>
-    <option value="vip">VIP</option>
-    <option value="lounge">Lounge</option>
-  </select>
-      </div>
-      <div className="mb-4">
-      <label>Duration</label>
-        <select
-          name="duration"
-          value={formData.duration}
-          onChange={handleInputChange}
-          required
-          className="w-full p-2 border border-gray-300"
-        >
-          <option value="">Select duration</option>
+  <div className="mb-4">
+    <label>{translations[language].name}</label>
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    />
+  </div>
+  <div className="mb-4">
+    <label>{translations[language].phone}</label>
+    <input
+      type="text"
+      name="phone"
+      value={formData.phone}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    />
+  </div>
+  <div className="mb-4">
+    <label>{translations[language].email}</label>
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    />
+  </div>
+  <div className="mb-4">
+    <label>{translations[language].noOfPeople}</label>
+    <input
+      type="number"
+      name="no_of_people"
+      value={formData.no_of_people}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+      min="1"
+    />
+  </div>
+  <div className="mb-4">
+    <label>Type</label>
+    <select
+      name="booking_type"
+      value={formData.booking_type}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    >
+      <option value="">Select type</option>
+      <option value="normal">Normal</option>
+      <option value="vip">VIP</option>
+      <option value="lounge">Lounge</option>
+    </select>
+  </div>
+  <div className="mb-4">
+    <label>Duration</label>
+    <select
+      name="duration"
+      value={formData.duration}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    >
+      {formData.booking_type === "lounge" ? (
+        <>
+        <option value="">Select a time slot</option>
+        <option value="120">120 minutes</option>
+        </>
+      ) : (
+        <> <option value="">Select a time slot</option>
           <option value="20">20 minutes</option>
           <option value="40">40 minutes</option>
           <option value="60">60 minutes</option>
-        </select>
-      </div>
-      <div className="mb-4">
-      <label>Date</label>
-      <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleInputChange}
-          required
-          className="w-full p-2 border border-gray-300"
-        />
-      </div>
-      <div className="mb-4">
-      <label>Time</label>
+        </>
+      )}
+    </select>
+  </div>
+  <div className="mb-4">
+    <label>Date</label>
+    <input
+      type="date"
+      name="date"
+      value={formData.date}
+      onChange={handleInputChange}
+      required
+      className="w-full p-2 border border-gray-300"
+    />
+  </div>
+  
+  {/* Always render Time field */}
+  <div className="mb-4">
+    <label>Time</label>
+    {isVisible && formData.booking_type && formData.booking_type !== "" ? (
       <select
-          name="time"
-          value={formData.time}
-          onChange={handleInputChange}
-          required
-          className="w-full p-2 border border-gray-300"
-        >
-          <option value="">Select a time slot</option>
-          {timeSlots.map((slot, index) => (
-            <option key={index} value={slot}>
-              {slot}
-            </option>
-          ))}
-        </select>
-      </div>
-      <button type="submit" className="w-[160px] h-[40px] bg-[#063828] text-white">
-      {editingId ? "Update" : translations[language].submit}
-      </button>
+        name="time"
+        value={formData.time}
+        onChange={handleInputChange}
+        required
+        className="w-full p-2 border border-gray-300"
+      >
+        <option value="">Select a time slot</option>
+        {timeSlots.map((slot, index) => (
+          <option key={index} value={slot}>
+            {slot}
+          </option>
+        ))}
+      </select>
+    ) : (
+      <p>Please select a booking type to enable time slot selection</p>
+    )}
+  </div>
+
+  <button type="submit" className="w-[160px] h-[40px] bg-[#063828] text-white">
+    {editingId ? "Update" : translations[language].submit}
+  </button>
     </form>
+
   );
 
+  const isTimeDropdownVisible =
+    formData.no_of_people &&
+    formData.booking_type &&
+    formData.duration &&
+    formData.date;
 
   
   return (

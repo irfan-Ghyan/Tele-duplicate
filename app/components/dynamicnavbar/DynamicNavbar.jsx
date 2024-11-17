@@ -65,20 +65,20 @@ const DynamicNavbar = () => {
               EXPERIENCS
             </Link>
             <Link href="/" className="block w-full text-left px-4 py-2 text-white font-jura text-[14px] hover:text-[#A72CCF]">
-              DOME
+              VENUE
             </Link>
             <Link href="/" className="block w-full text-left px-4 py-2 text-white font-jura font-bold text-[14px] hover:text-[#A72CCF]">
-              UPCOMING EVENTS
+              WATCH PARTIES
             </Link>
             <Link href="/" className="block w-full text-left px-4 py-2 text-white text-[14px] font-bold font-jura hover:text-[#A72CCF]">
-              COPORATE & CELEBRATION EVENTS
+              PRIVATE EVENTS
             </Link>
             <Link href="/" className="block w-full text-left px-4 py-2 text-white font-jura text-[14px] font-bold hover:text-[#A72CCF]">
               EDUCATION
             </Link>
-            <Link href="/" className="block w-full text-left px-4 py-2 text-white font-jura font-bold text-[14px] hover:text-[#A72CCF]">
+            {/* <Link href="/" className="block w-full text-left px-4 py-2 text-white font-jura font-bold text-[14px] hover:text-[#A72CCF]">
               OTHER
-            </Link>
+            </Link> */}
             <Dropdown />
           </div>
         </div>
