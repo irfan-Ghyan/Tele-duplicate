@@ -92,7 +92,7 @@ const WhyteleiosData = () => {
           <div className="flex flex-col lg:flex-row lg:justify-between items-center lg:items-start">
             <div className="order-2 lg:order-1 flex flex-col lg:items-start lg:text-left w-full lg:w-1/2 lg:pr-8 lg:py-0">
             {whyEntries.map((why, index) => (
-              <div className="py-[40px]">
+              <div key={index} className="py-[40px]">
                 <h2 className="text-[23px] text-[#c09e5f] font-bold font-orbitron">
                   {why.title}
                 </h2>

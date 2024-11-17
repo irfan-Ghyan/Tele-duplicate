@@ -379,10 +379,10 @@ const Page = ({ onTimeChange = () => {} }) => {
   const [bookingDetails, setBookingDetails] = useState([
    
     { title: "no_of_people", description: "0" },
-    { title: "duration", description: "20" }, 
     { title: "date", description: "17-11-2024" },
     { title: "time", description: "01:00" }, 
     { title: "booking_type", description: "vip" },
+    { title: "duration", description: "20" }, 
   ]);
   
   
@@ -562,7 +562,7 @@ const Page = ({ onTimeChange = () => {} }) => {
   return (
     <>
       <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
-        <div className="my-[60px]">
+        {/* <div className="my-[60px]">
           <div class="flex justify-between items-center w-[407px] max-w-3xl mx-auto my-8">
             <div class="relative">
               <div class="ml-4 w-12 h-12 rounded-full bg-[#c09e5f] text-[#002718] hover:text-[#c09e5f] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]">
@@ -591,8 +591,8 @@ const Page = ({ onTimeChange = () => {} }) => {
               <div class="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
             </div>
           </div>
-        </div>
-        <div className="flex">
+        </div> */}
+        <div className="flex my-20">
           <div className="left">
             <div className="flex max-w-7xl ">
               <div className="w-full flex">
