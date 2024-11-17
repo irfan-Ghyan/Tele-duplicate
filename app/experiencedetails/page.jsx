@@ -373,7 +373,7 @@ import PlanSelector from "../components/planselector/PlanSelector";
 import { doGetCall, doPostCall } from "../utils/api";
 import BookingType from "../components/bookingtype/BookingType";
 
-const Page = ({ onTimeChange }) => {
+const Page = (onTimeChange ) => {
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
