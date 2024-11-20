@@ -25,10 +25,20 @@ const Page = ({ params } ) => {
 
   useEffect(() => {
     if (id) {
-      console.log(`Fetched ID: ${id}`);
-
+      fetchEventDetails();
     }
   }, [id]);
+
+  const fetchEventDetails = async () => {
+    try {
+      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
+      const data = await response.json();
+      setEventDetails(data);
+    } catch (error) {
+      console.error("Error fetching event details:", error);
+    }
+  };
+
 
 
   const [count, setCount] = useState(1);
@@ -105,21 +115,6 @@ const Page = ({ params } ) => {
 
 
 
-  useEffect(() => {
-    if (id) {
-      fetchEventDetails();
-    }
-  }, [id]);
-
-  const fetchEventDetails = async () => {
-    try {
-      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
-      const data = await response.json();
-      setEventDetails(data);
-    } catch (error) {
-      console.error("Error fetching event details:", error);
-    }
-  };
 
 
   const updateBookingDetail = (field, value) => {
