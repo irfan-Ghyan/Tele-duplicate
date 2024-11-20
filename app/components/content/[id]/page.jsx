@@ -19,7 +19,7 @@ import { doGetCall } from "../../../utils/api";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const Page = ({ onTimeChange, params } ) => {
+const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
 
