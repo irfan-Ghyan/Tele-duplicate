@@ -106,14 +106,14 @@ const Page = () => {
         <link rel="preload" href="/assets/images/experience/exbg.png" as="image" />
         <link rel="preload" href="/assets/images/experience/mintue1.jpg" as="image" />
       </Head>
-    <div className="flex flex-col min-h-screen items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
-        <div className=" flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
+    <div className="flex flex-col min-h-screen items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px] ">
+        <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
         <div className="text-center text-[#e3ce90] ">
           <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">EXPERIENCES</h1>
         </div>
       </div>
-      <div className="w-full max-w-7xl ">
-      <div className="flex justify-center my-6 lg:pb-[100px]" >
+      <div className="w-full max-w-7xl  ">
+      {/* <div className="flex justify-center my-6 lg:pb-[100px]" >
         {faqEntries.map((experience, index) => (
           <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '360px'}}>
              <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
@@ -147,9 +147,106 @@ const Page = () => {
           </div>
         ))}
         
+      </div> */}
+
+
+      <div className='flex'>
+        <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
+      <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
       </div>
+      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
+        <div>
+          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">20-Minute Sprint</h1>
+          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.</p>
+        </div>
+        <div className="pt-[19px] pb-[22px]">
+          <Link
+            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            href='/experiencedetails'
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
+          </Link>
+          
+        </div>
+{/* 
+        <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
+      </div> */}
       
+      </div>
+          </div>
       
+          <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
+      <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
+      </div>
+      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
+        <div>
+          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">40-Minute Session</h1>
+          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.</p>
+        </div>
+        <div className="pt-[19px] pb-[22px]">
+          <Link
+            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            href='/experiencedetails'
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
+          </Link>
+          
+        </div>
+{/* 
+        <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
+      </div> */}
+      
+      </div>
+          </div>
+          <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
+      <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
+      </div>
+      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
+        <div>
+          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">60-Minute Session</h1>
+          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.</p>
+        </div>
+        <div className="pt-[19px] pb-[22px]">
+          <Link
+            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            href='/experiencedetails'
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
+          </Link>
+          
+        </div>
+
+        <div className="pt-[19px] pb-[22px]">
+          <Link
+            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            href='/experiencedetails'
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
+          </Link>
+          
+        </div>
+{/* 
+        <div className="flex justify-center items-center w-[363px] h-[282px]">
+        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
+      </div> */}
+      
+      </div>
+          </div>
+        </div>
+
       </div>
       {/* <div className="w-full max-w-7xl md:px-8">
         <Event />
