@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 
 const Page = ({ onTimeChange, params } ) => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = params;
 
   useEffect(() => {
     if (id) {
