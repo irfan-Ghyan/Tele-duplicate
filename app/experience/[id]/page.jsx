@@ -1,24 +1,39 @@
+
+
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../components/calendar/Calendar";
-import PlanSelectorVip from "../components/planselectorvip/PlanSelectorVip";
-import { doGetCall, doPostCall } from "../utils/api";
-import BookingType from "../components/bookingtype/BookingType";
-import Link from "next/link";
+import CalendarComponent from "../../components/calendar/Calendar";
+import PlanSelector from "../../components/planselector/PlanSelector";
+import { doGetCall } from "../../utils/api";
+// import BookingType from "../components/bookingtype/BookingType";
+// import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-const Page = (onTimeChange, { onSubmit } ) => {
+const Page = ({ onTimeChange, params } ) => {
+  const router = useRouter();
+  const { id } = params; 
+
+  useEffect(() => {
+    if (id) {
+      console.log(`Fetched ID: ${id}`);
+      fetchEventDetails();
+    }
+  }, [id]);
+
+  
+
+
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
    
-    // { title: "no_of_people", description: "0" },
+    { title: "no_of_people", description: "0" },
     { title: "date", description: "17-11-2024" },
     { title: "time", description: "01:00" }, 
-    { title: "booking_type", description: "vip" },
-    { title: "duration", description: "120" }, 
+    // { title: "booking_type", description: "vip" },
+    { title: "duration", description: "20" }, 
   ]);
-  
   
 
   const [times, setTimes] = useState({});
@@ -27,8 +42,13 @@ const Page = (onTimeChange, { onSubmit } ) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
   const [slotInterval, setSlotInterval] = useState(20);
+  const [eventDetails, setEventDetails] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const [minDate, setMinDate] = useState(null);  // Disabling past dates
+
+
+
+  const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null); 
 
   const [bookingType, setBookingType] = useState("normal");
@@ -50,7 +70,6 @@ const Page = (onTimeChange, { onSubmit } ) => {
 
 
   const handleBookingTypeChange = (type) => {
-    // Update the bookingDetails state with the selected booking type
     setBookingDetails((prevDetails) =>
       prevDetails.map((detail) =>
         detail.title === "booking_type" ? { ...detail, description: type } : detail
@@ -79,6 +98,17 @@ const Page = (onTimeChange, { onSubmit } ) => {
 
 
 
+  const fetchEventDetails = async () => {
+    try {
+      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
+      const data = await response.json();
+      setEventDetails(data);
+    } catch (error) {
+      console.error("Error fetching event details:", error);
+    }
+  };
+
+
   const updateBookingDetail = (field, value) => {
     setBookingDetails((prevDetails) =>
       prevDetails.map((detail) =>
@@ -89,13 +119,17 @@ const Page = (onTimeChange, { onSubmit } ) => {
 
 
   const increaseCount = () => {
-    const newCount = count + 1;
-    setCount(newCount);
-    updateBookingDetail("no_of_people", newCount.toString());
+    if (count < 14) { // Add the limit check
+      const newCount = count + 1;
+      setCount(newCount);
+      updateBookingDetail("no_of_people", newCount.toString());
+    } else {
+      alert("Maximum limit of 14 seats reached."); // Optional: Provide feedback to the user
+    }
   };
   
   const decreaseCount = () => {
-    if (count > 1) {
+    if (count > 1) { // Ensure count doesn't go below 1
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
@@ -105,7 +139,10 @@ const Page = (onTimeChange, { onSubmit } ) => {
   const handlePlanChange = (newDuration) => {
     updateBookingDetail("duration", newDuration);
   };
-
+  const handleButtonClick = (timeKey, timeValue) => {
+    setActiveTime(timeKey); // Set the selected time slot
+    updateBookingDetail("time", timeValue); // Update booking detail
+  };
   const handleDateChange = (newDate) => {
     setDate(newDate);
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
@@ -119,9 +156,6 @@ const Page = (onTimeChange, { onSubmit } ) => {
     setMaxDate(nextDate);
   };
 
-  const handleButtonClick = (timeValue) => {
-    updateBookingDetail("time", timeValue);
-  };
   
   
   const updateSeatsDescription = (newCount) => {
@@ -327,7 +361,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
     <div className="relative">
       <div
         className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-        onClick={() => handleTabChange(3)}  // Add a click handler to set active tab to 3
+        onClick={() => handleTabChange(3)} 
       >
         3
       </div>
@@ -346,9 +380,10 @@ const Page = (onTimeChange, { onSubmit } ) => {
             <div className="flex max-w-7xl ">
               <div className="w-full flex">
                 <div className="">
+
                   <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[261px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      PRIVATE EVENTS
+                      Select Seats
                     </h1>
                     <div className="flex justify-between">
                       <div className="py-4">
@@ -361,7 +396,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
                           For 6+, Go back and select team racing.
                         </p>
                       </div>
-                      {/* <div className="flex items-center justify-center mb-4 ">
+                      <div className="flex items-center justify-center mb-4 ">
                         <button
                           onClick={decreaseCount}
                           className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#e3ce90] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
@@ -381,9 +416,11 @@ const Page = (onTimeChange, { onSubmit } ) => {
                             +
                           </span>
                         </button>
-                      </div> */}
+                      </div>
                     </div>
                   </div>
+
+                 
                   <div>
                     <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[493px] my-[20px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
@@ -396,34 +433,42 @@ const Page = (onTimeChange, { onSubmit } ) => {
                       />
                     </div>
                   </div>
+
+
                   <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Choose Time
                     </h1>
                     {timeChunks.map((chunk, chunkIndex) => (
                       <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, timeValue]) => (
-                          <div
-                            key={timeKey}
-                            className={`button-slanted mt-[20px] cursor-pointer w-[120px] h-[51px] font-jura font-normal text-[#002718] hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]e m-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                              chunkIndex === timeChunks.length - 1
-                                ? " bg-opacity-60  hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                                : "bg-border-[0.5px] bg-opacity-30 bg-transparent hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                            }`}
-                          >
-                            <button
-                              onClick={() =>
-                                handleButtonClick(timeKey, timeValue)
-                              }
-                              className="button-slanted-content w-full h-full flex items-center justify-center"
+                        {chunk
+                          .filter(([timeKey, timeValue]) => {
+                            // Show only time slots greater than or equal to the selected time
+                            if (!activeTime) return true;
+                            return new Date(`1970-01-01T${timeValue}:00`) >= new Date(`1970-01-01T${times[activeTime]}:00`);
+                          })
+                          .map(([timeKey, timeValue]) => (
+                            <div
+                              key={timeKey}
+                              className={`button-slanted mt-[20px] cursor-pointer w-[120px] h-[51px] font-jura font-normal text-[#002718] hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]e m-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                                timeKey === activeTime
+                                  ? "bg-[#002718] text-[#c09e5f] font-bold" // Focused style
+                                  : "bg-transparent hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
+                              }`}
                             >
-                              {timeValue}
-                            </button>
-                          </div>
-                        ))}
+                              <button
+                                onClick={() => handleButtonClick(timeKey, timeValue)}
+                                className="button-slanted-content w-full h-full flex items-center justify-center"
+                              >
+                                {timeValue}
+                              </button>
+                            </div>
+                          ))}
                       </div>
-                    ))}
+                      ))}
                   </div>
+
+
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Booking Type
@@ -434,14 +479,14 @@ const Page = (onTimeChange, { onSubmit } ) => {
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
-                    <PlanSelectorVip onPlanChange={handlePlanChange} />
+                    <PlanSelector onPlanChange={handlePlanChange} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px]">
-            <h2 className="text-[24px] text-[#063828] font-black font-orbitron mb-[24px]">
+            <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
               Your booking details
             </h2>
             {bookingDetails.map((detail, index) => (
@@ -485,7 +530,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
       )}
 
 
-{activeTab === 2 && (
+    {activeTab === 2 && (
       <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl p-20">
         <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">Payment Details</h2>
         <form onSubmit={handleSubmit}>
@@ -623,7 +668,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
       )}
       {activeTab === 3 && (
         <div className="flex justify-center py-20">
-          <div>
+          <div className="">
           <div>
             <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">Thank you for your purchase</h2>
             <p className=" text-lg font-jura font-bold text-[#e3ce90]">Check your e-mail inbox, Your ticket is waiting you there!</p>

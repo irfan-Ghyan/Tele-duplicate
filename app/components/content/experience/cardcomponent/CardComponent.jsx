@@ -42,7 +42,7 @@ const CardComponent = ({ imageUrl, title, description, button, link }) => {
             <span className="button-slanted-content">{button}</span>
           </Link>
         </div>
-
+        
         
       </div>
     </div>
