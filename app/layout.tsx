@@ -111,7 +111,7 @@ interface RootLayoutProps {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   const [showNotice, setShowNotice] = useState(false);
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
 
   useEffect(() => {
     if (!localStorage.getItem("cookiesAccepted")) {
