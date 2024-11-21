@@ -29,7 +29,7 @@ const BookingListing = () => {
 
   const [timeSlots, setTimeSlots] = useState([]);
   
- 
+
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
@@ -254,11 +254,6 @@ const BookingListing = () => {
 
     try {
       const response = await doPostCall(url, payload, method);
-      // const response = await fetch(url, {
-      //   method,
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ ...formData, time: formattedTime }),
-      // });
      
 
       if (response.ok) {

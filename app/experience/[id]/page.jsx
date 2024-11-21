@@ -740,7 +740,7 @@ const Page = ({ params } ) => {
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
    
-    { title: "no_of_people", description: "0" },
+    { title: "no_of_people", description: "1" },
     { title: "date", description: "17-11-2024" },
     { title: "time", description: "01:00" }, 
     // { title: "booking_type", description: "vip" },
@@ -827,12 +827,12 @@ const Page = ({ params } ) => {
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
     } else {
-      alert("Maximum limit of 14 seats reached."); // Optional: Provide feedback to the user
+      alert("Maximum limit of 14 seats reached."); 
     }
   };
   
   const decreaseCount = () => {
-    if (count > 1) { // Ensure count doesn't go below 1
+    if (count > 1) { 
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
@@ -842,10 +842,7 @@ const Page = ({ params } ) => {
   const handlePlanChange = (newDuration) => {
     updateBookingDetail("duration", newDuration);
   };
-  const handleButtonClick = (timeKey, timeValue) => {
-    setActiveTime(timeKey); // Set the selected time slot
-    updateBookingDetail("time", timeValue); // Update booking detail
-  };
+
   const handleDateChange = (newDate) => {
     setDate(newDate);
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
@@ -1024,7 +1021,10 @@ const Page = ({ params } ) => {
     console.log("Thank you logic...");
   };
 
-
+  const handleButtonClick = (timeKey, timeValue) => {
+    setActiveTime(timeKey);
+    updateBookingDetail("time", timeValue);
+  };
   
   return (
     <>
@@ -1137,39 +1137,43 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
+                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                  {timeChunks.map((chunk, chunkIndex) => (
+                    <div key={chunkIndex} className="flex">
+                      {chunk.map(([timeKey, timeValue], index) => {
+                        const now = new Date();
+                        const currentTime = now.getHours() * 60 + now.getMinutes();
+                        const slotTime = parseInt(timeValue.split(":")[0]) * 60 + parseInt(timeValue.split(":")[1]);
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Choose Time
-                    </h1>
-                    {timeChunks.map((chunk, chunkIndex) => (
-                      <div key={chunkIndex} className="flex">
-                        {chunk
-                          .filter(([timeKey, timeValue]) => {
-                            // Show only time slots greater than or equal to the selected time
-                            if (!activeTime) return true;
-                            return new Date(`1970-01-01T${timeValue}:00`) >= new Date(`1970-01-01T${times[activeTime]}:00`);
-                          })
-                          .map(([timeKey, timeValue]) => (
-                            <div
-                              key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[120px] h-[51px] font-jura font-normal text-[#002718] hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]e m-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                                timeKey === activeTime
-                                  ? "bg-[#002718] text-[#c09e5f] font-bold" // Focused style
-                                  : "bg-transparent hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                              }`}
+
+                        const isNearestFutureSlot = !activeTime && slotTime >= currentTime;
+
+                        return (
+                          <div
+                            key={timeKey}
+                            className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                              isNearestFutureSlot || timeKey === activeTime
+                                ? "bg-[#002718] text-[#c09e5f] font-bold"
+                                : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                            } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                              slotTime < currentTime ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
+                          >
+                            <button
+                              onClick={() => handleButtonClick(timeKey, timeValue)}
+                              className="button-slanted-content w-full h-full flex items-center justify-center"
+                              disabled={slotTime < currentTime}
                             >
-                              <button
-                                onClick={() => handleButtonClick(timeKey, timeValue)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                              >
-                                {timeValue}
-                              </button>
-                            </div>
-                          ))}
-                      </div>
-                      ))}
-                  </div>
+                              {timeValue}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">

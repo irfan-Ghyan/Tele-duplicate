@@ -20,32 +20,33 @@ const Content = () => {
    const [events, setEvents] = useState([]);
    
 
-
-   useEffect(() => {
+  useEffect(() => {
     fetchData();
   }, []);
-  
+
   const fetchData = async () => {
     try {
       const url = "http://192.168.70.211:8000/api/content/sections/Experience";
       const response = await fetch(url);
-  
+
       if (response.ok) {
         const data = await response.json();
-        console.log(data); // Ensure data includes id
-  
+
         if (data.success) {
           const faqSection = data.data.sections.find((section) => section.title === "Session");
-  
           if (faqSection) {
-            const faqData = faqSection.section_fields.map((field) => ({
-              id: field.id, // Ensure `id` field exists
-              title: field.value,
-              description: field.description,
-              imageUrl: field.imageUrl || "",
-            }));
-  
-            console.log(faqData);
+            // Group fields by their index (e.g., "title1", "description1")
+            const groupedData = faqSection.section_fields.reduce((acc, field) => {
+              const match = field.key.match(/(title|description)(\d+)/); // Extract type and index
+              if (match) {
+                const [_, type, index] = match;
+                if (!acc[index]) acc[index] = {};
+                acc[index][type] = field.value; 
+              }
+              return acc;
+            }, {});
+
+            const faqData = Object.values(groupedData);
             setFaqEntries(faqData);
           }
         }
@@ -54,7 +55,7 @@ const Content = () => {
       console.error("Error fetching data:", error);
     }
   };
-  
+
   
   return (
     <>
@@ -73,97 +74,44 @@ const Content = () => {
           <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">SESSIONS</h1>
         </div>
       </div>
-      <div className="w-full max-w-7xl ">
-      {/* <div className="flex justify-center my-6 lg:pb-[100px]" >
-        {faqEntries.map((experience, index) => (
-          <div key={index} className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '360px'}}>
-             <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
-      <div className="flex justify-center items-center w-[363px] h-[282px]">
-        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
-      </div>
-      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
-        <div>
-          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">{experience.title}</h1>
-          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">{experience.description}</p>
-        </div>
-        <div className="pt-[19px] pb-[22px]">
-          <Link
-            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-            href='/'
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <span className='button-slanted-content'>{t('BOOK NOW')}</span>
-          </Link>
-          
-        </div>
-      </div>
+      <div className="flex justify-center my-6 lg:pb-[100px] flex-wrap gap-8">
+          {faqEntries.map((experience, index) => (
+            <div
+              key={index}
+              className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto"
+            >
+              <div className="flex justify-center items-center w-[363px] h-[282px]">
+                <Image
+                  src=""
+                  alt="Product"
+                  width={363}
+                  height={282}
+                  className="w-[363px] h-[282px] object-cover"
+                  priority={true}
+                />
+              </div>
+              <div className="flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full">
+                <div>
+                  <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">{experience.title}</h1>
+                  <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">
+                    {experience.description}
+                  </p>
+                </div>
+                <div className="pt-[19px] pb-[22px]">
+                  <Link
+                    className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                    href="/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="button-slanted-content">{t('BOOK NOW')}</span>
+                  </Link>
+                </div>
+              </div>
             </div>
-    
-          </div>
-        ))}        
-      </div> */}
+          ))}
 
-
-
-        <div className='flex'>
-        <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
-      <div className="flex justify-center items-center w-[363px] h-[282px]">
-        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
-      </div>
-      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
-        <div>
-          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">20-Minute Sprint</h1>
-          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.</p>
-        </div>
-        <div className="pt-[19px] pb-[22px]">
-          <Link
-            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-            href='/experiencedetails'
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
-          </Link>
-          
-        </div>
-{/* 
-        <div className="flex justify-center items-center w-[363px] h-[282px]">
-        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
-      </div> */}
-      
-      </div>
-          </div>
-      
-          <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
-      <div className="flex justify-center items-center w-[363px] h-[282px]">
-        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
-      </div>
-      <div className='flex flex-col justify-between items-center mx-[20px] pt-4 flex-1 w-full'>
-        <div>
-          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">40-Minute Session</h1>
-          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8 text-justify">Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.</p>
-        </div>
-        <div className="pt-[19px] pb-[22px]">
-          <Link
-            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-            href='/experiencedetails'
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
-            <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
-          </Link>
-          
-        </div>
-{/* 
-        <div className="flex justify-center items-center w-[363px] h-[282px]">
-        <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
-      </div> */}
-      
-      </div>
-          </div>
-
-          <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
+<div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
       <div className="flex justify-center items-center w-[363px] h-[282px]">
         <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
       </div>
@@ -202,10 +150,10 @@ const Content = () => {
       
       </div>
           </div>
-
-          
         </div>
-      </div>
+      
+ 
+          
   
 
     </div>

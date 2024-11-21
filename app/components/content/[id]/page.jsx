@@ -12,9 +12,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../../calendar/Calendar";
-import PlanSelector from "../../planselector/PlanSelector";
-import { doGetCall } from "../../../utils/api";
+import CalendarComponent from "../../components/calendar/Calendar";
+import PlanSelector from "../../components/planselector/PlanSelector";
+import { doGetCall } from "../../utils/api";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -45,7 +45,7 @@ const Page = ({ params } ) => {
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
    
-    { title: "no_of_people", description: "0" },
+    { title: "no_of_people", description: "1" },
     { title: "date", description: "17-11-2024" },
     { title: "time", description: "01:00" }, 
     // { title: "booking_type", description: "vip" },
@@ -132,12 +132,12 @@ const Page = ({ params } ) => {
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
     } else {
-      alert("Maximum limit of 14 seats reached."); // Optional: Provide feedback to the user
+      alert("Maximum limit of 14 seats reached."); 
     }
   };
   
   const decreaseCount = () => {
-    if (count > 1) { // Ensure count doesn't go below 1
+    if (count > 1) { 
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
@@ -147,10 +147,7 @@ const Page = ({ params } ) => {
   const handlePlanChange = (newDuration) => {
     updateBookingDetail("duration", newDuration);
   };
-  const handleButtonClick = (timeKey, timeValue) => {
-    setActiveTime(timeKey); // Set the selected time slot
-    updateBookingDetail("time", timeValue); // Update booking detail
-  };
+
   const handleDateChange = (newDate) => {
     setDate(newDate);
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
@@ -329,7 +326,10 @@ const Page = ({ params } ) => {
     console.log("Thank you logic...");
   };
 
-
+  const handleButtonClick = (timeKey, timeValue) => {
+    setActiveTime(timeKey);
+    updateBookingDetail("time", timeValue);
+  };
   
   return (
     <>
@@ -341,45 +341,45 @@ const Page = ({ params } ) => {
           Go back
         </button>
 
-        <div className="my-[60px]">
-  <div className="flex justify-between items-center w-[407px] max-w-3xl mx-auto my-8">
-    <div className="relative">
-      <div
-        className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-        onClick={() => handleTabChange(1)}  // Add a click handler to set active tab to 1
-      >
-        1
-      </div>
-      <div className={`text-[14px] ${activeTab === 1 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-        Experiences
-      </div>
-    </div>
-    <div className="relative">
-      <div
-        className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-         // Add a click handler to set active tab to 2
-      >
-        2
-      </div>
-      <div className={`text-[14px] ${activeTab === 2 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-        Payment
-      </div>
-      <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
-    </div>
-    <div className="relative">
-      <div
-        className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-        onClick={() => handleTabChange(3)} 
-      >
-        3
-      </div>
-      <div className={`text-[14px] ${activeTab === 3 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-        Thanks
-      </div>
-      <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
-    </div>
-  </div>
-</div>
+        <div className="my-[60px] ">
+            <div className="flex justify-between items-center w-[407px] max-w-7xl mx-auto my-8">
+                    <div className="relative">
+                    <div
+                        className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+                        onClick={() => handleTabChange(1)}  // Add a click handler to set active tab to 1
+                    >
+                        1
+                    </div>
+                    <div className={`text-[14px] ${activeTab === 1 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
+                        Experiences
+                    </div>
+                    </div>
+                    <div className="relative">
+                    <div
+                        className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+                        // Add a click handler to set active tab to 2
+                    >
+                        2
+                    </div>
+                    <div className={`text-[14px] ${activeTab === 2 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
+                        Payment
+                    </div>
+                    <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
+                    </div>
+                    <div className="relative">
+                    <div
+                        className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+                        onClick={() => handleTabChange(3)} 
+                    >
+                        3
+                    </div>
+                    <div className={`text-[14px] ${activeTab === 3 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
+                        Thanks
+                    </div>
+                    <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
+                    </div>
+                </div>
+        </div>
         
 
       {activeTab === 1 && (
@@ -442,39 +442,43 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
+                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                  {timeChunks.map((chunk, chunkIndex) => (
+                    <div key={chunkIndex} className="flex">
+                      {chunk.map(([timeKey, timeValue], index) => {
+                        const now = new Date();
+                        const currentTime = now.getHours() * 60 + now.getMinutes();
+                        const slotTime = parseInt(timeValue.split(":")[0]) * 60 + parseInt(timeValue.split(":")[1]);
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Choose Time
-                    </h1>
-                    {timeChunks.map((chunk, chunkIndex) => (
-                      <div key={chunkIndex} className="flex">
-                        {chunk
-                          .filter(([timeKey, timeValue]) => {
-                            // Show only time slots greater than or equal to the selected time
-                            if (!activeTime) return true;
-                            return new Date(`1970-01-01T${timeValue}:00`) >= new Date(`1970-01-01T${times[activeTime]}:00`);
-                          })
-                          .map(([timeKey, timeValue]) => (
-                            <div
-                              key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[120px] h-[51px] font-jura font-normal text-[#002718] hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]e m-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                                timeKey === activeTime
-                                  ? "bg-[#002718] text-[#c09e5f] font-bold" // Focused style
-                                  : "bg-transparent hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                              }`}
+
+                        const isNearestFutureSlot = !activeTime && slotTime >= currentTime;
+
+                        return (
+                          <div
+                            key={timeKey}
+                            className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                              isNearestFutureSlot || timeKey === activeTime
+                                ? "bg-[#002718] text-[#c09e5f] font-bold"
+                                : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                            } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                              slotTime < currentTime ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
+                          >
+                            <button
+                              onClick={() => handleButtonClick(timeKey, timeValue)}
+                              className="button-slanted-content w-full h-full flex items-center justify-center"
+                              disabled={slotTime < currentTime}
                             >
-                              <button
-                                onClick={() => handleButtonClick(timeKey, timeValue)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                              >
-                                {timeValue}
-                              </button>
-                            </div>
-                          ))}
-                      </div>
-                      ))}
-                  </div>
+                              {timeValue}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
@@ -511,20 +515,7 @@ const Page = ({ params } ) => {
               </div>
             ))}
             <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
-              {/* <h1 className="text-[18px] text-[#063828] font-black font-orbitron mb-4 mt-[20px]">
-                Price From
-              </h1>
-              <div className="flex justify-between items-center mb-4">
-                <p className="text-[18px] text-[#063828] font-normal font-jura">
-                  Price
-                </p>
-                <p className="text-[18px] text-[#063828] font-normal font-jura">
-                  250<span className="text-[#A063828]">AED</span>
-                </p>
-              </div>
-              <p className="text-[18px] text-[#063828] font-normal font-jura">
-                Total cost will be calculated at the next step
-              </p> */}
+    
               <button
                 onClick={() => handleTabChange(2)} 
                 className="button-slanted mt-[20px] w-full ursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"

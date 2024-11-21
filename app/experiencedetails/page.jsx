@@ -13,8 +13,8 @@ const Page = (onTimeChange, { onSubmit } ) => {
   const [bookingDetails, setBookingDetails] = useState([
    
     // { title: "no_of_people", description: "0" },
-    { title: "date", description: "17-11-2024" },
-    { title: "time", description: "01:00" }, 
+    { title: "date", description: "" },
+    { title: "time", description: "" }, 
     { title: "booking_type", description: "vip" },
     { title: "duration", description: "120" }, 
   ]);
@@ -119,9 +119,11 @@ const Page = (onTimeChange, { onSubmit } ) => {
     setMaxDate(nextDate);
   };
 
-  const handleButtonClick = (timeValue) => {
-    updateBookingDetail("time", timeValue);
+  const handleButtonClick = (timeKey, timeValue) => {
+    setActiveTime(timeKey); // Update the selected time
+    updateBookingDetail("time", timeValue); // Update the booking details
   };
+  
   
   
   const updateSeatsDescription = (newCount) => {
@@ -303,8 +305,8 @@ const Page = (onTimeChange, { onSubmit } ) => {
   <div className="flex justify-between items-center w-[407px] max-w-3xl mx-auto my-8">
     <div className="relative">
       <div
-        className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-        onClick={() => handleTabChange(1)}  // Add a click handler to set active tab to 1
+        className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:text-[#c09e5f] hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+        onClick={() => handleTabChange(1)}
       >
         1
       </div>
@@ -314,8 +316,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
     </div>
     <div className="relative">
       <div
-        className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-         // Add a click handler to set active tab to 2
+        className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:text-[#c09e5f] hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
       >
         2
       </div>
@@ -326,15 +327,15 @@ const Page = (onTimeChange, { onSubmit } ) => {
     </div>
     <div className="relative">
       <div
-        className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-        onClick={() => handleTabChange(3)}  // Add a click handler to set active tab to 3
+        className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:text-[#c09e5f] hover:from-[#002718] hover:to-[#002718]`}
+        onClick={() => handleTabChange(3)} 
       >
         3
       </div>
       <div className={`text-[14px] ${activeTab === 3 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
         Thanks
       </div>
-      <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
+      <div className="absolute top-[22px] right-full h-1 w-[110px] bg-[#c09e5f]"></div>
     </div>
   </div>
 </div>
@@ -396,34 +397,45 @@ const Page = (onTimeChange, { onSubmit } ) => {
                       />
                     </div>
                   </div>
+
                   <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Choose Time
-                    </h1>
-                    {timeChunks.map((chunk, chunkIndex) => (
-                      <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, timeValue]) => (
-                          <div
-                            key={timeKey}
-                            className={`button-slanted mt-[20px] cursor-pointer w-[120px] h-[51px] font-jura font-normal text-[#002718] hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]e m-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                              chunkIndex === timeChunks.length - 1
-                                ? " bg-opacity-60  hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                                : "bg-border-[0.5px] bg-opacity-30 bg-transparent hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]"
-                            }`}
+                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                {timeChunks.map((chunk, chunkIndex) => (
+                  <div key={chunkIndex} className="flex">
+                    {chunk.map(([timeKey, timeValue], index) => {
+                      const now = new Date();
+                      const currentTime = now.getHours() * 60 + now.getMinutes(); // Current time in minutes
+                      const slotTime = parseInt(timeValue.split(":")[0]) * 60 + parseInt(timeValue.split(":")[1]); // Slot time in minutes
+
+                      // Automatically select the nearest future time slot
+                      const isNearestFutureSlot = !activeTime && slotTime >= currentTime;
+
+                      return (
+                        <div
+                          key={timeKey}
+                          className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                            isNearestFutureSlot || timeKey === activeTime
+                              ? "bg-[#002718] text-[#c09e5f] font-bold" // Selected style
+                              : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                          } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                            slotTime < currentTime ? "opacity-50 cursor-not-allowed" : "" // Disable past times
+                          }`}
+                        >
+                          <button
+                            onClick={() => handleButtonClick(timeKey, timeValue)}
+                            className="button-slanted-content w-full h-full flex items-center justify-center"
+                            disabled={slotTime < currentTime} // Disable past times
                           >
-                            <button
-                              onClick={() =>
-                                handleButtonClick(timeKey, timeValue)
-                              }
-                              className="button-slanted-content w-full h-full flex items-center justify-center"
-                            >
-                              {timeValue}
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    ))}
+                            {timeValue}
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
+                ))}
+              </div>
+
+                  
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Booking Type
@@ -434,7 +446,7 @@ const Page = (onTimeChange, { onSubmit } ) => {
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
-                    <PlanSelectorVip onPlanChange={handlePlanChange} />
+                    <PlanSelectorVip onPlanChange={(duration) => console.log(`Selected duration: ${duration}`)}/>
                   </div>
                 </div>
               </div>

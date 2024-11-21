@@ -79,7 +79,7 @@ const BookingCalendar = () => {
 
   const generateSlotTimes = (interval) => {
     const startHour = 9;
-    const endHour = 18;
+    const endHour = 24;
     const times = [];
 
     for (let hour = startHour; hour < endHour; hour++) {
