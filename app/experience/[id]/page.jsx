@@ -718,24 +718,6 @@ const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
 
-  useEffect(() => {
-    if (id) {
-      fetchEventDetails();
-    }
-  }, [id]);
-
-  const fetchEventDetails = async () => {
-    try {
-      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
-      const data = await response.json();
-      setEventDetails(data);
-    } catch (error) {
-      console.error("Error fetching event details:", error);
-    }
-  };
-
-
-
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
@@ -758,8 +740,6 @@ const Page = ({ params } ) => {
   const [loading, setLoading] = useState(true);
 
 
-
-
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null); 
 
@@ -779,6 +759,24 @@ const Page = ({ params } ) => {
     cardHolderName: "",
     billingAddress: "",
   });
+
+
+  
+  useEffect(() => {
+    console.log("Dynamic ID:", id); // Ensure the ID is logged
+    if (id) fetchEventDetails();
+  }, [id]);
+
+  const fetchEventDetails = async () => {
+    try {
+      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
+      const data = await response.json();
+      console.log("Fetched Event Details:", data);
+      setEventDetails(data);
+    } catch (error) {
+      console.error("Error fetching event details:", error);
+    }
+  };
 
 
   const handleBookingTypeChange = (type) => {

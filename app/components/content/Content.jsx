@@ -1,4 +1,3 @@
-import Experience from './experience/Experience';
 
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
@@ -100,7 +99,7 @@ const Content = () => {
                 <div className="pt-[19px] pb-[22px]">
                   <Link
                     className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                    href="/"
+                    href={`/content/${experience.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

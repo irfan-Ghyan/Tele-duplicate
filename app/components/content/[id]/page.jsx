@@ -12,9 +12,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "./calendar/Calendar"
-import PlanSelector from "./components/planselector/PlanSelector";
-import { doGetCall } from "../../utils/api";
+import CalendarComponent from "../../calendar/Calendar";
+import PlanSelector from "../../planselector/PlanSelector";
+import { doGetCall } from "../../../utils/api";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -22,24 +22,6 @@ import { useRouter } from "next/navigation";
 const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
-
-  useEffect(() => {
-    if (id) {
-      fetchEventDetails();
-    }
-  }, [id]);
-
-  const fetchEventDetails = async () => {
-    try {
-      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
-      const data = await response.json();
-      setEventDetails(data);
-    } catch (error) {
-      console.error("Error fetching event details:", error);
-    }
-  };
-
-
 
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
@@ -63,8 +45,6 @@ const Page = ({ params } ) => {
   const [loading, setLoading] = useState(true);
 
 
-
-
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null); 
 
@@ -84,6 +64,24 @@ const Page = ({ params } ) => {
     cardHolderName: "",
     billingAddress: "",
   });
+
+
+  
+  useEffect(() => {
+    console.log("Dynamic ID:", id); // Ensure the ID is logged
+    if (id) fetchEventDetails();
+  }, [id]);
+
+  const fetchEventDetails = async () => {
+    try {
+      const response = await fetch(`http://192.168.70.211:8000/api/content/sections/${id}`);
+      const data = await response.json();
+      console.log("Fetched Event Details:", data);
+      setEventDetails(data);
+    } catch (error) {
+      console.error("Error fetching event details:", error);
+    }
+  };
 
 
   const handleBookingTypeChange = (type) => {
