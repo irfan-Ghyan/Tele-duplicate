@@ -12,9 +12,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../../components/calendar/Calendar";
-import PlanSelector from "../../components/planselector/PlanSelector";
-import { doGetCall } from "../../utils/api";
+import CalendarComponent from "../../calendar/Calendar.jsx"
+import PlanSelector from "../../components/planselector/PlanSelector.jsx";
+import { doGetCall } from "../../utils/api.js";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
