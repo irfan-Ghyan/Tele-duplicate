@@ -13,32 +13,7 @@ const DashboardDomeSection = () => {
   const [showSection, setShowSection] = useState(true);
   const [language, setLanguage] = useState('en');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const url = "http://192.168.70.211:8000/api/content/sections/Home";
-        let response = await doGetCall(url);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        const sections = data?.data?.sections || [];
-        const domeSection = sections.find(section => section.title === "Dome");
-
-        if (domeSection) {
-          const titleField = domeSection.section_fields.find(field => field.key === 'title');
-          const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
-
-          setTitle(titleField?.value || '');
-          setDescription(descriptionField?.value || '');
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
+ 
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -53,6 +28,44 @@ const DashboardDomeSection = () => {
   //   });
   //   setImages((prevImages) => [...prevImages, ...newImages]);
   // };
+
+
+  const [slides, setSlides] = useState([]);
+
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url = 'http://192.168.70.211:8000/api/content/sections/Home';
+        const response = await doGetCall(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data.');
+        }
+        const data = await response.json();
+
+        // Extract "Dome" section
+        const domeSection = data?.data?.sections.find((section) => section.title === 'Dome');
+        if (domeSection) {
+          // Group fields by index
+          const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
+            const match = field.key.match(/(title|description)(\d+)/); // Match "title1", "description1", etc.
+            if (match) {
+              const [, type, index] = match;
+              if (!acc[index]) acc[index] = {};
+              acc[index][type] = field.value; // Add title/description based on the type
+            }
+            return acc;
+          }, {});
+
+          setSlides(Object.values(groupedSlides)); // Convert to an array
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
   const uploadImages = async () => {
@@ -90,142 +103,150 @@ const DashboardDomeSection = () => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
   
-// const handleSubmit = async (e) => {
-//   e.preventDefault();
-
-//   const formData = new FormData();
-
-//   images.forEach((image, index) => {
-//     formData.append("files", image.file);
-//     formData.append("section", "Dome");  
-//     formData.append("imageName", `image_${index + 1}.jpg`);
-//   });
-
-//   try {
-//     const uploadUrl = "http://192.168.70.211:8000/api/content/uploadImages";
-//     const uploadResponse = await doPostCall(uploadUrl, {
-//       method: "POST",
-//       body: formData,
-//     });
-
-//     if (!uploadResponse.ok) {
-//       throw new Error("Failed to upload images.");
-//     }
-
-//     const uploadResult = await uploadResponse.json();
-
-//     if (!uploadResult.success) {
-//       throw new Error("Image upload failed: " + uploadResult.message);
-//     }
-
-//     const imagePaths = uploadResult.file_paths;
-
-//     const payload = {
-//       pageName: "Home",  
-//       sectionName: "Dome",
-//       fields: [
-//         { fieldName: "title", fieldValue: title },
-//         { fieldName: "description", fieldValue: description },
-//       ],
-//       images: imagePaths,
-//     };
-
-//     const saveUrl = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
-//     const saveResponse = await doPostCall(saveUrl, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(payload),
-//     });
-
-//     if (!saveResponse.ok) {
-//       throw new Error("Failed to save data to the database.");
-//     }
-
-//     const result = await saveResponse.json();
-//     console.log("Data saved successfully:", result);
-
-//     setTitle("");
-//     setDescription("");
-//     setImages([]);
-//   } catch (error) {
-//     console.error("Error:", error);
-//   }
-// };
-
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData();
-
-  formData.append("section", "dome");
-  images.forEach((image, index) => {
-    formData.append("files", image.file); 
-    formData.append("imageName", `image_${index + 1}.jpg`); 
-  });
-
-  try {
-    const uploadedImagePaths = await uploadImages();
-    const newEntry = {
-      title,
-      description,
-      images: uploadedImagePaths, // store uploaded image paths in the entry
-    };
-
-    const payload = {
-      pageName: "Home",
-      sectionName: "Dome",
-      fields: [
-        { fieldName: "title", fieldValue: title },
-        { fieldName: "description", fieldValue: description },
-      ],
-      images: imagePaths,
-    };
-
-    const saveUrl = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
-    const saveResponse = await doPostCall(saveUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!saveResponse.ok) {
-      throw new Error("Failed to save data to the database.");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // Prepare payload for the POST request
+      const payload = {
+        pageName: "Home",
+        sectionName: "Dome",
+        fields: [
+          { fieldName: "title", fieldValue: title },
+          { fieldName: "description", fieldValue: description },
+        ],
+      };
+  
+      // Handle image uploads if any
+      if (images.length > 0) {
+        const uploadedImagePaths = await uploadImages();
+        payload.images = uploadedImagePaths; // Add image paths to the payload
+      }
+  
+      // API call to save data
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+  
+      if (!response.ok) {
+        throw new Error("Failed to save data to the database.");
+      }
+  
+      const result = await response.json();
+      console.log("Data saved successfully:", result);
+  
+      // Update the table with the new entry
+      const newEntry = {
+        title,
+        description,
+        images: payload.images || [],
+      };
+  
+      setTableData((prevData) => [...prevData, newEntry]);
+  
+      // Reset form fields
+      setTitle("");
+      setDescription("");
+      setImages([]);
+    } catch (error) {
+      console.error("Error saving data:", error);
     }
-
-    const result = await saveResponse.json();
-    console.log("Data saved successfully:", result);
-
-    if (editingIndex === null) {
-      setTableData((prevData) => [...prevData, { ...newEntry, key: `title${newIndex}` }]);
-    } else {
-      setTableData((prevData) =>
-        prevData.map((entry, index) =>
-          index === editingIndex ? { ...newEntry, key: `title${newIndex}` } : entry
-        )
-      );
-    }
-    
-
-    setTitle("");
-    setDescription("");
-    setImages([]);
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
-
-
+  };
+  
   const labels = {
     en: { heading: 'DOME', title: 'Title', description: 'Description', submit: 'Submit', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images' },
     ar: { heading: 'اقبة', title: 'عنوان', description: 'وصف', submit: 'إرسال', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور' },
   };
 
   const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
+
+
+  const handleEdit = (index) => {
+    const entryToEdit = tableData[index];
+  
+    // Populate the form fields with the selected entry's values
+    setTitle(entryToEdit.title);
+    setDescription(entryToEdit.description);
+    setImages(entryToEdit.images.map((img) => ({ file: null, previewUrl: img }))); // Handle existing images
+    setIsEditing(true);
+    setEditingIndex(index);
+  };
+
+  const handleDelete = async (index) => {
+    try {
+      const confirmed = window.confirm("Are you sure you want to delete this entry?");
+      if (!confirmed) return;
+  
+      const entryToDelete = tableData[index];
+  
+      const payload = {
+        pageName: "Home",
+        sectionName: "Dome",
+        fieldName: entryToDelete.title, // Assuming title uniquely identifies the entry
+      };
+  
+      const url = "http://192.168.70.211:8000/api/content/removeSectionField";
+      const response = await doPostCall(url, payload);
+  
+      if (!response.ok) {
+        throw new Error("Failed to delete entry from the server.");
+      }
+  
+      const result = await response.json();
+      if (result.success) {
+        // Remove the entry from the table
+        setTableData((prevData) => prevData.filter((_, i) => i !== index));
+        console.log("Entry deleted successfully:", result);
+      }
+    } catch (error) {
+      console.error("Error deleting entry:", error);
+    }
+  };
+  
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const updatedEntry = {
+        title,
+        description,
+        images: images.map((img) => img.previewUrl), // Assuming updated images are already uploaded
+      };
+  
+      const payload = {
+        pageName: "Home",
+        sectionName: "Dome",
+        fields: [
+          { fieldName: "title", fieldValue: updatedEntry.title },
+          { fieldName: "description", fieldValue: updatedEntry.description },
+        ],
+      };
+  
+      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const response = await doPostCall(url, payload);
+  
+      if (!response.ok) {
+        throw new Error("Failed to update entry.");
+      }
+  
+      const result = await response.json();
+      console.log("Entry updated successfully:", result);
+  
+      // Update the table data
+      setTableData((prevData) =>
+        prevData.map((entry, i) => (i === editingIndex ? updatedEntry : entry))
+      );
+  
+      // Reset form and editing state
+      setTitle("");
+      setDescription("");
+      setImages([]);
+      setIsEditing(false);
+      setEditingIndex(null);
+    } catch (error) {
+      console.error("Error updating entry:", error);
+    }
+  };
 
   return (
     <>
@@ -238,6 +259,7 @@ const handleSubmit = async (e) => {
           {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
+
 
       {showSection && (
         <>
@@ -293,11 +315,18 @@ const handleSubmit = async (e) => {
             </div>
 
             <button
+  type="submit"
+  className="w-full p-4 text-white bg-[#063828]"
+>
+  {isEditing ? "Update Entry" : "Submit"}
+</button>
+
+            {/* <button
               type="submit"
               className="w-full p-4 text-white bg-[#063828]"
             >
               {isEditing ? labels[language].update : labels[language].submit}
-            </button>
+            </button> */}
           </form>
         </>
       )}
@@ -313,26 +342,37 @@ const handleSubmit = async (e) => {
         </tr>
       </thead>
       <tbody>
-        {tableData.map((entry, index) => (
-          <tr key={index} className="border border-gray-300">
-            <td className="p-2">{entry.title}</td>
-            <td className="p-2">{entry.description}</td>
-            <td className="p-2">
-                    {entry.images.length > 0 ? (
-                      entry.images.map((image, i) => (
-                        <img key={i} src={image} alt={`Image ${i}`} className="w-12 h-12 object-cover mr-2" />
-                      ))
-                    ) : (
-                      <span>No images</span>
-                    )}
-                  </td>
-            <td className="p-2">
-              <button onClick={() => handleEdit(index)} className="text-blue-500 mr-2">Edit</button>
-              <button onClick={() => handleDelete(index)} className="text-red-500">Delete</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
+  {tableData.map((entry, index) => (
+    <tr key={index} className="border border-gray-300">
+      <td className="p-2">{entry.title}</td>
+      <td className="p-2">{entry.description}</td>
+      <td className="p-2">
+        {entry.images.length > 0 ? (
+          entry.images.map((image, i) => (
+            <img key={i} src={image} alt={`Image ${i}`} className="w-12 h-12 object-cover mr-2" />
+          ))
+        ) : (
+          <span>No images</span>
+        )}
+      </td>
+      <td className="p-2">
+        <button
+          onClick={() => handleEdit(index)}
+          className="text-blue-500 mr-2"
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => handleDelete(index)}
+          className="text-red-500"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  ))}
+</tbody>
+
     </table>
   </div>
     </div>

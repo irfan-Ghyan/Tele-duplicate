@@ -8,6 +8,7 @@ const DashboardVenueBranding = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
+  const [language, setLanguage] = useState('en');
 
   // Handle title change
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -113,21 +114,28 @@ const DashboardVenueBranding = () => {
   //   }
   // };
 
+  const labels = {
+    en: { heading: 'VENUE BRANDING', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.',edit: 'Edit', delete: 'Delete' },
+    ar: { heading: 'العلامة التجارية للمكان', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
+  };
 
+ const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
   return (
     <div className="w-full">
-      <div className="flex justify-end">
-        <button
-          onClick={toggleSectionVisibility}
-          className="mb-4 p-2 text-[#A62ED1]"
-        >
-          {showSection ? "Hide" : "Show"}
+      <div className="flex justify-between">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
+          {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
+  
 
       {showSection && (
         <>
+         <h1 className="text-4xl text-[#063828] font-black font-orbitron">{labels[language].heading}</h1>
         <div className='flex justify-between'> 
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
@@ -142,7 +150,7 @@ const DashboardVenueBranding = () => {
         </div>
         <button
           type="submit"
-          className="w-full p-3 bg-[#A62ED1] text-white rounded hover:bg-[#A62ED1]"
+          className="w-full p-3 bg-[#063828] text-white rounded hover:bg-[#063828]"
         >
           {isEditing ? 'Update Title' : 'Submit Title'}
         </button>

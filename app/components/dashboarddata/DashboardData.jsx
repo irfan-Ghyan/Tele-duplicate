@@ -4,7 +4,6 @@ import BookingListing from "../bookinglisting/Bookinglisting";
 
 const DashboardData = () => {
   const [slotsData, setSlotsData] = useState([]);
-
   const updateSlotData = (updatedSlots) => {
     setSlotsData(updatedSlots);
   };

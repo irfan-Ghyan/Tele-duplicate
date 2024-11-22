@@ -29,10 +29,7 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
         <div className='p-40'>
-        <h1 className='text-4xl text-black font-black font-orbitron'>UPCOMING EVENTS</h1>
-        <div className=''>
         <DashboardEvents />
-        </div>
         </div>
         </div>
         </div>

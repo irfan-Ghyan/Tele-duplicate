@@ -185,6 +185,7 @@
 // export default DashboardExperience;
 
 
+  
 import React, { useState, useEffect } from 'react';
 import { doPostCall, doDeleteCall } from '../../utils/api';
 
@@ -201,7 +202,7 @@ const DashboardExperience = () => {
 
   const fetchTableData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Experience"; // Replace with your API
+      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
       const response = await fetch(url);
 
       if (response.ok) {
@@ -210,11 +211,17 @@ const DashboardExperience = () => {
           // Assuming backend returns a list of saved entries
           const sessionData = data.data.sections.find((section) => section.title === "Session");
           if (sessionData) {
-            const formattedData = sessionData.section_fields.map((field, index) => ({
-              key: `field${index}`,
-              title: field.key.startsWith('title') ? field.value : '',
-              description: field.key.startsWith('description') ? field.value : '',
-            })).filter(entry => entry.title && entry.description); // Filter incomplete records
+            const formattedData = sessionData.section_fields
+              .reduce((acc, field) => {
+                const match = field.key.match(/(title|description)(\d+)/);
+                if (match) {
+                  const [, type, index] = match;
+                  if (!acc[index]) acc[index] = { key: index };
+                  acc[index][type] = field.value;
+                }
+                return acc;
+              }, [])
+              .filter((entry) => entry.title && entry.description);
             setTableData(formattedData);
           }
         }
@@ -248,7 +255,9 @@ const DashboardExperience = () => {
       console.log("Data saved successfully:", result);
 
       // Update table data with new entry
-      setTableData((prevData) => [...prevData, { ...newEntry, key: `title${tableData.length + 1}` }]);
+      setTableData((prevData) => [...prevData, { ...newEntry, key: `title${tableData.length + 1}` },
+
+      ]);
 
       // Reset form
       setTitle('');
@@ -262,23 +271,26 @@ const DashboardExperience = () => {
     try {
       const confirmed = window.confirm("Are you sure you want to delete this record?");
       if (!confirmed) return;
-
+  
+      // Use a soft delete mechanism by adding a "deleted" flag
+      const updatedData = tableData.map((entry) =>
+        entry.key === keyId ? { ...entry, deleted: true } : entry
+      );
+  
+      setTableData(updatedData);
+  
       const payload = {
         pageName: "Experience",
         sectionName: "Session",
         fieldName: keyId,
       };
-
+  
       const url = "http://192.168.70.211:8000/api/content/removeSectionField";
       const response = await doDeleteCall(url, payload);
-
+  
       if (!response.ok) throw new Error("Failed to delete data");
       const result = await response.json();
       console.log("Delete API Response:", result);
-
-      if (result.success) {
-        setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
-      }
     } catch (error) {
       console.error("Error deleting data:", error);
     }
@@ -320,7 +332,7 @@ const DashboardExperience = () => {
           </tr>
         </thead>
         <tbody>
-          {tableData.map((entry, index) => (
+        {tableData.filter((entry) => !entry.deleted).map((entry, index) => (
             <tr key={index} className="border border-gray-300">
               <td className="p-2">{entry.title}</td>
               <td className="p-2">{entry.description}</td>

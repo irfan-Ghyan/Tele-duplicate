@@ -10,6 +10,7 @@ const DashboardBuildingEvents = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
+  const [language, setLanguage] = useState('en');
 
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -116,6 +117,12 @@ const DashboardBuildingEvents = () => {
     setShowSection(!showSection);
   };
 
+  const labels = {
+    en: { heading: 'TEAM BUILDING', title: 'Title', description: 'Description', submit: 'Submit', upload: 'Upload Images', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', image: 'Image', actions: 'Actions', noentries: 'No entries found.',edit: 'Edit', delete: 'Delete' },
+    ar: { heading: 'بناء الفريق', title: 'عنوان', description: 'وصف', submit: 'إرسال', upload: 'تحميل الصور', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', image: 'صورة', actions: 'الإجراءات', noentries: 'لم يتم العثور على إدخالات.', edit: 'يحرر', delete: 'يمسح' },
+  };
+
+ const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
   // Handle edit action
   const handleEdit = (index) => {
@@ -164,19 +171,23 @@ const DashboardBuildingEvents = () => {
   // };
 
   return (
-    <div className="w-full">
-      <div className="flex justify-end">
-        <button
-          onClick={toggleSectionVisibility}
-          className="mb-4 p-2 text-[#A62ED1]"
-        >
-          {showSection ? "Hide" : "Show"}
+    <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px]px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+      <div className="flex justify-between">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
+          {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
+   
       {showSection && ( 
         <>
+         <h1 className="text-4xl text-[#063828] font-black font-orbitron">{labels[language].heading}</h1>
         <div className='flex justify-between'>
+       
             <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
+           
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
           <input
@@ -227,7 +238,7 @@ const DashboardBuildingEvents = () => {
 
         <button
           type="submit"
-          className="w-full p-4 bg-[#A62ED1] text-white hover:bg-[#A62ED1]"
+          className="w-full p-4 bg-[#063828] text-white hover:bg-[#063828]"
         >
           {isEditing ? 'Update Entry' : 'Submit'}
         </button>
@@ -237,8 +248,7 @@ const DashboardBuildingEvents = () => {
       
 
       
-          <div className='mt-20'>
-      <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+      <div className='mt-20'>
       <table className="w-full border border-gray-300">
         <thead>
           <tr className="bg-gray-100">

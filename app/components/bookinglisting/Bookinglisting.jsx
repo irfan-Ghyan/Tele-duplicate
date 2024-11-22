@@ -169,7 +169,7 @@ const BookingListing = () => {
       startTime = new Date(selectedDate.setHours(9, 0, 0));
     }
   
-    const endTime = new Date(selectedDate.setHours(21, 0, 0));
+    const endTime = new Date(selectedDate.setHours(24, 0, 0));
     const slots = [];
   
     while (startTime < endTime) {
