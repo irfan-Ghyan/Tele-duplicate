@@ -143,6 +143,8 @@ const Dome = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = React.useRef(null);
   const { t, i18n } = useTranslation();
+  const [slides, setSlides] = useState([]); 
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -153,18 +155,25 @@ const Dome = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        const sections = data?.data?.sections || [];
+        console.log(data)
 
-        const domeSection = sections.find(section => section.title === "Dome");
+        const domeSection = data?.data?.sections.find(section => section.title === "Dome");
 
         if (domeSection) {
-          // Assuming domeSection.section_fields contains keys 'title', 'description', and 'imageUrls'
-          const domeSlides = domeSection.section_fields.map(field => ({
-            title: field.key === 'title' ? field.value : 'DOME',
-            description: field.key === 'description' ? field.value : 'Default description',
-            imageUrl: field.key === 'imageUrl' ? `http://192.168.70.211:8000${field.value}` : '/assets/images/dome/default.jpg',
-          }));
-          setDomes(domeSlides);
+          // Group fields by index (e.g., title1, description1)
+          const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
+            const match = field.key.match(/(title|description)(\d*)/); // Match "title1", "description1"
+            if (match) {
+              const [, type, index] = match;
+              if (!acc[index]) acc[index] = {};
+              acc[index][type] = field.value;
+            }
+            return acc;
+          }, {});
+
+          // Convert groupedSlides into an array
+          const slidesArray = Object.values(groupedSlides);
+          setDomes(slidesArray);
         }
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -259,3 +268,5 @@ const Dome = () => {
 };
 
 export default Dome;
+
+

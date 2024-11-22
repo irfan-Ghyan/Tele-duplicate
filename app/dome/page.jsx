@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import { Helmet } from 'react-helmet-async'; // Import Helmet
+import { Helmet } from 'react-helmet-async';
 import DomeData from '../components/domedata/DomeData';
 import DomeVip from '../components/domevip/DomeVip';
 import DomePit from '../components/domepit/DomePit';
