@@ -6,7 +6,7 @@
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 // import leftArrow from '../../../public/assets/images/dome/left-arrow.png';
-// import rightArrow from '../../../public/assets/images/dome/right-arrow.png';
+// import rightArrow from '../../../public/assets/images/dome/righ-arrow.png';
 // import Head from 'next/head';
 // import { useTranslation } from 'react-i18next';
 
@@ -19,7 +19,7 @@
 //   useEffect(() => {
 //     const fetchData = async () => {
 //       try {
-//         const url = "http://192.168.70.211:8000/api/content/sections/Home";
+//         const url = "http://192.168.70.205:8000/api/content/sections/Home";
 //         const response = await fetch(url);
 //         if (!response.ok) {
 //           throw new Error("Network response was not ok");
@@ -149,7 +149,7 @@ const Dome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = "http://192.168.70.211:8000/api/content/sections/Home";
+        const url = "http://192.168.70.205:8000/api/content/sections/Home";
         const response = await fetch(url);
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -227,7 +227,7 @@ const Dome = () => {
               </p>
               <Link
                 href="/dome"
-                className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#e3ce90] to-[#c09e5f] text-white rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
+                className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#e3ce90] to-[#c09e5f] text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
               >
                 <span className="button-slanted-content">{t('Discover the Dome')}</span>
               </Link>
@@ -254,7 +254,7 @@ const Dome = () => {
                   key={index}
                   onClick={() => setCurrentSlide(index)}
                   className={`p-[2px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${
-                    index === currentSlide ? 'bg-white ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'
+                    index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'
                   }`}
                 />
               ))}

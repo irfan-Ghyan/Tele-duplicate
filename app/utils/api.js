@@ -59,16 +59,16 @@ async function doGetCall(url, payload){
 //   }
 // }
 
+
+
 async function doPostCall(url, payload, headers = {}) {
   const token = localStorage.getItem('token'); 
   console.log("Token:", token);
 
-  // Ensure headers is an object
   if (typeof headers !== 'object' || headers === null) {
-    headers = {}; // Initialize headers if it's null or not an object
+    headers = {};
   }
 
-  // Set Authorization header
   headers['Authorization'] = `Bearer ${token}`;
   headers['Accept'] = 'application/json';
 

@@ -80,7 +80,7 @@ const DashboardSim = () => {
     };
   
     try {
-      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
       const response = await doPostCall(url, payload);
   
       if (!response.ok) throw new Error("Failed to save data to the database.");

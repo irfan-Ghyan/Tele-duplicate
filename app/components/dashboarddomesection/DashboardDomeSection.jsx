@@ -18,46 +18,43 @@ const DashboardDomeSection = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
-  // const handleImageUpload = (e) => {
-  //   const files = Array.from(e.target.files);
-  //   const newImages = files.map((file) => {
-  //     return {
-  //       file,
-  //       previewUrl: URL.createObjectURL(file),
-  //     };
-  //   });
-  //   setImages((prevImages) => [...prevImages, ...newImages]);
-  // };
+  const handleImageUpload = (e) => {
+    const files = Array.from(e.target.files);
+    const newImages = files.map((file) => {
+      return {
+        file,
+        previewUrl: URL.createObjectURL(file),
+      };
+    });
+    setImages((prevImages) => [...prevImages, ...newImages]);
+  };
 
 
   const [slides, setSlides] = useState([]);
 
-  // Fetch data from the API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://192.168.70.211:8000/api/content/sections/Home';
+        const url = 'http://192.168.70.205:8000/api/content/sections/Home';
         const response = await doGetCall(url);
         if (!response.ok) {
           throw new Error('Failed to fetch data.');
         }
         const data = await response.json();
 
-        // Extract "Dome" section
         const domeSection = data?.data?.sections.find((section) => section.title === 'Dome');
         if (domeSection) {
-          // Group fields by index
           const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
-            const match = field.key.match(/(title|description)(\d+)/); // Match "title1", "description1", etc.
+            const match = field.key.match(/(title|description)(\d+)/); 
             if (match) {
               const [, type, index] = match;
               if (!acc[index]) acc[index] = {};
-              acc[index][type] = field.value; // Add title/description based on the type
+              acc[index][type] = field.value;
             }
             return acc;
           }, {});
 
-          setSlides(Object.values(groupedSlides)); // Convert to an array
+          setSlides(Object.values(groupedSlides));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -76,7 +73,7 @@ const DashboardDomeSection = () => {
     formData.append("section", "dome");
     formData.append("imageName", title);
   
-    const url = "http://192.168.70.211:8000/api/content/uploadImages";
+    const url = "http://192.168.70.205:8000/api/content/uploadImages";
     const response = await doPostCall(url, formData);
   
     if (!response.ok) throw new Error("Failed to upload images.");
@@ -88,15 +85,15 @@ const DashboardDomeSection = () => {
 
 
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    console.log(files); 
-    const newImages = files.map((file) => ({
-      file,
-      previewUrl: URL.createObjectURL(file),
-    }));
-    setImages((prevImages) => [...prevImages, ...newImages]);
-  };
+  // const handleImageUpload = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   console.log(files); 
+  //   const newImages = files.map((file) => ({
+  //     file,
+  //     previewUrl: URL.createObjectURL(file),
+  //   }));
+  //   setImages((prevImages) => [...prevImages, ...newImages]);
+  // };
   
 
   const handleRemoveImage = (index) => {
@@ -107,7 +104,7 @@ const DashboardDomeSection = () => {
     e.preventDefault();
   
     try {
-      // Prepare payload for the POST request
+    
       const payload = {
         pageName: "Home",
         sectionName: "Dome",
@@ -117,14 +114,12 @@ const DashboardDomeSection = () => {
         ],
       };
   
-      // Handle image uploads if any
       if (images.length > 0) {
         const uploadedImagePaths = await uploadImages();
-        payload.images = uploadedImagePaths; // Add image paths to the payload
+        payload.images = uploadedImagePaths;
       }
   
-      // API call to save data
-      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
       const response = await doPostCall(url, payload);
   
       if (!response.ok) {
@@ -134,7 +129,6 @@ const DashboardDomeSection = () => {
       const result = await response.json();
       console.log("Data saved successfully:", result);
   
-      // Update the table with the new entry
       const newEntry = {
         title,
         description,
@@ -142,8 +136,7 @@ const DashboardDomeSection = () => {
       };
   
       setTableData((prevData) => [...prevData, newEntry]);
-  
-      // Reset form fields
+
       setTitle("");
       setDescription("");
       setImages([]);
@@ -166,7 +159,7 @@ const DashboardDomeSection = () => {
     // Populate the form fields with the selected entry's values
     setTitle(entryToEdit.title);
     setDescription(entryToEdit.description);
-    setImages(entryToEdit.images.map((img) => ({ file: null, previewUrl: img }))); // Handle existing images
+    setImages(entryToEdit.images.map((img) => ({ file: null, previewUrl: img })));
     setIsEditing(true);
     setEditingIndex(index);
   };
@@ -181,10 +174,10 @@ const DashboardDomeSection = () => {
       const payload = {
         pageName: "Home",
         sectionName: "Dome",
-        fieldName: entryToDelete.title, // Assuming title uniquely identifies the entry
+        fieldName: entryToDelete.title,
       };
   
-      const url = "http://192.168.70.211:8000/api/content/removeSectionField";
+      const url = "http://192.168.70.205:8000/api/content/removeSectionField";
       const response = await doPostCall(url, payload);
   
       if (!response.ok) {
@@ -210,7 +203,7 @@ const DashboardDomeSection = () => {
       const updatedEntry = {
         title,
         description,
-        images: images.map((img) => img.previewUrl), // Assuming updated images are already uploaded
+        images: images.map((img) => img.previewUrl),
       };
   
       const payload = {

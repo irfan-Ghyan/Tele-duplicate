@@ -6,12 +6,7 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const Content = () => {
-  // return (
-  //   <div id="target-section" className="max-w-full overflow-hidden text-white flex flex-col justify-between">
-  //       <Experience />
-  //   </div>
-  // );
+const Session = () => {
 
   const { t } = useTranslation();
   const [faqEntries, setFaqEntries] = useState([]);
@@ -19,33 +14,37 @@ const Content = () => {
    const [events, setEvents] = useState([]);
    
 
-  useEffect(() => {
+useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.205:8000/api/content/sections/Experience";
+      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
       const response = await fetch(url);
-
+  
       if (response.ok) {
         const data = await response.json();
-
+  
         if (data.success) {
           const faqSection = data.data.sections.find((section) => section.title === "Session");
           if (faqSection) {
-            // Group fields by their index (e.g., "title1", "description1")
             const groupedData = faqSection.section_fields.reduce((acc, field) => {
-              const match = field.key.match(/(title|description)(\d+)/); // Extract type and index
+              const match = field.key.match(/(title|description)(\d+)/);
               if (match) {
                 const [_, type, index] = match;
                 if (!acc[index]) acc[index] = {};
-                acc[index][type] = field.value; 
+                acc[index][type] = field.value;
               }
               return acc;
             }, {});
-
-            const faqData = Object.values(groupedData);
+  
+            const faqData = Object.values(groupedData).map((item, index) => ({
+              ...item,
+              id: `${index + 1}`, // Generate a unique ID
+            }));
+  
+            console.log("Processed FAQ Entries:", faqData); // Debug the entries
             setFaqEntries(faqData);
           }
         }
@@ -99,7 +98,7 @@ const Content = () => {
                 <div className="pt-[19px] pb-[22px]">
                   <Link
                     className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                    href={`/experience/${experience.id}`}
+                    // href={`/content/${experience.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -161,6 +160,6 @@ const Content = () => {
 }
 
 
-export default Content;
+export default Session;
 
 

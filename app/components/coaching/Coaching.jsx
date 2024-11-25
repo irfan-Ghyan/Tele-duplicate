@@ -68,7 +68,7 @@ const Coaching = () => {
     // Fetch data from API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.70.211:8000/api/content/sections/Experience');
+        const response = await fetch('http://192.168.70.205:8000/api/content/sections/Experience');
         const result = await response.json();
 
         if (result.success) {
@@ -117,7 +117,7 @@ const Coaching = () => {
                 )}
                 <div className="flex justify-center lg:justify-start m-bottom">
                   <div className='pt-4 pb-10'>
-                    <Link href="HTTPS://wa.me/971566628585" target="_blank" rel="noopener noreferrer" className="button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-[#e3ce90]  hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-[#e3ce90]  ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                    <Link href="HTTPS://wa.me/971566628585" target="_blank" rel="noopener noreferrer" className="button-slanted w-[200px] lg:w-[233px] h-[44px] text-[#e3ce90] px-8 py-6 button font-jura font-bold border-[1px] border-[#e3ce90]  hover:bg-gradient-to-r hover:from-[#c09e5f] hover:to-[#e3ce90] hover:border-0 hover:text-[#002718]  ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                       <span className='button-slanted-content'>{t('ENQUIRE NOW')}</span>
                     </Link>
                   </div>

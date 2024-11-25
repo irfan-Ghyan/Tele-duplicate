@@ -27,7 +27,7 @@ const Page = () => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
+      const url = "http://192.168.70.205:8000/api/content/sections/Experience";
       const response = await fetch(url);
   
       if (response.ok) {
@@ -61,39 +61,6 @@ const Page = () => {
     }
   };
   
-  
-  // const fetchData = async () => {
-  //   try {
-  //     const url = "http://192.168.70.211:8000/api/content/sections/Experience";
-  //     const response = await fetch(url);
-
-  //     if (response.ok) {
-  //       const data = await response.json();
-
-  //       if (data.success) {
-  //         const faqSection = data.data.sections.find((section) => section.title === "Session");
-  //         if (faqSection) {
-  //           // Group fields by their index (e.g., "title1", "description1")
-  //           const groupedData = faqSection.section_fields.reduce((acc, field) => {
-  //             const match = field.key.match(/(title|description)(\d+)/); // Extract type and index
-  //             if (match) {
-  //               const [_, type, index] = match; // Destructure type and index
-  //               if (!acc[index]) acc[index] = {}; // Initialize group if not exists
-  //               acc[index][type] = field.value; // Assign value to corresponding type
-  //             }
-  //             return acc;
-  //           }, {});
-
-  //           // Convert grouped data into an array
-  //           const faqData = Object.values(groupedData);
-  //           setFaqEntries(faqData);
-  //         }
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching data:", error);
-  //   }
-  // };
 
   return (
     <>
@@ -148,9 +115,6 @@ const Page = () => {
         ))}
         
       </div> 
-
-
-   
 
       </div>
       {/* <div className="w-full max-w-7xl md:px-8">

@@ -27,7 +27,7 @@ const handleInputChange = (e) => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Home"
+      const url = "http://192.168.70.205:8000/api/content/sections/Home"
       let response = await doGetCall(url);
       
       if (response.ok) {
@@ -99,7 +99,7 @@ const handleInputChange = (e) => {
     };
   
     try {
-      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
       const response = await doPostCall(url, payload);
       // const response = await fetch(
       //   "http://192.168.70.211:8000/api/content/setMultipleFieldValues",
@@ -178,7 +178,7 @@ const handleInputChange = (e) => {
         fieldName: keyId,
       };
 
-      const url = "http://192.168.70.211:8000/api/content/removeSectionField"
+      const url = "http://192.168.70.205:8000/api/content/removeSectionField"
       const response = await doDeleteCall(url, payload);
       // const response = await fetch(
       //   "http://192.168.70.211:8000/api/content/removeSectionField",

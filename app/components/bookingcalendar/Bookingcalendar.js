@@ -222,7 +222,7 @@ const BookingCalendar = () => {
     const queryString = new URLSearchParams(payload).toString();
 
     try {
-      const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+      const url = `http://192.168.70.205:8000/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
       console.log("Fetched data:", data);

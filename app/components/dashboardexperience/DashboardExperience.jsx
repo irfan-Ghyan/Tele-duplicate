@@ -236,6 +236,8 @@ const DashboardExperience = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+
     try {
       const newEntry = { title, description };
       const payload = {
@@ -247,25 +249,25 @@ const DashboardExperience = () => {
         ],
       };
 
-      const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
+      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
       const response = await doPostCall(url, payload);
 
       if (!response.ok) throw new Error("Failed to save data to the database.");
       const result = await response.json();
       console.log("Data saved successfully:", result);
 
-      // Update table data with new entry
       setTableData((prevData) => [...prevData, { ...newEntry, key: `title${tableData.length + 1}` },
 
       ]);
 
-      // Reset form
       setTitle('');
       setDescription('');
     } catch (error) {
       console.error("Error saving data:", error);
     }
   };
+
+  
 
   const handleDelete = async (keyId) => {
     try {
@@ -285,7 +287,7 @@ const DashboardExperience = () => {
         fieldName: keyId,
       };
   
-      const url = "http://192.168.70.211:8000/api/content/removeSectionField";
+      const url = "http://192.168.70.205:8000/api/content/removeSectionField";
       const response = await doDeleteCall(url, payload);
   
       if (!response.ok) throw new Error("Failed to delete data");
@@ -298,7 +300,7 @@ const DashboardExperience = () => {
 
   return (
     <div className="w-full py-10 px-40">
-      <h1 className="text-4xl font-black">Sessions</h1>
+      <h1 className="text-4xl font-black text-[#063828]">Session</h1>
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>

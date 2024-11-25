@@ -34,7 +34,7 @@ const BookingListing = () => {
   const fetchBookings = useCallback(async () => {
     setLoading(true);
     try {
-      const url = "http://192.168.70.211:8000/api/bookings"
+      const url = "http://192.168.70.205:8000/api/bookings"
       let response = await doGetCall(url);
       // const response = await fetch("http://192.168.70.211:8000/api/bookings");
 
@@ -71,7 +71,7 @@ const BookingListing = () => {
       const queryString = new URLSearchParams(payload).toString();
       try {
         // const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
-        const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+        const url = `http://192.168.70.205:8000/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
       console.log("Fetched time slotnew data:", data);
@@ -237,26 +237,30 @@ const BookingListing = () => {
     return times;
   };
   
-  
-  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
-
-    const formattedTime = formData.time?.slice(0, 5); 
+    setLoading(true);
+  
+    const formattedTime = formData.time?.slice(0, 5); // Format the time
     const url = editingId
-      ? `http://192.168.70.211:8000/api/bookings/${editingId}`
-      : "http://192.168.70.211:8000/api/bookings";
-
-    const method = editingId ? "PUT" : "POST";
-
-    const payload = { ...formData, time: formattedTime };
-
+      ? `http://192.168.70.205:8000/api/bookings/${editingId}` // PUT for editing
+      : "http://192.168.70.205:8000/api/bookings"; // POST for creating
+  
+    const method = editingId ? "PUT" : "POST"; // Decide the method based on editingId
+  
+    const payload = { ...formData, time: formattedTime }; // Prepare payload
+  
     try {
-      const response = await doPostCall(url, payload, method);
-     
-
+      console.log("Request Method:", method);
+      console.log("URL:", url);
+      console.log("Payload:", payload);
+  
+      const response = editingId
+        ? await doPostCall(url, payload, method) // Pass the method explicitly for PUT
+        : await doPostCall(url, payload);
+  
       if (response.ok) {
+        // Reset form data
         setFormData({
           name: "",
           phone: "",
@@ -265,22 +269,64 @@ const BookingListing = () => {
           booking_type: "",
           duration: "",
           date: "",
-          time: ""
-          
+          time: "",
         });
         setEditingId(null);
         setShowForm(false);
-        fetchBookings();
+        fetchBookings(); // Refresh bookings
       } else {
         console.error("Failed to submit form");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+    } finally {
+      setLoading(false);
     }
-    finally {
-    setLoading(false);  
-  }
   };
+  
+  
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true); 
+
+  //   const formattedTime = formData.time?.slice(0, 5); 
+  //   const url = editingId
+  //     ? `http://192.168.70.211:8000/api/bookings/${editingId}`
+  //     : "http://192.168.70.211:8000/api/bookings";
+
+  //   const method = editingId ? "PUT" : "POST";
+
+  //   const payload = { ...formData, time: formattedTime };
+
+  //   try {
+  //     const response = await doPostCall(url, payload, method);
+     
+
+  //     if (response.ok) {
+  //       setFormData({
+  //         name: "",
+  //         phone: "",
+  //         email: "",
+  //         no_of_people: "",
+  //         booking_type: "",
+  //         duration: "",
+  //         date: "",
+  //         time: ""
+          
+  //       });
+  //       setEditingId(null);
+  //       setShowForm(false);
+  //       fetchBookings();
+  //     } else {
+  //       console.error("Failed to submit form");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   }
+  //   finally {
+  //   setLoading(false);  
+  // }
+  // };
   
   const handleCreateClick = () => {
     setShowForm(true);

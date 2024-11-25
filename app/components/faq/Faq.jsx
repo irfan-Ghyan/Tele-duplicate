@@ -186,7 +186,7 @@ const Faq = () => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Home";
+      const url = "http://192.168.70.205:8000/api/content/sections/Home";
       let response = await fetch(url);
 
       if (response.ok) {

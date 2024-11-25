@@ -9,7 +9,7 @@ const DashboardNavbar = () => {
 
     if (token) {
       try {
-        const response = await fetch('http://192.168.70.211:8000/api/logout', {
+        const response = await fetch('http://192.168.70.205:8000/api/logout', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,

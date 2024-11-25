@@ -500,7 +500,7 @@ const Header = () => {
 
         {/* Overlay Background */}
         {pathname === '/' && (
-          <div className="absolute inset-0 bg-[#002718] bg-opacity-60 z-0 "></div>
+          <div className="absolute inset-0 bg-[#002718] bg-opacity-80 z-0 "></div>
         )}
 
         {/* Play Button for video popup or other interactions - ONLY ON HOME PAGE */}

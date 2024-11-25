@@ -17,7 +17,7 @@ const DomePit = () => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Dome";
+      const url = "http://192.168.70.205:8000/api/content/sections/Dome";
       const response = await fetch(url);
   
       if (response.ok) {

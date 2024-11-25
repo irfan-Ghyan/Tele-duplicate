@@ -122,7 +122,7 @@ const DashboardCoaching = () => {
 
       };
   
-      const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
+      const response = await fetch("http://192.168.70.205:8000/api/content/removeSectionField", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

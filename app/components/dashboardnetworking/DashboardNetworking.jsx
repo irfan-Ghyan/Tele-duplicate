@@ -82,7 +82,7 @@ const DashboardNetworking = () => {
     };
     
     try {
-      const response = await fetch("http://192.168.70.136:8000/api/content/setMultipleFieldValues", {
+      const response = await fetch("http://192.168.70.205:8000/api/content/setMultipleFieldValues", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
