@@ -374,7 +374,8 @@ const DashboardExperience = () => {
     };
 
     try {
-      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/setMultipleFieldValues`;
       const response = await doPostCall(url, payload);
       // const response = await fetch('http://192.168.70.136:8000/api/content/setMultipleFieldValues', {
       //   method: 'POST',

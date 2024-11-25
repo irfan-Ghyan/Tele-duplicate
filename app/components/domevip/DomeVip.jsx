@@ -18,7 +18,8 @@ const DomeVip = () => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.205:8000/api/content/sections/Dome";
+       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; // Use environment variable
+    const url = `${baseUrl}/api/content/sections/Dome`;
       const response = await fetch(url);
   
       if (response.ok) {

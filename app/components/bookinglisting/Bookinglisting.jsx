@@ -34,7 +34,8 @@ const BookingListing = () => {
   const fetchBookings = useCallback(async () => {
     setLoading(true);
     try {
-      const url = "http://192.168.70.205:8000/api/bookings"
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/bookings`;
       let response = await doGetCall(url);
       // const response = await fetch("http://192.168.70.211:8000/api/bookings");
 
@@ -71,7 +72,8 @@ const BookingListing = () => {
       const queryString = new URLSearchParams(payload).toString();
       try {
         // const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
-        const url = `http://192.168.70.205:8000/api/bookings/availableSlots?${queryString}`;
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
       console.log("Fetched time slotnew data:", data);
@@ -241,14 +243,15 @@ const BookingListing = () => {
     e.preventDefault();
     setLoading(true);
   
-    const formattedTime = formData.time?.slice(0, 5); // Format the time
+    const formattedTime = formData.time?.slice(0, 5);
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
     const url = editingId
-      ? `http://192.168.70.205:8000/api/bookings/${editingId}` // PUT for editing
-      : "http://192.168.70.205:8000/api/bookings"; // POST for creating
+      ? `${baseUrl}/api/bookings/${editingId}`
+      : `${baseUrl}/api/bookings`;
   
-    const method = editingId ? "PUT" : "POST"; // Decide the method based on editingId
+    const method = editingId ? "PUT" : "POST";
   
-    const payload = { ...formData, time: formattedTime }; // Prepare payload
+    const payload = { ...formData, time: formattedTime };
   
     try {
       console.log("Request Method:", method);
@@ -256,7 +259,7 @@ const BookingListing = () => {
       console.log("Payload:", payload);
   
       const response = editingId
-        ? await doPostCall(url, payload, method) // Pass the method explicitly for PUT
+        ? await doPostCall(url, payload, method)
         : await doPostCall(url, payload);
   
       if (response.ok) {
@@ -379,7 +382,8 @@ const BookingListing = () => {
   };
 
   const handleDelete = async (id) => {
-    const deleteUrl = `http://192.168.70.211:8000/api/bookings/${id}`;
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const deleteUrl = `${baseUrl}/api/bookings/${id}`;
     
     if (window.confirm("Are you sure you want to delete this booking?")) {
       try {

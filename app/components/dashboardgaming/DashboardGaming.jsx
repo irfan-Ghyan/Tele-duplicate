@@ -80,7 +80,8 @@ const DashboardGaming = () => {
     };
   
     try {
-      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/setMultipleFieldValues`;
       const response = await doPostCall(url, payload);
 
       if (!response.ok) throw new Error("Failed to save data to the database.");
@@ -119,7 +120,8 @@ const DashboardGaming = () => {
     };
 
     try {
-      const response = await fetch("http://192.168.70.205:8000/api/content/removeSectionField", {
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const response = await fetch(`${baseUrl}/api/content/removeSectionField`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

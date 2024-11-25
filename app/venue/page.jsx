@@ -35,7 +35,7 @@ const Page = () => {
         <div className="flex items-center justify-center xl:px-80 lg:px-40 sm:px-4">
           <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
-              {t('DOME')}
+              {t('VENUE')}
             </h1>
             <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify">
               {t('Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.')}

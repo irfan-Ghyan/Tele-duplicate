@@ -35,7 +35,8 @@ const DashboardDomeSection = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = 'http://192.168.70.205:8000/api/content/sections/Home';
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const url = `${baseUrl}/api/content/sections/Home`;
         const response = await doGetCall(url);
         if (!response.ok) {
           throw new Error('Failed to fetch data.');
@@ -73,7 +74,8 @@ const DashboardDomeSection = () => {
     formData.append("section", "dome");
     formData.append("imageName", title);
   
-    const url = "http://192.168.70.205:8000/api/content/uploadImages";
+     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const url = `${baseUrl}/api/content/uploadImages`;
     const response = await doPostCall(url, formData);
   
     if (!response.ok) throw new Error("Failed to upload images.");
@@ -119,7 +121,8 @@ const DashboardDomeSection = () => {
         payload.images = uploadedImagePaths;
       }
   
-      const url = "http://192.168.70.205:8000/api/content/setMultipleFieldValues";
+       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; 
+    const url = `${baseUrl}/api/content/setMultipleFieldValues`;
       const response = await doPostCall(url, payload);
   
       if (!response.ok) {

@@ -6,9 +6,9 @@ const PlanSelectorVip = ({ onPlanChange }) => {
   // Initialize the selected plan as "platinum" by default
   const [selectedPlan, setSelectedPlan] = useState('platinum');
 
-  // Trigger the default duration when the component mounts
+
   useEffect(() => {
-    onPlanChange("60 mins");
+    onPlanChange("120 mins");
   }, [onPlanChange]);
 
   const handlePlanChange = (plan) => {
@@ -17,10 +17,10 @@ const PlanSelectorVip = ({ onPlanChange }) => {
     let duration = "";
     switch (plan) {
       case "platinum":
-        duration = "60 mins";
+        duration = "120 mins";
         break;
       default:
-        duration = "60 mins";
+        duration = "120 mins";
     }
     onPlanChange(duration); 
   };
@@ -37,7 +37,7 @@ const PlanSelectorVip = ({ onPlanChange }) => {
             onChange={() => handlePlanChange('platinum')}
             className="button-slanted-content form-radio text-[#c09e5f] transition duration-150 ease-in-out w-[17px] h-[17px]"
           />
-          <span className="ml-2 font-jura font-normal md:font-bold">60 Mins</span>
+          <span className="ml-2 font-jura font-normal md:font-bold">120 Mins</span>
         </label>
       </form>
     </div>

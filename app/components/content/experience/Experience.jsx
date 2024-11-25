@@ -206,7 +206,8 @@ const Experience = () => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/sections/Experience`;
       const response = await fetch(url);
 
       if (response.ok) {

@@ -159,7 +159,8 @@ const TimePicker = ({ onTimeChange }) => {
     const queryString = new URLSearchParams(payload).toString();
 
     try {
-      const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
 

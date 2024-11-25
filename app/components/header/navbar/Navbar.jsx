@@ -66,7 +66,7 @@ const Navbar = ({ isTopBannerVisible }) => {
           title: 'Experiences | Teleios Dome',
           description: 'Discover exciting racing experiences at Teleios Dome. Book your seat now!',
         };
-      case '/dome':
+      case '/venue':
         return {
           title: 'Venue | Teleios Dome',
           description: 'Explore the ultimate immersive experience at Teleios Dome.',
@@ -147,7 +147,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               {t('EXPERIENCES')}
             </Link>
             <Link
-              href="/dome"
+              href="/venue"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
@@ -216,7 +216,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 {t('EXPERIENCES')}
               </Link>
               <Link
-                href="/dome"
+                href="/venue"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >

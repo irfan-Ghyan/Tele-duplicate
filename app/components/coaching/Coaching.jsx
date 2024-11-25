@@ -68,7 +68,8 @@ const Coaching = () => {
     // Fetch data from API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://192.168.70.205:8000/api/content/sections/Experience');
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const response = await fetch(`${baseUrl}/api/content/sections/Experience`);
         const result = await response.json();
 
         if (result.success) {
