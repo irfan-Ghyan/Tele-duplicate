@@ -367,6 +367,8 @@ const Page = ({ params } ) => {
     setActiveTime(timeKey);
     updateBookingDetail("time", timeValue);
   };
+
+  
   
   return (
     <>
@@ -507,7 +509,7 @@ const Page = ({ params } ) => {
                                 className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
                                   isNearestFutureSlot || timeKey === activeTime
                                     ? "border-2 border-[#002718] text-[#063828] font-bold" 
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-[#063828] text-[#c09e5f]"
                                 } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
                                   slotTime < currentTime ? "opacity-50 cursor-not-allowed" : ""
                                 }`}
