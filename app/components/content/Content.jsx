@@ -293,7 +293,7 @@ const Content = () => {
                 ? `/vip`
                 : index === 4
                 ? `/lounge`
-                : `/experience/${experience.id}`
+                : `/normal`
             }
             target="_blank"
             rel="noopener noreferrer"
