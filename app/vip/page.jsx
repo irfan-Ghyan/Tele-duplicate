@@ -7,6 +7,7 @@ import { doGetCall, doPostCall } from "../utils/api";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Page = ({ params } ) => {
   const router = useRouter();
@@ -17,8 +18,8 @@ const Page = ({ params } ) => {
   const [bookingDetails, setBookingDetails] = useState([
     { title: "name", description: "" },
     // { title: "no_of_people", description: "1" },
-    { title: "date", description: "17-11-2024" },
-    { title: "time", description: "01:00" }, 
+    { title: "date", description: "" },
+    { title: "time", description: "" }, 
     { title: "booking_type", description: "vip" },
     { title: "duration", description: "60" }, 
 
@@ -33,6 +34,8 @@ const Page = ({ params } ) => {
   const [slotInterval, setSlotInterval] = useState(20);
   const [eventDetails, setEventDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [generalError, setGeneralError] = useState("");
+  const [bookingErrors, setBookingErrors] = useState([]);
 
 
   const [minDate, setMinDate] = useState(null);
@@ -272,17 +275,7 @@ const Page = ({ params } ) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); 
-  
-    // const bookingData = {
-    //   name: bookingDetails.find((detail) => detail.title === "name")?.description || "", 
-    //   phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
-    //   email: bookingDetails.find((detail) => detail.title === "email")?.description || "", 
-    //   no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "1",
-    //   duration: bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 
-    //   date: bookingDetails.find((detail) => detail.title === "date")?.description || "2024-10-29", 
-    //   time: bookingDetails.find((detail) => detail.title === "time")?.description || "00:00", 
-    //   booking_type: bookingDetails.find((detail) => detail.title === "booking_type")?.description || "",
-    // };
+    const errors = {};
 
     const bookingData = {
       name: bookingDetails.find((detail) => detail.title === "name")?.description || "",
@@ -311,12 +304,39 @@ const Page = ({ params } ) => {
   
     // const fullBookingData = { ...bookingData, ...paymentData };
   
-    if (validateForm()) {
-      console.log("Form is valid. Proceeding to submit:", formData);
-    } else {
-      console.error("Form validation failed.");
+   
+    if (!formData.firstName.trim()) errors.firstName = "First name is required.";
+    if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
+    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "A valid email is required.";
     }
-
+    if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
+      errors.phone = "A valid phone number is required.";
+    }
+    if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
+      errors.cardNumber = "Card number must be 16 digits.";
+    }
+    if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
+      errors.expiryDate = "Expiry date must be in MM/YY format.";
+    }
+    if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
+      errors.securityCode = "CVV must be 3 or 4 digits.";
+    }
+    if (!formData.cardHolderName.trim()) {
+      errors.cardHolderName = "Cardholder name is required.";
+    }
+  
+    // Update state with validation errors
+    setValidationErrors(errors);
+  
+    if (Object.keys(errors).length > 0) {
+      setGeneralError("Please fix the errors above before proceeding.");
+      return;
+    }
+  
+    // If no validation errors, clear general error and proceed
+    setGeneralError("");
+    handleTabChange(3);
   
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -339,10 +359,6 @@ const Page = ({ params } ) => {
     }
   };
 
-  // Handle tab change
-  const handleTabChange = (tabIndex) => {
-    setActiveTab(tabIndex);
-  };
 
   // Tab 1: Create Booking
   const handleCreateBooking = () => {
@@ -366,6 +382,29 @@ const Page = ({ params } ) => {
     setActiveTime(timeKey);
     updateBookingDetail("time", timeValue);
   };
+
+
+  const validateBookingDetails = () => {
+    const errors = [];
+  
+    bookingDetails.forEach((detail) => {
+      if (detail.title !== "name" && (!detail.description || detail.description.trim() === "")) {
+        errors.push(`The field "${detail.title}" is required.`);
+      }
+    });
+  
+    setBookingErrors(errors);
+    return errors.length === 0;
+  };
+
+  const handleTabChange = (tabIndex) => {
+      if (tabIndex === 2 && !validateBookingDetails()) {
+        return;
+      }
+    
+      setActiveTab(tabIndex);
+  };
+  
   
   return (
     <>
@@ -538,6 +577,13 @@ const Page = ({ params } ) => {
                 </p>
               </div>
             ))}
+             {bookingErrors.length > 0 && (
+                <ul className="text-red-500 text-sm mt-4">
+                  {bookingErrors.map((error, index) => (
+                    <li key={index}>{error}</li>
+                  ))}
+                </ul>
+              )}
             <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
     
               <button
@@ -706,14 +752,20 @@ const Page = ({ params } ) => {
     </div>
   </div>
 
+  <div>
+  {generalError && (
+    <p className="text-red-500 text-sm font-bold mb-4">{generalError}</p>
+  )}
   <div className="mt-6 flex justify-center">
     <button
-      onClick={() => handleTabChange(3)}
+      type="submit"
       className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
       <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Pay Now</span>
     </button>
   </div>
+</div>
+
 </form>
 
       </div>
@@ -726,9 +778,9 @@ const Page = ({ params } ) => {
             <p className=" text-lg font-jura font-bold text-[#e3ce90]">Check your e-mail inbox, Your ticket is waiting you there!</p>
           </div>
           <div className="mt-20 w-[400px] ">
-            <button type="submit" onClick={handleSubmit} className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
-            <span className="button-slanted-content text-lg font-bold py-2">CONTINUE EXPERIENSE</span>
-            </button>
+          <Link href="/experience"  className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
+            <span className="button-slanted-content text-lg font-bold py-2">CONTINUE EXPERIENCE</span>
+            </Link>
           </div>
           </div>
           </div>

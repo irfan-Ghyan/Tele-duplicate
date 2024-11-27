@@ -617,7 +617,7 @@ const BookingListing = () => {
           ))}
         </tbody>
       </table>
-
+    
       <div className="flex justify-between mt-4">
         <button onClick={handlePrevPage} disabled={currentPage === 1} className="p-2 bg-[#063828] text-white px-4">
           {translations[language].previous}

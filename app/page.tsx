@@ -31,7 +31,7 @@ const Home = () => {
         {/* <link rel="canonical" href="/" /> */}
       </Helmet>
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
-        <div className="w-full max-w-7xl px-4 md:px-8">
+        <div className="w-full px-4 md:px-8">
           <Content />
         </div>
         <div className="w-full">
