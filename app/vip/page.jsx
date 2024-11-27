@@ -226,7 +226,11 @@ const Page = ({ params } ) => {
   }, [fetchBookings]);
   
   const goBack = () => {
-    setActiveTab(prevTab => Math.max(prevTab - 1, 1));
+    if (activeTab === 1) {
+      router.push("/");
+    } else {
+      setActiveTab(prevTab => Math.max(prevTab - 1, 1));
+    }
   };
 
   const handleChange = (e) => {
@@ -464,7 +468,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[261px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       VIP SEATS
                     </h1>
@@ -495,7 +499,67 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
+
                   <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                  {timeChunks.map((chunk, chunkIndex) => {
+                    // Determine the current date
+                    const now = new Date();
+                    const currentDate = now.toLocaleDateString("en-CA");
+                    const selectedDateStr = date.toLocaleDateString("en-CA"); // Compare the selected date
+
+                    const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
+                      const [hours, minutes] = timeValue.split(":").map(Number);
+                      const slotTime = hours * 60 + minutes;
+
+                      // If the selected date is today, compare with the current time
+                      // Otherwise, compare with 09:00 (540 minutes from midnight)
+                      const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+
+                      return slotTime >= startTime;
+                    });
+
+                    if (!hasActiveSlot) {
+                      return null;
+                    }
+
+                    return (
+                      <div key={chunkIndex} className="flex">
+                        {chunk.map(([timeKey, timeValue], index) => {
+                          const [hours, minutes] = timeValue.split(":").map(Number);
+                          const slotTime = hours * 60 + minutes;
+
+                          // Determine the start time based on the selected date
+                          const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+                          const isNearestFutureSlot = !activeTime && slotTime >= startTime;
+
+                          return (
+                            <div
+                              key={timeKey}
+                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                                isNearestFutureSlot || timeKey === activeTime
+                                  ? "border-2 border-[#002718] text-[#063828] font-bold" 
+                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                                slotTime < startTime ? "opacity-50 cursor-not-allowed" : ""
+                              }`}
+                            >
+                              <button
+                                onClick={() => handleButtonClick(timeKey, timeValue)}
+                                className="button-slanted-content w-full h-full flex items-center justify-center"
+                                disabled={slotTime < startTime}
+                              >
+                                {timeValue}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>;
+
+                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                     {timeChunks.map((chunk, chunkIndex) => {
                       const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
@@ -541,7 +605,7 @@ const Page = ({ params } ) => {
                         </div>
                       );
                     })}
-                  </div>
+                  </div> */}
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">

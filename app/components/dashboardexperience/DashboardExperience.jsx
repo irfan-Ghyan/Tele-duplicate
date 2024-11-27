@@ -1,191 +1,5 @@
-// 'use client';
-
-// import React, { useState } from 'react';
-// import { doPostCall, doDeleteCall } from '../../utils/api';
-
-// const DashboardExperience = () => {
-//   const [language, setLanguage] = useState('en');
-//   const [title, setTitle] = useState('');
-//   const [description, setDescription] = useState('');
-//   const [images, setImages] = useState([]);
-//   const [tableData, setTableData] = useState([]);
-//   const [showSection, setShowSection] = useState(true);
-//   const [editingIndex, setEditingIndex] = useState(null);
-
-//   const handleTitleChange = (e) => setTitle(e.target.value);
-//   const handleDescriptionChange = (e) => setDescription(e.target.value);
-
-//   const handleImageUpload = (e) => {
-//     const files = Array.from(e.target.files);
-//     const newImages = files.map((file) => ({
-//       file,
-//       previewUrl: URL.createObjectURL(file),
-//     }));
-//     setImages((prevImages) => [...prevImages, ...newImages]);
-//   };
-
-//   const handleRemoveImage = (index) => {
-//     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
-//   };
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-
-//     const newEntry = {
-//       title,
-//       description,
-//       images: images.map((img) => img.previewUrl),
-//     };
-
-//     const newIndex = editingIndex === null ? tableData.length + 1 : editingIndex;
-//     const payload = {
-//       pageName: 'Experience',
-//       sectionName: 'Session',
-//       fields: [
-//         { fieldName: `title${newIndex}`, fieldValue: title },
-//         { fieldName: `description${newIndex}`, fieldValue: description },
-//       ],
-//     };
-
-//     try {
-//       const url = "http://192.168.70.211:8000/api/content/setMultipleFieldValues";
-//       const response = await doPostCall(url, payload);
-
-//       if (!response.ok) throw new Error('Failed to save data to the database.');
-//       const result = await response.json();
-//       console.log('Data saved successfully:', result);
-
-//       if (editingIndex === null) {
-//         setTableData((prevData) => [...prevData, { ...newEntry, key: `title${newIndex}` }]);
-//       } else {
-//         setTableData((prevData) =>
-//           prevData.map((entry, index) =>
-//             index === editingIndex ? { ...newEntry, key: `title${newIndex}` } : entry
-//           )
-//         );
-//       }
-
-//       setTitle('');
-//       setDescription('');
-//       setImages([]);
-//       setEditingIndex(null);
-//     } catch (error) {
-//       console.error('Error:', error);
-//     }
-//   };
-
-//   const handleEdit = (keyId) => {
-//     const entryToEdit = tableData.find((entry) => entry.key === keyId);
-//     if (entryToEdit) {
-//       setTitle(entryToEdit.title);
-//       setDescription(entryToEdit.description);
-//       setImages(entryToEdit.images.map((imgUrl) => ({ previewUrl: imgUrl })));
-//       setEditingIndex(keyId);
-//     }
-//   };
-
-//   const handleDelete = async (keyId) => {
-//     try {
-//       const payload = {
-//         pageName: "Experience",
-//         sectionName: "Session",
-//         fieldName: keyId,
-//       };
-
-//       const url = "http://192.168.70.211:8000/api/content/removeSectionField";
-//       const response = await doDeleteCall(url, payload);
-
-//       if (!response.ok) throw new Error("Failed to delete data");
-//       const result = await response.json();
-//       console.log("Delete API Response:", result);
-
-//       if (result.success) {
-//         setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
-//       }
-//     } catch (error) {
-//       console.error("Error deleting data:", error);
-//     }
-//   };
-
-//   const labels = {
-//     en: { heading: 'Sessions', title: 'Title', description: 'Description', submit: 'Submit', show: 'Show', hide: 'Hide', upload: 'Upload Images', edit: 'Edit', delete: 'Delete', actions: 'Actions' },
-//     ar: { heading: 'الجلسات', title: 'عنوان', description: 'وصف', submit: 'إرسال', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', edit: 'يحرر', delete: 'يمسح', actions: 'الإجراءات' },
-//   };
-
-//   const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
-
-//   return (
-//     <div className={`w-full py-10 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-//       <div className="flex justify-between">
-//         <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
-//           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
-//         </button>
-//         <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
-//           {showSection ? labels[language].hide : labels[language].show}
-//         </button>
-//       </div>
-
-//       {showSection && (
-//         <>
-//           <h1 className="text-4xl text-[#002718] font-black">{labels[language].heading}</h1>
-//           <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
-//             <div className="mb-4">
-//               <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].title}</label>
-//               <input type="text" value={title} onChange={handleTitleChange} className="w-full p-2 border border-gray-300" dir={getDirection()} required />
-//             </div>
-//             <div className="mb-4">
-//               <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].description}</label>
-//               <textarea value={description} onChange={handleDescriptionChange} className="w-full p-2 border border-gray-300" dir={getDirection()} rows="3" required />
-//             </div>
-//             <div className="mb-4">
-//               <label className="block text-sm font-medium text-gray-700 mb-2">{labels[language].upload}</label>
-//               <input type="file" accept="image/*" multiple onChange={handleImageUpload} className="w-full p-2 border border-gray-300" />
-//             </div>
-//             <button type="submit" className="w-full p-4 bg-[#063828] text-white">{labels[language].submit}</button>
-//           </form>
-
-//           <table className="w-full border border-gray-300">
-//             <thead>
-//               <tr className="bg-gray-100">
-//                 <th className="p-2 border border-gray-300">{labels[language].title}</th>
-//                 <th className="p-2 border border-gray-300">{labels[language].description}</th>
-//                 <th className="p-2 border border-gray-300">Images</th>
-//                 <th className="p-2 border border-gray-300">{labels[language].actions}</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {tableData.map((entry, index) => (
-//                 <tr key={index} className="border border-gray-300">
-//                   <td className="p-2">{entry.title}</td>
-//                   <td className="p-2">{entry.description}</td>
-//                   <td className="p-2">
-//                     {/* Display images */}
-//                     {entry.images.length > 0 ? (
-//                       entry.images.map((image, i) => (
-//                         <img key={i} src={image} alt={`Image ${i}`} className="w-12 h-12 object-cover mr-2" />
-//                       ))
-//                     ) : (
-//                       <span>No images</span>
-//                     )}
-//                   </td>
-//                   <td className="p-2">
-//                     <button onClick={() => handleEdit(entry.key)} className="mr-2 text-blue-500 hover:underline">{labels[language].edit}</button>
-//                     <button onClick={() => handleDelete(entry.key)} className="text-red-500 hover:underline">{labels[language].delete}</button>
-//                   </td>
-//                 </tr>
-//               ))}
-//             </tbody>
-//           </table>
-//         </>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default DashboardExperience;
 
 
-  
 // import React, { useState, useEffect } from 'react';
 // import { doPostCall, doDeleteCall } from '../../utils/api';
 
@@ -194,6 +8,8 @@
 //   const [description, setDescription] = useState('');
 //   const [tableData, setTableData] = useState([]);
 //   const [editingIndex, setEditingIndex] = useState(null);
+//   const [isDeleting, setIsDeleting] = useState(false);
+
 
 //   // Fetch table data from backend on component mount
 //   useEffect(() => {
@@ -202,101 +18,132 @@
 
 //   const fetchTableData = async () => {
 //     try {
-//       const url = "http://192.168.70.249:8000/api/content/sections/Experience";
+//       const url = 'http://192.168.70.249:8000/api/content/sections/Experience';
 //       const response = await fetch(url);
-
+  
 //       if (response.ok) {
 //         const data = await response.json();
 //         if (data.success) {
-//           // Assuming backend returns a list of saved entries
-//           const sessionData = data.data.sections.find((section) => section.title === "Session");
+//           const sessionData = data.data.sections.find((section) => section.title === 'Session');
 //           if (sessionData) {
-//             const formattedData = sessionData.section_fields
-//               .reduce((acc, field) => {
-//                 const match = field.key.match(/(title|description)(\d+)/);
-//                 if (match) {
-//                   const [, type, index] = match;
-//                   if (!acc[index]) acc[index] = { key: index };
-//                   acc[index][type] = field.value;
-//                 }
-//                 return acc;
-//               }, [])
-//               .filter((entry) => entry.title && entry.description);
+//             const formattedData = sessionData.section_fields.reduce((acc, field) => {
+//               const match = field.key.match(/(title|description)(\d+)/);
+//               if (match) {
+//                 const [, type, index] = match;
+//                 if (!acc[index]) acc[index] = { key: index };
+//                 acc[index][type] = field.value;
+//               }
+//               return acc;
+//             }, []);
+//             console.log('Formatted Data:', formattedData); // Debug here
 //             setTableData(formattedData);
 //           }
 //         }
 //       } else {
-//         console.error("Failed to fetch table data");
+//         console.error('Failed to fetch table data');
 //       }
 //     } catch (error) {
-//       console.error("Error fetching table data:", error);
+//       console.error('Error fetching table data:', error);
 //     }
 //   };
+  
 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
-
-    
-
+  
+//     if (!title || !description) {
+//       alert('Both title and description are required.');
+//       return;
+//     }
+  
 //     try {
 //       const newEntry = { title, description };
+//       const index = editingIndex !== null ? editingIndex : tableData.length;
+  
 //       const payload = {
 //         pageName: 'Experience',
 //         sectionName: 'Session',
 //         fields: [
-//           { fieldName: `title${tableData.length + 1}`, fieldValue: title },
-//           { fieldName: `description${tableData.length + 1}`, fieldValue: description },
+//           { fieldName: `title${index + 1}`, fieldValue: title },
+//           { fieldName: `description${index + 1}`, fieldValue: description },
 //         ],
 //       };
-
-//       const url = "http://192.168.70.249:8000/api/content/setMultipleFieldValues";
+  
+//       const url = 'http://192.168.70.249:8000/api/content/setMultipleFieldValues';
 //       const response = await doPostCall(url, payload);
-
-//       if (!response.ok) throw new Error("Failed to save data to the database.");
+  
+//       if (!response.ok) throw new Error('Failed to save data to the database.');
 //       const result = await response.json();
-//       console.log("Data saved successfully:", result);
-
-//       setTableData((prevData) => [...prevData, { ...newEntry, key: `title${tableData.length + 1}` },
-
-//       ]);
-
+//       console.log('Data saved successfully:', result);
+  
+//       if (editingIndex !== null) {
+//         setTableData((prevData) =>
+//           prevData.map((entry, i) =>
+//             i === editingIndex ? { ...newEntry, key: `title${index + 1}` } : entry
+//           )
+//         );
+//       } else {
+//         setTableData((prevData) => [...prevData, { ...newEntry, key: `title${index + 1}` }]);
+//       }
+  
 //       setTitle('');
 //       setDescription('');
+//       setEditingIndex(null);
 //     } catch (error) {
-//       console.error("Error saving data:", error);
+//       console.error('Error saving data:', error);
 //     }
 //   };
-
   
 
 //   const handleDelete = async (keyId) => {
-//     try {
-//       const confirmed = window.confirm("Are you sure you want to delete this record?");
-//       if (!confirmed) return;
-  
-//       // Use a soft delete mechanism by adding a "deleted" flag
-//       const updatedData = tableData.map((entry) =>
-//         entry.key === keyId ? { ...entry, deleted: true } : entry
-//       );
-  
-//       setTableData(updatedData);
-  
-//       const payload = {
-//         pageName: "Experience",
-//         sectionName: "Session",
-//         fieldName: keyId,
-//       };
-  
-//       const url = "http://192.168.70.249:8000/api/content/removeSectionField";
-//       const response = await doDeleteCall(url, payload);
-  
-//       if (!response.ok) throw new Error("Failed to delete data");
-//       const result = await response.json();
-//       console.log("Delete API Response:", result);
-//     } catch (error) {
-//       console.error("Error deleting data:", error);
+//   try {
+//     const confirmed = window.confirm("Are you sure you want to delete this record?");
+//     if (!confirmed) return;
+
+//     const payload = {
+//       pageName: "Experience",
+//       sectionName: "Session",
+//       fieldName: keyId,
+//     };
+
+//     console.log("Delete Payload:", payload);
+
+//     const url = "http://192.168.70.249:8000/api/content/removeSectionField";
+//     const response = await doDeleteCall(url, payload);
+
+//     console.log("Delete Response Status:", response.status);
+
+//     if (!response.ok) {
+//       throw new Error("Failed to delete data from the backend.");
 //     }
+
+//     const result = await response.json();
+//     console.log("Delete API Result:", result);
+
+//     if (result.success) {
+//       // Remove the deleted entry from the frontend state
+//       setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
+//     } else {
+//       console.error("Backend failed to delete the record:", result.message);
+//     }
+//   } catch (error) {
+//     console.error("Error deleting data:", error.message);
+//   }
+// };
+
+
+//   const handleEdit = (index) => {
+//     const entryToEdit = tableData[index];
+//     if (!entryToEdit) {
+//       console.error('No entry found at index:', index);
+//       return;
+//     }
+  
+//     setTitle(entryToEdit.title || '');
+//     setDescription(entryToEdit.description || '');
+//     setEditingIndex(index);
 //   };
+  
 
 //   return (
 //     <div className="w-full py-10 px-40">
@@ -322,7 +169,9 @@
 //             required
 //           />
 //         </div>
-//         <button type="submit" className="w-full p-4 bg-[#063828] text-white">Submit</button>
+//         <button type="submit" className="w-full p-4 bg-[#063828] text-white">
+//           {editingIndex !== null ? 'Update' : 'Submit'}
+//         </button>
 //       </form>
 
 //       <table className="w-full border border-gray-300">
@@ -334,13 +183,13 @@
 //           </tr>
 //         </thead>
 //         <tbody>
-//         {tableData.filter((entry) => !entry.deleted).map((entry, index) => (
+//           {tableData.filter((entry) => !entry.deleted).map((entry, index) => (
 //             <tr key={index} className="border border-gray-300">
 //               <td className="p-2">{entry.title}</td>
 //               <td className="p-2">{entry.description}</td>
 //               <td className="p-2">
 //                 <button
-//                   onClick={() => setTitle(entry.title) || setDescription(entry.description) || setEditingIndex(index)}
+//                   onClick={() => handleEdit(index)}
 //                   className="mr-2 text-blue-500 hover:underline"
 //                 >
 //                   Edit
@@ -348,13 +197,15 @@
 //                 <button
 //                   onClick={() => handleDelete(entry.key)}
 //                   className="text-red-500 hover:underline"
+//                   disabled={isDeleting}
 //                 >
-//                   Delete
+//                   {isDeleting ? "Deleting..." : "Delete"}
 //                 </button>
 //               </td>
-//             </tr>
-//           ))}
+//               </tr>
+//             ))}
 //         </tbody>
+
 //       </table>
 //     </div>
 //   );
@@ -372,7 +223,8 @@ const DashboardExperience = () => {
   const [tableData, setTableData] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
-
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(''); // Error state
 
   // Fetch table data from backend on component mount
   useEffect(() => {
@@ -380,10 +232,12 @@ const DashboardExperience = () => {
   }, []);
 
   const fetchTableData = async () => {
+    setLoading(true);
+    setError('');
     try {
       const url = 'http://192.168.70.249:8000/api/content/sections/Experience';
       const response = await fetch(url);
-  
+
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
@@ -398,31 +252,33 @@ const DashboardExperience = () => {
               }
               return acc;
             }, []);
-            console.log('Formatted Data:', formattedData); // Debug here
             setTableData(formattedData);
           }
         }
       } else {
-        console.error('Failed to fetch table data');
+        setError('Failed to fetch table data');
       }
     } catch (error) {
-      console.error('Error fetching table data:', error);
+      setError('Error fetching table data: ' + error.message);
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (!title || !description) {
-      alert('Both title and description are required.');
+      setError('Both title and description are required.');
       return;
     }
-  
+
+    setLoading(true);
+    setError('');
     try {
       const newEntry = { title, description };
       const index = editingIndex !== null ? editingIndex : tableData.length;
-  
+
       const payload = {
         pageName: 'Experience',
         sectionName: 'Session',
@@ -431,14 +287,14 @@ const DashboardExperience = () => {
           { fieldName: `description${index + 1}`, fieldValue: description },
         ],
       };
-  
+
       const url = 'http://192.168.70.249:8000/api/content/setMultipleFieldValues';
       const response = await doPostCall(url, payload);
-  
+
       if (!response.ok) throw new Error('Failed to save data to the database.');
       const result = await response.json();
       console.log('Data saved successfully:', result);
-  
+
       if (editingIndex !== null) {
         setTableData((prevData) =>
           prevData.map((entry, i) =>
@@ -448,69 +304,67 @@ const DashboardExperience = () => {
       } else {
         setTableData((prevData) => [...prevData, { ...newEntry, key: `title${index + 1}` }]);
       }
-  
+
       setTitle('');
       setDescription('');
       setEditingIndex(null);
     } catch (error) {
-      console.error('Error saving data:', error);
+      setError('Error saving data: ' + error.message);
+    } finally {
+      setLoading(false);
     }
   };
-  
 
   const handleDelete = async (keyId) => {
-  try {
-    const confirmed = window.confirm("Are you sure you want to delete this record?");
-    if (!confirmed) return;
+    setIsDeleting(true);
+    setError('');
+    try {
+      const confirmed = window.confirm('Are you sure you want to delete this record?');
+      if (!confirmed) return;
 
-    const payload = {
-      pageName: "Experience",
-      sectionName: "Session",
-      fieldName: keyId,
-    };
+      const payload = {
+        pageName: 'Experience',
+        sectionName: 'Session',
+        fieldName: keyId,
+      };
 
-    console.log("Delete Payload:", payload);
+      const url = 'http://192.168.70.249:8000/api/content/removeSectionField';
+      const response = await doDeleteCall(url, payload);
 
-    const url = "http://192.168.70.249:8000/api/content/removeSectionField";
-    const response = await doDeleteCall(url, payload);
+      if (!response.ok) {
+        throw new Error('Failed to delete data from the backend.');
+      }
 
-    console.log("Delete Response Status:", response.status);
-
-    if (!response.ok) {
-      throw new Error("Failed to delete data from the backend.");
+      const result = await response.json();
+      if (result.success) {
+        setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
+      } else {
+        setError('Failed to delete the record: ' + result.message);
+      }
+    } catch (error) {
+      setError('Error deleting data: ' + error.message);
+    } finally {
+      setIsDeleting(false);
     }
-
-    const result = await response.json();
-    console.log("Delete API Result:", result);
-
-    if (result.success) {
-      // Remove the deleted entry from the frontend state
-      setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
-    } else {
-      console.error("Backend failed to delete the record:", result.message);
-    }
-  } catch (error) {
-    console.error("Error deleting data:", error.message);
-  }
-};
-
+  };
 
   const handleEdit = (index) => {
     const entryToEdit = tableData[index];
     if (!entryToEdit) {
-      console.error('No entry found at index:', index);
+      setError('No entry found at index: ' + index);
       return;
     }
-  
+
     setTitle(entryToEdit.title || '');
     setDescription(entryToEdit.description || '');
     setEditingIndex(index);
   };
-  
 
   return (
     <div className="w-full py-10 px-40">
       <h1 className="text-4xl font-black text-[#063828]">Session</h1>
+      {loading && <p className="text-blue-500">Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
@@ -532,7 +386,7 @@ const DashboardExperience = () => {
             required
           />
         </div>
-        <button type="submit" className="w-full p-4 bg-[#063828] text-white">
+        <button type="submit" className="w-full p-4 bg-[#063828] text-white" disabled={loading}>
           {editingIndex !== null ? 'Update' : 'Submit'}
         </button>
       </form>
@@ -546,15 +400,12 @@ const DashboardExperience = () => {
           </tr>
         </thead>
         <tbody>
-          {tableData.filter((entry) => !entry.deleted).map((entry, index) => (
+          {tableData.map((entry, index) => (
             <tr key={index} className="border border-gray-300">
               <td className="p-2">{entry.title}</td>
               <td className="p-2">{entry.description}</td>
               <td className="p-2">
-                <button
-                  onClick={() => handleEdit(index)}
-                  className="mr-2 text-blue-500 hover:underline"
-                >
+                <button onClick={() => handleEdit(index)} className="mr-2 text-blue-500 hover:underline">
                   Edit
                 </button>
                 <button
@@ -562,13 +413,12 @@ const DashboardExperience = () => {
                   className="text-red-500 hover:underline"
                   disabled={isDeleting}
                 >
-                  {isDeleting ? "Deleting..." : "Delete"}
+                  {isDeleting ? 'Deleting...' : 'Delete'}
                 </button>
               </td>
-              </tr>
-            ))}
+            </tr>
+          ))}
         </tbody>
-
       </table>
     </div>
   );

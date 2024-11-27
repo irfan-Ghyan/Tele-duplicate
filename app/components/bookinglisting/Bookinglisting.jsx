@@ -28,16 +28,20 @@ const BookingListing = () => {
   });
 
   const [timeSlots, setTimeSlots] = useState([]);
-  
+  const [error, setError] = useState("");
 
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
+    setError(""); 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings`;
       let response = await doGetCall(url);
-      // const response = await fetch("http://192.168.70.211:8000/api/bookings");
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch bookings: ${response.statusText}`);
+      }
 
       const data = await response.json();
       const formattedBookings = data.data.map((booking) => ({
@@ -47,6 +51,7 @@ const BookingListing = () => {
 
       setBookings(data.data || []);
     } catch (error) {
+      setError(error.message);
       console.error("Error fetching bookings:", error);
     } finally {
       setLoading(false);
@@ -70,8 +75,9 @@ const BookingListing = () => {
 
     async function fetchTimeSlots() {
       const queryString = new URLSearchParams(payload).toString();
+      setLoading(true);
+      setError("");
       try {
-        // const response = await fetch("http://192.168.70.211:8000/api/bookings/availableSlots");
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
@@ -85,6 +91,7 @@ const BookingListing = () => {
         if (Array.isArray(data)) {
           setTimeSlots(data);
         } else {
+          setError(error.message); 
           console.error("Unexpected data format. Expected an array:", data);
         }
 
@@ -545,7 +552,10 @@ const BookingListing = () => {
   
   return (
     <div className="w-full">
-      {loading ? <div>Loading...</div> : (
+        {loading && <div className="text-center text-lg text-gray-600">Loading...</div>}
+    {error && <div className="text-center text-red-500 mb-4">{error}</div>}
+    
+    {!loading && !error && (
         <>
       <button onClick={toggleLanguage} className="mb-4 p-2 text-[#063828]">
         {translations[language].switchTo}

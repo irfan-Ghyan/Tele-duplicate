@@ -1,5 +1,4 @@
 
-
 // import React, { useState, useEffect, useCallback } from "react";
 // import { doGetCall } from "../../utils/api";
 
@@ -10,11 +9,27 @@
 //   const [selectedDate, setSelectedDate] = useState("");
 //   const [slotInterval, setSlotInterval] = useState(20);
 
+//   const startHour = 9; // Start time
+//   const endHour = 24; // End time
+
 //   useEffect(() => {
 //     const currentDate = new Date();
 //     const formattedDate = currentDate.toISOString().split("T")[0];
 //     setSelectedDate(formattedDate);
 //   }, []);
+
+//   const generateSlotTimes = (startHour, endHour, interval) => {
+//     const times = [];
+//     for (let hour = startHour; hour < endHour; hour++) {
+//       for (let minutes = 0; minutes < 60; minutes += interval) {
+//         const formattedTime = `${hour.toString().padStart(2, "0")}:${minutes
+//           .toString()
+//           .padStart(2, "0")}`;
+//         times.push(formattedTime);
+//       }
+//     }
+//     return times;
+//   };
 
 //   const fetchBookings = useCallback(async () => {
 //     setLoading(true);
@@ -29,25 +44,30 @@
 //     const queryString = new URLSearchParams(payload).toString();
 
 //     try {
-//       const url = `http://192.168.70.211:8000/api/bookings/availableSlots?${queryString}`;
+//       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+//     const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
 //       let response = await doGetCall(url);
 //       const data = await response.json();
 //       console.log("Fetched data:", data);
 
-//       const slotsWithBusyData = data.map((slot) => {
-//         let busy;
+//       // Generate consistent slots and map API data
+//       const slotTimes = generateSlotTimes(startHour, endHour, slotInterval);
+//       const slotsWithBusyData = slotTimes.map((time) => {
+//         const slot = data.find((s) => s.time === time) || {};
+//         let busy = 0;
 
 //         if (selectedSlotType === "normal") {
-//           busy = 14 - slot.sims;
+//           busy = 14 - (slot.sims || 0);
 //         } else if (selectedSlotType === "vip") {
-//           busy = 4 - slot.sims;
+//           busy = 4 - (slot.sims || 0);
 //         } else if (selectedSlotType === "lounge") {
-//           busy = 2 - slot.sims;
+//           busy = 2 - (slot.sims || 0);
 //         }
 
 //         return {
-//           ...slot,
-//           busy: busy,
+//           time,
+//           sims: slot.sims || 0,
+//           busy,
 //           type: selectedSlotType,
 //           date: selectedDate,
 //         };
@@ -76,25 +96,6 @@
 //   const handleIntervalChange = (event) => {
 //     setSlotInterval(Number(event.target.value));
 //   };
-
-//   const generateSlotTimes = (interval) => {
-//     const startHour = 9;
-//     const endHour = 24;
-//     const times = [];
-
-//     for (let hour = startHour; hour < endHour; hour++) {
-//       for (let minutes = 0; minutes < 60; minutes += interval) {
-//         const formattedTime = `${hour.toString().padStart(2, "0")}:${minutes
-//           .toString()
-//           .padStart(2, "0")}`;
-//         times.push(formattedTime);
-//       }
-//     }
-
-//     return times;
-//   };
-
-//   const slotTimes = generateSlotTimes(slotInterval);
 
 //   return (
 //     <div className="w-full overflow-x-auto h-screen">
@@ -155,18 +156,15 @@
 //               </td>
 //             </tr>
 //           ) : (
-//             slotTimes.map((time, index) => {
-//               const slot = slotsData[index] || {};
-//               return (
-//                 <tr key={time}>
-//                   <td className="border border-gray-300 p-4 text-center">{slot.type || "-"}</td>
-//                   <td className="border border-gray-300 p-4 text-center">{slot.sims || "-"}</td>
-//                   <td className="border border-gray-300 p-4 text-center">{slot.busy || "-"}</td>
-//                   <td className="border border-gray-300 p-4 text-center">{slot.time}</td>
-//                   <td className="border border-gray-300 p-4 text-center">{selectedDate}</td>
-//                 </tr>
-//               );
-//             })
+//             slotsData.map((slot) => (
+//               <tr key={slot.time}>
+//                 <td className="border border-gray-300 p-4 text-center">{slot.type}</td>
+//                 <td className="border border-gray-300 p-4 text-center">{slot.sims}</td>
+//                 <td className="border border-gray-300 p-4 text-center">{slot.busy}</td>
+//                 <td className="border border-gray-300 p-4 text-center">{slot.time}</td>
+//                 <td className="border border-gray-300 p-4 text-center">{selectedDate}</td>
+//               </tr>
+//             ))
 //           )}
 //         </tbody>
 //       </table>
@@ -177,12 +175,14 @@
 // export default BookingCalendar;
 
 
+
 import React, { useState, useEffect, useCallback } from "react";
 import { doGetCall } from "../../utils/api";
 
 const BookingCalendar = () => {
   const [slotsData, setSlotsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(""); // Error state
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
   const [selectedDate, setSelectedDate] = useState("");
   const [slotInterval, setSlotInterval] = useState(20);
@@ -211,6 +211,7 @@ const BookingCalendar = () => {
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
+    setError(""); // Reset error before fetching
 
     const payload = {
       no_of_people: "2",
@@ -223,7 +224,7 @@ const BookingCalendar = () => {
 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
+      const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
       console.log("Fetched data:", data);
@@ -253,6 +254,7 @@ const BookingCalendar = () => {
 
       setSlotsData(slotsWithBusyData);
     } catch (error) {
+      setError("Failed to fetch bookings. Please try again."); // Set error message
       console.error("Error fetching bookings:", error);
     } finally {
       setLoading(false);
@@ -316,25 +318,29 @@ const BookingCalendar = () => {
         </div>
       </div>
 
-      <table className="min-w-full border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 p-4 bg-[#ececec]">Type</th>
-            <th className="border border-gray-300 p-4 bg-[#ececec]">Available</th>
-            <th className="border border-gray-300 p-4 bg-[#ececec]">Busy</th>
-            <th className="border border-gray-300 p-4 bg-[#ececec]">Time</th>
-            <th className="border border-gray-300 p-4 bg-[#ececec]">Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading ? (
+      {loading && (
+        <div className="text-center p-4 text-lg text-gray-600">
+          Loading slots...
+        </div>
+      )}
+
+      {error && (
+        <div className="text-center p-4 text-lg text-red-500">{error}</div>
+      )}
+
+      {!loading && !error && (
+        <table className="min-w-full border-collapse border border-gray-300">
+          <thead>
             <tr>
-              <td colSpan="5" className="text-center p-4">
-                Loading...
-              </td>
+              <th className="border border-gray-300 p-4 bg-[#ececec]">Type</th>
+              <th className="border border-gray-300 p-4 bg-[#ececec]">Available</th>
+              <th className="border border-gray-300 p-4 bg-[#ececec]">Busy</th>
+              <th className="border border-gray-300 p-4 bg-[#ececec]">Time</th>
+              <th className="border border-gray-300 p-4 bg-[#ececec]">Date</th>
             </tr>
-          ) : (
-            slotsData.map((slot) => (
+          </thead>
+          <tbody>
+            {slotsData.map((slot) => (
               <tr key={slot.time}>
                 <td className="border border-gray-300 p-4 text-center">{slot.type}</td>
                 <td className="border border-gray-300 p-4 text-center">{slot.sims}</td>
@@ -342,10 +348,10 @@ const BookingCalendar = () => {
                 <td className="border border-gray-300 p-4 text-center">{slot.time}</td>
                 <td className="border border-gray-300 p-4 text-center">{selectedDate}</td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

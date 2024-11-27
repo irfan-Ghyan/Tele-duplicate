@@ -285,7 +285,7 @@ const Form = () => {
               <select
                 name="type"
                 id="type"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#002718] py-[10px] text-[14px] font-bold text-[#c09e5f]font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#002718] py-[10px] text-[#c09e5f] text-[14px] font-bold text-[#c09e5f]font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.type}
                 onChange={handleChange}
                

@@ -6,7 +6,7 @@ import PlanSelectorLounge from "../components/planselectorlounge/PlanSelectorLou
 import { doGetCall, doPostCall } from "../utils/api";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; 
 import Link from "next/link";
 
 const Page = ({ params } ) => {
@@ -20,7 +20,7 @@ const Page = ({ params } ) => {
     // { title: "no_of_people", description: "1" },
     { title: "date", description: "" },
     { title: "time", description: "" }, 
-    { title: "booking_type", description: "louge" },
+    { title: "booking_type", description: "lounge" },
     { title: "duration", description: "120" }, 
 
   ]);
@@ -57,13 +57,21 @@ const Page = ({ params } ) => {
 
   
   useEffect(() => {
-    if (id) fetchEventDetails();
-    setBookingDetails((prevDetails) =>
-      prevDetails.map((detail) =>
-        detail.title === "name" ? { ...detail, description: formData.firstName } : detail
-      )
-    );
-  }, [id, formData.firstName]);
+    if (id) {
+      fetchEventDetails();
+    }
+  }, [id]);
+  
+  useEffect(() => {
+    // Only update state if the value has changed
+    if (formData.firstName !== bookingDetails[0]?.description) {
+      setBookingDetails((prevDetails) =>
+        prevDetails.map((detail) =>
+          detail.title === "name" ? { ...detail, description: formData.firstName } : detail
+        )
+      );
+    }
+  }, [formData.firstName, bookingDetails]);
 
   const fetchEventDetails = async () => {
     try {
@@ -104,10 +112,6 @@ const Page = ({ params } ) => {
     setBookingDetails(updatedDetails);
     onTimeChange(value);
   };
-
-
-
-
 
   const updateBookingDetail = (field, value) => {
     setBookingDetails((prevDetails) =>
@@ -223,10 +227,10 @@ const Page = ({ params } ) => {
   useEffect(() => {
     fetchBookings();
   }, [fetchBookings]);
+
   
-  const goBack = () => {
-    setActiveTab(prevTab => Math.max(prevTab - 1, 1));
-  };
+  
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -264,7 +268,7 @@ const Page = ({ params } ) => {
       errors.cardHolderName = "Cardholder name is required.";
     }
   
-    // Update state with validation errors
+
     setValidationErrors(errors);
   
     if (Object.keys(errors).length > 0) {
@@ -272,7 +276,6 @@ const Page = ({ params } ) => {
       return;
     }
   
-    // If no validation errors, clear general error and proceed
     setGeneralError("");
     handleTabChange(3);
 
@@ -288,7 +291,7 @@ const Page = ({ params } ) => {
       phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
       email: bookingDetails.find((detail) => detail.title === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "1",
-      duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10), // Ensure integer
+      duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10),
       date: bookingDetails.find((detail) => detail.title === "date")?.description || "2024-10-29",
       time: bookingDetails.find((detail) => detail.title === "time")?.description || "00:00",
       booking_type: bookingDetails.find((detail) => detail.title === "booking_type")?.description || "",
@@ -406,6 +409,14 @@ const Page = ({ params } ) => {
       setActiveTab(tabIndex);
   };
   
+  const goBack = () => {
+    if (activeTab === 1) {
+      router.push("/");
+    } else {
+      setActiveTab(prevTab => Math.max(prevTab - 1, 1));
+    }
+  };
+
   return (
     <>
       <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
@@ -464,16 +475,16 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[261px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       LOUNGE
                     </h1>
                     <div className="flex justify-between">
                       <div className="py-4">
                         <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
-                          Choose a first-class VIP room where two specially tailored simulators
+                          Choose a first-class Lounge room where two specially tailored simulators
                           <br />
-                          offer a premium experience for you and up to 4 friends.
+                          offer a premium experience for you and up to 6 friends.
                         </p>
 
                       </div>
@@ -495,7 +506,7 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                     {timeChunks.map((chunk, chunkIndex) => {
                       const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
@@ -541,7 +552,66 @@ const Page = ({ params } ) => {
                         </div>
                       );
                     })}
-                  </div>
+                  </div> */}
+
+                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                  {timeChunks.map((chunk, chunkIndex) => {
+                    // Determine the current date
+                    const now = new Date();
+                    const currentDate = now.toLocaleDateString("en-CA");
+                    const selectedDateStr = date.toLocaleDateString("en-CA"); // Compare the selected date
+
+                    const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
+                      const [hours, minutes] = timeValue.split(":").map(Number);
+                      const slotTime = hours * 60 + minutes;
+
+                      // If the selected date is today, compare with the current time
+                      // Otherwise, compare with 09:00 (540 minutes from midnight)
+                      const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+
+                      return slotTime >= startTime;
+                    });
+
+                    if (!hasActiveSlot) {
+                      return null;
+                    }
+
+                    return (
+                      <div key={chunkIndex} className="flex">
+                        {chunk.map(([timeKey, timeValue], index) => {
+                          const [hours, minutes] = timeValue.split(":").map(Number);
+                          const slotTime = hours * 60 + minutes;
+
+                          // Determine the start time based on the selected date
+                          const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+                          const isNearestFutureSlot = !activeTime && slotTime >= startTime;
+
+                          return (
+                            <div
+                              key={timeKey}
+                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                                isNearestFutureSlot || timeKey === activeTime
+                                  ? "border-2 border-[#002718] text-[#063828] font-bold" 
+                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
+                                slotTime < startTime ? "opacity-50 cursor-not-allowed" : ""
+                              }`}
+                            >
+                              <button
+                                onClick={() => handleButtonClick(timeKey, timeValue)}
+                                className="button-slanted-content w-full h-full flex items-center justify-center"
+                                disabled={slotTime < startTime}
+                              >
+                                {timeValue}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>;
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">

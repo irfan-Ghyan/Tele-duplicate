@@ -13,6 +13,8 @@ const DashboardFaq = () => {
   const [showSection, setShowSection] = useState(true);
   const { faqData, updateFaqData } = useFaq();
   const [language, setLanguage] = useState('en');
+  const [loading, setLoading] = useState(false); // Loading state
+  const [error, setError] = useState(""); // Error state
 
 
 const handleInputChange = (e) => {
@@ -103,17 +105,7 @@ const handleInputChange = (e) => {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/content/setMultipleFieldValues`;
       const response = await doPostCall(url, payload);
-      // const response = await fetch(
-      //   "http://192.168.70.211:8000/api/content/setMultipleFieldValues",
-      //   {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(payload),
-      //   }
-      // );
-  
+
       const result = await response.json();
   
       if (result.success) {
@@ -144,15 +136,15 @@ const handleInputChange = (e) => {
           setFaqEntries((prevEntries) => [...prevEntries, newEntry]);
         }
 
-        
-  
         setFormData({ question: "", answer: "" });
         setEditingIndex(null);
       } else {
         console.error("Error from API:", result.message || "Unknown error");
       }
     } catch (error) {
-      console.error("Error sending data:", error);
+      setError("Error sending data: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
   
@@ -183,16 +175,6 @@ const handleInputChange = (e) => {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/content/removeSectionField`;
       const response = await doDeleteCall(url, payload);
-      // const response = await fetch(
-      //   "http://192.168.70.211:8000/api/content/removeSectionField",
-      //   {
-      //     method: "DELETE",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(payload),
-      //   }
-      // );
 
       if (!response.ok) {
         throw new Error("Failed to delete data");
@@ -207,7 +189,9 @@ const handleInputChange = (e) => {
         );
       }
     } catch (error) {
-      console.error("Error deleting data:", error);
+      setError("Error deleting data: " + error.message);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -232,6 +216,9 @@ const handleInputChange = (e) => {
           {showSection ? labels[language].hide : labels[language].show}
         </button>
       </div>
+
+      {loading && <p className="text-blue-500">Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
 
       {showSection && (
         <>
