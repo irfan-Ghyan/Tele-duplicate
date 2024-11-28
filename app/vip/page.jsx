@@ -614,12 +614,12 @@ const Page = ({ params } ) => {
                     </h1>
                     <BookingType selectedBookingType={bookingType} onBookingTypeChange={handleBookingTypeChange} />
                   </div> */}
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
+                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
                     <PlanSelectorVip onPlanChange={handlePlanChange} />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

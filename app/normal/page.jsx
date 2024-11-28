@@ -14,11 +14,11 @@ const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
 
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
   const [bookingDetails, setBookingDetails] = useState([
     { title: "name", description: "" },
-    { title: "no_of_people", description: "" },
+    { title: "no_of_people", description: "1" },
     { title: "date", description: "" },
     { title: "time", description: "" }, 
     { title: "booking_type", description: "normal" },
@@ -37,6 +37,7 @@ const Page = ({ params } ) => {
   const [loading, setLoading] = useState(true);
   const [generalError, setGeneralError] = useState("");
   const [bookingErrors, setBookingErrors] = useState([]);
+  const [seatError, setSeatError] = useState("");
 
 
   const [minDate, setMinDate] = useState(null);
@@ -122,16 +123,18 @@ const Page = ({ params } ) => {
       const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
+      setSeatError("");
     } else {
-      alert("Maximum limit of 14 seats reached."); 
+      setSeatError("Maximum limit of 14 seats reached.");
     }
   };
   
   const decreaseCount = () => {
-    if (count > 1) { 
+    if (count > 1) {
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
+      setSeatError("");  // Clear error message if count is valid
     }
   };
 
@@ -508,7 +511,11 @@ const Page = ({ params } ) => {
                           </span>
                         </button>
                       </div>
+
                     </div>
+                    {seatError && (
+                        <p className="text-red-500 text-sm mt-2">{seatError}</p>
+                      )}
                   </div>
 
                  
@@ -564,9 +571,9 @@ const Page = ({ params } ) => {
                               className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
                                 isNearestFutureSlot || timeKey === activeTime
                                   ? "border-2 border-[#002718] text-[#063828] font-bold" 
-                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
+                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#c09e5f] text-[#c09e5f]"
                               } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                                slotTime < startTime ? "opacity-50 cursor-not-allowed" : ""
+                                slotTime < startTime ? "opacity-40 cursor-not-allowed" : ""
                               }`}
                             >
                               <button

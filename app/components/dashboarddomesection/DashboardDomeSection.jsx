@@ -389,15 +389,24 @@ const DashboardDomeSection = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
 
+  // const handleImageUpload = (e) => {
+  //   const files = Array.from(e.target.files);
+  //   const newImages = files.map((file) => ({
+  //     file,
+  //     previewUrl: URL.createObjectURL(file),
+  //   }));
+  //   setImages((prevImages) => [...prevImages, ...newImages]);
+  // };
+
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     const newImages = files.map((file) => ({
       file,
       previewUrl: URL.createObjectURL(file),
     }));
-    setImages((prevImages) => [...prevImages, ...newImages]);
+    setImages((prevImages) => [...prevImages, ...newImages]); 
   };
-
+  
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
   };
@@ -434,32 +443,53 @@ const DashboardDomeSection = () => {
         console.error('Error fetching data:', error);
         setError('Failed to load data. Please try again.');
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
 
     fetchData();
   }, []);
 
+
   const uploadImages = async () => {
     const formData = new FormData();
+    const section = 'Dome';
+    const imageName = `${section}_image`;
+  
     images.forEach((image, index) => {
       formData.append(`image${index}`, image.file);
     });
-    formData.append('section', 'dome');
-    formData.append('imageName', title);
-
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const url = `${baseUrl}/api/content/uploadImages`;
-    const response = await doPostCall(url, formData);
-
-    if (!response.ok) throw new Error('Failed to upload images.');
-
-    const result = await response.json();
-    console.log('Images uploaded successfully:', result);
-    return result.file_paths;
+  
+    formData.append('section', section);
+    formData.append('imageName', imageName);
+  
+    try {
+      const response = await fetch('http://192.168.70.209:8000/api/content/uploadImages', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': "Bearer 97|Gg4Cu9YhJfcCTi0WUGNMZxJ6UQW2b6AcDRFVu2Ky4c7828cb",
+        },
+        body: formData,
+        
+      });
+      console.log(response);
+  
+      if (!response.ok) {
+        const errorData = await response.text();
+        console.error('Server responded with error:', errorData);
+        throw new Error(`Failed to upload images: ${response.statusText}`);
+      }
+  
+      const result = await response.json();
+      console.log('Images uploaded successfully:', result);
+      return result.file_paths; 
+    } catch (error) {
+      console.error('Error uploading images:', error);
+      throw error;
+    }
   };
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -582,3 +612,5 @@ const DashboardDomeSection = () => {
 };
 
 export default DashboardDomeSection;
+
+

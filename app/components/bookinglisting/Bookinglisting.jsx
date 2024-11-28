@@ -253,8 +253,9 @@ const BookingListing = () => {
     const url = editingId
       ? `${baseUrl}/api/bookings/${editingId}`
       : `${baseUrl}/api/bookings`;
-  
+  debugger
     const method = editingId ? "PUT" : "POST";
+    console.log()
   
     const payload = { ...formData, time: formattedTime };
   
