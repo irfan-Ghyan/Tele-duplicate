@@ -18,7 +18,7 @@ const Page = () => {
   
   return (
     <div className='w-full'>
-    <Experience />
+      <Experience />
         <div className="w-full ">
           <Coaching />
 

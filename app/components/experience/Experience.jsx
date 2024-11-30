@@ -8,12 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 
-
-
 const Experience = () => {
-  
-
-
 const { t } = useTranslation();
   const [faqEntries, setFaqEntries] = useState([]);
   const [apiData, setApiData] = useState([]);
@@ -21,7 +16,6 @@ const { t } = useTranslation();
    const [loading, setLoading] = useState(false);
    const [error, setError] = useState("");
    
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -29,36 +23,39 @@ const { t } = useTranslation();
   const fetchData = async () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-    const url = `${baseUrl}/api/content/sections/Experience`;
+      const url = `${baseUrl}/api/content/sections/Experience`;
       const response = await fetch(url);
 
       if (response.ok) {
         const data = await response.json();
 
         if (data.success) {
-          const faqSection = data.data.sections.find((section) => section.title === "Session");
+          const faqSection = data.data.sections.find(
+            (section) => section.title === 'Session'
+          );
           if (faqSection) {
-            // Group fields by their index (e.g., "title1", "description1")
             const groupedData = faqSection.section_fields.reduce((acc, field) => {
-              const match = field.key.match(/(title|description)(\d+)/); // Extract type and index
+              const match = field.key.match(/(title|description)(\d+)/);
               if (match) {
                 const [_, type, index] = match;
                 if (!acc[index]) acc[index] = {};
-                acc[index][type] = field.value; 
+                acc[index][type] = field.value;
               }
               return acc;
             }, {});
 
-            const faqData = Object.values(groupedData);
+            const faqData = Object.values(groupedData).map((item, index) => ({
+              ...item,
+              id: `${index + 1}`, 
+            }));
+
             setFaqEntries(faqData);
           }
         }
       }
     } catch (error) {
-        setError("Failed to fetch data from the server.");
-    } finally {
-        setLoading(false);
-      }
+      console.error('Error fetching data:', error);
+    }
   };
 
   
@@ -95,7 +92,7 @@ const { t } = useTranslation();
       >
         <div className="flex justify-center items-center w-full h-[282px]">
           <Image
-            src=""
+            src="http://192.168.70.234:8000/storage/images/Dome/Dome_image_0.jpg" 
             alt="Product"
             width={363}
             height={282}
@@ -134,7 +131,7 @@ const { t } = useTranslation();
       >
         <div className="flex justify-center items-center w-full h-[282px]">
           <Image
-            src=""
+             src="http://192.168.70.234:8000/storage/images/Dome/Dome_image_0.jpg" 
             alt="Product"
             width={550}
             height={282}

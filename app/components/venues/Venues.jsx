@@ -83,7 +83,6 @@ const Dome = () => {
             <Image src={rightArrow} alt="Next" width={20} height={20} className='w-5 h-5 lg:w-10 lg:h-10' />
           </button>
 
-          {/* Slide Indicators */}
           <div className="absolute bottom-6 lg:bottom-20 left-2/4 transform -translate-x-1/2 flex space-x-4 max-w-7xl md:px-8 mx-auto">
             {domes.map((_, index) => (
               <button

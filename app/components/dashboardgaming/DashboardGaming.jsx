@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {doPostCall} from '../../utils/api';
+import {doPostCall, uploadImageCall, doGetCall} from '../../utils/api';
 
 const DashboardGaming = () => {
   const [title, setTitle] = useState('');
@@ -10,6 +10,8 @@ const DashboardGaming = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
   const [language, setLanguage] = useState('en'); 
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -32,84 +34,115 @@ const DashboardGaming = () => {
   };
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Dome');
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       const data = await response.json();
-  //       const sections = data?.data?.sections || [];
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true); // Start loading
+      setError(''); // Reset error state
 
-  //       const domeSection = sections.find(section => section.title === "Gaming Room");
+      try {
+        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+        const url = `${baseUrl}/api/content/sections/Dome`;
+        const response = await doGetCall(url);
 
-  //       if (domeSection) {
-  //         const titleField = domeSection.section_fields.find(field => field.key === 'title');
-  //         const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
+        if (!response.ok) {
+          throw new Error('Failed to fetch data.');
+        }
 
-  //         setTitle(titleField?.value || '');
-  //         setDescription(descriptionField?.value || '');
+        const data = await response.json();
+        const domeSection = data?.data?.sections.find((section) => section.title === '');
+        if (domeSection) {
+          const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
+            const match = field.key.match(/(title|description)(\d+)/);
+            if (match) {
+              const [, type, index] = match;
+              if (!acc[index]) acc[index] = {};
+              acc[index][type] = field.value;
+            }
+            return acc;
+          }, {});
+          setTableData(Object.values(groupedSlides));
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setError('Failed to load data. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //         // Populate tableData with each section's title and description
-  //         const sectionData = sections.map((section) => ({
-  //           title: section.section_fields.find(field => field.key === 'title')?.value || '',
-  //           description: section.section_fields.find(field => field.key === 'description')?.value || '',
-  //         }));
+    fetchData();
+  }, []);
 
-  //         setTableData(sectionData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
   
-    const payload = {
-      pageName: "Dome",
-      sectionName: "Gaming Room",
-      fields: [
-        { fieldName: "title", fieldValue: title },
-        { fieldName: "description", fieldValue: description },
-      ],
-    };
+    if (!title || !description) {
+      setError('Both title and description are required.');
+      return;
+    }
   
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/content/setMultipleFieldValues`;
-      const response = await doPostCall(url, payload);
-
-      if (!response.ok) throw new Error("Failed to save data to the database.");
-  
-      const result = await response.json();
-      console.log("Data saved successfully:", result);
-  
-  
-      if (isEditing) {
-        setTableData((prevData) =>
-          prevData.map((entry, index) =>
-            index === editingIndex ? { title, description } : entry
-          )
-        );
-      } else {
-        setTableData((prevData) => [...prevData, { title, description }]);
+      let uploadedImagePaths = [];
+      if (images.length > 0) {
+        uploadedImagePaths = await uploadImages(); 
       }
   
-      setTitle("");
-      setDescription("");
+      const payload = {
+        pageName: 'Dome',
+        sectionName: 'Gaming Room',
+        fields: [
+          { fieldName: `title${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: title },
+          { fieldName: `description${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: description },
+        ],
+        images: uploadedImagePaths,
+      };
+  
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/setMultipleFieldValues`;
+  
+      const response = await doPostCall(url, payload);
+  
+      if (!response.ok) {
+        const responseBody = await response.text();
+        console.error('Update API response:', responseBody);
+        throw new Error('Failed to save data to the database.');
+      }
+  
+      // Update tableData
+      const newEntry = {
+        id: tableData[editingIndex]?.id || tableData.length + 1,
+        title,
+        description,
+        images: uploadedImagePaths,
+      };
+  
+      if (editingIndex !== null) {
+        setTableData((prevData) => {
+          const updatedData = [...prevData];
+          updatedData[editingIndex] = newEntry;
+          return updatedData;
+        });
+        setEditingIndex(null);
+        setIsEditing(false);
+      } else {
+        setTableData((prevData) => [...prevData, newEntry]);
+      }
+  
+      // Reset form fields
+      setTitle('');
+      setDescription('');
       setImages([]);
-      setIsEditing(false);
-      setEditingIndex(null);
     } catch (error) {
-      console.error("Error:", error);
-    }
+      console.error('Error saving data:', error.message || error);
+      setError('Failed to save data. Please try again.');
+    } 
   };
-
+  
+  
   const handleDelete = async (index) => {
     const entryToDelete = tableData[index];
 
@@ -152,6 +185,46 @@ const DashboardGaming = () => {
     setImages(entry.images || []); 
     setIsEditing(true);
     setEditingIndex(index);
+  };
+  
+  const uploadImages = async () => {
+    const formData = new FormData();
+    const section = 'Gaming Room';
+    const imageName = `${section}_image`;
+  
+    // Append images
+    images.forEach((image) => {
+      formData.append('images[]', image.file);
+    });
+  
+    // Append metadata
+    formData.append('section', section);
+    formData.append('imageName', imageName);
+  
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/uploadImages`;
+  
+      const response = await uploadImageCall(url, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Upload failed:', errorData.message || 'Unknown error');
+        throw new Error(errorData.message || 'Failed to upload images');
+      }
+  
+      const result = await response.json();
+      console.log('Image Upload Successful:', result);
+  
+      // Return uploaded file paths
+      return result.file_paths || [];
+    } catch (error) {
+      console.error('Error during image upload:', error);
+      throw error;
+    }
   };
   
   
@@ -217,20 +290,19 @@ const DashboardGaming = () => {
           />
         </div>
 
-        <div className="mb-4 grid grid-cols-3 gap-4">
-          {images.map((img, index) => (
-            <div key={index} className="relative">
-              <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
-              <button
-                type="button"
-                onClick={() => handleRemoveImage(index)}
-                className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
-              >
-                &times;
-              </button>
-            </div>
-          ))}
-        </div>
+        {images.map((img, index) => (
+  <div key={index} className="relative">
+    <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
+    <button
+      type="button"
+      onClick={() => handleRemoveImage(index)}
+      className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1"
+    >
+      &times;
+    </button>
+  </div>
+))}
+
 
         <button
           type="submit"

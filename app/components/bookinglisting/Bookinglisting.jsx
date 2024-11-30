@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState, useMemo, useCallback } from "react";
-import { doGetCall, doPostCall, doDeleteCall } from "../../utils/api.js";
+import { doGetCall, doPostCall, doDeleteCall, doPutCall } from "../../utils/api.js";
 
 const BookingListing = () => {
   const [bookings, setBookings] = useState([]);
@@ -17,6 +17,7 @@ const BookingListing = () => {
   const [slotInterval, setSlotInterval] = useState(20);
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
   const [formData, setFormData] = useState({
+    id: "",
     name: "",
     phone: "",
     email: "",
@@ -253,11 +254,11 @@ const BookingListing = () => {
     const url = editingId
       ? `${baseUrl}/api/bookings/${editingId}`
       : `${baseUrl}/api/bookings`;
-  debugger
+
     const method = editingId ? "PUT" : "POST";
     console.log()
   
-    const payload = { ...formData, time: formattedTime };
+    const payload = { ...formData, time: formattedTime,  id: formData.id || editingId, booking_type: formData.booking_type, };
   
     try {
       console.log("Request Method:", method);
@@ -265,7 +266,7 @@ const BookingListing = () => {
       console.log("Payload:", payload);
   
       const response = editingId
-        ? await doPostCall(url, payload, method)
+        ? await doPutCall(url, payload, method)
         : await doPostCall(url, payload);
   
       if (response.ok) {
@@ -275,10 +276,11 @@ const BookingListing = () => {
           phone: "",
           email: "",
           no_of_people: "",
-          booking_type: "",
+          booking_type: { id: "", name: "" },
           duration: "",
           date: "",
           time: "",
+          id: "",
         });
         setEditingId(null);
         setShowForm(false);
@@ -325,20 +327,51 @@ const BookingListing = () => {
     setShowForm(true);
   };
   
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setFormData((prevData, prevFormData) => ({ ...prevFormData, ...prevData, [name]: value }));
+
+  // if (name === 'no_of_people' && value > 14) {
+  //   alert('Number of people cannot exceed 14');
+  //   return; 
+  // }
+
+  // setFormData({
+  //   ...formData,
+  //   [name]: value
+  // });
+  // };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData, prevFormData) => ({ ...prevFormData, ...prevData, [name]: value }));
-
-  if (name === 'no_of_people' && value > 14) {
-    alert('Number of people cannot exceed 14');
-    return; 
-  }
-
-  setFormData({
-    ...formData,
-    [name]: value
-  });
+  
+    // If the field is booking_type, handle it as an object with id and name
+    if (name === 'booking_type') {
+      const selectedType = value; // Get the selected booking type from the dropdown
+      const bookingTypeObject = getBookingTypeById(selectedType); // Get the corresponding object (id and name)
+      
+      setFormData((prevData) => ({
+        ...prevData,
+        booking_type: bookingTypeObject, // Update formData with the full object
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
+  
+  const getBookingTypeById = (typeName) => {
+    const bookingTypes = [
+      { id: 1, name: 'normal' },
+      { id: 2, name: 'vip' },
+      { id: 3, name: 'lounge' },
+    ];
+  
+    return bookingTypes.find(type => type.name === typeName) || { id: "", name: "" }; 
+  };
+  
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === "en" ? "ar" : "en"));
@@ -447,7 +480,7 @@ const BookingListing = () => {
     <label>Type</label>
     <select
       name="booking_type"
-      value={formData.booking_type}
+        value={formData.booking_type?.name || ""}
       onChange={handleInputChange}
       required
       className="w-full p-2 border border-gray-300"

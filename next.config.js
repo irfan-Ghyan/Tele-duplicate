@@ -27,7 +27,8 @@ module.exports = {
 
   images: {
     unoptimized: true,
-    domains: ['www.teleiosdome.com'],  
+    domains: ['192.168.70.234'], 
+    
 
   },
 

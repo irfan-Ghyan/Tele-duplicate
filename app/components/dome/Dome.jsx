@@ -1,5 +1,3 @@
-
-
 // 'use client';
 
 // import React, { useState, useEffect } from 'react';
@@ -15,27 +13,27 @@
 // const Dome = () => {
 //   const [domes, setDomes] = useState([]);
 //   const [currentSlide, setCurrentSlide] = useState(0);
-//   const sliderRef = React.useRef(null);
-//   const { t, i18n } = useTranslation();
-//   const [slides, setSlides] = useState([]); 
-
+//   const [loading, setLoading] = useState(false); // Loading state
+//   const [error, setError] = useState(''); // Error state
+//   const { t } = useTranslation();
 
 //   useEffect(() => {
 //     const fetchData = async () => {
+//       setLoading(true);
+//       setError('');
 //       try {
 //         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 //         const url = `${baseUrl}/api/content/sections/Home`;
 //         const response = await fetch(url);
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         const data = await response.json();
-//         console.log(data)
 
-//         const domeSection = data?.data?.sections.find(section => section.title === "Dome");
+//         if (!response.ok) {
+//           throw new Error("Failed to fetch data from the server");
+//         }
+
+//         const data = await response.json();
+//         const domeSection = data?.data?.sections.find((section) => section.title === "Dome");
 
 //         if (domeSection) {
-
 //           const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
 //             const match = field.key.match(/(title|description)(\d*)/); 
 //             if (match) {
@@ -46,12 +44,13 @@
 //             return acc;
 //           }, {});
 
-
 //           const slidesArray = Object.values(groupedSlides);
 //           setDomes(slidesArray);
 //         }
-//       } catch (error) {
-//         console.error("Error fetching data:", error);
+//       } catch (err) {
+//         setError(err.message || 'An error occurred while fetching data.');
+//       } finally {
+//         setLoading(false);
 //       }
 //     };
 
@@ -79,7 +78,12 @@
 //         <link rel="preload" href="/assets/images/dome/S1.png" as="image" />
 //       </Head>
 //       <div className="relative w-full h-[700px] xl:h-[1000px] overflow-hidden flex justify-center items-center">
-//         {domes.map((dome, index) => (
+//         {/* Loading and Error Messages */}
+//         {loading && <p className="text-[#e3ce90] text-xl">Loading...</p>}
+//         {error && <p className="text-red-500">{error}</p>}
+
+//         {/* Render Content if Not Loading or Error */}
+//         {!loading && !error && domes.map((dome, index) => (
 //           <div
 //             key={index}
 //             className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out ${
@@ -108,7 +112,6 @@
 //               </Link>
 //             </div>
   
-          
 //             <button
 //               onClick={prevSlide}
 //               className="absolute top-[50%] left-0 xl:left-20 transform -translate-y-1/2 z-10"
@@ -139,7 +142,6 @@
 //       </div>
 //     </>
 //   );
-  
 // };
 
 // export default Dome;
@@ -156,12 +158,15 @@ import leftArrow from '../../../public/assets/images/dome/left-arrow.png';
 import rightArrow from '../../../public/assets/images/dome/righ-arrow.png';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import { getImageCall} from '../../utils/api';
+
+
 
 const Dome = () => {
   const [domes, setDomes] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(''); // Error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -182,7 +187,7 @@ const Dome = () => {
 
         if (domeSection) {
           const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
-            const match = field.key.match(/(title|description)(\d*)/); 
+            const match = field.key.match(/(title|description)(\d*)/);
             if (match) {
               const [, type, index] = match;
               if (!acc[index]) acc[index] = {};
@@ -192,7 +197,26 @@ const Dome = () => {
           }, {});
 
           const slidesArray = Object.values(groupedSlides);
-          setDomes(slidesArray);
+
+          const imagesResponse = await getImageCall(
+            `${baseUrl}/api/content/getImages/Dome`,
+            {}
+          );
+
+          const imagesData = await imagesResponse.json();
+
+          if (imagesData.success) {
+            const images = imagesData.data.map((image) => image.url);
+
+            const updatedDomes = slidesArray.map((slide, index) => ({
+              ...slide,
+              imageUrl: images[index] || 'http://192.168.70.234:8000/storage/images/Dome/Dome_image.png_0.png',
+            }));
+
+            setDomes(updatedDomes);
+          } else {
+            throw new Error("Failed to fetch images from the server");
+          }
         }
       } catch (err) {
         setError(err.message || 'An error occurred while fetching data.');
@@ -233,9 +257,7 @@ const Dome = () => {
         {!loading && !error && domes.map((dome, index) => (
           <div
             key={index}
-            className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
             style={{
               backgroundImage: `url(${dome.imageUrl})`,
               backgroundSize: 'cover',
@@ -278,9 +300,7 @@ const Dome = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`p-[2px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${
-                    index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'
-                  }`}
+                  className={`p-[2px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'}`}
                 />
               ))}
             </div>
