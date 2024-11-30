@@ -50,7 +50,7 @@ const DashboardGaming = () => {
         }
 
         const data = await response.json();
-        const domeSection = data?.data?.sections.find((section) => section.title === '');
+        const domeSection = data?.data?.sections.find((section) => section.title === 'Gaming Room');
         if (domeSection) {
           const groupedSlides = domeSection.section_fields.reduce((acc, field) => {
             const match = field.key.match(/(title|description)(\d+)/);
