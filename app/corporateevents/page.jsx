@@ -4,6 +4,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async'; 
 import CorporateEvent from '../components/corporateevent/CorporateEvent';
 import CorporateBuilding from '../components/corporatebuilding/CorporateBuilding';
+import CorporateConference from '../components/corporateConference/CorporateConference';
+import CorporateNetworking from '../components/corporateNetworking/CorporateNetworking.jsx'
 import Venues from '../components/venues/Venues';
 // import Partners from '../components/partners/Partners';
 import Celebrations from '../components/celebrations/Celebrations';
@@ -43,8 +45,16 @@ const Page = () => {
         <div className="w-full">
           <CorporateEvent />
         </div>
+        <div className='flex w-full'> 
         <div className="w-full">
           <CorporateBuilding />
+      </div>
+        <div className="w-full">
+          <CorporateNetworking />
+        </div>
+        <div className="w-full">
+          <CorporateConference />
+        </div>
         </div>
         <div className="w-full">
           <Venues />

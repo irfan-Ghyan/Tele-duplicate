@@ -1,3 +1,5 @@
+
+
 // 'use client';
 
 // import React, { useState, useEffect } from 'react';
@@ -7,7 +9,7 @@
 // import { getImageCall } from '../../utils/api';
 // import Image from 'next/image';
 
-// const CorporateBuilding = () => {
+// const CorporateNetworking = () => {
 
 //   const { t } = useTranslation();
 //   const [latestEntry, setLatestEntry] = useState(null);
@@ -35,7 +37,7 @@
 //       let entry = null;
 
 //       if (sectionData.success) {
-//         const domeSection = sectionData.data.sections.find((section) => section.title === 'Team Building');
+//         const domeSection = sectionData.data.sections.find((section) => section.title === 'Networking');
 
 //         if (domeSection && domeSection.section_fields) {
 //           // Assume the fields are sorted by the backend or sort them here
@@ -56,11 +58,11 @@
 //           }
 
 //           // Fetch the image data dynamically
-//           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Team Building`);
+//           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Networking`);
 //           if (imageResponse.ok) {
 //             const imageData = await imageResponse.json();
 //             if (imageData.success && imageData.data.length > 0) {
-//               entry.imageUrl = imageData.data[0].url; 
+//               entry.imageUrl = imageData.data[0].url; // Use the first image URL
 //             }
 //           }
 
@@ -108,7 +110,7 @@
 //               priority={true}
 //             />
 //             <h1 className='text-[18px] text-[#c09e5f] font-bold font-orbitron'>{latestEntry.title}</h1>
-//             <p className='text-[#c09e5f] font-jura text-center hidden md:block text-balance'>{latestEntry.description}</p>
+//             <p className='text-[#c09e5f] font-jura text-center hidden md:block text-balance'> {latestEntry.description}</p>
 //             {/* <button className='hidden md:block mt-2 button-slanted w-[160px] h-[44px] px-4 py-2 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center'>
 //             <span className='button-slanted-content'>Enquire now</span>
 //             </button> */}
@@ -116,7 +118,6 @@
 //         </div>
 //       </div>
 // )}
-
 //       <style jsx>{`
 //         .hover-trigger {
 //           position: relative;
@@ -147,8 +148,7 @@
 //   )
 // }
 
-// export default CorporateBuilding;
-
+// export default CorporateNetworking;
 
 'use client';
 
@@ -159,7 +159,7 @@ import Image from 'next/image'; // Ensure you import the Image component from 'n
 import { useTranslation } from 'react-i18next';
 import { getImageCall } from '../../utils/api';
 
-const CorporateBuilding = () => {
+const CorporateNetworking = () => {
   const { t } = useTranslation();
   const [latestEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -305,4 +305,4 @@ const CorporateBuilding = () => {
   );
 };
 
-export default CorporateBuilding;
+export default CorporateNetworking;

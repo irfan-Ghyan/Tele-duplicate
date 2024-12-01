@@ -208,9 +208,12 @@ const Dome = () => {
           if (imagesData.success) {
             const images = imagesData.data.map((image) => image.url);
 
+            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+            const url =`${baseUrl}/storage/images/Dome/Dome_image.png_0.png`
             const updatedDomes = slidesArray.map((slide, index) => ({
+              
               ...slide,
-              imageUrl: images[index] || 'http://192.168.70.234:8000/storage/images/Dome/Dome_image.png_0.png',
+              imageUrl: images[index] || (url),
             }));
 
             setDomes(updatedDomes);
