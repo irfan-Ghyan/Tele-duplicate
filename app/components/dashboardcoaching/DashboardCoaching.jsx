@@ -50,10 +50,10 @@ const DashboardCoaching = () => {
     
         if (coachingSection) {
           const tableData = coachingSection.section_fields.map((field, index) => ({
-            id: index, // Or use a unique identifier from the API
+            id: index,
             title: field.key.includes('title') ? field.value : '',
             description: field.key.includes('description') ? field.value : '',
-            images: [], // Update with actual image URLs if available
+            images: [],
           }));
           setTableData(tableData);
         }
@@ -152,13 +152,13 @@ const DashboardCoaching = () => {
       const response = await doPostCall(url, payload);
   
       if (!response.ok) {
-        const responseBody = await response.text(); // Debug response if not OK
+        const responseBody = await response.text(); 
         console.error('Update API response:', responseBody);
         throw new Error('Failed to save data to the database.');
       }
   
       const newEntry = {
-        id: tableData[editingIndex]?.id || tableData.length + 1, // Retain existing ID or generate a new one
+        id: tableData[editingIndex]?.id || tableData.length + 1, 
         title,
         description,
         images: uploadedImagePaths,
@@ -190,37 +190,50 @@ const DashboardCoaching = () => {
   };
   
 
-  const handleDelete = async (index) => {
-    const entryToDelete = tableData[index]; // Get the entry to delete
-    if (!entryToDelete || !entryToDelete.id) {
-      setError('Entry does not have a valid ID to delete.');
-      return;
-    }
+
+  const handleDelete = async (fieldName) => {
+    setLoading(true);
+    setError('');
   
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/content/deleteSection/${entryToDelete.id}`;
+      // Set up the API URL and request body
+      const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/content/removeSectionField`; // Adjust the URL as needed
+      const payload = {
+        pageName: 'Experience',
+        sectionName: 'Coaching',
+        fieldName: fieldName, // Pass the dynamic fieldName
+      };
   
-      const response = await doDeleteCall(url, {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      // Make the API call to delete the field
+      const response = await fetch(url, {
+        method: 'DELETE', // Assuming POST request for deletion
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`, // Include token if necessary
+        },
+        body: JSON.stringify(payload),
       });
   
-      if (!response.ok) {
-        const responseBody = await response.text(); // Capture response for debugging
-        console.error('Delete API response:', responseBody);
-        throw new Error('Failed to delete entry from the database.');
-      }
+      const data = await response.json();
   
-      // Update tableData state to remove the deleted entry
-      setTableData((prevData) => prevData.filter((_, i) => i !== index));
-      console.log('Entry deleted successfully:', entryToDelete.id);
+      // Check if the deletion was successful
+      if (data.success) {
+        // Handle successful deletion
+        console.log(data.message);
+  
+        // Now remove the deleted row from the tableData state
+        setTableData((prevData) => prevData.filter((item) => item.title !== fieldName));
+      } else {
+        setError('Failed to delete field.');
+      }
     } catch (error) {
-      console.error('Error deleting entry:', error.message || error);
-      setError('Failed to delete entry. Please try again.');
+      console.error('Error:', error);
+      setError('Error deleting the field.');
+    } finally {
+      setLoading(false);
     }
   };
   
-
   const handleEdit = (index) => {
     const entryToEdit = tableData[index];
     if (!entryToEdit) {
@@ -276,6 +289,7 @@ const DashboardCoaching = () => {
 
   const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
+
   return (
     <div
       className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40 ${
@@ -314,6 +328,7 @@ const DashboardCoaching = () => {
                 className="w-full p-2 border border-gray-300"
                 dir={getDirection()}
                 required
+   
               />
             </div>
 
@@ -328,6 +343,7 @@ const DashboardCoaching = () => {
                 dir={getDirection()}
                 rows="3"
                 required
+ 
               />
             </div>
 
@@ -375,12 +391,13 @@ const DashboardCoaching = () => {
         </>
       )}
 
-<div className="mt-20">
-  <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
-  <table className="w-full border border-gray-300">
+    <div className="mt-20">
+      <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+      <table className="w-full border border-gray-300">
     <thead>
       <tr className="bg-gray-100">
-        <th className="p-2 border border-gray-300">Title & Description</th>
+        <th className="p-2 border border-gray-300">Title</th>
+        <th className="p-2 border border-gray-300">Description</th>
         <th className="p-2 border border-gray-300">Images</th>
         <th className="p-2 border border-gray-300">Actions</th>
       </tr>
@@ -389,10 +406,10 @@ const DashboardCoaching = () => {
       {tableData.map((entry, index) => (
         <tr key={index} className="border border-gray-300">
           <td className="p-2">
-            <div>
-              <p><strong>Title:</strong> {entry.title}</p>
-              <p><strong>Description:</strong> {entry.description}</p>
-            </div>
+            <p><strong>Title:</strong> {entry.title}</p>
+          </td>
+          <td className="p-2">
+            <p><strong>Description:</strong> {entry.description}</p>
           </td>
           <td className="p-2">
             {entry.images.length > 0 ? (
@@ -409,25 +426,24 @@ const DashboardCoaching = () => {
             )}
           </td>
           <td className="p-2">
+          <button
+               onClick={() => handleEdit(index)}
+              className="mr-2 text-blue-500 hover:underline"
+              >
+             {labels[language].edit}
+          </button>
             <button
-              onClick={() => handleEdit(index)}
-              className="text-blue-500 mr-2"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(index)}
+              onClick={() => handleDelete(`description${entry.id}`)} 
               className="text-red-500"
             >
-              Delete
+              {labels[language].delete}
             </button>
           </td>
         </tr>
       ))}
     </tbody>
   </table>
-</div>
-
+    </div>
 
     </div>
   );

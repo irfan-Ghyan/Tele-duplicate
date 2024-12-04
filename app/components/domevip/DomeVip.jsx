@@ -282,7 +282,7 @@ const DomeVip = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('http://192.168.70.234:8000/storage/images/VIP Experience/VIP Experience_image_0.jpg')`,
+            : `url('http://192.168.70.162:8000/storage/images/VIP Experience/VIP Experience_image_0.jpg')`,
         }}
       >
         <div className="w-full bg-[#11072C] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">

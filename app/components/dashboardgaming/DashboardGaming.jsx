@@ -76,9 +76,75 @@ const DashboardGaming = () => {
 
  
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  
+  //   if (!title || !description) {
+  //     setError('Both title and description are required.');
+  //     return;
+  //   }
+  
+  //   try {
+  //     let uploadedImagePaths = [];
+  //     if (images.length > 0) {
+  //       uploadedImagePaths = await uploadImages(); 
+  //     }
+  
+  //     const payload = {
+  //       pageName: 'Dome',
+  //       sectionName: 'Gaming Room',
+  //       fields: [
+  //         { fieldName: `title${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: title },
+  //         { fieldName: `description${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: description },
+  //       ],
+  //       images: uploadedImagePaths,
+  //     };
+  
+  //     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  //     const url = `${baseUrl}/api/content/setMultipleFieldValues`;
+  
+  //     const response = await doPostCall(url, payload);
+  
+  //     if (!response.ok) {
+  //       const responseBody = await response.text();
+  //       console.error('Update API response:', responseBody);
+  //       throw new Error('Failed to save data to the database.');
+  //     }
+  
+  //     // Update tableData
+  //     const newEntry = {
+  //       id: tableData[editingIndex]?.id || tableData.length + 1,
+  //       title,
+  //       description,
+  //       images: uploadedImagePaths,
+  //     };
+  
+  //     if (editingIndex !== null) {
+  //       setTableData((prevData) => {
+  //         const updatedData = [...prevData];
+  //         updatedData[editingIndex] = newEntry;
+  //         return updatedData;
+  //       });
+  //       setEditingIndex(null);
+  //       setIsEditing(false);
+  //     } else {
+  //       setTableData((prevData) => [...prevData, newEntry]);
+  //     }
+  
+  //     // Reset form fields
+  //     setTitle('');
+  //     setDescription('');
+  //     setImages([]);
+  //   } catch (error) {
+  //     console.error('Error saving data:', error.message || error);
+  //     setError('Failed to save data. Please try again.');
+  //   } 
+  // };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
   
     if (!title || !description) {
       setError('Both title and description are required.');
@@ -132,14 +198,14 @@ const DashboardGaming = () => {
         setTableData((prevData) => [...prevData, newEntry]);
       }
   
-      // Reset form fields
+      // Reset form fields after submission
       setTitle('');
       setDescription('');
       setImages([]);
     } catch (error) {
       console.error('Error saving data:', error.message || error);
       setError('Failed to save data. Please try again.');
-    } 
+    }
   };
   
   
@@ -177,15 +243,25 @@ const DashboardGaming = () => {
       console.error("Error deleting data:", error);
     }
   };
-  
+
   const handleEdit = (index) => {
     const entry = tableData[index];
-    setTitle(entry.title);
-    setDescription(entry.description);
-    setImages(entry.images || []); 
-    setIsEditing(true);
-    setEditingIndex(index);
+    setTitle(entry.title);  // Set the title to the selected entry's title
+    setDescription(entry.description);  // Set the description to the selected entry's description
+    setImages(entry.images || []);  // Set the images to the selected entry's images
+    setIsEditing(true);  // Set editing mode to true
+    setEditingIndex(index);  // Store the index of the entry being edited
   };
+  
+  
+  // const handleEdit = (index) => {
+  //   const entry = tableData[index];
+  //   setTitle(entry.title);
+  //   setDescription(entry.description);
+  //   setImages(entry.images || []); 
+  //   setIsEditing(true);
+  //   setEditingIndex(index);
+  // };
   
   const uploadImages = async () => {
     const formData = new FormData();

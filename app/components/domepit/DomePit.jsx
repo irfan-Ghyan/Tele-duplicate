@@ -1,6 +1,3 @@
-
-
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -61,7 +58,7 @@ const DomePit = () => {
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url;
             }
           }
 
@@ -86,7 +83,7 @@ const DomePit = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('http://192.168.70.234:8000/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
+            : `url('http://192.168.70.162:8000/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
         }}
       >
         <div className="w-full bg-[#11072C] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
