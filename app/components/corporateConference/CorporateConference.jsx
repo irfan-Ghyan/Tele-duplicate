@@ -185,7 +185,7 @@ const CorporateConference = () => {
       let entry = null;
 
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'Networking');
+        const domeSection = sectionData.data.sections.find((section) => section.title === 'Conference');
 
         if (domeSection && domeSection.section_fields) {
           // Find the latest title and corresponding description
@@ -206,11 +206,11 @@ const CorporateConference = () => {
           }
 
           // Fetch the image data dynamically
-          const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Networking`);
+          const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Conference`);
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url;
             }
           }
 
@@ -259,7 +259,7 @@ const CorporateConference = () => {
                   src={latestEntry.imageUrl || '/assets/images/events/default.jpg'} // Dynamically use the fetched image URL
                   width={60}
                   height={60}
-                  alt="Networking"
+                  alt="Conference"
                   className="mb-4"
                   priority={true}
                 />

@@ -211,7 +211,7 @@ const BookingCalendar = () => {
 
   const fetchBookings = useCallback(async () => {
     setLoading(true);
-    setError(""); // Reset error before fetching
+    setError("");
 
     const payload = {
       no_of_people: "2",

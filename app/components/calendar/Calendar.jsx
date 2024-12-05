@@ -32,8 +32,8 @@ const CalendarComponent = ({ onChange, value, minDate, maxDate }) => {
       <Calendar
         onChange={onChange}
         value={value}
-        minDate={minDate}  // Disable dates before selected date
-        maxDate={maxDate}  // Disable dates after selected date
+        minDate={minDate}
+        maxDate={maxDate}
       />
     </div>
   );

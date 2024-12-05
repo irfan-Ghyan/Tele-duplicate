@@ -11,91 +11,73 @@ const DashboardExperience = () => {
   const [tableData, setTableData] = useState([]);
   const [editingIndex, setEditingIndex] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(''); // Error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Fetch table data from backend on component mount
-  // useEffect(() => {
-  //   fetchTableData();
-  // }, []);
 
-  // const fetchTableData = async () => {
-  //   setLoading(true);
-  //   setError('');
-  //   try {
-  //     const url = 'http://192.168.70.249:8000/api/content/sections/Home';
-  //     const response = await fetch(url);
+//   const uploadImages = async () => {
+//     let formData = new FormData();
+//     const section = 'Session';
+//     const imageName = `${section}_image`;
+  
+//     images.forEach((image, index) => {
 
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       if (data.success) {
-  //         const sessionData = data.data.sections.find((section) => section.title === 'Experience');
-  //         if (sessionData) {
-  //           const formattedData = sessionData.section_fields.reduce((acc, field) => {
-  //             const match = field.key.match(/(title|description)(\d+)/);
-  //             if (match) {
-  //               const [, type, index] = match;
-  //               if (!acc[index]) acc[index] = { key: index };
-  //               acc[index][type] = field.value;
-  //             }
-  //             return acc;
-  //           }, []);
-  //           setTableData(formattedData);
-  //         }
-  //       }
-  //     } else {
-  //       setError('Failed to fetch table data');
-  //     }
-  //   } catch (error) {
-  //     setError('Error fetching table data: ' + error.message);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
+//       formData.append('images[]', image.file);
+//     });
+  
+//     formData.append('section', section);
+//     formData.append('imageName', imageName);
+  
+// console.log(formData)
+    
+  
+//     try {
+//       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+//       const url = `${baseUrl}/api/content/uploadImages`;
+//       const response = await uploadImageCall(url, {
+//         method: 'POST',
+//         body: formData,
+//       });
+  
+//       // const response = await uploadImageCall(url, formData, {
+//       //   Accept: 'application/json',
+//       //   Authorization: 'Bearer ' + localStorage.getItem('token'),
+//       // });
 
-  const uploadImages = async () => {
-    const formData = new FormData();
-    const section = 'Dome';
-    const imageName = `${section}_image`;
+//       console.log(response);
 
-    images.forEach((image, index) => {
-      formData.append('images[]', image.file);
-    });
+//       if (!response.ok) {
+//         const errorData = await response.text();
+//         console.error('Server responded with error:', errorData);
+//         throw new Error(`Failed to upload images: ${response.statusText}`);
+//       }
 
-    formData.append('section', section);
-    formData.append('imageName', imageName);
+//       const result = await response.json();
 
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/content/uploadImages`;
+//       console.log('Images uploaded successfully:', result);
+//       const cleanedUrls = result.file_paths.map((file) => ({
+//         ...file,
+//         url: file.url.replace(/\\/g, '/'),
+//       }));
 
-      const response = await uploadImageCall(url, formData, {
-        Accept: 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      });
+//       return result.file_paths;
+//     } catch (error) {
+//       console.error('Error uploading images:', error);
+//       throw error;
+//     }
+//   };
 
-      console.log(response);
 
-      if (!response.ok) {
-        const errorData = await response.text();
-        console.error('Server responded with error:', errorData);
-        throw new Error(`Failed to upload images: ${response.statusText}`);
-      }
-
-      const result = await response.json();
-
-      console.log('Images uploaded successfully:', result);
-      const cleanedUrls = result.file_paths.map((file) => ({
-        ...file,
-        url: file.url.replace(/\\/g, '/'),
-      }));
-
-      return result.file_paths;
-    } catch (error) {
-      console.error('Error uploading images:', error);
-      throw error;
-    }
-  };
+const handleImageUpload = (e) => {
+  const files = Array.from(e.target.files);
+  const newImages = files.map((file) => {
+    return {
+      file,
+      previewUrl: URL.createObjectURL(file),
+    };
+  });
+  setImages((prevImages) => [...prevImages, ...newImages]);
+};
 
   
   const handleSubmit = async (e) => {
@@ -109,8 +91,13 @@ const DashboardExperience = () => {
     setLoading(true);
     setError('');
     try {
-      const newEntry = { title, description };
+      // const newEntry = { title, description };
       const index = editingIndex !== null ? editingIndex : tableData.length;
+
+      let uploadedImagePaths = [];
+      if (images.length > 0) {
+        uploadedImagePaths = await uploadImages(); 
+      }
 
       const payload = {
         pageName: 'Experience',
@@ -119,6 +106,7 @@ const DashboardExperience = () => {
           { fieldName: `title${index + 1}`, fieldValue: title },
           { fieldName: `description${index + 1}`, fieldValue: description },
         ],
+        images: uploadedImagePaths,
       };
 
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -128,10 +116,17 @@ const DashboardExperience = () => {
       if (!response.ok) throw new Error('Failed to save data to the database.');
       const result = await response.json();
 
-      if (images.length > 0) {
-        const uploadedImagePaths = await uploadImages();
-        payload.images = uploadedImagePaths;
-      }
+      const newEntry = {
+        id: tableData[editingIndex]?.id || tableData.length + 1,
+        title,
+        description,
+        images: uploadedImagePaths,
+      };
+
+      // if (images.length > 0) {
+      //   const uploadedImagePaths = await uploadImages();
+      //   payload.images = uploadedImagePaths;
+      // }
 
 
       if (editingIndex !== null) {
@@ -147,6 +142,7 @@ const DashboardExperience = () => {
       setTitle('');
       setDescription('');
       setEditingIndex(null);
+      setImages([]);
     } catch (error) {
       setError('Error saving data: ' + error.message);
     } finally {
@@ -200,13 +196,45 @@ const DashboardExperience = () => {
     setEditingIndex(index);
   };
   
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    const newImages = files.map((file) => ({
-      file,
-      previewUrl: URL.createObjectURL(file),
-    }));
-    setImages((prevImages) => [...prevImages, ...newImages]);
+
+  const uploadImages = async () => {
+    const formData = new FormData();
+    const section = 'Dome';
+    const imageName = `${section}_image`;
+  
+    // Append images
+    images.forEach((image) => {
+      formData.append('images[]', image.file);
+    });
+  
+    // Append metadata
+    formData.append('section', section);
+    formData.append('imageName', imageName);
+  
+    try {
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const url = `${baseUrl}/api/content/uploadImages`;
+  
+      const response = await uploadImageCall(url, {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Upload failed:', errorData.message || 'Unknown error');
+        throw new Error(errorData.message || 'Failed to upload images');
+      }
+  
+      const result = await response.json();
+      console.log('Image Upload Successful:', result);
+  
+      // Return uploaded file paths
+      return result.file_paths || [];
+    } catch (error) {
+      console.error('Error during image upload:', error);
+      throw error;
+    }
   };
 
   const fetchTableData = async () => {
@@ -249,7 +277,7 @@ const DashboardExperience = () => {
 
 
   return (
-    <div className="w-full py-10 px-40">
+    <div className="bg-white w-full py-10 px-40">
       <h1 className="text-4xl font-black text-[#063828]">Session</h1>
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}

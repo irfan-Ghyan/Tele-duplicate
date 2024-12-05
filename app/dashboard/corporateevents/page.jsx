@@ -33,20 +33,20 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
 
-        <div className='px-40'>
+        <div className='px-40 bg-white'>
         <DashboardBuildingEvents />
         </div>
 
-        <div className='px-40 bg-white border-t-2 border-gray-200'>
+        <div className='px-40 bg-white'>
         <DashboardNetworking />
         </div>
 
-        <div className='px-40 bg-white border-t-2 border-gray-200'>
+        <div className='px-40 bg-white'>
         <DashboardConference />
         </div>
 
 
-        <div className='px-40 bg-white border-t-2 border-gray-200'>
+        <div className='px-40 bg-white'>
         <DashboardVenueBranding />
         </div>
 

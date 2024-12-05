@@ -11,8 +11,7 @@ const BookingListing = () => {
   const [language, setLanguage] = useState("en");
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [editingId, setEditingId] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [isVisible, setIsVisible] = useState(false); 
+
   const [selectedDate, setSelectedDate] = useState("");
   const [slotInterval, setSlotInterval] = useState(20);
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
@@ -29,6 +28,8 @@ const BookingListing = () => {
   });
 
   const [timeSlots, setTimeSlots] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [isVisible, setIsVisible] = useState(false); 
   const [error, setError] = useState("");
 
 
@@ -45,6 +46,8 @@ const BookingListing = () => {
       }
 
       const data = await response.json();
+
+
       const formattedBookings = data.data.map((booking) => ({
         ...booking,
         time: booking.time ? booking.time.slice(0, 5) : "",
@@ -66,46 +69,82 @@ const BookingListing = () => {
     setSelectedDate(formattedDate);
   }, []);
 
-  useEffect(() => {
-    const payload = {
-      no_of_people: "2",
-      date: selectedDate,
-      duration: slotInterval.toString(),
-      booking_type: selectedSlotType,
-    };
+  // useEffect(() => {
+  //   const payload = {
+  //     no_of_people: "2",
+  //     date: selectedDate,
+  //     duration: slotInterval.toString(),
+  //     booking_type: selectedSlotType,
+  //   };
 
-    async function fetchTimeSlots() {
-      const queryString = new URLSearchParams(payload).toString();
+  //   async function fetchTimeSlots() {
+  //     const queryString = new URLSearchParams(payload).toString();
+  //     setLoading(true);
+  //     setError("");
+  //     try {
+  //       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  //     const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
+  //     let response = await doGetCall(url);
+  //     const data = await response.json();
+  //     console.log("Fetched time slotnew data:", data);
+  //       if (!response.ok) {
+  //         console.error("Failed to fetch time slots, status:", response.status);
+  //         return;
+  //       }
+
+  //       if (Array.isArray(data)) {
+  //         setTimeSlots(data);
+  //       } else {
+  //         setError(error.message); 
+  //         console.error("Unexpected data format. Expected an array:", data);
+  //       }
+
+  //     } catch (error) {
+  //       console.error("Error fetching time slots:", error);
+  //     }
+  //   }
+
+  //   fetchTimeSlots();
+  // }, []);
+
+  useEffect(() => {
+    const fetchTimeSlots = async () => {
+      if (!formData.date || !formData.duration || !formData.booking_type) return;
+  
       setLoading(true);
       setError("");
+  
+      const payload = {
+        no_of_people: formData.no_of_people || 1,
+        date: formData.date,
+        duration: formData.duration,
+        booking_type: formData.booking_type, // This is now a string
+      };
+  
       try {
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
-      let response = await doGetCall(url);
-      const data = await response.json();
-      console.log("Fetched time slotnew data:", data);
+        const queryString = new URLSearchParams(payload).toString();
+        const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
+        
+        const response = await doGetCall(url);
         if (!response.ok) {
-          console.error("Failed to fetch time slots, status:", response.status);
-          return;
+          throw new Error(`Failed to fetch time slots: ${response.statusText}`);
         }
-
-        if (Array.isArray(data)) {
-          setTimeSlots(data);
-        } else {
-          setError(error.message); 
-          console.error("Unexpected data format. Expected an array:", data);
-        }
-
-      } catch (error) {
-        console.error("Error fetching time slots:", error);
-      }
-    }
-
-    fetchTimeSlots();
-  }, []);
-
   
-
+        const data = await response.json();
+        setTimeSlots(data || []);
+        setIsVisible(true);
+      } catch (err) {
+        setError("Failed to fetch time slots.");
+        console.error("Error fetching time slots:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchTimeSlots();
+  }, [formData.date, formData.duration, formData.booking_type, formData.no_of_people]);
+  
   useEffect(() => {
     fetchBookings();
   }, [fetchBookings]);
@@ -245,26 +284,69 @@ const BookingListing = () => {
     return times;
   };
   
+  // const handleFormSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  
+  //   const formattedTime = formData.time?.slice(0, 5);
+  //   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  //   const url = editingId
+  //     ? `${baseUrl}/api/bookings/${editingId}`
+  //     : `${baseUrl}/api/bookings`;
+
+  //   const method = editingId ? "PUT" : "POST";
+  //   const payload = { ...formData, time: formattedTime,  id: formData.id || editingId, booking_type: formData.booking_type.name, no_of_people: formData.no_of_people };
+
+  //   try {
+  //     const response = editingId
+  //       ? await doPutCall(url, payload, method)
+  //       : await doPostCall(url, payload);
+  
+  //     if (response.ok) {
+  //       // Reset form data
+  //       setFormData({
+  //         name: "",
+  //         phone: "",
+  //         email: "",
+  //         no_of_people: "",
+  //         booking_type: "",
+  //         duration: "",
+  //         date: "",
+  //         time: "",
+  //         id: "",
+  //       });
+  //       setEditingId(null);
+  //       setShowForm(false);
+  //       fetchBookings();
+  //     } else {
+  //       console.error("Failed to submit form");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error submitting form:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
   
     const formattedTime = formData.time?.slice(0, 5);
+    const payload = {
+      ...formData,
+      time: formattedTime,
+      id: formData.id || editingId,
+    };
+  
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
     const url = editingId
       ? `${baseUrl}/api/bookings/${editingId}`
       : `${baseUrl}/api/bookings`;
-
-    const method = editingId ? "PUT" : "POST";
-    console.log()
   
-    const payload = { ...formData, time: formattedTime,  id: formData.id || editingId, booking_type: formData.booking_type, };
+    const method = editingId ? "PUT" : "POST";
   
     try {
-      console.log("Request Method:", method);
-      console.log("URL:", url);
-      console.log("Payload:", payload);
-  
       const response = editingId
         ? await doPutCall(url, payload, method)
         : await doPostCall(url, payload);
@@ -276,7 +358,7 @@ const BookingListing = () => {
           phone: "",
           email: "",
           no_of_people: "",
-          booking_type: { id: "", name: "" },
+          booking_type: "",
           duration: "",
           date: "",
           time: "",
@@ -284,7 +366,7 @@ const BookingListing = () => {
         });
         setEditingId(null);
         setShowForm(false);
-        fetchBookings(); // Refresh bookings
+        fetchBookings();
       } else {
         console.error("Failed to submit form");
       }
@@ -295,7 +377,6 @@ const BookingListing = () => {
     }
   };
   
-  
   const handleCreateClick = () => {
     setShowForm(true);
     setEditingId(null);
@@ -303,7 +384,7 @@ const BookingListing = () => {
       name: "",
       phone: "",
       email: "",
-      no_of_people: "",
+      no_of_people: 0,
       booking_type: "",
       duration: "",
       date: "",
@@ -317,15 +398,15 @@ const BookingListing = () => {
       phone: booking.phone,
       email: booking.email,
       no_of_people: booking.no_of_people,
-      booking_type: booking.type,
+      booking_type: booking.booking_type, // Ensure it matches the stored string
       duration: booking.duration,
       date: booking.date,
       time: booking.time,
-      
     });
     setEditingId(booking.id);
     setShowForm(true);
   };
+  
   
   // const handleInputChange = (e) => {
   //   const { name, value } = e.target;
@@ -345,14 +426,10 @@ const BookingListing = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
   
-    // If the field is booking_type, handle it as an object with id and name
-    if (name === 'booking_type') {
-      const selectedType = value; // Get the selected booking type from the dropdown
-      const bookingTypeObject = getBookingTypeById(selectedType); // Get the corresponding object (id and name)
-      
+    if (name === "booking_type") {
       setFormData((prevData) => ({
         ...prevData,
-        booking_type: bookingTypeObject, // Update formData with the full object
+        booking_type: value, // Store the selected booking type as a string
       }));
     } else {
       setFormData((prevData) => ({
@@ -361,6 +438,7 @@ const BookingListing = () => {
       }));
     }
   };
+  
   
   const getBookingTypeById = (typeName) => {
     const bookingTypes = [
@@ -477,20 +555,22 @@ const BookingListing = () => {
   </div>
  
   <div className="mb-4">
-    <label>Type</label>
-    <select
-      name="booking_type"
-        value={formData.booking_type?.name || ""}
-      onChange={handleInputChange}
-      required
-      className="w-full p-2 border border-gray-300"
-    >
-      <option value="">Select type</option>
-      <option value="normal">Normal</option>
-      <option value="vip">VIP</option>
-      <option value="lounge">Lounge</option>
-    </select>
-  </div>
+  <label>Type</label>
+  <select
+    name="booking_type"
+    value={formData.booking_type || ""} // Ensure it uses the string value
+    onChange={handleInputChange}
+    required
+    className="w-full p-2 border border-gray-300"
+  >
+    <option value="">Select type</option>
+    <option value="normal">Normal</option>
+    <option value="vip">VIP</option>
+    <option value="lounge">Lounge</option>
+  </select>
+</div>
+
+  
   {formData.booking_type === "normal" && (
   <div className="mb-4">
     <label>{translations[language].noOfPeople}</label>
@@ -505,15 +585,15 @@ const BookingListing = () => {
     />
   </div>
 )}
-  <div className="mb-4">
-  <label>Duration</label>
-  <select
-    name="duration"
-    value={formData.duration}
-    onChange={handleInputChange}
-    required
-    className="w-full p-2 border border-gray-300"
-  >
+   <div className="mb-4">
+        <label>Duration</label>
+        <select
+          name="duration"
+          value={formData.duration}
+          onChange={handleInputChange}
+          required
+          className="w-full p-2 border border-gray-300"
+        >
     {formData.booking_type === "lounge" ? (
       <>
         <option value="">Select a time slot</option>
@@ -532,6 +612,7 @@ const BookingListing = () => {
         <option value="60">60 minutes</option>
       </>
     )}
+
   </select>
 </div>
 
@@ -559,8 +640,8 @@ const BookingListing = () => {
     >
       <option value="">Select a time slot</option>
       {timeSlots.map((slot, index) => (
-        <option key={index} value={slot}>
-          {slot}
+        <option key={index} value={slot.time}>
+          {slot.time}
         </option>
       ))}
     </select>
@@ -568,6 +649,7 @@ const BookingListing = () => {
     <p>Please select a booking type to enable time slot selection</p>
   )}
 </div>
+
 
 
   <button type="submit" className="w-[160px] h-[40px] bg-[#063828] text-white">

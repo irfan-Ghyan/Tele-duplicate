@@ -28,7 +28,7 @@ const Page = () => {
         <Sidebar />
         <div className='w-full'>
         <DashboardMainNavbar/>
-        <div className='p-40'>
+        <div className='bg-white'>
         <DashboardEvents />
         </div>
         </div>

@@ -71,48 +71,6 @@ const DashboardDomeSection = () => {
     fetchData();
   }, []);
 
-  // const uploadImages = async () => {
-  //   const formData = new FormData();
-  //   const section = 'Dome';
-  //   const imageName = `${section}_image`;
-
-  //   images.forEach((image, index) => {
-  //     formData.append('images[]', image.file);
-  //   });
-
-  //   formData.append('section', section);
-  //   formData.append('imageName', imageName);
-
-  //   try {
-  //     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  //     const url = `${baseUrl}/api/content/uploadImages`;
-
-  //     const response = await uploadImageCall(url, formData, {
-  //       Accept: 'application/json',
-  //       Authorization: 'Bearer ' + localStorage.getItem('token'),
-  //     });
-
-
-  //     if (!response.ok) {
-  //       const errorData = await response.text();
-  //       console.error('Server responded with error:', errorData);
-  //       throw new Error(`Failed to upload images: ${response.statusText}`);
-  //     }
-
-  //     const result = await response.json();
-  //     console.log('Images uploaded successfully:', result);
-      
-  //     const cleanedUrls = result.file_paths.map((file) => ({
-  //       ...file,
-  //       url: file.url.replace(/\\/g, '/'),
-  //     }));
-
-  //     return result.file_paths;
-  //   } catch (error) {
-  //     console.error('Error uploading images:', error);
-  //     throw error;
-  //   }
-  // };
 
 
   const uploadImages = async () => {
@@ -128,6 +86,7 @@ const DashboardDomeSection = () => {
     // Append metadata
     formData.append('section', section);
     formData.append('imageName', imageName);
+  console.log(formData)
   
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;

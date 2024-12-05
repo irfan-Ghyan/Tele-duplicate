@@ -520,7 +520,7 @@ const Page = ({ params } ) => {
 
                  
                   <div>
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[493px] my-[20px]">
+                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[605px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -532,20 +532,17 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[700px] my-[10px]">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
-                    // Determine the current date
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA"); // Compare the selected date
+                    const selectedDateStr = date.toLocaleDateString("en-CA");
 
                     const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
                       const [hours, minutes] = timeValue.split(":").map(Number);
                       const slotTime = hours * 60 + minutes;
 
-                      // If the selected date is today, compare with the current time
-                      // Otherwise, compare with 09:00 (540 minutes from midnight)
                       const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
 
                       return slotTime >= startTime;

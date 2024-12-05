@@ -189,7 +189,6 @@ const CorporateNetworking = () => {
         const domeSection = sectionData.data.sections.find((section) => section.title === 'Networking');
 
         if (domeSection && domeSection.section_fields) {
-          // Find the latest title and corresponding description
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
             .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
@@ -202,16 +201,16 @@ const CorporateNetworking = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '',
             };
           }
 
-          // Fetch the image data dynamically
+
           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Networking`);
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url;
             }
           }
 
@@ -257,7 +256,7 @@ const CorporateNetworking = () => {
             <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center hover-content transition-transform duration-300">
               <Link href="/enquiry-form" className="flex flex-col items-center text-center">
                 <Image
-                  src={latestEntry.imageUrl || '/assets/images/events/default.jpg'} // Dynamically use the fetched image URL
+                  src={latestEntry.imageUrl || '/assets/images/events/default.jpg'}
                   width={60}
                   height={60}
                   alt="Networking"

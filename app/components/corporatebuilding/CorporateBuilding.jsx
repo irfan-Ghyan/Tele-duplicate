@@ -155,7 +155,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import Image from 'next/image'; // Ensure you import the Image component from 'next/image'
+import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import { getImageCall } from '../../utils/api';
 
@@ -186,10 +186,9 @@ const CorporateBuilding = () => {
       let entry = null;
 
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'Networking');
+        const domeSection = sectionData.data.sections.find((section) => section.title === 'Team Building');
 
         if (domeSection && domeSection.section_fields) {
-          // Find the latest title and corresponding description
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
             .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
@@ -202,16 +201,15 @@ const CorporateBuilding = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '',
             };
           }
 
-          // Fetch the image data dynamically
-          const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Networking`);
+          const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Team Building`);
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url;
             }
           }
 
@@ -257,10 +255,10 @@ const CorporateBuilding = () => {
             <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center hover-content transition-transform duration-300">
               <Link href="/enquiry-form" className="flex flex-col items-center text-center">
                 <Image
-                  src={latestEntry.imageUrl || '/assets/images/events/default.jpg'} // Dynamically use the fetched image URL
+                  src={latestEntry.imageUrl || '/assets/images/events/default.jpg'}
                   width={60}
                   height={60}
-                  alt="Networking"
+                  alt="Building"
                   className="mb-4"
                   priority={true}
                 />
