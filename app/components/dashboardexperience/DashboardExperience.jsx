@@ -150,40 +150,7 @@ const handleImageUpload = (e) => {
     }
   };
 
-  const handleDelete = async (keyId) => {
-    setIsDeleting(true);
-    setError('');
-    try {
-      const confirmed = window.confirm('Are you sure you want to delete this record?');
-      if (!confirmed) return;
-
-      const payload = {
-        pageName: 'Experience',
-        sectionName: 'Session',
-        fieldName: keyId,
-      };
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/content/removeSectionField`;
-      // const url = 'http://192.168.70.249:8000/api/content/removeSectionField';
-      const response = await doDeleteCall(url, payload);
-
-      if (!response.ok) {
-        throw new Error('Failed to delete data from the backend.');
-      }
-
-      const result = await response.json();
-      if (result.success) {
-        setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
-      } else {
-        setError('Failed to delete the record: ' + result.message);
-      }
-    } catch (error) {
-      setError('Error deleting data: ' + error.message);
-    } finally {
-      setIsDeleting(false);
-    }
-  };
-
+ 
   const handleEdit = (index) => {
     const entryToEdit = tableData[index];
     if (!entryToEdit) {
@@ -275,6 +242,35 @@ const handleImageUpload = (e) => {
   }
 };
 
+const handleDelete = async (keyId) => {
+  setIsDeleting(true);
+  setError('');
+  try {
+    const confirmed = window.confirm('Are you sure you want to delete this record?');
+    if (!confirmed) return;
+
+    const payload = {
+      pageName: 'Experience',
+      sectionName: 'Session',
+      fieldName: keyId,
+    };
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const url = `${baseUrl}/api/content/removeSectionField`;
+    const response = await doDeleteCall(url, payload);
+
+    if (response.ok) {
+      setTableData((prevEntries) => prevEntries.filter((entry) => entry.key !== keyId));
+    } else {
+      const errorData = await response.json();
+      setError(errorData.message || 'Failed to delete the record.');
+    }
+  } catch (error) {
+    setError('Error deleting data: ' + error.message);
+  } finally {
+    setIsDeleting(false);
+  }
+};
+
 
   return (
     <div className="bg-white w-full py-10 px-40">
@@ -318,50 +314,66 @@ const handleImageUpload = (e) => {
       </form>
 
     
-        <div className="mt-20">
-        <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
-        <table className="w-full border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="p-2 border border-gray-300">Title</th>
-              <th className="p-2 border border-gray-300">Description</th>
-              <th className="p-2 border border-gray-300">Images</th>
-              <th className="p-2 border border-gray-300">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {tableData.map((entry, index) => (
-              <tr key={index} className="border border-gray-300">
-                <td className="p-2">{entry.title}</td>
-                <td className="p-2">{entry.description}</td>
-                <td className="p-2">
-                {Array.isArray(entry.images) && entry.images.length > 0 ? (
-                  entry.images.map((image, i) => (
-                    <img key={i} src={image} alt={`Image ${i}`} className="w-12 h-12 object-cover mr-2" />
-                  ))
-                ) : (
-                  <span>No images</span>
-                )}
-                </td>
-                <td className="p-2">
-                  <button
-                    onClick={() => handleEdit(index)}
-                    className="text-blue-500 mr-2"
-                  >
-                    Edit
-                  </button>
-                  <button
-                    onClick={() => handleDelete(index)}
-                    className="text-red-500"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-20">
+  <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+  <table className="w-full border border-gray-300">
+    <thead>
+      <tr className="bg-gray-100">
+        <th className="p-2 border border-gray-300">Title</th>
+        <th className="p-2 border border-gray-300">Description</th>
+        <th className="p-2 border border-gray-300">Images</th>
+        <th className="p-2 border border-gray-300">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {tableData.length > 0 ? (
+        tableData.map((entry, index) => (
+          <tr key={index} className="border border-gray-300">
+            <td className="p-2">{entry.title || "N/A"}</td>
+            <td className="p-2">{entry.description || "N/A"}</td>
+            <td className="p-2">
+              {entry.images && entry.images.length > 0 ? (
+                <div className="flex flex-wrap">
+                  {entry.images.map((image, i) => (
+                    <img
+                      key={i}
+                      src={image}
+                      alt={`Image ${i}`}
+                      className="w-12 h-12 object-cover mr-2"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <span>No images</span>
+              )}
+            </td>
+            <td className="p-2">
+              <button
+                onClick={() => handleEdit(index)}
+                className="text-blue-500 mr-2"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(entry.key)}
+                className="text-red-500"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        ))
+      ) : (
+        <tr>
+          <td colSpan="4" className="text-center p-2">
+            No entries found.
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
       </div>
+
     </div>
   );
 };
