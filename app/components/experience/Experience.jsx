@@ -9,7 +9,7 @@ import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getImageCall } from '@/app/utils/api';
+import { doGetCall, getImageCall } from '@/app/utils/api';
 
 const Experience = () => {
   const { t } = useTranslation();
@@ -27,9 +27,9 @@ const Experience = () => {
 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
+      const url =`${baseUrl}/api/content/sections/Experience`
       // Fetch the section data
-      const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Experience`);
+      const sectionResponse = await doGetCall(url);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');
       }
@@ -115,7 +115,43 @@ const Experience = () => {
 
             {/* Render only the first 5 entries */}
             {!loading && !error && faqEntries.length > 0 &&
-              faqEntries.slice(0, 5).map((experience, index) => (
+              faqEntries.slice(0, 3).map((experience, index) => (
+                <div
+                  key={index}
+                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto"
+                >
+                  <div className="flex justify-center items-center w-full h-[282px]">
+                    <Image
+                      src={experience.imageUrl || '/assets/images/default-image.jpg'} 
+                      alt="Experience Image"
+                      width={300}
+                      height={282}
+                      className="w-[360px] h-[282px] object-cover"
+                      priority={true}
+                    />
+                  </div>
+                  <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+                    <div>
+                      <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
+                        {experience.title}
+                      </h1>
+                      <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
+                        {experience.description}
+                      </p>
+                    </div>
+                    <div className="pt-[19px] pb-[22px]">
+                      <Link
+                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        href='/normal'
+                      >
+                        <span className="button-slanted-content">{t('BOOK NOW')}</span>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+               {!loading && !error && faqEntries.length > 0 &&
+              faqEntries.slice(3, 5).map((experience, index) => (
                 <div
                   key={index}
                   className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto"

@@ -306,49 +306,91 @@ const Content = () => {
         </div>
 
         <div className="w-full">
-          <div className="lg:flex xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
-            {loading && <p className="text-[#c09e5f]">Loading...</p>}
-            {error && <p className="text-red-500">{error}</p>}
+  {/* First Row */}
+  <div className="lg:flex xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
+    {loading && <p className="text-[#c09e5f]">Loading...</p>}
+    {error && <p className="text-red-500">{error}</p>}
 
-            {/* Render only the first 5 entries */}
-            {!loading && !error && faqEntries.length > 0 &&
-              faqEntries.slice(0, 5).map((experience, index) => (
-                <div
-                  key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto"
-                >
-                  <div className="flex justify-center items-center w-full h-[282px]">
-                    <Image
-                      src={experience.imageUrl || '/assets/images/default-image.jpg'}  // Placeholder for missing image
-                      alt="Experience Image"
-                      width={300}
-                      height={282}
-                      className="w-[360px] h-[282px] object-cover"
-                      priority={true}
-                    />
-                  </div>
-                  <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
-                    <div>
-                      <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                        {experience.title}
-                      </h1>
-                      <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                        {experience.description}
-                      </p>
-                    </div>
-                    <div className="pt-[19px] pb-[22px]">
-                      <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                        href={index === 0 ? `/vip` : `/lounge`}
-                      >
-                        <span className="button-slanted-content">{t('BOOK NOW')}</span>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
+    {/* Render First Row (First 3 Entries) */}
+    {!loading && !error && faqEntries.length > 0 &&
+    faqEntries.slice(0, 3).map((experience, index) => (
+      <div
+        key={index}
+        className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] m-0"
+      >
+        <div className="flex justify-center items-center w-full h-[282px]">
+          <Image
+            src={experience.imageUrl || '/assets/images/default-image.jpg'}
+            alt="Experience Image"
+            width={300}
+            height={282}
+            className="w-[360px] h-[282px] object-cover"
+            priority={true}
+          />
+        </div>
+        <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+          <div>
+            <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
+              {experience.title}
+            </h1>
+            <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
+              {experience.description}
+            </p>
+          </div>
+          <div className="pt-[19px] pb-[22px]">
+            <Link
+              className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+              href='/normal'
+            >
+              <span className="button-slanted-content">{t('BOOK NOW')}</span>
+            </Link>
           </div>
         </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Second Row */}
+  <div className="lg:flex xl:flex xl:justify-center flex-wrap gap-2 my-6 lg:mx-80">
+  {faqEntries.slice(3, 5).map((experience, index) => (
+    <div
+      key={index}
+      className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[430px] lg:w-[560px] m-0"
+    >
+      <div className="flex justify-center items-center w-full h-[282px]">
+        <Image
+          src={experience.imageUrl || '/assets/images/default-image.jpg'}
+          alt="Experience Image"
+          width={300}
+          height={282}
+          className="w-[560px] h-[282px] object-cover"
+          priority={true}
+        />
+      </div>
+      <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+        <div>
+          <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
+            {experience.title}
+          </h1>
+          <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
+            {experience.description}
+          </p>
+        </div>
+        <div className="pt-[19px] pb-[22px]">
+          <Link
+            className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            href={index === 0 ? `/vip` : `/lounge`}
+          >
+            <span className="button-slanted-content">{t('BOOK NOW')}</span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+</div>
+
       </div>
     </>
   );
