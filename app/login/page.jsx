@@ -36,10 +36,12 @@ const Login = () => {
         } else {
           setError("Login failed: Token not found.");
         }
-      } else if (response.status === 401) {
+      } else if (response.status === 401 || response.status === 403) {
         setError("Unauthorized: Invalid credentials");
+        router.push("/");
       } else {
         throw new Error("An error occurred. Please try again.");
+        
       }
     } catch (err) {
       setError(err.message || "Failed to login");

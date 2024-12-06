@@ -9,7 +9,7 @@ import BahrainParty from '../components/bahrainparty/BahrainParty';
 
 const Page = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="flex items-center justify-center px-4 lg:px-20 xl:px-40">
         <div className="text-center p-6 text-[#c09e5f] pt-[80px] pb-[40px] lg:pb-[100px] lg:pt-[50px]">
           <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">UP COMING EVENTS</h1>
@@ -20,7 +20,7 @@ const Page = () => {
       </div>
       <div className="w-full flex flex-col items-center">
         <UpcomingEvents />
-        <div className="w-full flex justify-center">
+        {/* <div className="w-full flex justify-center">
           <PremierLeague />
         </div>
         <div className="w-full flex justify-center">
@@ -28,7 +28,7 @@ const Page = () => {
         </div>
         <div className="w-full flex justify-center">
           <BahrainParty />
-        </div>
+        </div> */}
       </div>
     </div>
   );
