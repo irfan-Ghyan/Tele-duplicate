@@ -1,4 +1,4 @@
-
+'use client'
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Head from 'next/head';
@@ -20,7 +20,7 @@ useEffect(() => {
 
   const fetchData = async () => {
     try {
-      const url = "http://192.168.70.211:8000/api/content/sections/Experience";
+      const url = "http://192.168.70.126:8000/api/content/sections/Experience";
       const response = await fetch(url);
   
       if (response.ok) {
