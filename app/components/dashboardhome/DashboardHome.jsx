@@ -1,6 +1,6 @@
-// pages/DashboardHome.js
+
 import React from 'react';
-import DashboardCard from '../../components/dashboardcard/DashBoardcard';
+import DashboardCard from '../../components/dashboardcard/DashBoardcard.jsx'
 import { FaUser, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
 import BookingCalendar from '../bookingcalendar/Bookingcalendar';
 
