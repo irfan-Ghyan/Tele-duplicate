@@ -217,7 +217,7 @@ const DomeData = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('http://192.168.70.213:8000/storage/images/Gaming Room/Gaming Room_image_0.jpg')`,
+            : `url('http://192.168.70.126:8000/storage/images/Gaming Room/Gaming Room_image_0.jpg')`,
         }}
       >
         <div className="w-full bg-[#11072C] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
