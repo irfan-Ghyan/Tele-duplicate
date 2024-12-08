@@ -8,7 +8,7 @@ const DashboardHome = () => {
   const users = [
     { name: 'User', status: '10', icon: <FaUser /> },
     { name: 'Booked slot', status: '20', icon: <FaCalendarCheck /> },
-    { name: 'Available slot', status: '4', icon: <FaCheckCircle /> },
+    { name: 'Available slot', status: '2', icon: <FaCheckCircle /> },
   ];
 
   return (
