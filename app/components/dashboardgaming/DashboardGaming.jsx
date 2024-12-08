@@ -524,7 +524,8 @@ const DashboardGaming = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/content/uploadImages`;
-
+ console.log(url)
+ debugger
       const response = await uploadImageCall(url, {
         method: 'POST',
         body: formData,
