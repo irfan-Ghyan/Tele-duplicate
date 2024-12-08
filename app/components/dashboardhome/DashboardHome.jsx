@@ -1,23 +1,32 @@
+// pages/DashboardHome.js
 import React from 'react';
+import DashboardCard from '../../components/dashboardcard/DashBoardcard';
+import { FaUser, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
+import BookingCalendar from '../bookingcalendar/Bookingcalendar';
 
 const DashboardHome = () => {
-  return (
-    // <div className="min-h-screen flex flex-col items-center">
-    <div className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-    <h1 className='text-white font-black text-4xl font-orbitron text-center'>Dashboard</h1>
-    <div className='flex flex-wrap -mx-6'>
-      <div className="w-full px-6 sm:w-1/2 xl:w-1/3">
-            <div className='p-3 '></div>
-            <div className='mx-5'>
-            <h1 className='p-3 bg-indigo-600'>8,282</h1>
-            <div className='p-3 bg-indigo-600'>New Users</div>
-      </div>
-      <div className="w-full px-6 sm:w-1/2 xl:w-1/3"></div>
-      <div className="w-full px-6 sm:w-1/2 xl:w-1/3"></div>
-    </div>
-    </div>
-  </div>
-  )
-}
+  const users = [
+    { name: 'User', status: '10', icon: <FaUser /> },
+    { name: 'Booked slot', status: '20', icon: <FaCalendarCheck /> },
+    { name: 'Available slot', status: '4', icon: <FaCheckCircle /> },
+  ];
 
-export default DashboardHome ;
+  return (
+    <div className="w-full bg-gray-200 px-40 py-20 ">
+      <h1 className='text-4xl font-black'>Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4  text-center text-2xl">
+        {users.map((user, index) => (
+          <DashboardCard
+            key={index}
+            userName={user.name}
+            status={user.status}
+            icon={user.icon}
+          />
+        ))}
+      </div>
+      <BookingCalendar />
+    </div>
+  );
+};
+
+export default DashboardHome;

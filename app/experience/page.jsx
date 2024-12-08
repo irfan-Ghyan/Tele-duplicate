@@ -21,7 +21,6 @@ const Page = () => {
       <Experience />
         <div className="w-full ">
           <Coaching />
-
           <Newsletter />
         </div>
 

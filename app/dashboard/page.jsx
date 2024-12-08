@@ -21,7 +21,7 @@ const Page = () => {
   }, [router]);
   return (
 
-        <div className="flex h-screen bg-white">
+        <div className="flex h-screen bg-gray-200">
           
         <div className="flex-1 ">
         <DashboardNavbar />
