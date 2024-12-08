@@ -252,7 +252,7 @@ const Content = () => {
               return {
                 title: field.value,
                 description: descriptionField ? descriptionField.value : '',
-                imageUrl: '', // Placeholder for now
+                imageUrl: '', 
               };
             });
 
@@ -269,7 +269,7 @@ const Content = () => {
             }
           }
 
-          setFaqEntries(entries);  // Update state with an array of experiences
+          setFaqEntries(entries); 
         }
       }
     } catch (err) {
@@ -296,7 +296,7 @@ const Content = () => {
         <link rel="preload" href="/assets/images/experience/mintue1.jpg" as="image" />
       </Head>
 
-      <div className=" flex flex-col items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px] ">
+      <div className=" flex flex-col  items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px] ">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center text-[#e3ce90]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
@@ -389,7 +389,7 @@ const Content = () => {
   ))}
 </div>
 
-</div>
+        </div>
 
       </div>
     </>

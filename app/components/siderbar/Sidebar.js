@@ -1,17 +1,22 @@
 import React from "react";
 import Link from "next/link";
+import { FaRegCalendarAlt, FaFileAlt } from "react-icons/fa";
 
 const Sidebar = () => {
   return (
-    <div className="w-80 overflow-x-auto bg-[#ffffff] text-[#063828] p-4 border-r-2 border-gray-200 ">
-      <h2 className="text-2xl font-bold mb-16 text-center">Dashboard</h2>
-      <ul className="flex flex-col items-center justify-center">
-        {/* <Link className="w-[100px] mb-4 text-[#A62ED1] hover:border-b-2 hover:border-b-[#A62ED1] p-2 "  href="/dashboard"></Link> */}
-        <Link className="w-[100px] mb-4 hover:border-b-2 hover:border-b-[#063828] p-2 " href="/dashboard/booking">BOOKING</Link>
-        <Link className="w-[100px] mb-4 hover:border-b-2 hover:border-b-[#063828] p-2 " href="/dashboard/content">CONTENT</Link>
+    <div className="w-60 overflow-x-auto bg-[#101010] p-4">
+      <h2 className="text-3xl font-bold pt-20  text-white">Dashboard</h2>
+      <ul className="flex flex-col justify-center">
+        <Link href="/dashboard/booking" className="flex items-center text-white pt-6 hover:text-white">
+          <FaRegCalendarAlt className="mr-2 " /> Booking
+        </Link>
+        <Link href="/dashboard/content" className="flex items-center  text-[#919191] pt-6 hover:text-white">
+          <FaFileAlt className="mr-2" /> Content
+        </Link>
       </ul>
     </div>
   );
 };
 
 export default Sidebar;
+

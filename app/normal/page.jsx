@@ -416,6 +416,12 @@ const Page = ({ params } ) => {
       setActiveTab(tabIndex);
   };
   
+  function formatToAMPM(time) {
+    const [hours, minutes] = time.split(':').map(Number); // Split and convert to numbers
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  }
   
   return (
     <>
@@ -519,7 +525,7 @@ const Page = ({ params } ) => {
                   </div>
 
                  
-                  <div>
+                  <div className="my-4">
                     <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[605px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
@@ -558,7 +564,6 @@ const Page = ({ params } ) => {
                           const [hours, minutes] = timeValue.split(":").map(Number);
                           const slotTime = hours * 60 + minutes;
 
-                          // Determine the start time based on the selected date
                           const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
                           const isNearestFutureSlot = !activeTime && slotTime >= startTime;
 
@@ -573,13 +578,13 @@ const Page = ({ params } ) => {
                                 slotTime < startTime ? "opacity-40 cursor-not-allowed" : ""
                               }`}
                             >
-                              <button
-                                onClick={() => handleButtonClick(timeKey, timeValue)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime}
-                              >
-                                {timeValue}
-                              </button>
+                             <button
+                              onClick={() => handleButtonClick(timeKey, timeValue)}
+                              className="button-slanted-content w-full h-full flex items-center justify-center"
+                              disabled={slotTime < startTime}
+                            >
+                              {formatToAMPM(timeValue)}
+                            </button>
                             </div>
                           );
                         })}
@@ -816,6 +821,7 @@ const Page = ({ params } ) => {
 
       </div>
       )}
+
       {activeTab === 3 && (
         <div className="flex justify-center py-20">
           <div className="">

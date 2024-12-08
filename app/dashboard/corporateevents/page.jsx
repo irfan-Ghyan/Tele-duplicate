@@ -25,7 +25,7 @@ const Page = () => {
   }, [router]);
   
   return (
-    <div className=" flex flex-col h-screen bg-white">
+    <div className=" flex flex-col h-screen bg-gray-200">
 
         <DashboardNavbar />
         <div className='flex'>
@@ -33,20 +33,20 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
 
-        <div className='px-40 bg-white'>
+        <div className='px-40 bg-gray-200'>
         <DashboardBuildingEvents />
         </div>
 
-        <div className='px-40 bg-white'>
+        <div className='px-40 bg-gray-200'>
         <DashboardNetworking />
         </div>
 
-        <div className='px-40 bg-white'>
+        <div className='px-40 bg-gray-200'>
         <DashboardConference />
         </div>
 
 
-        <div className='px-40 bg-white'>
+        <div className='px-40 bg-gray-200'>
         <DashboardVenueBranding />
         </div>
 

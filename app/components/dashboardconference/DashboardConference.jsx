@@ -604,7 +604,8 @@ const DashboardConference= () => {
   };
 
   return (
-    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 ">
+    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray border-t-2 border-color-200 ">
+      <div className='bg-white p-20 rounded-lg'>
       <h1 className="text-4xl text-[#063828] font-black font-orbitron">Conference</h1>
 
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
@@ -677,6 +678,8 @@ const DashboardConference= () => {
             )}
           </tbody>
         </table>
+      </div>
+
       </div>
     </div>
   );

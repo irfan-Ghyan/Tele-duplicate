@@ -9,7 +9,7 @@ const DashboardData = () => {
   };
 
   return (
-    <div className="w-full bg-[#ffffff]">
+    <div className="w-full bg-gray-200">
        <div>
             <h1 className='text-4xl font-black text-[#002718] px-20 pt-20'>BOOKING</h1>
           </div>

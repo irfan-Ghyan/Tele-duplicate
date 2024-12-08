@@ -543,9 +543,9 @@ const DashboardGaming = () => {
   };
 
   return (
-    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
+    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40">
+      <div className='bg-white p-20 rounded-lg'>
       <h1 className="text-4xl text-[#063828] font-black font-orbitron">Gaming Room</h1>
-
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
@@ -557,7 +557,6 @@ const DashboardGaming = () => {
             required
           />
         </div>
-
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
           <textarea
@@ -616,6 +615,7 @@ const DashboardGaming = () => {
             )}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );

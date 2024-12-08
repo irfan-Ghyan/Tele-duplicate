@@ -417,6 +417,14 @@ const Page = ({ params } ) => {
     }
   };
 
+
+  function formatToAMPM(time) {
+    const [hours, minutes] = time.split(':').map(Number); // Split and convert to numbers
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  }
+
   return (
     <>
       <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
@@ -494,7 +502,7 @@ const Page = ({ params } ) => {
 
                  
                   <div>
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[493px] my-[20px]">
+                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[700px] my-[10px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -603,7 +611,7 @@ const Page = ({ params } ) => {
                                 className="button-slanted-content w-full h-full flex items-center justify-center"
                                 disabled={slotTime < startTime}
                               >
-                                {timeValue}
+                               {formatToAMPM(timeValue)} 
                               </button>
                             </div>
                           );

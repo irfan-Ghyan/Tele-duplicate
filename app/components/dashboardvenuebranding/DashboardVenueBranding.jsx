@@ -123,19 +123,19 @@ const DashboardVenueBranding = () => {
  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between">
+    <div className="w-full bg-white p-20 rounded-lg">
+      {/* <div className="flex justify-between">
         <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
         <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
           {showSection ? labels[language].hide : labels[language].show}
         </button>
-      </div>
+      </div> */}
   
 
       {showSection && (
-        <>
+        <div className=''>
          <h1 className="text-4xl text-[#063828] font-black font-orbitron">{labels[language].heading}</h1>
         <div className='flex justify-between'> 
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
@@ -190,7 +190,7 @@ const DashboardVenueBranding = () => {
           </tbody>
         </table>
       </div> */}
-      </>
+      </div>
       )}
     </div>
   );

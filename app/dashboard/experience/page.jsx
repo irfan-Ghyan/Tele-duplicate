@@ -23,7 +23,7 @@ const Page = () => {
     }
   }, [router]);
   return (
-    <div className=" flex flex-col h-screen bg-white">
+    <div className=" flex flex-col h-screen bg-gray-200">
 
         <DashboardNavbar />
         <div className='flex'>

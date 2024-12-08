@@ -667,7 +667,7 @@ const BookingListing = () => {
 
   
   return (
-    <div className="w-full">
+    <div className="w-full bg-white p-20 rounded-lg">
         {loading && <div className="text-center text-lg text-gray-600">Loading...</div>}
     {error && <div className="text-center text-red-500 mb-4">{error}</div>}
     

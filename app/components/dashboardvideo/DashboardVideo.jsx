@@ -116,7 +116,7 @@ const DashboardVideo = () => {
   };
   
   return (
-    <div className="flex flex-col items-center bg-white p-20">
+    <div className="flex flex-col items-center bg-gray-200 p-20">
       <div className="relative mb-8">
         <video
           preload="auto"

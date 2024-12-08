@@ -278,7 +278,7 @@ const BookingCalendar = () => {
   };
 
   return (
-    <div className="w-full overflow-x-auto h-screen">
+    <div className="w-full overflow-x-auto bg-white h-screen p-20 rounded-lg">
       <div className="flex gap-16">
         <div className="mb-4">
           <label className="mr-4">Select Slot Type:</label>
@@ -331,25 +331,30 @@ const BookingCalendar = () => {
       {!loading && !error && (
         <table className="min-w-full border-collapse border border-gray-300">
           <thead>
-            <tr>
-              <th className="border border-gray-300 p-4 bg-[#ececec]">Type</th>
-              <th className="border border-gray-300 p-4 bg-[#ececec]">Available</th>
-              <th className="border border-gray-300 p-4 bg-[#ececec]">Busy</th>
-              <th className="border border-gray-300 p-4 bg-[#ececec]">Time</th>
-              <th className="border border-gray-300 p-4 bg-[#ececec]">Date</th>
+            <tr className="text-left bg-[#f7f7f7]">
+              <th className="border border-gray-200 px-4 py-2 text-gray-600">Type</th>
+              <th className="border border-gray-200 px-4 py-2 text-gray-600">Available</th>
+              <th className="border border-gray-200 px-4 py-2 text-gray-600">Busy</th>
+              <th className="border border-gray-200 px-4 py-2 text-gray-600">Time</th>
+              <th className="border border-gray-200 px-4 py-2 text-gray-600">Date</th>
             </tr>
           </thead>
           <tbody>
-            {slotsData.map((slot) => (
-              <tr key={slot.time}>
-                <td className="border border-gray-300 p-4 text-center">{slot.type}</td>
-                <td className="border border-gray-300 p-4 text-center">{slot.sims}</td>
-                <td className="border border-gray-300 p-4 text-center">{slot.busy}</td>
-                <td className="border border-gray-300 p-4 text-center">{slot.time}</td>
-                <td className="border border-gray-300 p-4 text-center">{selectedDate}</td>
-              </tr>
-            ))}
-          </tbody>
+  {slotsData.map((slot, index) => (
+    <tr
+      key={slot.time}
+      style={{
+        backgroundColor: index % 2 === 0 ? "#ffffff" : "#eeeeee", 
+      }}
+    >
+      <td className="border border-gray-200 px-4 py-2">{slot.type}</td>
+      <td className="border border-gray-200 px-4 py-2">{slot.sims}</td>
+      <td className="border border-gray-200 px-4 py-2">{slot.busy}</td>
+      <td className="border border-gray-200 px-4 py-2">{slot.time}</td>
+      <td className="border border-gray-200 px-4 py-2">{selectedDate}</td>
+    </tr>
+  ))}
+</tbody>
         </table>
       )}
     </div>

@@ -538,7 +538,8 @@ const DashboardEvents = () => {
   };
 
   return (
-    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
+    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40">
+      <div className='bg-white p-20 rounded-lg'>
       <h1 className="text-4xl text-[#063828] font-black font-orbitron">Virtual GP</h1>
 
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
@@ -611,6 +612,8 @@ const DashboardEvents = () => {
             )}
           </tbody>
         </table>
+      </div>
+
       </div>
     </div>
   );

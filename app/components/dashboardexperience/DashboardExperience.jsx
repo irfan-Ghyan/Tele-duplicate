@@ -485,6 +485,11 @@ const handleSubmit = async (e) => {
 
     if (!response.ok) throw new Error('Failed to save data to the database.');
 
+    if (images.length > 0) {
+      const uploadedImagePaths = await uploadImages();
+      payload.images = uploadedImagePaths;
+    }
+
     const newEntry = {
       title,
       description,
@@ -507,7 +512,7 @@ const handleSubmit = async (e) => {
 
   const uploadImages = async () => {
     const formData = new FormData();
-    const section = 'Dome';
+    const section = 'Session';
     const imageName = `${section}_image`;
   
     // Append images
@@ -615,8 +620,43 @@ const handleEdit = (index) => {
 };
 
 
+const handleImageDelete = async (imageName, entryIndex) => {
+  const payload = {
+    section: "Session",
+    imageName: imageName,
+  };
+
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const url = `${baseUrl}/api/content/deleteImages`;
+
+    const response = await doDeleteCall(url, payload);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || "Failed to delete image");
+    }
+
+    const result = await response.json();
+    console.log("Image deleted successfully:", result);
+
+    // Update the table data by removing the deleted image
+    setTableData((prevData) =>
+      prevData.map((entry, index) =>
+        index === entryIndex
+          ? { ...entry, images: entry.images.filter((img) => img !== imageName) }
+          : entry
+      )
+    );
+  } catch (error) {
+    console.error("Error deleting image:", error.message);
+    setError(`Error deleting image: ${error.message}`);
+  }
+};
+
   return (
-    <div className="bg-white w-full py-10 px-40">
+    <div className="bg-gray-200 w-full py-10 px-40">
+      <div className='bg-white p-20 rounded-lg'>
       <h1 className="text-4xl font-black text-[#063828]">Session</h1>
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
@@ -656,7 +696,6 @@ const handleEdit = (index) => {
         </button>
       </form>
 
-    
       <div className="mt-20">
         <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
         <table className="w-full border border-gray-300">
@@ -674,23 +713,30 @@ const handleEdit = (index) => {
               <tr key={index} className="border border-gray-300">
                 <td className="p-2">{entry.title || 'N/A'}</td>
                 <td className="p-2">{entry.description || 'N/A'}</td>
-                <td className="p-2">
-                  {entry.images && entry.images.length > 0 ? (
-                    <div className="flex flex-wrap">
-                      {entry.images.map((image, i) => (
-                        <img
-                          key={i}
-                          src={image}
-                          alt={`Image ${i}`}
-                          className="w-12 h-12 object-cover mr-2"
-                        />
-                      ))}
-                    </div>
-                  ) : (
-                    <span>No images</span>
-                  )}
-                </td>
-                <td className="p-2">
+               <td className='p-2'>
+                {entry.images && entry.images.length > 0 ? (
+                        <div className="flex flex-wrap">
+                          {entry.images.map((image, i) => (
+                            <div key={i} className="relative">
+                              <img
+                                src={image}
+                                alt={`Image ${i}`}
+                                className="w-12 h-12 object-cover mr-2"
+                              />
+                              <button
+                                onClick={() => handleImageDelete(image, index)}
+                                className="absolute top-0 right-0 bg-red-500 text-white text-xs p-1 rounded"
+                              >
+                                X
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <span>No images</span>
+                      )}
+               </td>
+                <td className="p-2">                   
                   <button onClick={() => handleEdit(index)} className="text-blue-500">
                     Edit
                   </button>
@@ -715,7 +761,7 @@ const handleEdit = (index) => {
         </table>
 
       </div>
-
+      </div>
     </div>
   );
 };

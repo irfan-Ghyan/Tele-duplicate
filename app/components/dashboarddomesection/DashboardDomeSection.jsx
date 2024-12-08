@@ -129,7 +129,7 @@ const DashboardDomeSection = () => {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+    
     try {
       const payload = {
         pageName: 'Home',
@@ -143,6 +143,7 @@ const DashboardDomeSection = () => {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/content/setMultipleFieldValues`;
       const response = await doPostCall(url, payload);
+      
 
       if (!response.ok) {
         throw new Error('Failed to save data to the database.');
@@ -215,8 +216,9 @@ const DashboardDomeSection = () => {
   
 
   return (
-    <div className={`w-full py-10 bg-white border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
-      <div className="flex justify-between">
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+      <div className='bg-white p-20 rounded-lg'>
+      <div className="flex justify-between ">
         <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
@@ -273,7 +275,7 @@ const DashboardDomeSection = () => {
         </>
       )}
 
-      <div className="mt-20">
+      <div className="mt-20 ">
         <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
         <table className="w-full border border-gray-300">
           <thead>
@@ -316,6 +318,8 @@ const DashboardDomeSection = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
       </div>
     </div>
   );

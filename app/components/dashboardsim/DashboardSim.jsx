@@ -924,9 +924,9 @@ const DashboardSim = () => {
   };
 
   return (
-    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-white border-t-2 border-color-200 px-40">
+    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40">
+      <div className='bg-white p-20 rounded-lg'>
       <h1 className="text-4xl text-[#063828] font-black font-orbitron">SIM CONFIGURATOR</h1>
-
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
@@ -965,7 +965,6 @@ const DashboardSim = () => {
           Submit
         </button>
       </form>
-
       <div className="mt-20">
         <table className="w-full border border-gray-300">
           <thead>
@@ -997,6 +996,7 @@ const DashboardSim = () => {
             )}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );

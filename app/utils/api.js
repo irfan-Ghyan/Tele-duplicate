@@ -25,8 +25,6 @@ async function doGetCall(url, payload){
 
 async function doPostCall(url, payload, headers = {}) {
   const token = localStorage.getItem('token'); 
-  console.log("Token:", token);
-
   if (typeof headers !== 'object' || headers === null) {
     headers = {};
   }
@@ -36,7 +34,6 @@ async function doPostCall(url, payload, headers = {}) {
 
   const isFormData = payload instanceof FormData;
 
-  // Only add Content-Type if not FormData
   if (!isFormData) {
     headers['Content-Type'] = 'application/json';
   }

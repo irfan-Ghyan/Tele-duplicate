@@ -290,7 +290,9 @@ body {
 
 
 
-
+.react-calendar__navigation button:disabled{
+  background-color: #c09e5f !important;
+}
 
 /* .button {
 

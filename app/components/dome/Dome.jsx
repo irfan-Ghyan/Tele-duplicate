@@ -1,5 +1,3 @@
-
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -12,6 +10,7 @@ import rightArrow from '../../../public/assets/images/dome/righ-arrow.png';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { getImageCall} from '../../utils/api';
+import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
 
 
 
@@ -30,7 +29,7 @@ const Dome = () => {
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
         const url = `${baseUrl}/api/content/sections/Home`;
         const response = await fetch(url);
-
+      
         if (!response.ok) {
           throw new Error("Failed to fetch data from the server");
         }
@@ -49,8 +48,9 @@ const Dome = () => {
             return acc;
           }, {});
 
+      
           const slidesArray = Object.values(groupedSlides);
-
+ 
           const imagesResponse = await getImageCall(
             `${baseUrl}/api/content/getImages/Dome`,
             {}
@@ -62,12 +62,12 @@ const Dome = () => {
             const images = imagesData.data.map((image) => image.url);
 
             const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-            const url =`${baseUrl}/storage/images/Dome/Dome_image.png_0.png`
+            const url =`${baseUrl}/api/content/getImages/Dome`
             const updatedDomes = slidesArray.map((slide, index) => ({
-              
               ...slide,
               imageUrl: images[index] || (url),
             }));
+
 
             setDomes(updatedDomes);
           } else {
