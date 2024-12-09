@@ -1069,12 +1069,25 @@ const Page = ({ params } ) => {
 
   const increaseCount = async () => {
     if (count < 14) {
+      const newCount = count + 1;
+      setCount(newCount);
+      updateBookingDetail("no_of_people", newCount.toString());
+      setSeatError(""); 
+  
+      // Fetch fresh slots
+      await fetchBookings();
+    } else {
+      setSeatError("Maximum limit of 14 seats reached.");
+    }
+    
+    if (count < 14) {
       if (availableSIMs !== null && count >= availableSIMs) {
         setSeatError(
           `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
         );
         return;
       }
+
       if (availableSIMs !== null) {
         if (count >= availableSIMs) {
           // Show error message and set count to availableSIMs
@@ -1086,36 +1099,35 @@ const Page = ({ params } ) => {
         }
       }
 
-      //step 2
-      //access the number of available sims and check if the count is smaller or not
-        //if count gets bigger
-          //show error message and keep count equal to the available sims
-          //let the user increase the max capacity
-          //de-select the time slot that was selected and re-fetch slots on each click (whenever increaseCount function runs fetch fresh slots)
-          
       const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
-      setSeatError("");
+      setSeatError(""); 
 
-       // Clear the selected time slot
-  setActiveTime(null);
-  updateBookingDetail("time", "");
+      setActiveTime(null);
+      updateBookingDetail("time", "");
 
-  // Fetch fresh slots
-  await fetchBookings();
+
+      await fetchBookings();
     } else {
       setSeatError("Maximum limit of 14 seats reached.");
     }
-
   };
   
-  const decreaseCount = () => {
+  const decreaseCount = async () => {
     if (count > 1) {
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
-      setSeatError("");  // Clear error message if count is valid
+      setSeatError("");
+  
+      // Fetch fresh slots
+      await fetchBookings();
+    }
+    if (count > 1) { 
+      const newCount = count - 1;
+      setCount(newCount);
+      updateBookingDetail("no_of_people", newCount.toString());
     }
   };
 
@@ -1148,12 +1160,13 @@ const Page = ({ params } ) => {
     //when clicked a day
      // 1 - fetch fresh time slots
       // 2 - deselect the selected time slot ( de select only if this slot is not available on this day for this many people)
-
+   
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
+    const formattedDate = newDate.toLocaleDateString("en-CA"); 
     const selectedDate = new Date(newDate);
     setMinDate(selectedDate); 
 
-    const formattedDate = newDate.toLocaleDateString("en-CA"); 
+   
     setDate(newDate);
     setSelectedDate(formattedDate);
 
@@ -1334,7 +1347,8 @@ const Page = ({ params } ) => {
     const errors = {};
   
     const bookingData = {
-      name: bookingDetails.find((detail) => detail.key === "name")?.description || "",
+      // name: bookingDetails.find((detail) => detail.key === "name")?.description || "",
+      name: formData.firstName,
       phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
       email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
@@ -1469,12 +1483,6 @@ const Page = ({ params } ) => {
       setActiveTab(tabIndex);
   };
   
-  // function formatToAMPM(time) {
-  //   const [hours, minutes] = time.split(':').map(Number); // Split and convert to numbers
-  //   const ampm = hours >= 12 ? 'PM' : 'AM';
-  //   const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
-  //   return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
-  // }
 
   function formatToAMPM(time) {
     if (!time || typeof time !== "string" || !time.includes(":")) {
@@ -1592,10 +1600,11 @@ const Page = ({ params } ) => {
                         Select Date
                       </h1>
                       <CalendarComponent
-                           onChange={handleDateChange}
-                           value={date}
-                           minDate={minDate} 
-                      />
+                          onChange={handleDateChange}
+                          value={date}
+                          minDate={minDate} 
+                          maxDate={maxDate}
+                        />
                     </div>
                   </div>
 
@@ -1679,13 +1688,15 @@ const Page = ({ params } ) => {
                     return (
                       <div key={chunkIndex} className="flex">
                         {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
-                            if (!timeValue || typeof timeValue !== "string") {
-                              console.warn(`Invalid time value for key ${timeKey}:`, timeValue);
-                              return null; // Skip invalid or undefined time slots
-                            }
-
-                            const [hours, minutes] = timeValue.split(":").map(Number);// Ensure timeValue is valid
-                            const slotTime = hours * 60 + minutes;
+                          const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                          if (!match) {
+                            console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
+                            return null; // Skip invalid time values
+                          }
+                          const hours = Number(match[1]);
+                          const minutes = Number(match[2]);
+                          const slotTime = hours * 60 + minutes;
+                            
 
                             const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
 
@@ -1700,14 +1711,14 @@ const Page = ({ params } ) => {
                                     : "opacity-50 cursor-not-allowed"
                                 } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                               >
-                                <button
-                                  onClick={() => handleButtonClick(timeKey, timeValue, sims)}
-                                  className="button-slanted-content w-full h-full flex items-center justify-center"
-                                  disabled={slotTime < startTime}
-                                >
-                                  {formatToAMPM(timeValue)}
-                                  <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span>
-                                </button>
+                                 <button
+                                onClick={() => handleButtonClick(timeKey, timeValue, sims)}
+                                className="button-slanted-content w-full h-full flex items-center justify-center"
+                                disabled={slotTime < startTime}
+                              >
+                                {formatToAMPM(timeValue)}
+                                <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span>
+                              </button>
                               </div>
                             );
                           })}

@@ -69,17 +69,22 @@ const Footer = () => {
           <ul className="space-y-2">
             <li>
               <Link href="/experience" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-                {t('experiences')}
+                {t('EXPERIENCES')}
               </Link>
             </li>
             <li>
               <Link href="/dome" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-                {t('dome')}
+                {t('VENUE')}
               </Link>
             </li>
             <li>
+              <Link href="/upcomingevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+              {t('WATCH PARTIES')}
+               </Link>
+             </li>
+             <li>
               <Link href="/corporateevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-              {t('CORPORATE EVENTS')}
+              {t('PRIVATE PARTIES')}
                </Link>
              </li>
              <li>

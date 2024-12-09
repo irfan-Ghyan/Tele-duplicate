@@ -629,11 +629,12 @@ border: none !important;
 
 
 
-/* Custom style for the selected date */
-.selected-date {
-  background-color: #002718 !important;
-  color: white !important;
- 
+/* Hide single arrow icons (>) */
+.react-calendar__navigation__arrow {
+  display: none;
 }
 
-
+/* Hide double arrow icons (>>) */
+.react-calendar__navigation__double-arrow {
+  display: none;
+}
