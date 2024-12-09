@@ -236,12 +236,11 @@ const Content = () => {
       let entries = [];
 
       console.log('title', sectionData);
-
+    //  debugger; 
       if (sectionData.success) {
         const domeSection = sectionData.data.sections.find((section) => section.title === 'Session');
 
         if (domeSection && domeSection.section_fields) {
-          // Filter and map over the section fields to create an array of experiences
           entries = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
             .map((field) => {

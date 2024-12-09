@@ -10,8 +10,6 @@ import rightArrow from '../../../public/assets/images/dome/righ-arrow.png';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { getImageCall} from '../../utils/api';
-import { DevBundlerService } from 'next/dist/server/lib/dev-bundler-service';
-
 
 
 const Dome = () => {
@@ -20,6 +18,8 @@ const Dome = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { t } = useTranslation();
+  
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,29 +47,29 @@ const Dome = () => {
             }
             return acc;
           }, {});
-
-      
+         
           const slidesArray = Object.values(groupedSlides);
+
  
-          const imagesResponse = await getImageCall(
-            `${baseUrl}/api/content/getImages/Dome`,
-            {}
-          );
+          const imagesResponse = await getImageCall(`${baseUrl}/api/content/getImages/Dome` );
+          
 
           const imagesData = await imagesResponse.json();
-
+         
           if (imagesData.success) {
+           
             const images = imagesData.data.map((image) => image.url);
-
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-            const url =`${baseUrl}/api/content/getImages/Dome`
-            const updatedDomes = slidesArray.map((slide, index) => ({
-              ...slide,
-              imageUrl: images[index] || (url),
-            }));
-
-
+            
+            let copies = Array(images.length).fill(slidesArray)
+            const updatedDomes = copies.map((slide, index) => {
+      
+              return {
+              ...(slide[0]),
+              imageUrl: images[index],
+            }});
+            
             setDomes(updatedDomes);
+            
           } else {
             throw new Error("Failed to fetch images from the server");
           }
@@ -83,6 +83,8 @@ const Dome = () => {
 
     fetchData();
   }, []);
+
+
 
   useEffect(() => {
     const interval = setInterval(() => {

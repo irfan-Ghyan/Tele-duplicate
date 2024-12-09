@@ -2,8 +2,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Newsletter from '../../components/newsletter/Newsletter';
-import Coaching from '../../components/coaching/Coaching';
 import { Helmet } from 'react-helmet-async';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +26,6 @@ const Experience = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url =`${baseUrl}/api/content/sections/Experience`
-      // Fetch the section data
       const sectionResponse = await doGetCall(url);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');
@@ -38,7 +35,6 @@ const Experience = () => {
       let entries = [];
 
       console.log('title', sectionData);
-
       if (sectionData.success) {
         const domeSection = sectionData.data.sections.find((section) => section.title === 'Session');
 
@@ -71,7 +67,7 @@ const Experience = () => {
             }
           }
 
-          setFaqEntries(entries);  // Update state with an array of experiences
+          setFaqEntries(entries); 
         }
       }
     } catch (err) {

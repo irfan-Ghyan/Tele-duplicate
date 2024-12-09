@@ -19,10 +19,10 @@ const Page = () => {
   return (
     <div className='w-full'>
       <Experience />
-        <div className="w-full ">
-          <Coaching />
-          <Newsletter />
-        </div>
+    <div className="w-full ">
+      <Coaching />
+      <Newsletter />
+    </div>
 
   </div>
   );

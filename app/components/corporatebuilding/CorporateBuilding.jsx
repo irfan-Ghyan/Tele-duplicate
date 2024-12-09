@@ -206,6 +206,7 @@ const CorporateBuilding = () => {
           }
 
           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Team Building`);
+   
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
@@ -247,7 +248,7 @@ const CorporateBuilding = () => {
           <div
             className="relative w-full h-[240px] md:h-[319px] hover-trigger"
             style={{
-              backgroundImage: `url(${latestEntry.imageUrl || '/assets/images/events/pics-17.jpg'})`,
+              backgroundImage: `url(${latestEntry.imageUrl})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
