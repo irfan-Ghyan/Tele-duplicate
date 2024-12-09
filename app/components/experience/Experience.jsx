@@ -255,19 +255,6 @@ const Experience = () => {
               };
             });
 
-          // Fetch the image data dynamically
-          // const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Session`);
-          // if (imageResponse.ok) {
-          //   const imageData = await imageResponse.json();
-          //   if (imageData.success && imageData.data.length > 0) {
-          //     entries.forEach((entry, index) => {
-          //       if (imageData.data[index]) {
-          //         entry.imageUrl = imageData.data[index].url;
-          //       }
-          //     });
-          //   }
-          // }
-
           setFaqEntries(entries); 
         }
       }

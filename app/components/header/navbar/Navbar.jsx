@@ -182,10 +182,8 @@ const Navbar = ({ isTopBannerVisible }) => {
           
           <div className="hidden xl:flex items-center">
             <Link
-              href="https://feverup.com/m/187813"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-[#c09e5f] transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+             href="/experience"
+              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content"> {t('BOOK NOW')}</span>
             </Link>

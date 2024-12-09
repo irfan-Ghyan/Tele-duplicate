@@ -15,15 +15,25 @@ const Page = ({ params } ) => {
 
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
-  const [bookingDetails, setBookingDetails] = useState([
-    { title: "name", description: "" },
-    // { title: "no_of_people", description: "1" },
-    { title: "date", description: "" },
-    { title: "time", description: "" }, 
-    { title: "booking_type", description: "vip" },
-    { title: "duration", description: "60" }, 
+  // const [bookingDetails, setBookingDetails] = useState([
+  //   { title: "name", description: "" },
+  //   // { title: "no_of_people", description: "1" },
+  //   // { title: "date", description: "" },
+  //   { title: "time", description: "" }, 
+  //   { title: "booking_type", description: "vip" },
+  //   { title: "duration", description: "60 Min" }, 
 
+  // ]);
+
+  const [bookingDetails, setBookingDetails] = useState([
+    { key: "name", title: "Name", description: "" },
+    // { key: "no_of_people", title: "Number of People", description: "1" },
+    { key: "date", title: "Date", description: "" },
+    { key: "time", title: "Time", description: "" },
+    { key: "booking_type", title: "Booking Type", description: "Normal" },
+    { key: "duration", title: "Duration", description: "20 Min" },
   ]);
+  
   
 
   const [times, setTimes] = useState({});
@@ -49,10 +59,10 @@ const Page = ({ params } ) => {
     lastName: "",
     email: "",
     phone: "",
-    cardNumber: "",
-    expiryDate: "",
-    securityCode: "",
-    cardHolderName: "",
+    // cardNumber: "",
+    // expiryDate: "",
+    // securityCode: "",
+    // cardHolderName: "",
   });
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -81,12 +91,12 @@ const Page = ({ params } ) => {
   const handleBookingTypeChange = (type) => {
     setBookingDetails((prevDetails) =>
       prevDetails.map((detail) =>
-        detail.title === "booking_type" ? { ...detail, description: type } : detail
+        detail.key === "booking_type" ? { ...detail, description: type } : detail
       )
     );
     setBookingType(type);
   };
-
+  
   const handleTimeChange = (value) => {
     setTimes((prevTimes) => ({
       ...prevTimes,
@@ -106,17 +116,17 @@ const Page = ({ params } ) => {
   };
 
 
-  const updateBookingDetail = (field, value) => {
+  const updateBookingDetail = (key, value) => {
     setBookingDetails((prevDetails) =>
       prevDetails.map((detail) =>
-        detail.title === field ? { ...detail, description: value } : detail
+        detail.key === key ? { ...detail, description: value } : detail
       )
     );
   };
 
 
   const increaseCount = () => {
-    if (count < 14) { // Add the limit check
+    if (count < 14) {
       const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
@@ -256,18 +266,18 @@ const Page = ({ params } ) => {
     if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
       errors.phone = "A valid phone number is required.";
     }
-    if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
-      errors.cardNumber = "Card number must be 16 digits.";
-    }
-    if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
-      errors.expiryDate = "Expiry date must be in MM/YY format.";
-    }
-    if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
-      errors.securityCode = "CVV must be 3 or 4 digits.";
-    }
-    if (!formData.cardHolderName.trim()) {
-      errors.cardHolderName = "Cardholder name is required.";
-    }
+    // if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
+    //   errors.cardNumber = "Card number must be 16 digits.";
+    // }
+    // if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
+    //   errors.expiryDate = "Expiry date must be in MM/YY format.";
+    // }
+    // if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
+    //   errors.securityCode = "CVV must be 3 or 4 digits.";
+    // }
+    // if (!formData.cardHolderName.trim()) {
+    //   errors.cardHolderName = "Cardholder name is required.";
+    // }
   
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -282,23 +292,24 @@ const Page = ({ params } ) => {
       phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
       email: bookingDetails.find((detail) => detail.title === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "1",
-      duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10), // Ensure integer
-      date: bookingDetails.find((detail) => detail.title === "date")?.description || "2024-10-29",
+      duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10), 
+      date: bookingDetails.find((detail) => detail.title === "date")?.description,
       time: bookingDetails.find((detail) => detail.title === "time")?.description || "00:00",
       booking_type: bookingDetails.find((detail) => detail.title === "booking_type")?.description || "",
     };
-  
+
     const paymentData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
+      phone: formData.phone,
       // address: formData.address,
       // city: formData.city,
-      phone: formData.phone,
-      cardNumber: formData.cardNumber,
-      expiryDate: formData.expiryDate,
-      securityCode: formData.securityCode,
-      cardHolderName: formData.cardHolderName,
+    
+      // cardNumber: formData.cardNumber,
+      // expiryDate: formData.expiryDate,
+      // securityCode: formData.securityCode,
+      // cardHolderName: formData.cardHolderName,
       // billingAddress: formData.billingAddress,
     };
   
@@ -310,21 +321,21 @@ const Page = ({ params } ) => {
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "A valid email is required.";
     }
-    if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
-      errors.phone = "A valid phone number is required.";
-    }
-    if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
-      errors.cardNumber = "Card number must be 16 digits.";
-    }
-    if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
-      errors.expiryDate = "Expiry date must be in MM/YY format.";
-    }
-    if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
-      errors.securityCode = "CVV must be 3 or 4 digits.";
-    }
-    if (!formData.cardHolderName.trim()) {
-      errors.cardHolderName = "Cardholder name is required.";
-    }
+    // if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
+    //   errors.phone = "A valid phone number is required.";
+    // }
+    // if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
+    //   errors.cardNumber = "Card number must be 16 digits.";
+    // }
+    // if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
+    //   errors.expiryDate = "Expiry date must be in MM/YY format.";
+    // }
+    // if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
+    //   errors.securityCode = "CVV must be 3 or 4 digits.";
+    // }
+    // if (!formData.cardHolderName.trim()) {
+    //   errors.cardHolderName = "Cardholder name is required.";
+    // }
   
     // Update state with validation errors
     setValidationErrors(errors);
@@ -388,7 +399,7 @@ const Page = ({ params } ) => {
     const errors = [];
   
     bookingDetails.forEach((detail) => {
-      if (detail.title !== "name" && (!detail.description || detail.description.trim() === "")) {
+      if (detail.key !== "name" && (!detail.description || detail.description.trim() === "")) {
         errors.push(`The field "${detail.title}" is required.`);
       }
     });
@@ -396,6 +407,7 @@ const Page = ({ params } ) => {
     setBookingErrors(errors);
     return errors.length === 0;
   };
+  
 
   const handleTabChange = (tabIndex) => {
       if (tabIndex === 2 && !validateBookingDetails()) {
@@ -502,7 +514,7 @@ const Page = ({ params } ) => {
                   </div>
 
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     // Determine the current date
@@ -559,55 +571,61 @@ const Page = ({ params } ) => {
                       </div>
                     );
                   })}
-                </div>;
+                </div>; */}
 
-                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
-                    {timeChunks.map((chunk, chunkIndex) => {
-                      const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
-                        const now = new Date();
-                        const currentTime = now.getHours() * 60 + now.getMinutes();
-                        const slotTime = parseInt(timeValue.split(":")[0]) * 60 + parseInt(timeValue.split(":")[1]);
-                        return slotTime >= currentTime; 
-                      });
+                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                  {timeChunks.map((chunk, chunkIndex) => {
+                    const now = new Date();
+                    const currentDate = now.toLocaleDateString("en-CA");
+                    const selectedDateStr = date.toLocaleDateString("en-CA");
 
-                      if (!hasActiveSlot) {
-                        return null;
-                      }
+                    const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
+                      const [hours, minutes] = timeValue.split(":").map(Number);
+                      const slotTime = hours * 60 + minutes;
 
-                      return (
-                        <div key={chunkIndex} className="flex">
-                          {chunk.map(([timeKey, timeValue], index) => {
-                            const now = new Date();
-                            const currentTime = now.getHours() * 60 + now.getMinutes();
-                            const slotTime = parseInt(timeValue.split(":")[0]) * 60 + parseInt(timeValue.split(":")[1]);
-                            const isNearestFutureSlot = !activeTime && slotTime >= currentTime;
+                      const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
 
-                            return (
-                              <div
-                                key={timeKey}
-                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
-                                  isNearestFutureSlot || timeKey === activeTime
-                                    ? "border-2 border-[#002718] text-[#063828] font-bold" 
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#063828] text-[#063828]"
-                                } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                                  slotTime < currentTime ? "opacity-50 cursor-not-allowed" : ""
-                                }`}
+                      return slotTime >= startTime;
+                    });
+
+                    if (!hasActiveSlot) {
+                      return null;
+                    }
+
+                    return (
+                      <div key={chunkIndex} className="flex">
+                        {chunk.map(([timeKey, timeValue], index) => {
+                          const [hours, minutes] = timeValue.split(":").map(Number);
+                          const slotTime = hours * 60 + minutes;
+
+                          const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+
+                          return (
+                            <div
+                              key={timeKey}
+                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] mx-2 ${
+                                slotTime >= startTime
+                                  ? timeKey === activeTime
+                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
+                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#002718] text-[#002718]"
+                                  : "opacity-50 cursor-not-allowed"
+                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
+                            >
+                              <button
+                                onClick={() => handleButtonClick(timeKey, timeValue)}
+                                className="button-slanted-content w-full h-full flex items-center justify-center"
+                                disabled={slotTime < startTime}
                               >
-                                <button
-                                  onClick={() => handleButtonClick(timeKey, timeValue)}
-                                  className="button-slanted-content w-full h-full flex items-center justify-center"
-                                  disabled={slotTime < currentTime}
-                                >
-                                  {timeValue}
-                                </button>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      );
-                    })}
-                  </div> */}
+                                {formatToAMPM(timeValue)}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>;
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
@@ -631,18 +649,19 @@ const Page = ({ params } ) => {
               Your booking details
             </h2>
             {bookingDetails.map((detail, index) => (
-              <div
-                className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
-                key={index}
-              >
-                <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
-                  {detail.title}
-                </h3>
-                <p className="text-[18px] text-[#063828] font-jura py-2">
-                  {detail.description}
-                </p>
-              </div>
-            ))}
+                <div
+                  className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+                  key={detail.key}
+                >
+                  <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+                    {detail.title}
+                  </h3>
+                  <p className="text-[18px] text-[#063828] font-jura py-2">
+                    {detail.description}
+                  </p>
+                </div>
+              ))}
+
              {bookingErrors.length > 0 && (
                 <ul className="text-red-500 text-sm mt-4">
                   {bookingErrors.map((error, index) => (
@@ -742,7 +761,7 @@ const Page = ({ params } ) => {
   </div>
 
   {/* Payment Information */}
-  <div className="space-y-4 mt-6">
+  {/* <div className="space-y-4 mt-6">
     <h1 className="text-4xl font-black font-jura text-[#063828] mt-20">Payment</h1>
 
     <div>
@@ -816,7 +835,7 @@ const Page = ({ params } ) => {
         <p className="text-red-500 text-sm">{validationErrors.cardHolderName}</p>
       )}
     </div>
-  </div>
+  </div> */}
 
   <div>
   {generalError && (
@@ -860,3 +879,9 @@ const Page = ({ params } ) => {
 };
 
 export default Page;
+
+
+
+
+
+

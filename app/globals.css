@@ -626,3 +626,12 @@ border: none !important;
 .video.visible {
   display: block;
 }
+
+
+
+/* Custom style for the selected date */
+.selected-date {
+  background-color: #002718 !important;
+  color: white !important;
+ 
+}

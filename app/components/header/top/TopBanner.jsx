@@ -29,8 +29,6 @@ const TopBanner = ({ onClose }) => {
           <div className="button-slanted w-[94px] h-[22px] bg-[#df2a27] text-white ml-2 rounded-tl-lg rounded-br-lg flex items-center justify-center">
             <Link
               href="/experience"
-              target="_blank"
-              rel="noopener noreferrer"
               className="text-[8px] md:text-[12px]"
             >
               <span className="button-slanted-content">{t('book_now')}</span>
