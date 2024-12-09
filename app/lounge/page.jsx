@@ -922,7 +922,7 @@ const Page = ({ params } ) => {
   // ]);
 
   const [bookingDetails, setBookingDetails] = useState([
-    { key: "name", title: "Name", description: "" },
+    // { key: "name", title: "Name", description: "" },
     // { key: "no_of_people", title: "Number of People", description: "1" },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
@@ -1289,7 +1289,8 @@ const Page = ({ params } ) => {
     const errors = {};
   
     const bookingData = {
-      name: bookingDetails.find((detail) => detail.title === "name")?.description || "",
+      // name: bookingDetails.find((detail) => detail.title === "name")?.description || "",
+      name: formData.firstName,
       phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
       email: bookingDetails.find((detail) => detail.title === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "1",
@@ -1497,7 +1498,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       LOUNGE
                     </h1>
@@ -1516,7 +1517,7 @@ const Page = ({ params } ) => {
 
                  
                   <div>
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[700px] my-[10px]">
+                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[700px] my-[10px] rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -1588,7 +1589,7 @@ const Page = ({ params } ) => {
                   })}
                 </div>; */}
 
-            <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+            <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
@@ -1630,7 +1631,7 @@ const Page = ({ params } ) => {
                                 slotTime >= startTime
                                   ? timeKey === activeTime
                                     ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#002718] text-[#002718]"
+                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-[#002718] text-[#002718]"
                                   : "opacity-50 cursor-not-allowed"
                               } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
@@ -1666,7 +1667,7 @@ const Page = ({ params } ) => {
               </div>
             </div>
           </div>
-          <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px]">
+          <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg">
             <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
               Your booking details
             </h2>

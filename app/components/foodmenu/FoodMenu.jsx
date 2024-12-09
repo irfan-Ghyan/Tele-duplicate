@@ -31,24 +31,24 @@ const FoodMenu = () => {
       
 
   return (
-    <div className="bg-[#c09e5f]">
+    <div className="bg-[#002718] mb-40">
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left border border-[#002718]">
           <thead className="bg-[#002718] text-[#c09e5f]">
-            <tr>
-              <th className="px-4 py-2">ID</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Description</th>
-              <th className="px-4 py-2">Price</th>
+            <tr className="border border-[#c09e5f] border-transparent-30 font-bold text-lg">
+              <th className="border border-[#e3ce90] border-opacity-25 p-4 ">ID</th>
+              <th className="border border-[#e3ce90] border-opacity-25 p-4">Name</th>
+              <th className="border border-[#e3ce90] border-opacity-25 p-4">Description</th>
+              <th className="border border-[#e3ce90] border-opacity-25 p-4">Price</th>
             </tr>
           </thead>
           <tbody>
             {menuItems.map((item) => (
-              <tr key={item.id} className="hover:bg-[#c09e5f]">
-                <td className="border px-4 py-2">{item.id}</td>
-                <td className="border px-4 py-2">{item.name}</td>
-                <td className="border px-4 py-2">{item.description}</td>
-                <td className="border px-4 py-2">{item.price}</td>
+              <tr key={item.id} className="text-[#e3ce90] hover:text-[#002718] hover:bg-[#c09e5f]">
+                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.id}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.name}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.description}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.price}</td>
               </tr>
             ))}
           </tbody>

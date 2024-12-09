@@ -134,7 +134,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 width={185}
                 height={90}
                 priority={true}
-                className="sm:w-[185px] sm:h-[52px] md:w-[185px] md:h-[52px] lg:w-[165px] lg:h-[92px] xl:w-[165px] xl:h-[92px]"
+                className="sm:w-[100px] sm:h-[52px] md:w-[185px] md:h-[92px] lg:w-[165px] lg:h-[92px] xl:w-[165px] xl:h-[92px]"
               />
             </Link>
           </div>

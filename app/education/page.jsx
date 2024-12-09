@@ -20,15 +20,15 @@ const Page = () => {
   return (
     <>
       <Helmet>
-        <title>{t('FOOD & BEVERAGE | Driving experience— a safe and thrilling introduction to the racing world')}</title>
+        <title>{t('FOOD & BEVERAGE ')}</title>
         <meta
           name="description"
-          content={t("Savor the finest flavors in every bite and every sip!")}
+          content={t("Food and beverages bring joy to life, uniting people over delicious meals and refreshing drinks. Whether it's a cozy coffee, a sweet treat, or a hearty dish, they create moments of comfort and celebration, making every gathering special.")}
         />
         <meta property="og:title" content={t("FOOD & BEVERAGE | Teleios Dome")} />
         <meta
           property="og:description"
-          content={t("Savor the finest flavors in every bite and every sip!")}
+          content={t("Food and beverages bring joy to life, uniting people over delicious meals and refreshing drinks. Whether it's a cozy coffee, a sweet treat, or a hearty dish, they create moments of comfort and celebration, making every gathering special.!")}
         />
         <meta property="og:type" content="website" />
       </Helmet>
@@ -37,7 +37,7 @@ const Page = () => {
           <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] xl:px-80 lg:px-40 lg:pt-[50px]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">{t('FOOD & BEVERAGE')}</h1>
             <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify">
-              {t("Savor the finest flavors in every bite and every sip!")}
+              {t("Food and beverages bring joy to life, uniting people over delicious meals and refreshing drinks.")}
             </p>
           </div>
         </div>

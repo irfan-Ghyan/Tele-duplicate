@@ -961,7 +961,7 @@ const Page = ({ params } ) => {
 
 
   const [bookingDetails, setBookingDetails] = useState([
-    { key: "name", title: "Name", description: "" },
+    // { key: "name", title: "Name", description: "" },
     { key: "no_of_people", title: "Customers", description: "0" },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
