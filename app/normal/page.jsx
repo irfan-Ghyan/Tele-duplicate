@@ -1,4 +1,3 @@
-
 // "use client";
 
 // import React, { useState, useCallback, useEffect } from "react";
@@ -16,14 +15,15 @@
 
 //   const [count, setCount] = useState(1);
 //   const [date, setDate] = useState(new Date());
-//   const [bookingDetails, setBookingDetails] = useState([
-//     { title: "name", description: "" },
-//     { title: "no_of_people", description: "1" },
-//     // { title: "date", description: "" },
-//     // { title: "time", description: "" }, 
-//     { title: "booking_type", description: "normal" },
-//     { title: "duration", description: "20 Min" }, 
 
+
+//   const [bookingDetails, setBookingDetails] = useState([
+//     { key: "name", title: "Name", description: "" },
+//     { key: "no_of_people", title: "Number of People", description: "1" },
+//     { key: "date", title: "Date", description: "" },
+//     { key: "time", title: "Time", description: "" },
+//     { key: "booking_type", title: "Booking Type", description: "Normal" },
+//     { key: "duration", title: "Duration", description: "20 Min" },
 //   ]);
   
 
@@ -84,7 +84,7 @@
 //   const handleBookingTypeChange = (type) => {
 //     setBookingDetails((prevDetails) =>
 //       prevDetails.map((detail) =>
-//         detail.title === "booking_type" ? { ...detail, description: type } : detail
+//         detail.key === "booking_type" ? { ...detail, description: type } : detail
 //       )
 //     );
 //     setBookingType(type);
@@ -109,18 +109,33 @@
 //   };
 
 
-//   const updateBookingDetail = (field, value) => {
+//   // const updateBookingDetail = (field, value) => {
+//   //   setBookingDetails((prevDetails) =>
+//   //     prevDetails.map((detail) =>
+//   //       detail.title === field ? { ...detail, description: value } : detail
+//   //     )
+//   //   );
+//   // };
+//   const updateBookingDetail = (key, value) => {
 //     setBookingDetails((prevDetails) =>
 //       prevDetails.map((detail) =>
-//         detail.title === field ? { ...detail, description: value } : detail
+//         detail.key === key ? { ...detail, description: value } : detail
 //       )
 //     );
 //   };
 
-
 //   const increaseCount = () => {
 //     if (count < 14) {
 //       const newCount = count + 1;
+//       //step 2
+//       //access the number of available sims and check if the count is smaller or not
+//         //if count gets bigger
+//           //show error message and keep count equal to the available sims
+//           //let the user increase the max capacity
+//           //de-select the time slot that was selected and re-fetch slots on each click (whenever increaseCount function runs fetch fresh slots)
+          
+
+          
 //       setCount(newCount);
 //       updateBookingDetail("no_of_people", newCount.toString());
 //       setSeatError("");
@@ -139,17 +154,32 @@
 //   };
 
 //   const handlePlanChange = (newDuration) => {
+
+//     //step 4
+//       // 1 - fetch fresh time slots
+//       // 2 - de-select time slot if that slot for that many people is not available 
+
 //     updateBookingDetail("duration", newDuration);
 //   };
 
 //   const handleDateChange = (newDate) => {
+//     //step 3
+
+//     //when clicked a day
+//      // 1 - fetch fresh time slots
+//       // 2 - deselect the selected time slot ( de select only if this slot is not available on this day for this many people)
+     
+      
+    
 //     setDate(newDate);
 //     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
 
 //     const selectedDate = new Date(newDate);
 //     setMinDate(selectedDate); 
 
+//     const formattedDate = newDate.toLocaleDateString("en-CA"); 
 
+//     updateBookingDetail("date", formattedDate);
 //     const nextDate = new Date(selectedDate);
 //     nextDate.setDate(selectedDate.getDate() + 1);
 //     setMaxDate(nextDate);
@@ -183,6 +213,11 @@
 //   };
 
 
+//     // step 1
+//   //save available number of sim for the clicked slot 
+//   //available sims are fetched when slots are fetched
+//   //To-Do:
+//     // available sims for this clicked slots needs to be saved so we can access them in number of people counter
 //   const chunkArray = (array, chunkSize) => {
 //     const result = [];
 //     for (let i = 0; i < array.length; i += chunkSize) {
@@ -196,7 +231,7 @@
 
 //   const fetchBookings = useCallback(async () => {
 //     const payload = {
-//       no_of_people: "2",
+//       no_of_people: count.toString(),
 //       date: selectedDate,
 //       duration: slotInterval.toString(),
 //       booking_type: selectedSlotType,
@@ -283,14 +318,14 @@
 //     const errors = {};
   
 //     const bookingData = {
-//       name: bookingDetails.find((detail) => detail.title === "name")?.description || "",
-//       phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
-//       email: bookingDetails.find((detail) => detail.title === "email")?.description || "",
-//       no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "0",
-//       duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10),
-//       date: bookingDetails.find((detail) => detail.title === "date")?.description || "2024-10-29",
-//       time: bookingDetails.find((detail) => detail.title === "time")?.description || "00:00",
-//       booking_type: bookingDetails.find((detail) => detail.title === "booking_type")?.description || "",
+//       name: bookingDetails.find((detail) => detail.key === "name")?.description || "",
+//       phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
+//       email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
+//       no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
+//       duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description || "20", 10),
+//       date: bookingDetails.find((detail) => detail.key === "date")?.description,
+//       time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
+//       booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
 //     };
   
 //     const paymentData = {
@@ -400,7 +435,7 @@
 //     const errors = [];
   
 //     bookingDetails.forEach((detail) => {
-//       if (detail.title !== "name" && (!detail.description || detail.description.trim() === "")) {
+//       if (detail.key !== "name" && (!detail.description || detail.description.trim() === "")) {
 //         errors.push(`The field "${detail.title}" is required.`);
 //       }
 //     });
@@ -408,7 +443,6 @@
 //     setBookingErrors(errors);
 //     return errors.length === 0;
 //   };
-
 //   const handleTabChange = (tabIndex) => {
 //       if (tabIndex === 2 && !validateBookingDetails()) {
 //         return;
@@ -668,19 +702,19 @@
 //               Your booking details
 //             </h2>
 //             {bookingDetails.map((detail, index) => (
-//               <div
-//                 className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
-//                 key={index}
-//               >
-//                 <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
-//                   {detail.title}
-//                 </h3>
-//                 <p className="text-[18px] text-[#063828] font-jura py-2">
-//                   {detail.description}
-//                 </p>
-//               </div>
-//             ))}
-//              {bookingErrors.length > 0 && (
+//             <div
+//               className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+//               key={detail.key}
+//             >
+//               <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+//                 {detail.title}
+//               </h3>
+//               <p className="text-[18px] text-[#063828] font-jura py-2">
+//                 {detail.description}
+//               </p>
+//             </div>
+//           ))}
+//                 {bookingErrors.length > 0 && (
 //                 <ul className="text-red-500 text-sm mt-4">
 //                   {bookingErrors.map((error, index) => (
 //                     <li key={index}>{error}</li>
@@ -903,6 +937,10 @@
 
 
 
+
+
+
+
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
@@ -918,21 +956,13 @@ const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [date, setDate] = useState(new Date());
-  // const [bookingDetails, setBookingDetails] = useState([
-  //   { title: "name", description: "" },
-  //   { title: "no_of_people", description: "1" },
-  //   { title: "date", description: "" },
-  //   { title: "time", description: "" }, 
-  //   { title: "booking_type", description: "normal" },
-  //   { title: "duration", description: "20 Min" }, 
 
-  // ]);
 
   const [bookingDetails, setBookingDetails] = useState([
     { key: "name", title: "Name", description: "" },
-    { key: "no_of_people", title: "Number of People", description: "1" },
+    { key: "no_of_people", title: "Customers", description: "0" },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
@@ -951,7 +981,7 @@ const Page = ({ params } ) => {
   const [generalError, setGeneralError] = useState("");
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
-
+  const [availableSIMs, setAvailableSIMs] = useState(null);
 
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null); 
@@ -1037,15 +1067,47 @@ const Page = ({ params } ) => {
     );
   };
 
-  const increaseCount = () => {
+  const increaseCount = async () => {
     if (count < 14) {
+      if (availableSIMs !== null && count >= availableSIMs) {
+        setSeatError(
+          `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+        );
+        return;
+      }
+      if (availableSIMs !== null) {
+        if (count >= availableSIMs) {
+          // Show error message and set count to availableSIMs
+          setSeatError(
+            `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+          );
+          setCount(availableSIMs); // Keep count equal to available SIMs
+          return;
+        }
+      }
+
+      //step 2
+      //access the number of available sims and check if the count is smaller or not
+        //if count gets bigger
+          //show error message and keep count equal to the available sims
+          //let the user increase the max capacity
+          //de-select the time slot that was selected and re-fetch slots on each click (whenever increaseCount function runs fetch fresh slots)
+          
       const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
       setSeatError("");
+
+       // Clear the selected time slot
+  setActiveTime(null);
+  updateBookingDetail("time", "");
+
+  // Fetch fresh slots
+  await fetchBookings();
     } else {
       setSeatError("Maximum limit of 14 seats reached.");
     }
+
   };
   
   const decreaseCount = () => {
@@ -1057,23 +1119,72 @@ const Page = ({ params } ) => {
     }
   };
 
-  const handlePlanChange = (newDuration) => {
+  const handlePlanChange = async (newDuration) => {
+
+    //step 4
+      // 1 - fetch fresh time slots
+      // 2 - de-select time slot if that slot for that many people is not available 
+
     updateBookingDetail("duration", newDuration);
+    await fetchBookings();
+
+  // Validate the selected time slot
+    if (activeTime) {
+      const isSelectedTimeAvailable = Object.values(times).some(
+        (slot) => slot.time === activeTime && slot.sims >= count
+      );
+  
+      // Deselect the time slot if it's not available
+      if (!isSelectedTimeAvailable) {
+        setActiveTime(null);
+        updateBookingDetail("time", "");
+      }
+    }
   };
 
-  const handleDateChange = (newDate) => {
-    setDate(newDate);
-    updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
+  const handleDateChange = async (newDate) => {
+    //step 3
 
+    //when clicked a day
+     // 1 - fetch fresh time slots
+      // 2 - deselect the selected time slot ( de select only if this slot is not available on this day for this many people)
+
+    updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
     const selectedDate = new Date(newDate);
     setMinDate(selectedDate); 
-    
+
     const formattedDate = newDate.toLocaleDateString("en-CA"); 
+    setDate(newDate);
+    setSelectedDate(formattedDate);
+
 
     updateBookingDetail("date", formattedDate);
-    const nextDate = new Date(selectedDate);
-    nextDate.setDate(selectedDate.getDate() + 1);
+
+    await fetchBookings();
+      // Validate the selected time slot
+  if (activeTime) {
+    const isSelectedTimeAvailable = Object.values(times).some(
+      (slot) => slot.time === activeTime && slot.sims >= count
+    );
+
+    // Deselect the time slot if it's not available
+    if (!isSelectedTimeAvailable) {
+      setActiveTime(null);
+      updateBookingDetail("time", "");
+    }
+  }
+
+    setActiveTime(null);
+    updateBookingDetail("time", "");
+  
+    const nextDate = new Date(newDate);
+    nextDate.setDate(newDate.getDate() + 1);
     setMaxDate(nextDate);
+
+    // const nextDate = new Date(selectedDate);
+    // nextDate.setDate(selectedDate.getDate() + 1);
+    // setMaxDate(nextDate);
+    fetchBookings();
   };
 
   
@@ -1104,6 +1215,11 @@ const Page = ({ params } ) => {
   };
 
 
+    // step 1
+  //save available number of sim for the clicked slot 
+  //available sims are fetched when slots are fetched
+  //To-Do:
+    // available sims for this clicked slots needs to be saved so we can access them in number of people counter
   const chunkArray = (array, chunkSize) => {
     const result = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -1131,17 +1247,31 @@ const Page = ({ params } ) => {
       let response = await doGetCall(url);
       const data = await response.json();
 
-      console.log("Fetched data:", data);
-
       const fetchedTimes = data.reduce((acc, slot) => {
-        acc[`time${slot.time}`] = slot.time;
+        if (slot.time) {
+          acc[`time${slot.time}`] = {
+            time: String(slot.time),
+            sims: slot.availableSIMs || 0,
+          };
+        }
         return acc;
       }, {});
       setTimes(fetchedTimes);
+
+    if (activeTime) {
+      const isActiveSlotAvailable = fetchedTimes[activeTime]?.sims >= count;
+      if (!isActiveSlotAvailable) {
+        setActiveTime(null); 
+        updateBookingDetail("time", ""); 
+      }
+    }
+
+    console.log("Available slots fetched:", fetchedTimes);
+
     } catch (error) {
       console.error("Error fetching bookings:", error);
     }
-  }, [selectedDate, selectedSlotType, slotInterval]);
+  }, [count, selectedDate, selectedSlotType, slotInterval, activeTime]);
 
   useEffect(() => {
     fetchBookings();
@@ -1312,9 +1442,11 @@ const Page = ({ params } ) => {
     console.log("Thank you logic...");
   };
 
-  const handleButtonClick = (timeKey, timeValue) => {
+  const handleButtonClick = (timeKey, timeValue, sims) => {
     setActiveTime(timeKey);
     updateBookingDetail("time", timeValue);
+    setAvailableSIMs(sims); // Save the available SIMs for the clicked slot step.1
+    console.log(`Available SIMs for slot ${timeValue}:`, sims);
   };
 
   const validateBookingDetails = () => {
@@ -1337,12 +1469,25 @@ const Page = ({ params } ) => {
       setActiveTab(tabIndex);
   };
   
+  // function formatToAMPM(time) {
+  //   const [hours, minutes] = time.split(':').map(Number); // Split and convert to numbers
+  //   const ampm = hours >= 12 ? 'PM' : 'AM';
+  //   const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
+  //   return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+  // }
+
   function formatToAMPM(time) {
-    const [hours, minutes] = time.split(':').map(Number); // Split and convert to numbers
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+    if (!time || typeof time !== "string" || !time.includes(":")) {
+      console.log("Invalid time value:", time);
+      return "Invalid Time"; 
+    }
+  
+    const [hours, minutes] = time.split(":").map(Number);
+    const ampm = hours >= 12 ? "PM" : "AM";
     const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
-    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+    return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   }
+  
   
   return (
     <>
@@ -1402,7 +1547,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Select Seats
                     </h1>
@@ -1442,7 +1587,7 @@ const Page = ({ params } ) => {
 
                  
                   <div className="my-4">
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[605px]">
+                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -1511,59 +1656,66 @@ const Page = ({ params } ) => {
 
 
                 
-                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px]">
+                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
                     const selectedDateStr = date.toLocaleDateString("en-CA");
 
-                    const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
-                      const [hours, minutes] = timeValue.split(":").map(Number);
-                      const slotTime = hours * 60 + minutes;
+                    // const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
+                    //   const [hours, minutes] = timeValue.split(":").map(Number);
+                    //   const slotTime = hours * 60 + minutes;
 
-                      const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+                    //   const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
 
-                      return slotTime >= startTime;
-                    });
+                    //   return slotTime >= startTime;
+                    // });
 
-                    if (!hasActiveSlot) {
-                      return null;
-                    }
+                    // if (!hasActiveSlot) {
+                    //   return null;
+                    // }
 
                     return (
                       <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, timeValue], index) => {
-                          const [hours, minutes] = timeValue.split(":").map(Number);
-                          const slotTime = hours * 60 + minutes;
+                        {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
+                            if (!timeValue || typeof timeValue !== "string") {
+                              console.warn(`Invalid time value for key ${timeKey}:`, timeValue);
+                              return null; // Skip invalid or undefined time slots
+                            }
 
-                          const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+                            const [hours, minutes] = timeValue.split(":").map(Number);// Ensure timeValue is valid
+                            const slotTime = hours * 60 + minutes;
 
-                          return (
-                            <div
-                              key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] mx-2 ${
-                                slotTime >= startTime
-                                  ? timeKey === activeTime
-                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#002718] text-[#002718]"
-                                  : "opacity-50 cursor-not-allowed"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                            >
-                              <button
-                                onClick={() => handleButtonClick(timeKey, timeValue)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime}
+                            const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+
+                            return (
+                              <div
+                                key={timeKey}
+                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] mx-2 ${
+                                  slotTime >= startTime
+                                    ? timeKey === activeTime
+                                      ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
+                                      : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#002718] text-[#002718]"
+                                    : "opacity-50 cursor-not-allowed"
+                                } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                               >
-                                {formatToAMPM(timeValue)}
-                              </button>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })}
-                </div>;
+                                <button
+                                  onClick={() => handleButtonClick(timeKey, timeValue, sims)}
+                                  className="button-slanted-content w-full h-full flex items-center justify-center"
+                                  disabled={slotTime < startTime}
+                                >
+                                  {formatToAMPM(timeValue)}
+                                  <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span>
+                                </button>
+                              </div>
+                            );
+                          })}
+
+                          </div>
+                        );
+                      })}
+                    </div>;
 
 
 
@@ -1573,7 +1725,7 @@ const Page = ({ params } ) => {
                     </h1>
                     <BookingType selectedBookingType={bookingType} onBookingTypeChange={handleBookingTypeChange} />
                   </div> */}
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
+                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
@@ -1583,7 +1735,7 @@ const Page = ({ params } ) => {
               </div>
             </div>
           </div>
-          <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px]">
+          <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
             <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
               Your booking details
             </h2>
