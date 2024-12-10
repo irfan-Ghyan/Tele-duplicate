@@ -65,9 +65,9 @@ const Page = () => {
         {/* <div className="w-full mt-10">
           <Celebrations />
         </div> */}
-        <div className="w-full max-w-7xl px-4 md:px-8 mx-auto py-10">
+        {/* <div className="w-full max-w-7xl px-4 md:px-8 mx-auto py-10">
           <GetTouchForm />
-        </div>
+        </div> */}
       </div>
     </>
   );

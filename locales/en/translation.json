@@ -4,12 +4,13 @@
     "title": "EXPERIENCES",
     "description_fun": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
     "dome": "DOME",
-    "corporate_events": "CORPORATE EVENTS",
+    "corporate_events": "WATCH PARTIES",
     "education": "EDUCATION",
     "EXPERIENCES": "EXPERIENCES",
-    "DOME": "DOME",
+    "DOME": "VENUE",
     "CORPORATE EVENTS": "CORPORATE EVENTS",
-    "EDUCATION": "EDUCATION",
+    "EDUCATION": "PRIVATE EVENTS",
+    "FOOD": "F&B",
     "EXPERIENCE": "EXPERIENCE",
     "experience.title": "20-Minute Sprint",
     "experience.description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
@@ -268,7 +269,54 @@
   "standings": "STANDINGS",
 
   "dometitle": "DOME",
-  "domedescription": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience."
+  "domedescription": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.",
+
+  "Loading": "Loading...",
+  "ErrorFetchingData": "An error occurred while fetching data.",
+  "DiscoverTheDome": "Discover the Dome",
+
+"Dome": {
+    "Loading": "Loading...",
+    "ErrorFetchingData": "Failed to fetch data from the server.",
+    "DiscoverTheDome": "Discover the Dome",
+    "title": "Title",
+    "description": "Description"
+  },
+
+  "Content": {
+    "Title": "Experiences | Racing simulators and all-inclusive access",
+    "Description": "Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill.",
+    "Sessions": "SESSIONS",
+    "Loading": "Loading...",
+    "Error": "An error occurred while fetching data.",
+    "BookNow": "BOOK NOW",
+    "title": "60-Minute Session",
+    "description": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
+    "title": "40-Minute Session",
+    "description": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
+    "title": "20-Minute Session",
+    "description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
+    "title": "VIP",
+    "description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
+    "lounge": "Lounge",
+    "description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
+
+    "FAQ": "FAQ",
+    "faq": {
+    "title": "Frequently Asked Questions",
+    "question": "Do I need prior experience?",
+    "answer": "No experience is necessary! Our simulators are user-friendly, and our staff is always available to assist you, practice makes perfect!",
+    "seeMore": "See More",
+    "seeLess": "See Less",
+    "otherQuestions": "Other Questions?",
+    "contactUs": "Contact Us",
+    "moreInfo": "for more information.",
+    "Loading": "Loading...",
+    "noData": "No FAQ data found."
+  }
+
+  }
+
 }
 
 

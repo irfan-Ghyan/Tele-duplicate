@@ -104,7 +104,7 @@ const Faq = () => {
       <div className="flex justify-between mt-[36px] mb-[41px]">
         <div>
           <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
-            {t('faq.title')}
+            {t('faq.ttle')}
           </h1>
         </div>
       </div>
@@ -163,7 +163,7 @@ const Faq = () => {
           {t('faq.otherQuestions')}
         </h1>
         <p className="text-[24px] md:text-[18px] text-[#c09e5f] font-bold font-jura">
-          <Link href="https://feverup.com/m/187813" target="_blank" rel="noopener noreferrer" className='underline'>
+          <Link href="/experience" target="_blank" rel="noopener noreferrer" className='underline'>
             {t('faq.contactUs')}
           </Link>{' '}
           {t('faq.moreInfo')}

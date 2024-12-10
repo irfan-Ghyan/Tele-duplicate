@@ -638,3 +638,20 @@ border: none !important;
 /* .react-calendar__navigation__double-arrow {
   display: none !important;
 } */
+
+
+
+.react-calendar__tile.selected-date {
+  background-color: #063828 !important; /* Selected date background color */
+  color: white !important;            /* Selected date text color */
+}
+
+.react-calendar__tile.current-date {
+  background-color: #e3ce90 !important; /* Current date background color */
+  color: white !important;           /* Current date text color */
+}
+
+.react-calendar__tile:hover {
+  background-color: #063828 !important; /* Hover effect */
+  color: #e3ce90 !important;
+}
