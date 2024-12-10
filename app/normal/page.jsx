@@ -952,6 +952,8 @@ import { doGetCall, doPostCall } from "../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
+
+
 const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
@@ -1073,19 +1075,32 @@ const Page = ({ params } ) => {
     );
   };
 
-  const increaseCount = async () => {
+  const increaseCount = async () => { 
+    const newCount = count + 1;
+
     if (count < 14) {
-      const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
+
       setSeatError(""); 
+      // setPopupMessage("Seats are not available.");
+      setIsPopupVisible(true);
+
+      if (activeTime && times[activeTime]?.sims < newCount) {
+        setPopupMessage(`Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`);
+        setIsPopupVisible(true);
+        setTimeout(() => {
+          setIsPopupVisible(false);
+        }, 1000);
+        
+      }
   
-      // Fetch fresh slots
       await fetchBookings();
     } else {
       setSeatError("Maximum limit of 14 seats reached.");
-     
+    
     }
+  };
     
     // if (count < 14) {
     //   if (availableSIMs !== null && count >= availableSIMs) {
@@ -1119,7 +1134,7 @@ const Page = ({ params } ) => {
     // } else {
     //   setSeatError("Maximum limit of 14 seats reached.");
     // }
-  };
+  
   
   const decreaseCount = async () => {
     if (count > 1) {
@@ -1143,7 +1158,7 @@ const Page = ({ params } ) => {
     //step 4
       // 1 - fetch fresh time slots
       // 2 - de-select time slot if that slot for that many people is not available 
-
+    
     updateBookingDetail("duration", newDuration);
     await fetchBookings();
 
@@ -1165,7 +1180,6 @@ const Page = ({ params } ) => {
 
   const handleDateChange = async (newDate) => {
     //step 3
-
     //when clicked a day
      // 1 - fetch fresh time slots
       // 2 - deselect the selected time slot ( de select only if this slot is not available on this day for this many people)
@@ -1176,7 +1190,8 @@ const Page = ({ params } ) => {
     setMinDate(selectedDate); 
     setDate(newDate);
     setSelectedDate(formattedDate);
-
+    setActiveTime(null);
+    updateBookingDetail("time", "");
 
     updateBookingDetail("date", formattedDate);
 
@@ -1187,13 +1202,13 @@ const Page = ({ params } ) => {
       setPopupMessage("No slots are available for the selected date and time.");
       setIsPopupVisible(true);
     }
-      // Validate the selected time slot
+
   if (activeTime) {
     const isSelectedTimeAvailable = Object.values(times).some(
       (slot) => slot.time === activeTime && slot.sims >= count
     );
 
-    // Deselect the time slot if it's not available
+   
     if (!isSelectedTimeAvailable) {
       setActiveTime(null);
       updateBookingDetail("time", "");
@@ -1274,7 +1289,7 @@ const Page = ({ params } ) => {
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
-   
+      
       const fetchedTimes = data.reduce((acc, slot) => {
         if (slot.time) {
           acc[`time${slot.time}`] = {
@@ -1527,19 +1542,7 @@ const Page = ({ params } ) => {
   
   return (
     <>
-    {isPopupVisible && (
-      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div className="bg-white rounded-lg p-6 shadow-lg w-[300px] text-center">
-          <p className="text-red-600 font-bold">{popupMessage}</p>
-          <button
-            onClick={closePopup}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
-          >
-            Close
-          </button>
-        </div>
-      </div>
-    )}
+ 
       <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
       <button
           className="text-[#e3ce90]"
@@ -1605,7 +1608,13 @@ const Page = ({ params } ) => {
                         <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
                           Select your seats
                         </p>
+                        {isPopupVisible && (
+                            <>
+                            <p className="text-red-600 font-bold">{popupMessage}</p>
+                            </>
+                            )}
                       </div>
+                     
                       <div className="flex items-center justify-center mb-4 ">
                         <button
                           onClick={decreaseCount}
@@ -1746,12 +1755,12 @@ const Page = ({ params } ) => {
                                 key={timeKey}
                                 className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
                                   slotTime >= startTime
-                                    ? timeKey === activeTime
-                                      ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
-                                      : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                                    : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                                } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                              >
+                                  ? timeKey === activeTime
+                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
+                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
+                                  : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
+                            >
                                  <button
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                 className="button-slanted-content w-full h-full flex items-center justify-center"

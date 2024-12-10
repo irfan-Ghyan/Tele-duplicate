@@ -125,53 +125,80 @@ const Page = ({ params } ) => {
   };
 
 
-  const increaseCount = async () => {
-    if (count < 14) {
-      const newCount = count + 1;
-      setCount(newCount);
-      updateBookingDetail("no_of_people", newCount.toString());
-      setSeatError(""); 
+  // const increaseCount = async () => {
+  //   if (count < 14) {
+  //     const newCount = count + 1;
+  //     setCount(newCount);
+  //     updateBookingDetail("no_of_people", newCount.toString());
+  //     setSeatError(""); 
   
-      // Fetch fresh slots
-      await fetchBookings();
-    } else {
-      setSeatError("Maximum limit of 14 seats reached.");
-    }
+  //     // Fetch fresh slots
+  //     await fetchBookings();
+  //   } else {
+  //     setSeatError("Maximum limit of 14 seats reached.");
+  //   }
     
+  //   if (count < 14) {
+  //     if (availableSIMs !== null && count >= availableSIMs) {
+  //       setSeatError(
+  //         `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+  //       );
+  //       return;
+  //     }
+
+  //     if (availableSIMs !== null) {
+  //       if (count >= availableSIMs) {
+  //         // Show error message and set count to availableSIMs
+  //         setSeatError(
+  //           `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+  //         );
+  //         setCount(availableSIMs); // Keep count equal to available SIMs
+  //         return;
+  //       }
+  //     }
+
+  //     const newCount = count + 1;
+  //     setCount(newCount);
+  //     updateBookingDetail("no_of_people", newCount.toString());
+  //     setSeatError(""); 
+
+  //     setActiveTime(null);
+  //     updateBookingDetail("time", "");
+
+
+  //     await fetchBookings();
+  //   } else {
+  //     setSeatError("Maximum limit of 14 seats reached.");
+  //   }
+  // };
+  
+  const increaseCount = async () => { 
+    const newCount = count + 1;
+
     if (count < 14) {
-      if (availableSIMs !== null && count >= availableSIMs) {
-        setSeatError(
-          `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-        );
-        return;
-      }
-
-      if (availableSIMs !== null) {
-        if (count >= availableSIMs) {
-          // Show error message and set count to availableSIMs
-          setSeatError(
-            `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-          );
-          setCount(availableSIMs); // Keep count equal to available SIMs
-          return;
-        }
-      }
-
-      const newCount = count + 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
+
       setSeatError(""); 
+      // setPopupMessage("Seats are not available.");
+      setIsPopupVisible(true);
 
-      setActiveTime(null);
-      updateBookingDetail("time", "");
-
-
+      if (activeTime && times[activeTime]?.sims < newCount) {
+        setPopupMessage(`Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`);
+        setIsPopupVisible(true);
+        setTimeout(() => {
+          setIsPopupVisible(false);
+        }, 1000);
+        
+      }
+  
       await fetchBookings();
     } else {
       setSeatError("Maximum limit of 14 seats reached.");
+    
     }
   };
-  
+
   const decreaseCount = async () => {
     if (count > 1) {
       const newCount = count - 1;
