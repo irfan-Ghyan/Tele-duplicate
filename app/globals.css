@@ -630,11 +630,11 @@ border: none !important;
 
 
 /* Hide single arrow icons (>) */
-.react-calendar__navigation__arrow {
+/* .react-calendar__navigation__arrow {
   display: none;
-}
+} */
 
 /* Hide double arrow icons (>>) */
-.react-calendar__navigation__double-arrow {
-  display: none;
-}
+/* .react-calendar__navigation__double-arrow {
+  display: none !important;
+} */

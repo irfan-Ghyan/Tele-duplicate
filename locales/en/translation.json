@@ -265,7 +265,10 @@
   "bookThrough": "BOOK THROUGH",
   "raceResults": "RACE RESULTS",
   "calendar": "CALENDAR",
-  "standings": "STANDINGS"
+  "standings": "STANDINGS",
+
+  "dometitle": "DOME",
+  "domedescription": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience."
 }
 
 

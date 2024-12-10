@@ -965,7 +965,7 @@ const Page = ({ params } ) => {
     { key: "no_of_people", title: "Customers", description: "0" },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
-    { key: "booking_type", title: "Booking Type", description: "Normal" },
+    // { key: "booking_type", title: "Booking Type", description: "Normal" },
     { key: "duration", title: "Duration", description: "20 Min" },
   ]);
   
@@ -1080,38 +1080,38 @@ const Page = ({ params } ) => {
       setSeatError("Maximum limit of 14 seats reached.");
     }
     
-    if (count < 14) {
-      if (availableSIMs !== null && count >= availableSIMs) {
-        setSeatError(
-          `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-        );
-        return;
-      }
+    // if (count < 14) {
+    //   if (availableSIMs !== null && count >= availableSIMs) {
+    //     setSeatError(
+    //       `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+    //     );
+    //     return;
+    //   }
 
-      if (availableSIMs !== null) {
-        if (count >= availableSIMs) {
-          // Show error message and set count to availableSIMs
-          setSeatError(
-            `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-          );
-          setCount(availableSIMs); // Keep count equal to available SIMs
-          return;
-        }
-      }
+    //   if (availableSIMs !== null) {
+    //     if (count >= availableSIMs) {
+    //       // Show error message and set count to availableSIMs
+    //       setSeatError(
+    //         `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
+    //       );
+    //       setCount(availableSIMs); // Keep count equal to available SIMs
+    //       return;
+    //     }
+    //   }
 
-      const newCount = count + 1;
-      setCount(newCount);
-      updateBookingDetail("no_of_people", newCount.toString());
-      setSeatError(""); 
+    //   const newCount = count + 1;
+    //   setCount(newCount);
+    //   updateBookingDetail("no_of_people", newCount.toString());
+    //   setSeatError(""); 
 
-      setActiveTime(null);
-      updateBookingDetail("time", "");
+    //   setActiveTime(null);
+    //   updateBookingDetail("time", "");
 
 
-      await fetchBookings();
-    } else {
-      setSeatError("Maximum limit of 14 seats reached.");
-    }
+    //   await fetchBookings();
+    // } else {
+    //   setSeatError("Maximum limit of 14 seats reached.");
+    // }
   };
   
   const decreaseCount = async () => {
@@ -1259,12 +1259,14 @@ const Page = ({ params } ) => {
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
+      console.log(data)
+      debugger
 
       const fetchedTimes = data.reduce((acc, slot) => {
         if (slot.time) {
           acc[`time${slot.time}`] = {
             time: String(slot.time),
-            sims: slot.availableSIMs || 0,
+            sims: slot.sims || 0,
           };
         }
         return acc;
@@ -1499,7 +1501,7 @@ const Page = ({ params } ) => {
   
   return (
     <>
-      <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
+      <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
       <button
           className="text-[#e3ce90]"
           onClick={goBack} 
@@ -1512,7 +1514,7 @@ const Page = ({ params } ) => {
                     <div className="relative">
                     <div
                         className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                        onClick={() => handleTabChange(1)}  // Add a click handler to set active tab to 1
+                        onClick={() => handleTabChange(1)}
                     >
                         1
                     </div>
@@ -1553,9 +1555,9 @@ const Page = ({ params } ) => {
           <div className="left">
             <div className="flex max-w-7xl ">
               <div className="w-full flex">
-                <div className="">
+                <div className="w-full">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
+                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Select Seats
                     </h1>
@@ -1595,7 +1597,7 @@ const Page = ({ params } ) => {
 
                  
                   <div className="my-4">
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
+                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -1665,7 +1667,7 @@ const Page = ({ params } ) => {
 
 
                 
-                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
+                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
@@ -1736,7 +1738,7 @@ const Page = ({ params } ) => {
                     </h1>
                     <BookingType selectedBookingType={bookingType} onBookingTypeChange={handleBookingTypeChange} />
                   </div> */}
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px] rounded-lg">
+                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] my-[20px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>

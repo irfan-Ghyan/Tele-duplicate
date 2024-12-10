@@ -584,7 +584,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="">
 
-                  <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
+                  <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       VIP SEATS
                     </h1>
@@ -603,7 +603,7 @@ const Page = ({ params } ) => {
 
                  
                   <div>
-                    <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[600px] my-[20px] rounded-lg">
+                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[600px] my-[20px] rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                         Select Date
                       </h1>
@@ -676,7 +676,7 @@ const Page = ({ params } ) => {
                   })}
                 </div>; */}
 
-                <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
+                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
