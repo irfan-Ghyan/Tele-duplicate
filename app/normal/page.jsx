@@ -958,7 +958,8 @@ const Page = ({ params } ) => {
 
   const [count, setCount] = useState(0);
   const [date, setDate] = useState(new Date());
-
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
@@ -1001,6 +1002,11 @@ const Page = ({ params } ) => {
   });
   const [validationErrors, setValidationErrors] = useState({});
 
+
+  const closePopup = () => {
+    setIsPopupVisible(false);
+    setPopupMessage("");
+  };
   
   useEffect(() => {
     if (id) fetchEventDetails();
@@ -1078,6 +1084,7 @@ const Page = ({ params } ) => {
       await fetchBookings();
     } else {
       setSeatError("Maximum limit of 14 seats reached.");
+     
     }
     
     // if (count < 14) {
@@ -1150,6 +1157,8 @@ const Page = ({ params } ) => {
       if (!isSelectedTimeAvailable) {
         setActiveTime(null);
         updateBookingDetail("time", "");
+        setSeatError("The selected time slot is not available.");
+
       }
     }
   };
@@ -1165,8 +1174,6 @@ const Page = ({ params } ) => {
     const formattedDate = newDate.toLocaleDateString("en-CA"); 
     const selectedDate = new Date(newDate);
     setMinDate(selectedDate); 
-
-   
     setDate(newDate);
     setSelectedDate(formattedDate);
 
@@ -1174,6 +1181,12 @@ const Page = ({ params } ) => {
     updateBookingDetail("date", formattedDate);
 
     await fetchBookings();
+
+    const hasAvailableSlots = Object.values(times).some((slot) => slot.sims >= count);
+    if (!hasAvailableSlots) {
+      setPopupMessage("No slots are available for the selected date and time.");
+      setIsPopupVisible(true);
+    }
       // Validate the selected time slot
   if (activeTime) {
     const isSelectedTimeAvailable = Object.values(times).some(
@@ -1198,9 +1211,11 @@ const Page = ({ params } ) => {
     // nextDate.setDate(selectedDate.getDate() + 1);
     // setMaxDate(nextDate);
     fetchBookings();
+    
+  
   };
 
-  
+ 
   
   const updateSeatsDescription = (newCount) => {
     const newBookingDetails = bookingDetails.map((detail) => {
@@ -1259,9 +1274,7 @@ const Page = ({ params } ) => {
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
-      console.log(data)
-      debugger
-
+   
       const fetchedTimes = data.reduce((acc, slot) => {
         if (slot.time) {
           acc[`time${slot.time}`] = {
@@ -1273,6 +1286,7 @@ const Page = ({ params } ) => {
       }, {});
       setTimes(fetchedTimes);
 
+     
     if (activeTime) {
       const isActiveSlotAvailable = fetchedTimes[activeTime]?.sims >= count;
       if (!isActiveSlotAvailable) {
@@ -1283,8 +1297,10 @@ const Page = ({ params } ) => {
 
     console.log("Available slots fetched:", fetchedTimes);
 
+
     } catch (error) {
       console.error("Error fetching bookings:", error);
+      
     }
   }, [count, selectedDate, selectedSlotType, slotInterval, activeTime]);
 
@@ -1458,11 +1474,21 @@ const Page = ({ params } ) => {
     console.log("Thank you logic...");
   };
 
+  // const handleButtonClick = (timeKey, timeValue, sims) => {
+  //   setActiveTime(timeKey);
+  //   updateBookingDetail("time", timeValue);
+  //   setAvailableSIMs(sims); // Save the available SIMs for the clicked slot step.1
+  //   console.log(`Available SIMs for slot ${timeValue}:`, sims);
+  // };
   const handleButtonClick = (timeKey, timeValue, sims) => {
-    setActiveTime(timeKey);
-    updateBookingDetail("time", timeValue);
-    setAvailableSIMs(sims); // Save the available SIMs for the clicked slot step.1
-    console.log(`Available SIMs for slot ${timeValue}:`, sims);
+    if (sims >= count) {
+      setActiveTime(timeKey);
+      updateBookingDetail("time", timeValue);
+      setSeatError("");
+    } else {
+      setPopupMessage("The selected time slot is not available for the selected number of people.");
+      setIsPopupVisible(true);
+    }
   };
 
   const validateBookingDetails = () => {
@@ -1501,6 +1527,19 @@ const Page = ({ params } ) => {
   
   return (
     <>
+    {isPopupVisible && (
+      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+        <div className="bg-white rounded-lg p-6 shadow-lg w-[300px] text-center">
+          <p className="text-red-600 font-bold">{popupMessage}</p>
+          <button
+            onClick={closePopup}
+            className="mt-4 px-4 py-2 bg-red-500 text-white rounded"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    )}
       <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
       <button
           className="text-[#e3ce90]"
@@ -1693,7 +1732,7 @@ const Page = ({ params } ) => {
                           const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
                           if (!match) {
                             console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
-                            return null; // Skip invalid time values
+                            return null;
                           }
                           const hours = Number(match[1]);
                           const minutes = Number(match[2]);
@@ -1705,12 +1744,12 @@ const Page = ({ params } ) => {
                             return (
                               <div
                                 key={timeKey}
-                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] mx-2 ${
+                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
                                   slotTime >= startTime
                                     ? timeKey === activeTime
-                                      ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                      : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-30 border-[#002718] text-[#002718]"
-                                    : "opacity-50 cursor-not-allowed"
+                                      ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
+                                      : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
+                                    : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
                                 } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                               >
                                  <button
@@ -1719,7 +1758,7 @@ const Page = ({ params } ) => {
                                 disabled={slotTime < startTime}
                               >
                                 {formatToAMPM(timeValue)}
-                                <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span>
+                                {/* <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span> */}
                               </button>
                               </div>
                             );

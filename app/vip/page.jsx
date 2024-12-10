@@ -714,21 +714,21 @@ const Page = ({ params } ) => {
                           return (
                             <div
                               key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] mx-2 ${
+                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
                                 slotTime >= startTime
-                                  ? timeKey === activeTime
-                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-[#002718] text-[#002718]"
-                                  : "opacity-50 cursor-not-allowed"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                            >
+                                    ? timeKey === activeTime
+                                      ? "bg-[#002718] text-white font-bold border-2 border-[#002718]  "
+                                      : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 hover:bg-[#002718] border-[#002718] text-[#002718]"
+                                    : "text-[#c09e5f] border-opacity-100 cursor-not-allowed border border-[#c09e5f]"
+                                } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
+                              >
                               <button
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                 className="button-slanted-content w-full h-full flex items-center justify-center"
                                 disabled={slotTime < startTime}
                               >
                                 {formatToAMPM(timeValue)}
-                                <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span>
+                                {/* <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span> */}
                               </button>
                             </div>
                           );

@@ -36,7 +36,7 @@ const Footer = () => {
               <Image src="/assets/images/dome/YouTube.png" width={30} height={30} alt="YouTube" className="h-[30px] w-[30px]"  priority={true}/>
             </Link>
             <Link
-              href="https://www.instagram.com/teleios_dome/"
+              href="https://www.instagram.com/teleiosx/"
               target="_blank"
               rel="noopener noreferrer"
               className=""
@@ -44,7 +44,7 @@ const Footer = () => {
               <Image src="/assets/images/dome/IG.png" width={30} height={30} alt="Instagram" className="h-[30px] w-[30px]"  priority={true}/>
             </Link>
             <Link
-              href="https://www.tiktok.com/@teleiosdome.com"
+              href="https://www.tiktok.com/@teleiosx"
               target="_blank"
               rel="noopener noreferrer"
               className=""
@@ -52,7 +52,7 @@ const Footer = () => {
               <Image src="/assets/images/TikTok.png" width={30} height={30} alt="LinkedIn" className="h-[30px] w-[30px]"  priority={true}/>
             </Link>
             <Link
-              href="https://www.tripadvisor.com/Attraction_Review-g295424-d28054157-Reviews-Teleios_Dome-Dubai_Emirate_of_Dubai.html"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               className=""
@@ -117,7 +117,7 @@ const Footer = () => {
               <p className="text-[#e3ce90] font-jura text-[13px] font-bold ml-1">{t('phone')}</p>
             </div>
             <div>
-              <Link href="tel:+9715554894679" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">+971 55 489 4679</Link>
+              <Link href="tel:+9715554894679" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">+966 55 224 9297</Link>
             </div>
           </div>
           <div className="mt-[10px]">
@@ -125,7 +125,7 @@ const Footer = () => {
               <Image src="/assets/images/dome/email.png" alt="Email Icon" height={12} width={12} className="w-[9px] h-[9px] mt-[5px]" priority={true} />
               <p className="text-[#e3ce90] font-jura text-[13px] font-bold ml-1">{t('email')}</p>
             </div>
-            <Link href="mailto:info@teleiosdome.ae" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">info@teleiosdome.ae</Link>
+            <Link href="mailto:info@teleiosdome.ae" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">info@teleiosx.com</Link>
           </div>
         </div>
       </div>
