@@ -225,11 +225,12 @@ const BookingCalendar = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
+
+    
       let response = await doGetCall(url);
       const data = await response.json();
-      console.log("Fetched data:", data);
+     
 
-      // Generate consistent slots and map API data
       const slotTimes = generateSlotTimes(startHour, endHour, slotInterval);
       const slotsWithBusyData = slotTimes.map((time) => {
         const slot = data.find((s) => s.time === time) || {};

@@ -27,7 +27,7 @@ const Page = ({ params } ) => {
     { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
-    { key: "duration", title: "Duration", description: "" },
+    { key: "duration", title: "Duration", description: "20" },
   ]);
   
 
@@ -535,15 +535,18 @@ const Page = ({ params } ) => {
       );
   
       const data = await response.json();
-      console.log("Booking successfully:", data)
+ 
   
       if (data.success) {
         console.log("Booking and payment saved successfully:", data);
+        // window.location.reload();
       } else {
         console.error("Error saving booking/payment:", data.message);
+        setGeneralError(data.message || "An error occurred. Please try again.");
       }
     } catch (error) {
       console.error("Error with POST request:", error);
+      setGeneralError("An error occurred while processing your request. Please try again.");
     }
   };
 
@@ -911,7 +914,7 @@ const Page = ({ params } ) => {
               </div>
             </div>
           </div>
-          <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
+          {/* <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
             <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
               Your booking details
             </h2>
@@ -949,7 +952,49 @@ const Page = ({ params } ) => {
                 <span className="button-slanted-content py-2">CONTINUE</span>
               </button>
             </div>
+          </div> */}
+          <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
+          <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
+            Your booking details
+          </h2>
+          {bookingDetails
+            .filter((detail) => detail.key !== "booking_type") // Exclude these keys
+            .map((detail, index) => (
+              <div
+                className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+                key={detail.key}
+              >
+                <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+                  {detail.title}
+                </h3>
+                <p className="text-[18px] text-[#063828] font-jura py-2">
+                  {detail.description}
+                </p>
+              </div>
+            ))}
+
+          <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
+            {generalError && (
+              <p className="text-red-500 text-md font-normal">{generalError}</p>
+            )}
+            {bookingErrors.length > 0 && (
+              <ul>
+                {bookingErrors.map((error, index) => (
+                  <li key={index} className="text-red-500 text-md font-normal ">
+                    {error}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <button
+              onClick={() => handleTabChange(2)}
+              className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+            >
+              <span className="button-slanted-content py-2">CONTINUE</span>
+            </button>
           </div>
+          </div>
+
         </div>
         
       )}

@@ -15,23 +15,13 @@ const Page = ({ params } ) => {
 
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
-  // const [bookingDetails, setBookingDetails] = useState([
-  //   { title: "name", description: "" },
-  //   // { title: "no_of_people", description: "1" },
-  //   // { title: "date", description: "" },
-  //   { title: "time", description: "" }, 
-  //   { title: "booking_type", description: "vip" },
-  //   { title: "duration", description: "60 Min" }, 
-
-  // ]);
 
   const [bookingDetails, setBookingDetails] = useState([
-    // { key: "name", title: "Name", description: "" },
-    // { key: "no_of_people", title: "Number of People", description: "1" },
-    { key: "date", title: "Date", description: "" },
+    { key: "no_of_people", title: "Customers", description: "1" },
+    { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "time", title: "Time", description: "" },
-    { key: "booking_type", title: "Booking Type", description: "vip" },
-    { key: "duration", title: "Duration", description: "60 Min" },
+    { key: "booking_type", title: "Booking Type", description: "VIP" },
+    { key: "duration", title: "Duration", description: "60 mins" },
   ]);
   
   
@@ -172,6 +162,17 @@ const Page = ({ params } ) => {
   //   }
   // };
   
+
+
+  useEffect(() => {
+    setBookingDetails((prevDetails) =>
+      prevDetails.map((detail) =>
+        detail.key === "date"
+          ? { ...detail, description: new Date().toLocaleDateString("en-CA") }
+          : detail
+      )
+    );
+  }, []);
   const increaseCount = async () => { 
     const newCount = count + 1;
 
@@ -186,9 +187,7 @@ const Page = ({ params } ) => {
       if (activeTime && times[activeTime]?.sims < newCount) {
         setPopupMessage(`Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`);
         setIsPopupVisible(true);
-        setTimeout(() => {
-          setIsPopupVisible(false);
-        }, 1000);
+      
         
       }
   
@@ -236,45 +235,82 @@ const Page = ({ params } ) => {
     }
   };
 
+  // const handleDateChange = async (newDate) => {
+  //   updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
+  //   const formattedDate = newDate.toLocaleDateString("en-CA"); 
+    
+  //   setDate(newDate);
+  //   setSelectedDate(formattedDate);
+    
+
+  //   updateBookingDetail("date", formattedDate);
+
+  //   if (activeTime) {
+  //     const isSelectedTimeAvailable = Object.values(times).some(
+  //       (slot) => slot.time === activeTime && slot.sims >= count
+  //     );
+  
+  //     // Deselect the time slot if it's not available
+  //     if (!isSelectedTimeAvailable) {
+  //       setActiveTime(null);
+  //       updateBookingDetail("time", "");
+  //     }
+  //   }
+
+  //   setActiveTime(null);
+  // updateBookingDetail("time", "");
+
+  //   setDate(newDate);
+ 
+  //   setSelectedDate(formattedDate);
+  //   updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
+
+  //   const selectedDate = new Date(newDate);
+  //   setMinDate(selectedDate); 
+    
+  //   const nextDate = new Date(selectedDate);
+  //   nextDate.setDate(selectedDate.getDate() + 1);
+
+  //   nextDate.setDate(newDate.getDate() + 1);
+  //   setMaxDate(nextDate);
+  //   fetchBookings();
+  // };
+
   const handleDateChange = async (newDate) => {
-    updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
-    const formattedDate = newDate.toLocaleDateString("en-CA"); 
+    const formattedDate = newDate.toLocaleDateString("en-CA");
+  
+    // Update states and booking details for the date
     setDate(newDate);
     setSelectedDate(formattedDate);
-
     updateBookingDetail("date", formattedDate);
-
+  
+    // Check if previously selected time slot is still valid
     if (activeTime) {
       const isSelectedTimeAvailable = Object.values(times).some(
         (slot) => slot.time === activeTime && slot.sims >= count
       );
-  
-      // Deselect the time slot if it's not available
+      // If not available, clear it
       if (!isSelectedTimeAvailable) {
         setActiveTime(null);
         updateBookingDetail("time", "");
       }
     }
-
+  
+    // Ensure time is cleared (if you always want a fresh start)
     setActiveTime(null);
-  updateBookingDetail("time", "");
-
-    setDate(newDate);
- 
-    setSelectedDate(formattedDate);
-    updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
-
-    const selectedDate = new Date(newDate);
-    setMinDate(selectedDate); 
-    
-    const nextDate = new Date(selectedDate);
-    nextDate.setDate(selectedDate.getDate() + 1);
-
-    nextDate.setDate(newDate.getDate() + 1);
+    updateBookingDetail("time", "");
+  
+    // Update minDate and maxDate
+    const selectedDateObj = new Date(newDate);
+    setMinDate(selectedDateObj);
+  
+    const nextDate = new Date(selectedDateObj);
+    nextDate.setDate(selectedDateObj.getDate() + 1);
     setMaxDate(nextDate);
-    fetchBookings();
+  
+    // Fetch new bookings for the selected date
+    await fetchBookings();
   };
-
   
   const updateSeatsDescription = (newCount) => {
     const newBookingDetails = bookingDetails.map((detail) => {
@@ -403,96 +439,72 @@ const Page = ({ params } ) => {
     return Object.keys(errors).length === 0;
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault(); 
     const errors = {};
-
+    
     const bookingData = {
-      // name: bookingDetails.find((detail) => detail.title === "name")?.description || "",
       name: formData.firstName,
-      phone: bookingDetails.find((detail) => detail.title === "phone")?.description || "",
-      email: bookingDetails.find((detail) => detail.title === "email")?.description || "",
-      no_of_people: bookingDetails.find((detail) => detail.title === "no_of_people")?.description || "1",
-      duration: parseInt(bookingDetails.find((detail) => detail.title === "duration")?.description || "20", 10), 
-      date: bookingDetails.find((detail) => detail.title === "date")?.description,
-      time: bookingDetails.find((detail) => detail.title === "time")?.description || "00:00",
-      booking_type: bookingDetails.find((detail) => detail.title === "booking_type")?.description || "",
+      phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
+      email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
+      no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
+      duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, 10),
+      date: bookingDetails.find((detail) => detail.key === "date")?.description,
+      time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
+      booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
     };
-
+    
     const paymentData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      // address: formData.address,
-      // city: formData.city,
-    
-      // cardNumber: formData.cardNumber,
-      // expiryDate: formData.expiryDate,
-      // securityCode: formData.securityCode,
-      // cardHolderName: formData.cardHolderName,
-      // billingAddress: formData.billingAddress,
     };
-  
-    // const fullBookingData = { ...bookingData, ...paymentData };
-  
-   
+    
     if (!formData.firstName.trim()) errors.firstName = "First name is required.";
     if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "A valid email is required.";
     }
-    // if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
-    //   errors.phone = "A valid phone number is required.";
-    // }
-    // if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
-    //   errors.cardNumber = "Card number must be 16 digits.";
-    // }
-    // if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
-    //   errors.expiryDate = "Expiry date must be in MM/YY format.";
-    // }
-    // if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
-    //   errors.securityCode = "CVV must be 3 or 4 digits.";
-    // }
-    // if (!formData.cardHolderName.trim()) {
-    //   errors.cardHolderName = "Cardholder name is required.";
-    // }
   
-    // Update state with validation errors
     setValidationErrors(errors);
-  
+    
     if (Object.keys(errors).length > 0) {
       setGeneralError("Please fix the errors above before proceeding.");
       return;
     }
   
-    // If no validation errors, clear general error and proceed
     setGeneralError("");
-    handleTabChange(3);
-  
+    
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings`; 
-      const response = await doPostCall(url,        
+      const response = await doPostCall(
+        url,        
         { ...bookingData, ...paymentData },
-        {"Content-Type": "application/json"},
+        { "Content-Type": "application/json" }
       );
-  
+      
       const data = await response.json();
-      console.log("Booking successfully:", data)
-  
+      
       if (data.success) {
         console.log("Booking and payment saved successfully:", data);
+        // Reload the page on success
+
+        handleTabChange(3);
+        
       } else {
         console.error("Error saving booking/payment:", data.message);
+        setGeneralError(data.message || "An error occurred. Please try again.");
       }
     } catch (error) {
       console.error("Error with POST request:", error);
+      setGeneralError("An error occurred while processing your request. Please try again.");
     }
   };
-
-
-  // Tab 1: Create Booking
+  
+  
   const handleCreateBooking = () => {
     // You can implement your logic to create the booking here.
     console.log("Create Booking logic...");
@@ -517,19 +529,38 @@ const Page = ({ params } ) => {
   console.log(`Available SIMs for slot ${timeValue}:`, sims);
 };
 
+  // const validateBookingDetails = () => {
+  //   const errors = [];
+  
+  //   bookingDetails.forEach((detail) => {
+  //     if (detail.key !== "name" && (!detail.description || detail.description.trim() === "")) {
+  //       errors.push(`The field "${detail.title}" is required.`);
+  //     }
+  //   });
+  
+  //   setBookingErrors(errors);
+  //   return errors.length === 0;
+  // };
+  
+
   const validateBookingDetails = () => {
     const errors = [];
   
     bookingDetails.forEach((detail) => {
-      if (detail.key !== "name" && (!detail.description || detail.description.trim() === "")) {
-        errors.push(`The field "${detail.title}" is required.`);
+      if (detail.key === "no_of_people" && (!detail.description || detail.description === "0")) {
+        errors.push("You must select at least one seat.");
+      } else if (detail.key === "date" && (!detail.description || detail.description.trim() === "")) {
+        errors.push("Please select a valid date.");
+      } else if (detail.key === "time" && (!detail.description || detail.description.trim() === "")) {
+        errors.push("Please select a valid time slot.");
+      } else if (detail.key === "duration" && (!detail.description || detail.description.trim() === "")) {
+        errors.push("Please select a booking duration.");
       }
     });
   
     setBookingErrors(errors);
     return errors.length === 0;
   };
-  
 
   const handleTabChange = (tabIndex) => {
       if (tabIndex === 2 && !validateBookingDetails()) {
@@ -784,7 +815,9 @@ const Page = ({ params } ) => {
               </div>
             </div>
           </div>
-          <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg">
+
+
+          {/* <div className="w-[386px] bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg">
             <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
               Your booking details
             </h2>
@@ -802,15 +835,16 @@ const Page = ({ params } ) => {
                 </div>
               ))}
 
-             {bookingErrors.length > 0 && (
-                <ul className="text-red-500 text-sm mt-4">
-                  {bookingErrors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              )}
             <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
-    
+     
+                 {bookingErrors.length > 0 && (
+              
+              <ul>
+                {bookingErrors.map((error, index) => (
+                  <li key={index} className="text-red-500 text-md font-normal ">{error}</li>
+                ))}
+              </ul>
+          )}
               <button
                 onClick={() => handleTabChange(2)} 
                 
@@ -819,7 +853,50 @@ const Page = ({ params } ) => {
                 <span className="button-slanted-content py-2">CONTINUE</span>
               </button>
             </div>
+          </div> */}
+
+      <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
+          <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
+            Your booking details
+          </h2>
+          {bookingDetails
+            .filter((detail) => detail.key !== "booking_type" && detail.key !== "duration" && detail.key !== "no_of_people")
+            .map((detail, index) => (
+              <div
+                className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+                key={detail.key}
+              >
+                <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+                  {detail.title}
+                </h3>
+                <p className="text-[18px] text-[#063828] font-jura py-2">
+                  {detail.description}
+                </p>
+              </div>
+            ))}
+
+          <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
+            {generalError && (
+              <p className="text-red-500 text-md font-normal">{generalError}</p>
+            )}
+            {bookingErrors.length > 0 && (
+              <ul>
+                {bookingErrors.map((error, index) => (
+                  <li key={index} className="text-red-500 text-md font-normal ">
+                    {error}
+                  </li>
+                ))}
+              </ul>
+            )}
+            <button
+              onClick={() => handleTabChange(2)}
+              className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+            >
+              <span className="button-slanted-content py-2">CONTINUE</span>
+            </button>
           </div>
+          </div>
+          
         </div>
         
       )}

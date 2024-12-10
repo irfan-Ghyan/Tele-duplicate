@@ -63,49 +63,14 @@ const BookingListing = () => {
   }, []);
   
 
+  
+
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split("T")[0];
     setSelectedDate(formattedDate);
   }, []);
 
-  // useEffect(() => {
-  //   const payload = {
-  //     no_of_people: "2",
-  //     date: selectedDate,
-  //     duration: slotInterval.toString(),
-  //     booking_type: selectedSlotType,
-  //   };
-
-  //   async function fetchTimeSlots() {
-  //     const queryString = new URLSearchParams(payload).toString();
-  //     setLoading(true);
-  //     setError("");
-  //     try {
-  //       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  //     const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
-  //     let response = await doGetCall(url);
-  //     const data = await response.json();
-  //     console.log("Fetched time slotnew data:", data);
-  //       if (!response.ok) {
-  //         console.error("Failed to fetch time slots, status:", response.status);
-  //         return;
-  //       }
-
-  //       if (Array.isArray(data)) {
-  //         setTimeSlots(data);
-  //       } else {
-  //         setError(error.message); 
-  //         console.error("Unexpected data format. Expected an array:", data);
-  //       }
-
-  //     } catch (error) {
-  //       console.error("Error fetching time slots:", error);
-  //     }
-  //   }
-
-  //   fetchTimeSlots();
-  // }, []);
 
   useEffect(() => {
     const fetchTimeSlots = async () => {
@@ -115,11 +80,13 @@ const BookingListing = () => {
       setError("");
   
       const payload = {
-        no_of_people: formData.no_of_people || 1,
+        no_of_people: formData.no_of_people,
         date: formData.date,
         duration: formData.duration,
-        booking_type: formData.booking_type, // This is now a string
+        booking_type: formData.booking_type,
       };
+
+     
   
       try {
         const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -228,106 +195,6 @@ const BookingListing = () => {
   };
   
 
-  const getAvailableTimes = () => {
-    const times = [];
-    const now = new Date();
-    const currentHour = now.getHours();
-    const currentMinute = now.getMinutes();
-    const selectedDate = new Date(formData.date); 
-    const isToday = selectedDate.toDateString() === now.toDateString(); 
-    
-    // Determine the selected duration
-    const durationInMinutes = parseInt(formData.duration, 10);
-  
-
-    const formatTime = (hour) => {
-      const h = hour < 10 ? `0${hour}` : hour;
-      return `${h}:00`;
-    };
-  
-
-    if (formData.booking_type === "lounge") {
-      let startHour = 9; 
-
-      if (isToday) {
-        if (currentMinute > 0) {
-          startHour = currentHour + 1;
-        } else {
-          startHour = currentHour + 1;
-        }
-      }
-  
-      let hour = startHour;
-      
-      while (hour < 24) {
-
-        times.push(formatTime(hour)); 
-        hour ++; 
-      }
-    } else {
-
-      let minutes = currentMinute >= 20 ? 40 : 20;
-      let hour = currentHour;
-      let minute = minutes;
-  
-      while (hour < 24) {
-        if (minute >= 60) {
-          minute = 0;
-          hour++;
-        }
-  
-        times.push(formatTime(hour));
-        minute = (minute === 20) ? 40 : 0;
-      }
-    }
-  
-    return times;
-  };
-  
-  // const handleFormSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  
-  //   const formattedTime = formData.time?.slice(0, 5);
-  //   const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  //   const url = editingId
-  //     ? `${baseUrl}/api/bookings/${editingId}`
-  //     : `${baseUrl}/api/bookings`;
-
-  //   const method = editingId ? "PUT" : "POST";
-  //   const payload = { ...formData, time: formattedTime,  id: formData.id || editingId, booking_type: formData.booking_type.name, no_of_people: formData.no_of_people };
-
-  //   try {
-  //     const response = editingId
-  //       ? await doPutCall(url, payload, method)
-  //       : await doPostCall(url, payload);
-  
-  //     if (response.ok) {
-  //       // Reset form data
-  //       setFormData({
-  //         name: "",
-  //         phone: "",
-  //         email: "",
-  //         no_of_people: "",
-  //         booking_type: "",
-  //         duration: "",
-  //         date: "",
-  //         time: "",
-  //         id: "",
-  //       });
-  //       setEditingId(null);
-  //       setShowForm(false);
-  //       fetchBookings();
-  //     } else {
-  //       console.error("Failed to submit form");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error submitting form:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -336,7 +203,7 @@ const BookingListing = () => {
     const payload = {
       ...formData,
       time: formattedTime,
-      id: formData.id || editingId,
+      // id: formData.id || editingId,
     };
   
     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -344,6 +211,7 @@ const BookingListing = () => {
       ? `${baseUrl}/api/bookings/${editingId}`
       : `${baseUrl}/api/bookings`;
   
+
     const method = editingId ? "PUT" : "POST";
   
     try {
@@ -352,8 +220,8 @@ const BookingListing = () => {
         : await doPostCall(url, payload);
   
       if (response.ok) {
-        // Reset form data
         setFormData({
+          id: "",
           name: "",
           phone: "",
           email: "",
@@ -362,7 +230,6 @@ const BookingListing = () => {
           duration: "",
           date: "",
           time: "",
-          id: "",
         });
         setEditingId(null);
         setShowForm(false);
@@ -392,36 +259,26 @@ const BookingListing = () => {
     });
   };
 
+
+
   const handleEditClick = (booking) => {
     setFormData({
-      name: booking.name,
-      phone: booking.phone,
-      email: booking.email,
-      no_of_people: booking.no_of_people,
-      booking_type: booking.booking_type, // Ensure it matches the stored string
-      duration: booking.duration,
-      date: booking.date,
-      time: booking.time,
+      id: booking.id,
+      name: booking.name || "",
+      phone: booking.phone || "",
+      email: booking.email || "",
+      no_of_people: booking.no_of_people || 0,
+      booking_type: booking.booking_type || "",
+      duration: booking.duration || "",
+      date: booking.date || new Date().toISOString().split("T")[0],
+      time: booking.time || "",
     });
     setEditingId(booking.id);
     setShowForm(true);
   };
   
   
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData((prevData, prevFormData) => ({ ...prevFormData, ...prevData, [name]: value }));
-
-  // if (name === 'no_of_people' && value > 14) {
-  //   alert('Number of people cannot exceed 14');
-  //   return; 
-  // }
-
-  // setFormData({
-  //   ...formData,
-  //   [name]: value
-  // });
-  // };
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -429,7 +286,7 @@ const BookingListing = () => {
     if (name === "booking_type") {
       setFormData((prevData) => ({
         ...prevData,
-        booking_type: value, // Store the selected booking type as a string
+        booking_type: value,
       }));
     } else {
       setFormData((prevData) => ({
@@ -437,17 +294,6 @@ const BookingListing = () => {
         [name]: value,
       }));
     }
-  };
-  
-  
-  const getBookingTypeById = (typeName) => {
-    const bookingTypes = [
-      { id: 1, name: 'normal' },
-      { id: 2, name: 'vip' },
-      { id: 3, name: 'lounge' },
-    ];
-  
-    return bookingTypes.find(type => type.name === typeName) || { id: "", name: "" }; 
   };
   
 
@@ -724,24 +570,26 @@ const BookingListing = () => {
           </tr>
         </thead>
         <tbody>
-          {currentItems.map(item => (
+          {currentItems.map((item) => (
             <tr key={item.id}>
-             
               <td className="border p-2">{item.name}</td>
               <td className="border p-2">{item.phone}</td>
               <td className="border p-2">{item.email}</td>
               <td className="border p-2">{item.no_of_people}</td>
-              <td className="border p-2">{item.booking_type.name}</td>
+              <td className="border p-2">
+                {item.booking_type?.name || item.booking_type || "Unknown Type"}
+              </td>
               <td className="border p-2">{item.duration}</td>
               <td className="border p-2">{item.date}</td>
               <td className="border p-2">{item.time}</td>
               <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900 border border-gray-300">
-                 <button className="text-blue-500" onClick={() => handleEditClick(item)}>Edit</button>
-                 <button className="text-red-500 ml-2" onClick={() => handleDelete(item.id)}>Delete</button>
-               </td>
+                <button className="text-blue-500" onClick={() => handleEditClick(item)}>Edit</button>
+                <button className="text-red-500 ml-2" onClick={() => handleDelete(item.id)}>Delete</button>
+              </td>
             </tr>
           ))}
         </tbody>
+
       </table>
     
       <div className="flex justify-between mt-4">

@@ -104,7 +104,7 @@ const Faq = () => {
       <div className="flex justify-between mt-[36px] mb-[41px]">
         <div>
           <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
-            {t('faq.ttle')}
+            {t('faq.title')}
           </h1>
         </div>
       </div>

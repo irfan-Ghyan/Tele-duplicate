@@ -32,7 +32,6 @@ import 'react-calendar/dist/Calendar.css';
 const CalendarComponent = ({ onChange, value, maxDate }) => {
   const minDate = new Date();
 
-  // Dynamically apply CSS class based on the tile date
   const tileClassName = ({ date }) => {
     const selectedDate = new Date(value).toLocaleDateString('en-CA');
     const currentDate = new Date().toLocaleDateString('en-CA');
