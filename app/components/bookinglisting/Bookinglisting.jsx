@@ -268,7 +268,7 @@ const BookingListing = () => {
       phone: booking.phone || "",
       email: booking.email || "",
       no_of_people: booking.no_of_people || 0,
-      booking_type: booking.booking_type || "",
+      booking_type: booking.booking_type?.name || "",
       duration: booking.duration || "",
       date: booking.date || new Date().toISOString().split("T")[0],
       time: booking.time || "",

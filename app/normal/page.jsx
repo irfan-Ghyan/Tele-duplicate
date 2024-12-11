@@ -23,11 +23,12 @@ const Page = ({ params } ) => {
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
-    { key: "no_of_people", title: "Customers", description: "0" },
-    { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
+    { key: "no_of_people", title: "Customers", description: "" },
+    // { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
+    { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
-    { key: "duration", title: "Duration", description: "20" },
+    { key: "duration", title: "Duration", description: "" },
   ]);
   
 
@@ -43,6 +44,7 @@ const Page = ({ params } ) => {
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
   const [availableSIMs, setAvailableSIMs] = useState(null);
+
 
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null); 
@@ -128,13 +130,6 @@ const Page = ({ params } ) => {
   };
 
 
-  // const updateBookingDetail = (field, value) => {
-  //   setBookingDetails((prevDetails) =>
-  //     prevDetails.map((detail) =>
-  //       detail.title === field ? { ...detail, description: value } : detail
-  //     )
-  //   );
-  // };
   const updateBookingDetail = (key, value) => {
     setBookingDetails((prevDetails) =>
       prevDetails.map((detail) =>
@@ -170,41 +165,6 @@ const Page = ({ params } ) => {
     }
 };
     
-
-
-    // if (count < 14) {
-    //   if (availableSIMs !== null && count >= availableSIMs) {
-    //     setSeatError(
-    //       `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-    //     );
-    //     return;
-    //   }
-
-    //   if (availableSIMs !== null) {
-    //     if (count >= availableSIMs) {
-    //       // Show error message and set count to availableSIMs
-    //       setSeatError(
-    //         `Maximum capacity reached for the selected time slot. Only ${availableSIMs} seats are available.`
-    //       );
-    //       setCount(availableSIMs); // Keep count equal to available SIMs
-    //       return;
-    //     }
-    //   }
-
-    //   const newCount = count + 1;
-    //   setCount(newCount);
-    //   updateBookingDetail("no_of_people", newCount.toString());
-    //   setSeatError(""); 
-
-    //   setActiveTime(null);
-    //   updateBookingDetail("time", "");
-
-
-    //   await fetchBookings();
-    // } else {
-    //   setSeatError("Maximum limit of 14 seats reached.");
-    // }
-  
   
   const decreaseCount = async () => {
     if (count > 1) {
@@ -223,17 +183,50 @@ const Page = ({ params } ) => {
     }
   };
 
-  const handlePlanChange = async (newDuration) => {
+  // const handlePlanChange = async (newDuration) => {
 
-    //step 4
-      // 1 - fetch fresh time slots
-      // 2 - de-select time slot if that slot for that many people is not availablef 
+  //   //step 4
+  //     // 1 - fetch fresh time slots
+  //     // 2 - de-select time slot if that slot for that many people is not availablef 
     
-    updateBookingDetail("duration", newDuration);
-    await fetchBookings();
+  //   updateBookingDetail("duration", newDuration);
+  //   await fetchBookings();
 
-  // Validate the selected time slot
-    if (activeTime) {
+  // // Validate the selected time slot
+  //   if (activeTime) {
+  //     const isSelectedTimeAvailable = Object.values(times).some(
+  //       (slot) => slot.time === activeTime && slot.sims >= count
+  //     );
+  
+  //     // Deselect the time slot if it's not available
+  //     if (!isSelectedTimeAvailable) {
+  //       setActiveTime(null);
+  //       updateBookingDetail("time", "");
+  //       setSeatError("The selected time slot is not available.");
+
+  //     }
+  //   }
+  // };
+
+  const handlePlanChange = async (newDuration) => {
+    // updateBookingDetail("duration", newDuration);
+    await fetchBookings();
+    setSlotInterval(newDuration)
+  
+    updateBookingDetail("duration", `${newDuration}`);
+    // if (activeTime) {
+    //   const isSelectedTimeAvailable = Object.values(times).some(
+    //     (slot) => slot.time === activeTime && slot.sims >= count
+    //   );
+  
+
+    //   if (!isSelectedTimeAvailable) {
+    //     setActiveTime(null);
+    //   updateBookingDetail("time", "")
+    //   }
+    // }
+
+        if (activeTime) {
       const isSelectedTimeAvailable = Object.values(times).some(
         (slot) => slot.time === activeTime && slot.sims >= count
       );
@@ -241,12 +234,13 @@ const Page = ({ params } ) => {
       // Deselect the time slot if it's not available
       if (!isSelectedTimeAvailable) {
         setActiveTime(null);
-        updateBookingDetail("time", "");
+        // updateBookingDetail("time", "");
         setSeatError("The selected time slot is not available.");
 
       }
     }
   };
+  
 
   const handleDateChange = async (newDate) => {
     //step 3
@@ -309,20 +303,6 @@ const Page = ({ params } ) => {
   };
 
  
-  
-  const updateSeatsDescription = (newCount) => {
-    const newBookingDetails = bookingDetails.map((detail) => {
-      if (detail.title === "Seats") {
-        return {
-          ...detail,
-          description: `${newCount} Driver${newCount > 1 ? "s" : ""}`,
-        };
-      }
-      return detail;
-    });
-    setBookingDetails(newBookingDetails);
-  };
-
 
   const updateBookingDetailsForDate = (newDate) => {
     const formattedDate = newDate.toLocaleDateString();
@@ -760,7 +740,7 @@ const Page = ({ params } ) => {
                         <p className="text-red-500 text-sm mt-2">{seatError}</p>
                       )}
                   </div>
-
+                  
                  
                   <div className="my-4">
                     <div className="w-[820] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
@@ -831,9 +811,8 @@ const Page = ({ params } ) => {
                   })}
                 </div>; */}
 
-
                 
-                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
+                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
@@ -895,7 +874,12 @@ const Page = ({ params } ) => {
                         );
                       })}
                     </div>;
-
+                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg">
+                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
+                      Duration
+                    </h1>
+                    <PlanSelector onPlanChange={handlePlanChange} />
+                  </div>
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
@@ -904,12 +888,7 @@ const Page = ({ params } ) => {
                     </h1>
                     <BookingType selectedBookingType={bookingType} onBookingTypeChange={handleBookingTypeChange} />
                   </div> */}
-                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] my-[20px] rounded-lg">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Duration
-                    </h1>
-                    <PlanSelector onPlanChange={handlePlanChange} />
-                  </div>
+                 
                 </div>
               </div>
             </div>

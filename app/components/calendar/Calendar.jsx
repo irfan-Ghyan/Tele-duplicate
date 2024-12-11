@@ -29,7 +29,7 @@ import React from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
-const CalendarComponent = ({ onChange, value, maxDate }) => {
+const CalendarComponent = ({ onChange, value }) => {
   const minDate = new Date();
 
   const tileClassName = ({ date }) => {
@@ -51,9 +51,10 @@ const CalendarComponent = ({ onChange, value, maxDate }) => {
       <Calendar
         onChange={onChange}
         value={value}
-        minDate={minDate}
-        maxDate={maxDate}
+        minDate={new Date()} 
+        // maxDate={maxDate}
         tileClassName={tileClassName}
+        tileDisabled={({ date }) => date < new Date()}
       />
     </div>
   );
