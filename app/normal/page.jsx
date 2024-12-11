@@ -163,6 +163,7 @@ const Page = ({ params } ) => {
       setSeatError("Maximum limit of 14 seats reached.");
     
     }
+
 };
     
   
@@ -226,19 +227,19 @@ const Page = ({ params } ) => {
     //   }
     // }
 
-        if (activeTime) {
-      const isSelectedTimeAvailable = Object.values(times).some(
-        (slot) => slot.time === activeTime && slot.sims >= count
-      );
+    //     if (activeTime) {
+    //   const isSelectedTimeAvailable = Object.values(times).some(
+    //     (slot) => slot.time === activeTime && slot.sims >= count
+    //   );
   
-      // Deselect the time slot if it's not available
-      if (!isSelectedTimeAvailable) {
-        setActiveTime(null);
-        // updateBookingDetail("time", "");
-        setSeatError("The selected time slot is not available.");
+    //   // Deselect the time slot if it's not available
+    //   if (!isSelectedTimeAvailable) {
+    //     setActiveTime(null);
+    //     // updateBookingDetail("time", "");
+    //     setSeatError("The selected time slot is not available.");
 
-      }
-    }
+    //   }
+    // }
   };
   
 
