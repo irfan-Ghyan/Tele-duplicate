@@ -19,7 +19,7 @@ const Header = () => {
   const [isTopBannerVisible, setIsTopBannerVisible] = useState(true);
   const [showCorpratePopup, setShowCorpratePopup] = useState(false);
   const [isNavbarBgVisible, setIsNavbarBgVisible] = useState(false);
-  const [videoUrl, setVideoUrl] = useState(""); // State for video URL
+  const [videoUrl, setVideoUrl] = useState(""); 
 
   const handleLanguageChange = (lng) => {
     switchLanguage(lng);
@@ -96,7 +96,7 @@ const Header = () => {
 
         const data = await response.json();
         if (data.success && data.data.length > 0) {
-          setVideoUrl(data.data[0].url); // Set the video URL
+          setVideoUrl(data.data[0].url);
         } else {
           console.error("No video data available.");
         }

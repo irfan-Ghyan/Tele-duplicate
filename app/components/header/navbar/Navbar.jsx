@@ -29,15 +29,24 @@ const Navbar = ({ isTopBannerVisible }) => {
     setMenuOpen(false);
   };
 
+  // const handleScroll = () => {
+  //   if (window.scrollY > 40 && isHiddenRoute) {
+  //     setNavbarBg('bg-[#063828] lg:bg-[#063828]');
+  //   } else if (window.scrollY > window.innerHeight) {
+  //     setNavbarBg('bg-[#063828] lg:bg-[#063828]');
+  //   } else {
+  //     setNavbarBg('bg-opacity-0');
+  //   }
+  // };
+
   const handleScroll = () => {
-    if (window.scrollY > 100 && isHiddenRoute) {
-      setNavbarBg('bg-[#063828] lg:bg-[#063828]');
-    } else if (window.scrollY > window.innerHeight) {
+    if (window.scrollY > 40) {
       setNavbarBg('bg-[#063828] lg:bg-[#063828]');
     } else {
       setNavbarBg('bg-opacity-0');
     }
   };
+  
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -83,7 +92,7 @@ const Navbar = ({ isTopBannerVisible }) => {
         };
       case '/f&b':
         return {
-          title: ' F& B | Teleios Dome',
+          title: ' F & B | Teleios Dome',
           description: 'Learn and grow with our education programs at Teleios Dome.',
         };
       default:

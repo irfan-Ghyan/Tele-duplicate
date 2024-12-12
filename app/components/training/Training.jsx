@@ -13,7 +13,7 @@ const Training = () => {
       className="training-section w-full max-w-full overflow-hidden lg:h-[650px] xl:h-[885px] bg-cover bg-right lg:bg-right xl:bg-center px-4 md:px-0 lg:px-0 xl:px-0"
       style={{ backgroundImage: "url('/assets/images/training/bg-3.png')" }}
     >
-      <div className='w-full bg-[#11072C] bg-opacity-80 lg:bg-opacity-60 md:bg-opacity-60 xl:bg-opacity-0 px-4 mt-[230px] sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0'>
+      <div className='w-full bg-[#002718] bg-opacity-80 lg:bg-opacity-60 md:bg-opacity-60 xl:bg-opacity-0 px-4 mt-[230px] sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0'>
         <div className="px-4 md:flex md:flex-col sm:pt-[100px] md:pt-[100px] md:pr-6 md:px-8 max-w-7xl mx-auto bottom-0 py-2 ">
           {/* Heading */}
           <div className='border-solid border-b-[1px] border-[#e3ce90] border-opacity-20 text-end mt-10 md:mt-0'>

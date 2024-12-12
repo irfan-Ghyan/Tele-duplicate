@@ -53,7 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
           {!pathname.startsWith("/dashboard") && (
             <Link
-              href="https://api.whatsapp.com/send/?phone=971566628585&text&type=phone_number&app_absent=0"
+              href="https://api.whatsapp.com/send/?phone=966552249297&text&type=phone_number&app_absent=0"
               target="_blank"
               rel="noopener noreferrer"
               className="fixed bottom-4 right-4 z-50"
