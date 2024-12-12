@@ -150,31 +150,31 @@ const Navbar = ({ isTopBannerVisible }) => {
           <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
             <Link
               href="/experience"
-              className=" font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1 ml-4"
+              className=" font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
               onClick={closeMenu}
             >
               {t('EXPERIENCES')}
             </Link>
             <Link
               href="/venue"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
              {t('VENUE')}
             </Link>
-            <Link href="/watchparties" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1" onClick={closeMenu}>
+            <Link href="/watchparties" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1" onClick={closeMenu}>
             {t('WATCH PARTIES')}
               </Link>
             <Link
               href="/privateevents"
-              className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#002718] mt-1"
+              className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
               {t('PRIVATE EVENTS')}
             </Link>
             <Link
               href="/f&b"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
               {t('F & B')}
@@ -185,8 +185,8 @@ const Navbar = ({ isTopBannerVisible }) => {
               <Dropdown/> */}
           </div>
           <div className="language-switcher mx-2">
-        <button onClick={() => handleLanguageChange('en')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-[#c09e5f]'>EN</button>
-        <button onClick={() => handleLanguageChange('ar')} className='px-2 font-jura font-[12px] hover:border-b-2 hover:border-[#c09e5f]'>العربية</button>
+        <button onClick={() => handleLanguageChange('en')} className='px-2 font-jura font-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]'>EN</button>
+        <button onClick={() => handleLanguageChange('ar')} className='px-2 font-jura font-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]'>العربية</button>
       </div>
           
           <div className="hidden xl:flex items-center">
