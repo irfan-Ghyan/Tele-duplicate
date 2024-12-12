@@ -132,9 +132,9 @@ const Navbar = ({ isTopBannerVisible }) => {
                 src="/assets/images/dome/logo.png"
                 alt="Logo"
                 width={185}
-                height={90}
+                height={120}
                 priority={true}
-                className="sm:w-[100px] sm:h-[52px] md:w-[185px] md:h-[92px] lg:w-[165px] lg:h-[92px] xl:w-[165px] xl:h-[92px]"
+                className="sm:w-[100px] sm:h-[52px] md:w-[185px] md:h-[92px] lg:w-[165px] lg:h-[92px] xl:w-[185px] xl:h-[120px]"
               />
             </Link>
           </div>
@@ -153,22 +153,22 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
              {t('VENUE')}
             </Link>
-            <Link href="/upcomingevents" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1" onClick={closeMenu}>
+            <Link href="/watchparties" className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1" onClick={closeMenu}>
             {t('WATCH PARTIES')}
               </Link>
             <Link
-              href="/corporateevents"
+              href="/privateevents"
               className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
               {t('PRIVATE EVENTS')}
             </Link>
             <Link
-              href="/education"
+              href="/f&b"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#002718] mt-1"
               onClick={closeMenu}
             >
-              {t('F&B')}
+              {t('F & B')}
             </Link>
             {/* <Link href="/other" className="text-white font-jura text-[12px] md:text-[14px] lg:text-[14px] font-normal lg:font-bold hover:text-[#A72CCF] mt-1" onClick={closeMenu}>
                 OTHER

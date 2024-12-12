@@ -291,7 +291,10 @@ body {
 
 
 .react-calendar__navigation button:disabled{
-  background-color: #c09e5f !important;
+  background: none !important;
+}
+.react-calendar__navigation__arrow {
+  display: none !important;
 }
 
 /* .button {
@@ -490,7 +493,8 @@ border: none !important;
 
 .react-calendar__tile.current-date {
   border: 0.5px solid #002718 !important; /* Current date background color */
-  color: #063828 !important;           /* Current date text color */
+  color: #063828 !important; /* Current date text color */
+  background: none !important;
 }
 
 .react-calendar__tile:hover {

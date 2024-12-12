@@ -24,7 +24,7 @@ const Footer = () => {
             {t('experience')}
           </p>
           <div className="flex space-x-4 mt-[15px]">
-            <Link href="https://www.facebook.com/people/Teleios-Dome/61561142146663/" target="_blank" rel="noopener noreferrer">
+            {/* <Link href="https://www.facebook.com/people/Teleios-Dome/61561142146663/" target="_blank" rel="noopener noreferrer">
               <Image src="/assets/images/dome/Facebook.png" width={30} height={30} alt="Facebook" className="h-[30px] w-[30px] ml-4" priority={true} />
             </Link>
             <Link
@@ -34,7 +34,7 @@ const Footer = () => {
               className=""
             >
               <Image src="/assets/images/dome/YouTube.png" width={30} height={30} alt="YouTube" className="h-[30px] w-[30px]"  priority={true}/>
-            </Link>
+            </Link> */}
             <Link
               href="https://www.instagram.com/teleiosx/"
               target="_blank"
@@ -51,14 +51,14 @@ const Footer = () => {
             >
               <Image src="/assets/images/TikTok.png" width={30} height={30} alt="LinkedIn" className="h-[30px] w-[30px]"  priority={true}/>
             </Link>
-            <Link
+            {/* <Link
               href="#"
               target="_blank"
               rel="noopener noreferrer"
               className=""
             >
               <Image src="/assets/images/tripadvisor.png" width={30} height={30} alt="Instagram" className="h-[30px] w-[50px]"  priority={true}/>
-            </Link>
+            </Link> */}
            
 
           </div>
@@ -73,23 +73,23 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/dome" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+              <Link href="/venue" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
                 {t('VENUE')}
               </Link>
             </li>
             <li>
-              <Link href="/upcomingevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+              <Link href="/watchparties" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
               {t('WATCH PARTIES')}
                </Link>
              </li>
              <li>
-              <Link href="/corporateevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+              <Link href="/privateevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
               {t('PRIVATE PARTIES')}
                </Link>
              </li>
              <li>
-               <Link href="/education" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-                {t('EDUCATION')}
+               <Link href="/f&b" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+                {t('F & B')}
                </Link>
              </li>
           </ul>
@@ -100,7 +100,7 @@ const Footer = () => {
           <div>
             <div className="mb-[10px]">
               <h3 className="text-[#e3ce90] font-jura text-[13px] font-bold">{t('address')}</h3>
-              <Link href="https://g.co/kgs/pvUAcQh" target="_blank" rel="noopener noreferrer" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">D-65 - Dubai Production City - Dubai, UAE</Link>
+              <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">Anas Ibn Malik Rd, Alyasmin, Riyadh 13326, Saudi Arabia</Link>
             </div>
             <div className="mt-[10px]">
               <h3 className="text-[#e3ce90] font-jura text-[13px] font-bold">{t('hours')}</h3>

@@ -225,8 +225,6 @@ const BookingCalendar = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
-
-    
       let response = await doGetCall(url);
       const data = await response.json();
      
@@ -255,7 +253,7 @@ const BookingCalendar = () => {
 
       setSlotsData(slotsWithBusyData);
     } catch (error) {
-      setError("Failed to fetch bookings. Please try again."); // Set error message
+      setError("Failed to fetch bookings. Please try again.");
       console.error("Error fetching bookings:", error);
     } finally {
       setLoading(false);

@@ -2,14 +2,14 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async'; 
-import CorporateEvent from '../components/corporateevent/CorporateEvent';
-import CorporateBuilding from '../components/corporatebuilding/CorporateBuilding';
-import CorporateConference from '../components/corporateConference/CorporateConference';
+import CorporateEvent from '../components/corporateevent/CorporateEvent.js';
+import CorporateBuilding from '../components/corporatebuilding/CorporateBuilding.jsx';
+import CorporateConference from '../components/corporateConference/CorporateConference.jsx';
 import CorporateNetworking from '../components/corporateNetworking/CorporateNetworking.jsx'
-import Venues from '../components/venues/Venues';
+import Venues from '../components/venues/Venues.jsx';
 // import Partners from '../components/partners/Partners';
-import Celebrations from '../components/celebrations/Celebrations';
-import GetTouchForm from '../components/getintouchform/GetTocuhForm';
+import Celebrations from '../components/celebrations/Celebrations.jsx';
+import GetTouchForm from '../components/getintouchform/GetTocuhForm.jsx';
 import { useTranslation } from 'react-i18next';
 
 

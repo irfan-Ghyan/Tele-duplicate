@@ -31,7 +31,7 @@ const FoodMenu = () => {
       
 
   return (
-    <div className="bg-[#002718] mb-40">
+    <div className="bg-[#002718] mb-40 border-8 border-[#e3ce90] border-opacity-30 rounded-lg">
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left border border-[#002718]">
           <thead className="bg-[#002718] text-[#c09e5f]">
@@ -45,10 +45,10 @@ const FoodMenu = () => {
           <tbody>
             {menuItems.map((item) => (
               <tr key={item.id} className="text-[#e3ce90] hover:text-[#002718] hover:bg-[#c09e5f]">
-                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.id}</td>
-                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.name}</td>
-                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.description}</td>
-                <td className="border border-[#e3ce90] border-opacity-25 p-2">{item.price}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.id}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.name}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.description}</td>
+                <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.price}</td>
               </tr>
             ))}
           </tbody>
