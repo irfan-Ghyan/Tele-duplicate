@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 
-
 const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
@@ -20,6 +19,7 @@ const Page = ({ params } ) => {
   const [date, setDate] = useState(new Date());
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
@@ -40,6 +40,7 @@ const Page = ({ params } ) => {
   const [slotInterval, setSlotInterval] = useState(20);
   const [eventDetails, setEventDetails] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(""); // Error state
   const [generalError, setGeneralError] = useState("");
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
@@ -643,18 +644,20 @@ const Page = ({ params } ) => {
     <>
  
       <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
+        
       <button
           className="text-[#e3ce90]"
           onClick={goBack} 
         >
           Go back
         </button>
-
+       
+      <div>
         <div className="my-[60px] ">
-            <div className="flex justify-between items-center w-[407px] max-w-7xl mx-auto my-8">
+            <div className="flex justify-between items-center w-[430px] max-w-7xl mx-auto my-8">
                     <div className="relative">
                     <div
-                        className={`ml-4 w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+                        className={`ml-[1.9rem] w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
                         onClick={() => handleTabChange(1)}
                     >
                         1
@@ -757,81 +760,12 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                  {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[700px] my-[10px]">
-                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
-                  {timeChunks.map((chunk, chunkIndex) => {
-                    const now = new Date();
-                    const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA");
-
-                    const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
-                      const [hours, minutes] = timeValue.split(":").map(Number);
-                      const slotTime = hours * 60 + minutes;
-
-                      const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-
-                      return slotTime >= startTime;
-                    });
-
-                    if (!hasActiveSlot) {
-                      return null;
-                    }
-
-                    return (
-                      <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, timeValue], index) => {
-                          const [hours, minutes] = timeValue.split(":").map(Number);
-                          const slotTime = hours * 60 + minutes;
-
-                          const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-                          const isNearestFutureSlot = !activeTime && slotTime >= startTime;
-
-                          return (
-                            <div
-                              key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
-                                isNearestFutureSlot || timeKey === activeTime
-                                  ? "border-2 border-[#002718] text-[#063828] font-bold" 
-                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#c09e5f] text-[#c09e5f]"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden ${
-                                slotTime < startTime ? "opacity-40 cursor-not-allowed" : ""
-                              }`}
-                            >
-                             <button
-                              onClick={() => handleButtonClick(timeKey, timeValue)}
-                              className="button-slanted-content w-full h-full flex items-center justify-center"
-                              disabled={slotTime < startTime}
-                            >
-                              {formatToAMPM(timeValue)}
-                            </button>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    );
-                  })}
-                </div>; */}
-
-                
                 <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
                     const selectedDateStr = date.toLocaleDateString("en-CA");
-
-                    // const hasActiveSlot = chunk.some(([timeKey, timeValue]) => {
-                    //   const [hours, minutes] = timeValue.split(":").map(Number);
-                    //   const slotTime = hours * 60 + minutes;
-
-                    //   const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-
-                    //   return slotTime >= startTime;
-                    // });
-
-                    // if (!hasActiveSlot) {
-                    //   return null;
-                    // }
 
                     return (
                       <div key={chunkIndex} className="flex">
@@ -865,7 +799,7 @@ const Page = ({ params } ) => {
                                 disabled={slotTime < startTime}
                               >
                                 {formatToAMPM(timeValue)}
-                                {/* <span className="text-sm text-[#c09e5f]"> ({sims} SIMs)</span> */}
+                  
                               </button>
                               </div>
                             );
@@ -873,9 +807,14 @@ const Page = ({ params } ) => {
 
                           </div>
                         );
-                      })}
-                    </div>;
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg">
+                      }
+                      
+                      )}
+                </div>
+
+
+
+                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
@@ -1168,6 +1107,7 @@ const Page = ({ params } ) => {
           </div>
         )}
 
+</div>
 
 
       </div>

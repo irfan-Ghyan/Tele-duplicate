@@ -263,7 +263,7 @@ const CorporateBuilding = () => {
             <div className="absolute inset-0 bg-black bg-opacity-80 flex flex-col justify-center items-center hover-content transition-transform duration-300">
               <Link href="/enquiry-form" className="flex flex-col items-center text-center">
                 <Image
-                  src={latestEntry.imageUrl || '/assets/images/events/default.jpg'}
+                  src={latestEntry.imageUrl || '/assets/images/events/pics-98.jpg'}
                   width={60}
                   height={60}
                   alt="Conference"
