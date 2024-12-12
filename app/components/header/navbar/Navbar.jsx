@@ -18,7 +18,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const menuRef = useRef(null);
   const { t, i18n } = useTranslation();
 
-  const hiddenRoutes = ['/experience', '/dome', '/upcomingevents',  '/corporateevents', '/education', '/enquiry-form', '/terms&conditions', '/privacy', '/menu', '/experiencedetails'];
+  const hiddenRoutes = ['/experience', '/dome', '/watchparties',  '/privateevents', '/f&b', '/enquiry-form', '/terms&conditions', '/privacy', '/menu', '/experiencedetails'];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
 
   const toggleMenu = () => {
@@ -71,19 +71,19 @@ const Navbar = ({ isTopBannerVisible }) => {
           title: 'Venue | Teleios Dome',
           description: 'Explore the ultimate immersive experience at Teleios Dome.',
         };
-        case '/upcomingevents/':
+        case '/watchparties/':
         return {
           title: 'Watch Parties | Teleios Dome',
           description: 'Host your next corporate event or celebration at Teleios Dome.',
         };
-      case '/corporateevents':
+      case '/privateevents':
         return {
-          title: 'Private Events | Teleios Dome',
+          title: 'Public Events | Teleios Dome',
           description: 'Host your next corporate event or celebration at Teleios Dome.',
         };
-      case '/education':
+      case '/f&b':
         return {
-          title: 'Education | Teleios Dome',
+          title: ' F& B | Teleios Dome',
           description: 'Learn and grow with our education programs at Teleios Dome.',
         };
       default:
@@ -220,18 +220,18 @@ const Navbar = ({ isTopBannerVisible }) => {
               >
                 {t('VENUE')}
               </Link>
-              <Link href="/upcomingevents" className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]" onClick={closeMenu}>
+              <Link href="/watchparties" className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]" onClick={closeMenu}>
                 {('WATCH PARTIES')}
               </Link>
               <Link
-                href="/corporateevents"
+                href="/privateevents"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
                 {t('PRIVATE EVENTS')}
               </Link>
               <Link
-                href="/education"
+                href="/f&b"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] font-jura text-[14px] font-bold hover:text-[#063828]"
                 onClick={closeMenu}
               >

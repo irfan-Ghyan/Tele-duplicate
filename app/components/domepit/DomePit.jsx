@@ -83,10 +83,10 @@ const DomePit = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('http://192.168.70.219:8000/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
+            : `url('http://192.168.70.142:8000/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
         }}
       >
-        <div className="w-full bg-[#11072C] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
+        <div className="w-full bg-[#002718] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
           <div className="bottom-0 px-4 md:flex md:flex-col md:pr-6 py-[25px] lg:py-[100px] max-w-7xl mx-auto mt-[200px] sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0">
             <div className="px-4 flex flex-col justify-between md:mt-[36px] md:mb-[41px]">
               {loading && (

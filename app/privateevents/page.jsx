@@ -46,13 +46,11 @@ const Page = () => {
           <CorporateEvent />
         </div>
         <div className='flex w-full'> 
-        <div className="w-full">
+        <div className="w-full md:flex lg:flex">
           <CorporateBuilding />
-      </div>
-        <div className="w-full">
+     
           <CorporateNetworking />
-        </div>
-        <div className="w-full">
+       
           <CorporateConference />
         </div>
         </div>
