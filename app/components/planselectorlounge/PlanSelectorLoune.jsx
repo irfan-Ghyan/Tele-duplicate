@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 
 const PlanSelectorVip = ({ onPlanChange }) => {
-  // Initialize the selected plan as "platinum" by default
   const [selectedPlan, setSelectedPlan] = useState('platinum');
 
 

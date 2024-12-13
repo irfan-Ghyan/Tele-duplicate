@@ -1,11 +1,9 @@
-// components/BookingType.js
 
 import React from "react";
 
 const BookingType = ({ selectedBookingType, onBookingTypeChange }) => {
-  // Handle the change when a booking type is selected
   const handleBookingTypeChange = (type) => {
-    onBookingTypeChange(type); // Pass the selected type to the parent component
+    onBookingTypeChange(type);
   };
 
   return (

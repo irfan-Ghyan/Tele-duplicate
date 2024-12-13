@@ -21,10 +21,8 @@ const Page = ({ params } ) => {
   const [popupMessage, setPopupMessage] = useState("");
 
 
-  const [bookingDetails, setBookingDetails] = useState([
-    // { key: "name", title: "Name", description: "" },
+  const [bookingDetails, setBookingDetails] = useState([,
     { key: "no_of_people", title: "Customers", description: "" },
-    // { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },

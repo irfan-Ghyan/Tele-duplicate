@@ -14,13 +14,7 @@ const StandingsPopup = ({ onClose }) => {
     { no: 'R8', name: 'Ibay Amor', results: [19, 30, 11, 19, 32, 4, 20], total: '158'},
   ]);
 
-  // Example to fetch data (uncomment and modify according to your API)
-  // useEffect(() => {
-  //   fetch('your-api-url')
-  //     .then(response => response.json())
-  //     .then(data => setStandings(data))
-  //     .catch(error => console.error('Error fetching data: ', error));
-  // }, []);
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">

@@ -6,12 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-// import slide from '../../../public/assets/images/slide1.png';
-// import slide1 from '../../../public/assets/images/slide2.png';
-// import slide2 from '../../../public/assets/images/dome/pic-101.jpg';
-// import slide3 from '../../../public/assets/images/dome/pic-102.jpg';
 
-// Custom Arrow components
 const CustomPrevArrow = ({ onClick }) => (
   <button
     className="absolute left-0 lg:left-20 transform -translate-y-1/2 z-10 "

@@ -32,40 +32,6 @@ const DashboardPrivateEvents = () => {
   };
 
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('http://192.168.70.136:8000/api/content/sections/Experience');
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-  //       const data = await response.json();
-  //       const sections = data?.data?.sections || [];
-
-  //       const domeSection = sections.find(section => section.title === "Private Events");
-
-  //       if (domeSection) {
-  //         const titleField = domeSection.section_fields.find(field => field.key === 'title');
-  //         const descriptionField = domeSection.section_fields.find(field => field.key === 'description');
-
-  //         setTitle(titleField?.value || '');
-  //         setDescription(descriptionField?.value || '');
-
-  //         // Populate tableData with each section's title and description
-  //         const sectionData = sections.map((section) => ({
-  //           title: section.section_fields.find(field => field.key === 'title')?.value || '',
-  //           description: section.section_fields.find(field => field.key === 'description')?.value || '',
-  //         }));
-
-  //         setTableData(sectionData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -110,42 +76,6 @@ const DashboardPrivateEvents = () => {
     }
   };
 
-
-  // const handleDelete = async (keyId) => {
-  //   try {
-  //     const payload = {
-  //       pageName: "Experience",
-  //       sectionName: "Private Events",
-  //       fieldName: "title",
-  //       fieldName: "description"
-
-  //     };
-  
-  //     const response = await fetch("http://192.168.70.136:8000/api/content/removeSectionField", {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(payload),
-  //     });
-  
-  //     if (!response.ok) {
-  //       throw new Error("Failed to delete data");
-  //     }
-  
-  //     const result = await response.json();
-  //     console.log("Delete API Response:", result);
-  
-  //     if (result.success) {
-  //       setTableData((prevEntries) =>
-  //         prevEntries.filter((entry) => entry.sectionName !== "Private Events")
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error("Error deleting data:", error);
-  //   }
-  // };
-  
 
   const handleEdit = (index) => {
     const entry = tableData[index];

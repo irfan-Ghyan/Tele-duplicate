@@ -19,36 +19,32 @@ const DashboardNavbar = () => {
         });
 
         if (response.ok) {
-          console.log('Logout successful'); // Log success message
+          console.log('Logout successful'); 
 
-          // Clear both 'authToken' and 'isAuthenticated' from localStorage
-          localStorage.removeItem('token'); // Remove the 'token' stored during login
-          localStorage.removeItem('isAuthenticated'); // Remove the authentication status
+          localStorage.removeItem('token');
+          localStorage.removeItem('isAuthenticated');
 
-          // Debugging: Log to ensure items are removed
           console.log('Token removed:', !localStorage.getItem('token'));
           console.log('isAuthenticated removed:', !localStorage.getItem('isAuthenticated'));
 
-          // Redirect to login page after a slight delay to ensure localStorage is cleared
           setTimeout(() => {
-            router.push('/login'); // Navigate to login page
-          }, 100); // 100ms delay to ensure the localStorage changes reflect
+            router.push('/login');
+          }, 100);
         } else {
-          console.error('Logout failed', response.status); // If the logout request fails
+          console.error('Logout failed', response.status);
         }
       } catch (error) {
-        console.error('Error during logout:', error); // Handle any errors that occur during the logout request
+        console.error('Error during logout:', error);
       }
     } else {
-      console.log('No token found'); // If there is no token, just remove items and redirect
+      console.log('No token found');
       localStorage.removeItem('token');
       localStorage.removeItem('isAuthenticated');
       
-      // Debugging: Log to confirm removal
       console.log('Token removed:', !localStorage.getItem('token'));
       console.log('isAuthenticated removed:', !localStorage.getItem('isAuthenticated'));
       
-      router.push('/login'); // Redirect to login page
+      router.push('/login');
     }
   };
 

@@ -7,13 +7,12 @@ import premier from '../../../public/assets/images/events/img1.png';
 import whatsapp from '../../../public/assets/images/whatsapp.png';
 
 const PremierLeague = () => {
-  // State to hold dynamic title and description
+
   const [dynamicContent, setDynamicContent] = useState({
     title: 'PREMIER LEAGUE ABU DHABI',
     description: 'Experience the Teleios Dome Virtual Grand Prix, mirroring the 2024 Formula 1 calendar with 24 races. Compete weekly before the real F1 Grand Prix. Earn points for the overall championship.Thursdays at 8pm precede each F1 weekend. Prizes include weekly rewards and a championship pool of 100k AED.', // Initial default description
   });
 
-  // Function to update title and description dynamically
   const updateDynamicContent = (newTitle, newDescription) => {
     setDynamicContent({
       title: newTitle,
