@@ -44,7 +44,7 @@ const FoodMenu = () => {
           </thead>
           <tbody>
             {menuItems.map((item) => (
-              <tr key={item.id} className="text-[#e3ce90] hover:text-[#002718] hover:bg-[#c09e5f]">
+              <tr key={item.id} className="text-[#e3ce90] hover:text-[#002718] hover:bg-[#e3ce90]">
                 <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.id}</td>
                 <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.name}</td>
                 <td className="border border-[#e3ce90] border-opacity-25 p-4">{item.description}</td>

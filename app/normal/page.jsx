@@ -304,7 +304,7 @@ const Page = ({ params } ) => {
   
   };
 
- 
+
 
   const updateBookingDetailsForDate = (newDate) => {
     const formattedDate = newDate.toLocaleDateString();
@@ -681,7 +681,7 @@ const Page = ({ params } ) => {
                     <div className="relative">
                     <div
                         className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                        onClick={() => handleTabChange(3)} 
+                        // onClick={() => handleTabChange(3)} 
                     >
                         3
                     </div>
@@ -760,7 +760,7 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+                {/* <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
@@ -810,8 +810,72 @@ const Page = ({ params } ) => {
                       }
                       
                       )}
-                </div>
+                </div> */}
 
+<div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                {timeChunks.map((chunk, chunkIndex) => {
+                  const now = new Date();
+                  const currentDate = now.toLocaleDateString("en-CA");
+                  const selectedDateStr = date.toLocaleDateString("en-CA");
+
+                  // Determine if this chunk has at least one active slot
+                  const hasActiveSlot = chunk.some(([timeKey, { time: timeValue = "" }]) => {
+                    const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                    if (!match) return false;
+
+                    const hours = Number(match[1]);
+                    const minutes = Number(match[2]);
+                    const slotTime = hours * 60 + minutes;
+                    const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+
+                    return slotTime >= startTime; 
+                  });
+
+                  // If no active slots, skip this row
+                  if (!hasActiveSlot) {
+                    return null;
+                  }
+
+                  return (
+                    <div key={chunkIndex} className="flex">
+                      {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
+                        const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                        if (!match) {
+                          console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
+                          return null;
+                        }
+                        const hours = Number(match[1]);
+                        const minutes = Number(match[2]);
+                        const slotTime = hours * 60 + minutes;
+                        const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
+                        const isActiveSlot = slotTime >= startTime;
+
+                        return (
+                          <div
+                            key={timeKey}
+                            className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
+                              isActiveSlot
+                                ? timeKey === activeTime
+                                  ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
+                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
+                                : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                            } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
+                          >
+                            <button
+                              onClick={() => handleButtonClick(timeKey, timeValue, sims)}
+                              className="button-slanted-content w-full h-full flex items-center justify-center"
+                              disabled={!isActiveSlot}
+                            >
+                              {formatToAMPM(timeValue)}
+                            </button>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+                })}
+              </div>
 
 
                     <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
@@ -921,7 +985,7 @@ const Page = ({ params } ) => {
 
     {activeTab === 2 && (
       <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl p-20">
-        <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">Payment Details</h2>
+        <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">Personal Details</h2>
         <form onSubmit={handleSubmit} >
   <div className="space-y-4">
     <div className="grid grid-cols-2 gap-4">
@@ -1095,11 +1159,11 @@ const Page = ({ params } ) => {
         <div className="flex justify-center py-20">
           <div className="">
           <div>
-            <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">Thank you for your purchase</h2>
-            <p className=" text-lg font-jura font-bold text-[#e3ce90]">Check your e-mail inbox, Your ticket is waiting you there!</p>
+            <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">Thank you for your booking</h2>
+            <p className=" text-lg font-jura font-bold text-[#e3ce90]">Check your e-mail inbox</p>
           </div>
           <div className="mt-20 w-[400px] ">
-            <Link href=""  className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
+            <Link href="/experience" className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
             <span className="button-slanted-content text-lg font-bold py-2">CONTINUE EXPERIENCE</span>
             </Link>
           </div>

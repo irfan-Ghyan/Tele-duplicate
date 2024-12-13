@@ -331,9 +331,7 @@ const Content = () => {
                   </div>
                 </div>
               ))}
-
-
-              
+      
           </div>
           <div className="lg:flex xl:flex xl:justify-center flex-wrap gap-2 my-6 lg:mx-80">
             {faqEntries.slice(3, 5).map((experience, index) => (
