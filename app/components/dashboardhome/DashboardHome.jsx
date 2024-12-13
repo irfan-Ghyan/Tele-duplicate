@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import DashboardCard from '../../components/dashboardcard/DashboardCard.jsx';
 import { FaUser, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
 import BookingCalendar from '../bookingcalendar/Bookingcalendar';
-import { doGetCall } from "../../utils/api";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -16,12 +15,9 @@ const DashboardHome = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-  
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-        const url = `${baseUrl}/api/bookings/availableSlots`;
-        let response = await doGetCall(url);
+        const response = await fetch(`${baseUrl}/api/bookings/availableSlots`);
         const data = await response.json();
-
+        
 
         const capacity = 14;
 

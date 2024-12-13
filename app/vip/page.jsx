@@ -674,7 +674,7 @@ const Page = ({ params } ) => {
                     </div>
                   </div>  
 
-                {/* <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
+                <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] my-[10px] rounded-lg">
                   <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                   {timeChunks.map((chunk, chunkIndex) => {
                     const now = new Date();
@@ -722,73 +722,7 @@ const Page = ({ params } ) => {
                       </div>
                     );
                   })}
-                </div>; */}
-
-              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
-                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
-                {timeChunks.map((chunk, chunkIndex) => {
-                  const now = new Date();
-                  const currentDate = now.toLocaleDateString("en-CA");
-                  const selectedDateStr = date.toLocaleDateString("en-CA");
-
-                  // Determine if this chunk has at least one active slot
-                  const hasActiveSlot = chunk.some(([timeKey, { time: timeValue = "" }]) => {
-                    const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                    if (!match) return false;
-
-                    const hours = Number(match[1]);
-                    const minutes = Number(match[2]);
-                    const slotTime = hours * 60 + minutes;
-                    const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-
-                    return slotTime >= startTime; 
-                  });
-
-                  // If no active slots, skip this row
-                  if (!hasActiveSlot) {
-                    return null;
-                  }
-
-                  return (
-                    <div key={chunkIndex} className="flex">
-                      {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
-                        const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                        if (!match) {
-                          console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
-                          return null;
-                        }
-                        const hours = Number(match[1]);
-                        const minutes = Number(match[2]);
-                        const slotTime = hours * 60 + minutes;
-                        const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-                        const isActiveSlot = slotTime >= startTime;
-
-                        return (
-                          <div
-                            key={timeKey}
-                            className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] mx-2 ${
-                              isActiveSlot
-                                ? timeKey === activeTime
-                                  ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                                : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                            } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                          >
-                            <button
-                              onClick={() => handleButtonClick(timeKey, timeValue, sims)}
-                              className="button-slanted-content w-full h-full flex items-center justify-center"
-                              disabled={!isActiveSlot}
-                            >
-                              {formatToAMPM(timeValue)}
-                            </button>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  );
-                })}
-              </div>
-
+                </div>;
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
@@ -1054,7 +988,7 @@ const Page = ({ params } ) => {
       type="submit"
       className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
-      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Pay Now</span>
+      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Confirm</span>
     </button>
   </div>
 </div>

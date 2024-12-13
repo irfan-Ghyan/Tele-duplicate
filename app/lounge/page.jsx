@@ -639,7 +639,7 @@ const Page = ({ params } ) => {
                       )}
                 </div> */}
 
-          <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+        <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
                 <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
                 {timeChunks.map((chunk, chunkIndex) => {
                   const now = new Date();
@@ -702,7 +702,7 @@ const Page = ({ params } ) => {
                     </div>
                   );
                 })}
-              </div> 
+              </div>
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
@@ -969,7 +969,7 @@ const Page = ({ params } ) => {
       type="submit"
       className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
-      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Pay Now</span>
+      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Confirm</span>
     </button>
   </div>
 </div>
