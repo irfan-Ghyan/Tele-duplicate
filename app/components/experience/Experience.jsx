@@ -540,9 +540,9 @@ const Experience = () => {
                     <Image
                       src={experience.imageUrl}
                       alt="Experience Image"
-                      width={300}
+                      width={600}
                       height={282}
-                      className="w-[360px] h-[282px] object-cover"
+                      className=" sm:w-[600px] lg:w-[360px] h-[282px] object-cover"
                       priority={true}
                     />
                   </div>
