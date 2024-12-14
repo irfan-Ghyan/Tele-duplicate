@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 import DashboardCard from '../../components/dashboardcard/DashboardCard.jsx';
 import { FaUser, FaCalendarCheck, FaCheckCircle } from 'react-icons/fa';
 import BookingCalendar from '../bookingcalendar/Bookingcalendar';
+import { Helmet } from 'react-helmet-async';
+import Head from 'next/head';
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -49,6 +51,25 @@ const DashboardHome = () => {
   ];
 
   return (
+
+    <>
+    <Helmet>
+            <title>Dashboard </title>
+            <meta
+              name="description"
+            
+            />
+            <meta property="og:title" content="Home | Teleios Dome" />
+            <meta
+              
+            />
+            <meta property="og:type" content="website" />
+            {/* <link rel="canonical" href="/" /> */}
+          </Helmet>
+          <Head>
+          <link rel="preload" href="" as="image" />
+          <link rel="preload" href="" as="image" />
+        </Head>
     <div className="w-full bg-gray-200 px-40 py-20">
       <h1 className='text-4xl font-black'>Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 py-4 text-center text-2xl">
@@ -63,6 +84,7 @@ const DashboardHome = () => {
       </div>
       <BookingCalendar />
     </div>
+    </>
   );
 };
 

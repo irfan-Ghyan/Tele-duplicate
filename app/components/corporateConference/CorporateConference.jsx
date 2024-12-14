@@ -25,7 +25,6 @@ const CorporateConference = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-      // Fetch the section data
       const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Corporate Events`);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');
@@ -51,7 +50,7 @@ const CorporateConference = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '', 
             };
           }
 
@@ -106,8 +105,8 @@ const CorporateConference = () => {
             <div className="absolute inset-0 bg-[#002718] bg-opacity-80 flex flex-col justify-center items-center hover-content transition-transform duration-300">
               <Link href="/enquiry-form" className="flex flex-col items-center text-center">
                 <Image
-                  // src={latestEntry.imageUrl}
-                  src="/assets/icons/conferences.png"
+
+                  src="/assets/icons/building.png"
                   width={60}
                   height={60}
                   alt="Conference"

@@ -154,7 +154,7 @@ const Form = () => {
   return (
     <div id="target-section" className="flex items-center justify-center py-[20px] lg:py-[40px] xl:py-[80px]">
       <div className="w-full max-w-2xl px-4">
-        <h2 className="text-[32px] lg:text-[42px] text-white font-black font-orbitron">
+        <h2 className="text-[32px] lg:text-[42px] text-[#e3ce90] font-black font-orbitron">
           Get In Touch Today to Book Your Custom Event
         </h2>
 
@@ -163,7 +163,7 @@ const Form = () => {
             <div>
               <label
                 htmlFor="firstName"
-                className="block text-[14px] font-bold font-jura text-white py-2 placeholder-white placeholder-opacity-20"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2 placeholder-white placeholder-opacity-20"
               >
                 First Name
               </label>
@@ -172,7 +172,7 @@ const Form = () => {
                 name="firstName"
                 placeholder="Enter your first name"
                 id="firstName"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] text-white py-[10px] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] text-[#e3ce90] py-[10px] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.firstName}
                 onChange={handleChange}
               
@@ -185,7 +185,7 @@ const Form = () => {
             <div className="xl:ml-[14px]">
               <label
                 htmlFor="lastName"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2"
               >
                 Last Name
               </label>
@@ -194,7 +194,7 @@ const Form = () => {
                 name="lastName"
                 placeholder="Enter your last name"
                 id="lastName"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] py-[10px] text-[#e3ce90] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.lastName}
                 onChange={handleChange}
                 
@@ -209,7 +209,7 @@ const Form = () => {
             <div>
               <label
                 htmlFor="companyName"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2"
               >
                 Company Name
               </label>
@@ -218,7 +218,7 @@ const Form = () => {
                 name="companyName"
                 placeholder="Enter your company name"
                 id="companyName"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] py-[10px] text-[#e3ce90] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.companyName}
                 onChange={handleChange}
                 
@@ -230,7 +230,7 @@ const Form = () => {
             <div className="xl:ml-[14px]">
               <label
                 htmlFor="phone"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2"
               >
                 Phone
               </label>
@@ -239,7 +239,7 @@ const Form = () => {
                 name="phone"
                 placeholder="Enter your phone"
                 id="phone"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] py-[10px] text-[#e3ce90] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.phone}
                 onChange={handleChange}
             
@@ -254,7 +254,7 @@ const Form = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2"
               >
                 Email
               </label>
@@ -263,7 +263,7 @@ const Form = () => {
                 name="email"
                 placeholder="Enter your email"
                 id="email"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] py-[10px] text-white text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] py-[10px] text-[#e3ce90] text-[14px] font-bold font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.email}
                 onChange={handleChange}
                 
@@ -275,39 +275,39 @@ const Form = () => {
             <div className="xl:ml-[14px]">
               <label
                 htmlFor="type"
-                className="block text-[14px] font-bold font-jura text-white py-2"
+                className="block text-[14px] font-bold font-jura text-[#e3ce90] py-2"
               >
                 Trip Type
               </label>
               <select
                 name="type"
                 id="type"
-                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold text-white font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+                className="mt-1 p-4 block w-full xl:w-[316px] bg-[#c09e5f] py-[10px] text-[14px] font-bold text-[#e3ce90] font-jura placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
                 value={formData.type}
                 onChange={handleChange}
                 
               >
                 <option
                   value=""
-                  className="text-[14px] font-bold w-full xl:w-[316px] font-jura text-white placeholder-white"
+                  className="text-[14px] font-bold w-full xl:w-[316px] font-jura text-[#e3ce90] placeholder-white"
                 >
                   Select type
                 </option>
                 <option
                   value="Type 1"
-                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
                 >
                   Corporate
                 </option>
                 <option
                   value="Type 2"
-                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
                 >
                   Birthdays
                 </option>
                 <option
                   value="Type 3"
-                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                  className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
                 >
                   Schools
                 </option>
@@ -321,75 +321,75 @@ const Form = () => {
           <div>
             <label
               htmlFor="hearAboutUs"
-              className="block text-[14px] w-full font-bold font-jura text-white placeholder-white py-2"
+              className="block text-[14px] w-full font-bold font-jura text-[#e3ce90] placeholder-white py-2"
             >
               How did you hear about us?
             </label>
             <select
               name="hearAboutUs"
               id="hearAboutUs"
-              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] text-white py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#c09e5f] text-[#e3ce90] py-[10px] focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.hearAboutUs}
               onChange={handleChange}
              
             >
               <option
                 value=""
-                className="text-[14px]  font-bold font-jura text-white w-full xl:w-[316px] placeholder-white "
+                className="text-[14px]  font-bold font-jura text-[#e3ce90] w-full xl:w-[316px] placeholder-white "
               >
                 Select an option
               </option>
               <option
                 value="Option 2"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
                 Google Search
               </option>
               <option
                 value="Option 1"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
                 Social Media (Instagram, TikTok, Facebook, etc.)
               </option>
               <option
                 value="Option 2"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
                 Online Advertisement
               </option>
               <option
                 value="Option 2"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
                 Word of Mouth
               </option>
               <option
                 value="Option 3"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
                Friend or Colleague
               </option>
               <option
                 value="Option 3"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
               Event or Conference
               </option>
               <option
                 value="Option 3"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
               News Article or Blog
               </option>
               <option
                 value="Option 3"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
               YouTube Video
               </option>
               <option
                 value="Option 3"
-                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-white placeholder-white"
+                className="text-[14px] w-full lg:w-[316px] font-bold font-jura text-[#e3ce90] placeholder-white"
               >
               Other
               </option>
@@ -402,7 +402,7 @@ const Form = () => {
           <div>
             <label
               htmlFor="message"
-              className="block w-full text-[14px] font-bold font-jura text-white py-2"
+              className="block w-full text-[14px] font-bold font-jura text-[#e3ce90] py-2"
             >
               Additional Information
             </label>
@@ -411,7 +411,7 @@ const Form = () => {
               id="message"
               placeholder="Select event type"
               rows="4"
-              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#2C1864C2] py-[10px] text-[14px] font-bold font-jura text-white placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
+              className="mt-1 p-4 block w-full xl:w-[642px] bg-[#c09e5f] py-[10px] text-[14px] font-bold font-jura text-[#e3ce90] placeholder-white placeholder-opacity-20 focus:outline-none focus:ring-0 focus:bg-[#1a1a2e] focus:text-[#ffffff]"
               value={formData.message}
               onChange={handleChange}
             ></textarea>
@@ -432,7 +432,7 @@ const Form = () => {
                   />
                   <span className={`custom-radio ${isRadioSelected ? 'checked' : ''}`} />
                 </label>
-                <span className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? 'text-white' : 'text-[#6e6295c2]'}`}>
+                <span className={`ml-4 text-[14px] font-medium font-jura mt-1 ${isRadioSelected ? 'text-[#e3ce90]' : 'text-[#002718]'}`}>
                   I agree to the{' '}
                   <Link href="/terms&conditions" className="underline">Terms & Conditions</Link>
                 </span>
@@ -442,7 +442,7 @@ const Form = () => {
               <button
   type="submit"
   className={`button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button font-jura font-bold border-[1px] border-white ${
-    isRadioSelected ? 'hover:bg-gradient-to-r hover:from-[#7E51F8] hover:to-[#D007A6] hover:border-0 text-white' : 'border-white text-gray-300'
+    isRadioSelected ? 'hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#063828] hover:border-0 text-[#e3ce90]' : 'border-white text-[#e3ce90]'
   } ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center`}
 >
   <span className="button-slanted-content" onClick={handleSubmitClick}>SUBMIT</span>
