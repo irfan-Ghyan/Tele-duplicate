@@ -28,7 +28,7 @@ const Page = ({ params } ) => {
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
-    { key: "duration", title: "Duration", description: "20" },
+    { key: "duration", title: "Duration", description: "40" },
   ]);
   
 

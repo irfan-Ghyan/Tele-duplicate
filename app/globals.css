@@ -290,12 +290,12 @@ body {
 
 
 
-.react-calendar__navigation button:disabled{
+/* .react-calendar__navigation button:disabled{
   background: none !important;
 }
 .react-calendar__navigation__arrow {
   display: none !important;
-}
+} */
 
 /* .button {
 
@@ -674,14 +674,16 @@ border: none !important;
 
 
 /* Hide single arrow icons (>) */
-/* .react-calendar__navigation__arrow {
-  display: none;
-} */
+.react-calendar__navigation__arrow {
+  display:inline;
+  background-color: #002718;
+}
 
 /* Hide double arrow icons (>>) */
-/* .react-calendar__navigation__double-arrow {
-  display: none !important;
-} */
+.react-calendar__navigation__double-arrow {
+  display: inline !important;
+  background-color: #002718;
+}
 
 
 

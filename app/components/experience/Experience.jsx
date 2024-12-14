@@ -255,6 +255,20 @@ const Experience = () => {
     }
   };
 
+
+  const getHref = (title) => {
+    switch (title.toLowerCase()) {
+      case '20 mint':
+        return '/normal';
+      case '40 mint':
+        return '/40mints';
+      case '60 mint':
+        return '/60mints';
+      default:
+        return '/normal'; // Fallback route
+    }
+  };
+  
   return (
     <>
       <Helmet>
@@ -309,7 +323,7 @@ const Experience = () => {
                     <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                        href='/normal'
+                        href={getHref(experience.title)} 
                       >
                         <span className="button-slanted-content">{t('BOOK NOW')}</span>
                       </Link>
