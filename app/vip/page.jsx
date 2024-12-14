@@ -615,7 +615,7 @@ const Page = ({ params } ) => {
                         2
                     </div>
                     <div className={`text-[14px] ${activeTab === 2 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-                        Payment
+                        Confirm
                     </div>
                     <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
                     </div>
