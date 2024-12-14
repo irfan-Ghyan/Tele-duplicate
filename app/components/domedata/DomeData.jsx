@@ -62,7 +62,7 @@ const DomeData = () => {
             }
           }
 
-          setLatestEntry(entry);  // Update state with all data together
+          setLatestEntry(entry);
         }
       }
     } catch (err) {
@@ -75,7 +75,7 @@ const DomeData = () => {
   return (
     <>
       <Head>
-        <link rel="preload" href={latestEntry?.imageUrl || '/assets/images/dome/default-image.jpg'} as="image" />
+        <link rel="preload" href={latestEntry?.imageUrl} as="image" />
       </Head>
 
       <div
@@ -83,7 +83,7 @@ const DomeData = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('http://192.168.70.142:8000/storage/images/Gaming Room/Gaming Room_image_0.jpg')`,
+            : `url('http://api.teleiosx.com/storage/images/Gaming Room/Gaming Room_image_0.jpg')`,
         }}
       >
         <div className="w-full bg-[#002718] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
