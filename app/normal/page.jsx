@@ -654,10 +654,10 @@ const Page = ({ params } ) => {
        
       <div>
         <div className="my-[60px] ">
-            <div className="flex justify-between items-center w-[430px] max-w-7xl mx-auto my-8">
+            <div className="flex justify-between items-center w-[403px] max-w-7xl mx-auto my-8">
                     <div className="relative">
                     <div
-                        className={`ml-[1.9rem] w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
+                        className={`ml-[1.2rem] w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
                         onClick={() => handleTabChange(1)}
                     >
                         1
