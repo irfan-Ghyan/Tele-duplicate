@@ -305,7 +305,7 @@ const Content = () => {
 
       <div className="flex flex-col items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
-          <div className="text-center text-[#e3ce90]">
+          <div className="text-center text-[#e3ce90] mt-20">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
               {t('Content.Sessions')}
             </h1>
@@ -328,9 +328,9 @@ const Content = () => {
                     <Image
                       src={experience.imageUrl}
                       alt={experience.title}
-                      width={300}
+                      width={600}
                       height={282}
-                      className="w-[360px] h-[282px] object-cover"
+                      className="sm:w-[600px] lg:w-[360px] h-[282px] object-cover"
                       priority={true}
                     />
                   </div>
