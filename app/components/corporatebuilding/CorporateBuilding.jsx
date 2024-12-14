@@ -76,9 +76,9 @@ const CorporateBuilding = () => {
   return (
     <>
       <Head>
-        <link rel="preload" href="/assets/images/events/pics-17.jpg" as="image" />
-        <link rel="preload" href="/assets/images/events/pics-98.jpg" as="image" />
-        <link rel="preload" href="/assets/images/events/Stage.png" as="image" />
+        <link rel="preload" href="" as="image" />
+        <link rel="preload" href="" as="image" />
+        <link rel="preload" href="" as="image" />
       </Head>
       <div className="w-full flex flex-wrap justify-center items-center my-0 md:my-20 lg:my-20">
         {loading && (
@@ -97,7 +97,7 @@ const CorporateBuilding = () => {
           <div
             className="relative w-full h-[240px] md:h-[319px] hover-trigger"
             style={{
-              backgroundImage: `url(${latestEntry.imageUrl || '/assets/images/events/pics-17.jpg'})`,
+              backgroundImage: `url(${latestEntry.imageUrl})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -105,7 +105,7 @@ const CorporateBuilding = () => {
             <div className="absolute inset-0 bg-[#002718] bg-opacity-80 flex flex-col justify-center items-center hover-content transition-transform duration-300">
               <Link href="/enquiry-form" className="flex flex-col items-center text-center">
                 <Image
-                  src={latestEntry.imageUrl || '/assets/images/events/pics-98.jpg'}
+                  src="/assets/icons/building.png"
                   width={60}
                   height={60}
                   alt="Conference"
