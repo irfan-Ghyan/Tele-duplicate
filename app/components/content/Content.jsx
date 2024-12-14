@@ -95,7 +95,7 @@ const Content = () => {
         </div>
 
         <div className="w-full">
-          <div className="lg:flex xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
+          <div className="xl:flex xl:justify-center gap-4 lg:mx-80 ">
             {loading && <p className="text-[#c09e5f]">{t('Content.Loading')}</p>}
             {error && <p className="text-red-500">{error}</p>}
 
@@ -104,7 +104,7 @@ const Content = () => {
               faqEntries.slice(0, 3).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] m-0"
+                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
                 >
                   <div className="flex justify-center items-center w-full h-[282px]">
                     <Image
@@ -116,6 +116,15 @@ const Content = () => {
                       priority={true}
                     />
                   </div>
+                   {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
+                   <div className="pt-[19px] pb-[22px] block lg:hidden">
+                      <Link
+                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        href='/normal'
+                      >
+                        <span className="button-slanted-content">{t('BOOK NOW')}</span>
+                      </Link>
+                    </div>
                   <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
@@ -125,7 +134,7 @@ const Content = () => {
                         {experience.description}
                       </p>
                     </div>
-                    <div className="pt-[19px] pb-[22px]">
+                    <div className="pt-[19px] pb-[22px] hidden lg:block">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href="/normal"
@@ -138,11 +147,11 @@ const Content = () => {
               ))}
       
           </div>
-          <div className="lg:flex xl:flex xl:justify-center flex-wrap gap-2 my-6 lg:mx-80">
+          <div className="xl:flex xl:justify-center flex-wrap gap-2 lg:mx-80 ">
             {faqEntries.slice(3, 5).map((experience, index) => (
               <div
                 key={index}
-                className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[430px] lg:w-[560px] m-0"
+                className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[430px] lg:w-[560px] my-8"
               >
                 <div className="flex justify-center items-center w-full h-[282px]">
                   <Image
@@ -154,6 +163,15 @@ const Content = () => {
                     priority={true}
                   />
                 </div>
+                {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
+                <div className="pt-[19px] pb-[22px] block lg:hidden">
+                      <Link
+                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        href={index === 0 ? `/vip` : `/lounge`}
+                      >
+                        <span className="button-slanted-content">{t('BOOK NOW')}</span>
+                      </Link>
+                    </div>
                 <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                   <div>
                     <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
@@ -163,7 +181,7 @@ const Content = () => {
                       {experience.description}
                     </p>
                   </div>
-                  <div className="pt-[19px] pb-[22px]">
+                  <div className="pt-[19px] pb-[22px] hidden lg:block">
                     <Link
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/vip` : `/lounge`}
@@ -182,3 +200,4 @@ const Content = () => {
 };
 
 export default Content;
+
