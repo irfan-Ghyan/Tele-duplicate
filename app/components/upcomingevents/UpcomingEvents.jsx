@@ -103,7 +103,7 @@ const UpcomingEvents = () => {
               <div className="py-10">
                 <div>
                   <Link
-                    href="/explore"
+                    href="/virtualgp"
                     className="button-slanted w-[300px] md:w-[475px] h-[44px] px-4 py-6 button font-jura font-boldbuton border-[1px] border-[#c09e5f] hover:bg-gradient-to-r hover:from-[#e3ce90] hover:to-[#c09e5f] text-[#c09e5f] hover:text-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center hover:border-0"
                   >
                     <span className="button-slanted-content md:text-[14px] lg:text-[18px] text-[#c09e5f] hover:text-[#002718] font-bold font-jura">

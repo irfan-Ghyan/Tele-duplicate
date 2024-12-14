@@ -3,7 +3,7 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import CalendarComponent from "../components/calendar/Calendar";
-import PlanSelector from "../components/planselector/PlanSelector";
+import PlanGold from "../components/plangold/PlanGold";
 import { doGetCall, doPostCall } from "../utils/api";
 // import BookingType from "../components/bookingtype/BookingType";
 // import Link from "next/link";
@@ -891,7 +891,7 @@ const Page = ({ params } ) => {
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       Duration
                     </h1>
-                    <PlanSelector onPlanChange={handlePlanChange} />
+                    <PlanGold onPlanChange={handlePlanChange} />
                   </div>
 
 

@@ -1,8 +1,8 @@
 
 import { useState } from 'react';
 
-const PlanSelector = ({ onPlanChange }) => {
-  const [selectedPlan, setSelectedPlan] = useState('bronze');
+const PlanSilver = ({ onPlanChange }) => {
+  const [selectedPlan, setSelectedPlan] = useState('silver');
 
   const handlePlanChange = (plan) => {
     setSelectedPlan(plan);
@@ -55,5 +55,5 @@ const PlanSelector = ({ onPlanChange }) => {
   );
 };
 
-export default PlanSelector;
+export default PlanSilver;
 
