@@ -312,7 +312,7 @@ const Content = () => {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="">
           <div className="xl:flex xl:justify-center gap-4 lg:mx-80 ">
             {loading && <p className="text-[#c09e5f]">{t('Content.Loading')}</p>}
             {error && <p className="text-red-500">{error}</p>}
