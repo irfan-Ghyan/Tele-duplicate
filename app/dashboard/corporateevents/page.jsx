@@ -45,9 +45,9 @@ const Page = () => {
         <DashboardConference />
         </div>
 
-        <div className='px-40 bg-gray-200'>
+        {/* <div className='px-40 bg-gray-200'>
         <DashboardVenueBranding />
-        </div>
+        </div> */}
 
         </div>
         </div>
