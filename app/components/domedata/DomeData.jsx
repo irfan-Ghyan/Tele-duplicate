@@ -103,10 +103,10 @@ const DomeData = () => {
               {!loading && !error && latestEntry?.title && latestEntry?.description && (
                 <div className="py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px]">
                   <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron drop-shadow-4xl">
-                  {latestEntry?.title || 'No title available'}
+                  {latestEntry.title}
                   </h1>
                   <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6 text-balance drop-shadow-4xl text-justify">
-                  {latestEntry?.description || 'No description available'}
+                  {latestEntry.description}
                   </p>
                 </div>
               )}

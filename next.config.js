@@ -2,7 +2,7 @@
 
 module.exports = {
   reactStrictMode: true,
-  // output: 'export',
+  output: 'export',
   trailingSlash: true,
  
 

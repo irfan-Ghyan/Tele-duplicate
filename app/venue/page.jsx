@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 const Page = () => {
   const { t } = useTranslation();
 
-  
+
 
   return (
     <>
