@@ -128,7 +128,7 @@ const Dome = () => {
               <h2 className="text-[32px] md:text-[54px] mb-4 text-[#e3ce90] font-black font-orbitron">
                 {dome.title}
               </h2>
-              <p className="text-[18px] mb-4 text-[#c09e5f] font-jura font-black leading-7 text-justify">
+              <p className="text-[18px] mb-4 text-[#e3ce90] font-jura font-black leading-7 text-justify">
                 {dome.description}
               </p>
               <Link
