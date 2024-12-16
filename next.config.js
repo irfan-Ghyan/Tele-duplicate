@@ -2,13 +2,13 @@
 
 module.exports = {
   reactStrictMode: true,
-  // output: 'export',
+  output: 'export',
   trailingSlash: true,
  
 
   images: {
     unoptimized: true,
-    domains: ['http://api.teleiosx.com'], 
+    domains: ['https://api.teleiosx.com'], 
   },
 
   async headers() {
