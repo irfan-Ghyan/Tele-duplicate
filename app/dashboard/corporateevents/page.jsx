@@ -45,7 +45,6 @@ const Page = () => {
         <DashboardConference />
         </div>
 
-
         <div className='px-40 bg-gray-200'>
         <DashboardVenueBranding />
         </div>

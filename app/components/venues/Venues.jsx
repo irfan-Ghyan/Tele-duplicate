@@ -169,7 +169,7 @@ const Dome = () => {
             }}
           >
             {/* Transparent Overlay */}
-            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-80"></div>
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
 
             {/* Content */}
             <div className="relative flex flex-col px-4 lg:px-40 padding-px items-start justify-end h-full bg-transparent pb-10 max-w-7xl md:px-8 mx-auto">
