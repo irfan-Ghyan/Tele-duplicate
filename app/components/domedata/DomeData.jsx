@@ -23,7 +23,6 @@ const DomeData = () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-      // Fetch the section data
       const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Dome`);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');
@@ -49,11 +48,11 @@ const DomeData = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '',
             };
           }
 
-          // Fetch the image data dynamically
+
           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Gaming Room`);
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
