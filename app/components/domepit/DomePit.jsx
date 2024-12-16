@@ -83,7 +83,7 @@ const DomePit = () => {
         style={{
           backgroundImage: latestEntry?.imageUrl
             ? `url(${latestEntry.imageUrl})`
-            : `url('https://api.teleiosx.com/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
+            : `url('https://api.teleiosx.com/public/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
         }}
       >
         <div className="w-full bg-[#002718] bg-opacity-60 lg:bg-opacity-0 md:bg-opacity-0 xl:bg-opacity-0 px-4">
