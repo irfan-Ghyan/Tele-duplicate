@@ -2,6 +2,47 @@
 import React, { useState, useEffect } from 'react';
 import { doPostCall, uploadImageCall, doGetCall, doDeleteCall } from '../../utils/api';
 
+const translations = {
+  en: {
+    switchLang: 'Switch to Arabic',
+    hide: 'Hide',
+    show: 'Show',
+    loading: 'Loading...',
+    error: 'Failed to load data. Please try again.',
+    domeTitle: 'Virtual GP',
+    title: 'Title',
+    description: 'Description',
+    uploadImages: 'Upload Images',
+    images: 'Images',
+    submit: 'Submit',
+    update: 'Update Entry',
+    submittedEntries: 'Submitted Entries',
+    noEntries: 'No entries found.',
+    edit: 'Edit',
+    delete: 'Delete',
+    actions: 'Actions',
+  },
+  ar: {
+    switchLang: 'التبديل إلى اللغة الإنجليزية',
+    hide: 'إخفاء',
+    show: 'عرض',
+    loading: 'جار التحميل...',
+    error: 'فشل في تحميل البيانات. حاول مرة اخرى.',
+    domeTitle: 'سباق الجائزة الكبرى الظاهري',
+    title: 'العنوان',
+    description: 'الوصف',
+    uploadImages: 'تحميل الصور',
+    images: 'الصور',
+    submit: 'إرسال',
+    update: 'تحديث البيانات',
+    submittedEntries: 'البيانات المقدمة',
+    noEntries: 'لا توجد بيانات.',
+    edit: 'تعديل',
+    delete: 'حذف',
+    actions: 'الإجراءات',
+  },
+};
+
 const DashboardEvents = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -154,14 +195,34 @@ const DashboardEvents = () => {
     }
   };
 
-  return (
-    <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40">
-      <div className='bg-white p-20 rounded-lg'>
-      <h1 className="text-4xl text-[#063828] font-black font-orbitron">Virtual GP</h1>
+  const [language, setLanguage] = useState('en');
+  const [showSection, setShowSection] = useState(true);
+  const t = translations[language];
+  
 
+  return (
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}
+    dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      
+      <div className='bg-white p-20 rounded-lg '>
+        <div className='flex justify-between'>
+      <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
+          {showSection ? 'Hide' : 'Show'}
+        </button>
+        </div>
+      <h1 className="text-4xl text-[#063828] font-black font-orbitron">{t.domeTitle}</h1>
+
+      {loading && <p className="text-blue-500">Loading...</p>}
+      {error && <p className="text-red-500">{error}</p>}
+
+      {showSection && (
+        <>
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t.title}</label>
           <input
             type="text"
             value={title}
@@ -172,7 +233,7 @@ const DashboardEvents = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t.Description}</label>
           <textarea
             value={description}
             onChange={handleDescriptionChange}
@@ -183,7 +244,7 @@ const DashboardEvents = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t.uploadImages}</label>
           <input
             type="file"
             accept="image/*"
@@ -202,9 +263,9 @@ const DashboardEvents = () => {
         <table className="w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 border">Title</th>
-              <th className="p-2 border">Description</th>
-              <th className="p-2 border">Image</th>
+            <th className="p-2 border">{t.title}</th>
+              <th className="p-2 border">{t.description}</th>
+              <th className="p-2 border">{t.images}</th>
             </tr>
           </thead>
           <tbody>
@@ -224,13 +285,14 @@ const DashboardEvents = () => {
               </tr>
             ) : (
               <tr>
-                <td colSpan="3" className="text-center p-2">No entries found.</td>
+                <td colSpan="3" className="text-center p-2">{t.noEntries}</td>
               </tr>
             )}
           </tbody>
         </table>
       </div>
-
+      </>
+      )}
       </div>
     </div>
   );

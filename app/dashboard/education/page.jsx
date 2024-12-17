@@ -33,9 +33,9 @@ const Page = () => {
         <div className='w-full'>
         <DashboardMainNavbar/>
       
-        <DashboardEducationalVisit />
+        {/* <DashboardEducationalVisit />
         <DashboardSafetyDriving />
-        <DashboardWhyTeleios />
+        <DashboardWhyTeleios /> */}
         </div>
         </div>
       </div>
