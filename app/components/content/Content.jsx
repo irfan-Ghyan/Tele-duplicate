@@ -346,10 +346,10 @@ const Content = () => {
                   <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                        {t('experience.title')}
+                        {experience.title}
                       </h1>
                       <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                      {t('experience.description')}
+                      {experience.description}
                       </p>
                     </div>
                     {/* Button: Hidden on Small Screens, Visible on Large Screens */}
@@ -393,10 +393,10 @@ const Content = () => {
                 <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                   <div>
                     <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                    {t('experienxe.watchparties.title')}
+                    {experience.title}
                     </h1>
                     <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                    {t('experienxe.watchparties.description')}
+                    {experience.description}
                     </p>
                   </div>
                   {/* Button: Hidden on Small Screens, Visible on Large Screens */}

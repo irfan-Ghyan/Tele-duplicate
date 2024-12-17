@@ -558,10 +558,10 @@ const Experience = () => {
 
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                         {t('experience.title')}
+                         {experience.title}
                       </h1>
                       <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                        {t('experience.description')}
+                        {experience.description}
                       </p>
                     </div>
 
@@ -607,10 +607,10 @@ const Experience = () => {
 
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                        {t('experienxe.watchparties.title')}
+                        {experience.title}
                       </h1>
                       <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                        {t('experienxe.watchparties.description')}
+                        {experience.description}
                       </p>
                     </div>
 
