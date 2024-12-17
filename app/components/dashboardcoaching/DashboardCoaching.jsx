@@ -213,7 +213,7 @@ const DashboardCoaching = () => {
           {showSection ? 'Hide' : 'Show'}
         </button>
         </div>
-      <h1 className="text-4xl text-[#063828] font-black font-orbitron">1-1 Coaching</h1>
+      <h1 className="text-4xl text-[#063828] font-black font-orbitron">{t.domeTitle}</h1>
 
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
