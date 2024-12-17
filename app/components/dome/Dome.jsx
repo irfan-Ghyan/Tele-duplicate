@@ -20,7 +20,6 @@ const Dome = () => {
   const { t } = useTranslation();
 
   
-  
 
   useEffect(() => {
     const fetchData = async () => {
