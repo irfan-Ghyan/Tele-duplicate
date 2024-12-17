@@ -4,6 +4,46 @@
 import React, { useState, useEffect } from 'react';
 import { doPostCall, doGetCall, uploadImageCall, doDeleteCall } from '../../utils/api';
 
+const translations = {
+  en: {
+    switchLang: 'Switch to Arabic',
+    hide: 'Hide',
+    show: 'Show',
+    loading: 'Loading...',
+    error: 'Failed to load data. Please try again.',
+    domeTitle: 'DOME',
+    title: 'Title',
+    description: 'Description',
+    uploadImages: 'Upload Images',
+    submit: 'Submit',
+    update: 'Update Entry',
+    submittedEntries: 'Submitted Entries',
+    noEntries: 'No entries found.',
+    edit: 'Edit',
+    delete: 'Delete',
+    actions: 'Actions',
+  },
+  ar: {
+    switchLang: 'التبديل إلى اللغة الإنجليزية',
+    hide: 'إخفاء',
+    show: 'عرض',
+    loading: 'جار التحميل...',
+    error: 'فشل في تحميل البيانات. حاول مرة اخرى.',
+    domeTitle: 'قُبَّة',
+    title: 'العنوان',
+    description: 'الوصف',
+    uploadImages: 'تحميل الصور',
+    submit: 'إرسال',
+    update: 'تحديث البيانات',
+    submittedEntries: 'البيانات المقدمة',
+    noEntries: 'لا توجد بيانات.',
+    edit: 'تعديل',
+    delete: 'حذف',
+    actions: 'الإجراءات',
+  },
+};
+
+
 const DashboardDomeSection = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -13,8 +53,10 @@ const DashboardDomeSection = () => {
   const [editingIndex, setEditingIndex] = useState(null);
   const [showSection, setShowSection] = useState(true);
   const [language, setLanguage] = useState('en');
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(''); // Error state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const t = translations[language];
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -230,7 +272,9 @@ const DashboardDomeSection = () => {
   
 
   return (
-    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}
+    dir={language === 'ar' ? 'rtl' : 'ltr'}
+    >
       <div className='bg-white p-20 rounded-lg'>
       <div className="flex justify-between ">
         <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
@@ -243,14 +287,14 @@ const DashboardDomeSection = () => {
 
       {showSection && (
         <>
-          <h1 className="text-4xl text-[#063828] font-black font-orbitron">DOME</h1>
+          <h1 className="text-4xl text-[#063828] font-black font-orbitron">{t.domeTitle}</h1>
 
           {loading && <p className="text-blue-500">Loading...</p>}
           {error && <p className="text-red-500">{error}</p>}
 
           <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2"> {t.title}</label>
               <input
                 type="text"
                 value={title}
@@ -261,7 +305,7 @@ const DashboardDomeSection = () => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t.description}</label>
               <textarea
                 value={description}
                 onChange={handleDescriptionChange}
@@ -272,7 +316,7 @@ const DashboardDomeSection = () => {
             </div>
 
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2"> {t.uploadImages}</label>
               <input
                 type="file"
                 accept="image/*"
@@ -290,14 +334,14 @@ const DashboardDomeSection = () => {
       )}
 
       <div className="mt-20 ">
-        <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+        <h2 className="text-xl font-bold mb-4">{t.submittedEntries}</h2>
         <table className="w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 border border-gray-300">Title</th>
-              <th className="p-2 border border-gray-300">Description</th>
-              <th className="p-2 border border-gray-300">Images</th>
-              <th className="p-2 border border-gray-300">Actions</th>
+              <th className="p-2 border border-gray-300">{t.title}</th>
+              <th className="p-2 border border-gray-300">{t.description}</th>
+              <th className="p-2 border border-gray-300">{t.uploadImages}</th>
+              <th className="p-2 border border-gray-300">{t.Actions}</th>
             </tr>
           </thead>
           <tbody>
@@ -322,10 +366,10 @@ const DashboardDomeSection = () => {
               </td>
               <td className="p-2">
                 <button onClick={() => handleEdit(index)} className="text-blue-500 mr-2">
-                  Edit
+                {t.edit}
                 </button>
                 <button onClick={() => handleDelete(index)} className="text-red-500">
-                  Delete
+                {t.delete}
                 </button>
               </td>
             </tr>
@@ -333,7 +377,7 @@ const DashboardDomeSection = () => {
         ) : (
           <tr>
             <td colSpan="4" className="p-2 text-center text-gray-500">
-              No entries found.
+            {t.noEntries}
             </td>
           </tr>
         )}

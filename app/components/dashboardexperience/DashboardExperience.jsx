@@ -3,6 +3,48 @@
 import React, { useState, useEffect } from 'react';
 import { doPostCall, doDeleteCall, uploadImageCall, doGetCall } from '../../utils/api';
 
+
+const translations = {
+  en: {
+    switchLang: 'Switch to Arabic',
+    hide: 'Hide',
+    show: 'Show',
+    loading: 'Loading...',
+    error: 'Failed to load data. Please try again.',
+    domeTitle: 'Session',
+    title: 'Title',
+    description: 'Description',
+    uploadImages: 'Upload Images',
+    images: 'Images',
+    submit: 'Submit',
+    update: 'Update Entry',
+    submittedEntries: 'Submitted Entries',
+    noEntries: 'No entries found.',
+    edit: 'Edit',
+    delete: 'Delete',
+    actions: 'Actions',
+  },
+  ar: {
+    switchLang: 'التبديل إلى اللغة الإنجليزية',
+    hide: 'إخفاء',
+    show: 'عرض',
+    loading: 'جار التحميل...',
+    error: 'فشل في تحميل البيانات. حاول مرة اخرى.',
+    domeTitle: 'حصة',
+    title: 'العنوان',
+    description: 'الوصف',
+    uploadImages: 'تحميل الصور',
+    images: 'الصور',
+    submit: 'إرسال',
+    update: 'تحديث البيانات',
+    submittedEntries: 'البيانات المقدمة',
+    noEntries: 'لا توجد بيانات.',
+    edit: 'تعديل',
+    delete: 'حذف',
+    actions: 'الإجراءات',
+  },
+};
+
 const DashboardExperience = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -12,6 +54,7 @@ const DashboardExperience = () => {
   const [isDeleting, setIsDeleting] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
 
 const handleImageUpload = (e) => {
   const files = Array.from(e.target.files);
@@ -49,16 +92,16 @@ const fetchTableData = async () => {
             if (!acc[index]) acc[index] = { key: index, images: [] };
 
             if (type === 'image') {
-              acc[index].images.push(field.value); // Add image URLs
+              acc[index].images.push(field.value);
             } else {
-              acc[index][type] = field.value; // Add title/description
-              acc[index][`${type}_meta`] = field.key; // Save metadata for deletion/edit
+              acc[index][type] = field.value;
+              acc[index][`${type}_meta`] = field.key;
             }
           }
           return acc;
         }, {});
 
-        setTableData(Object.values(formattedData)); // Convert object to array for rendering
+        setTableData(Object.values(formattedData));
       }
     } else {
       setError('No data found.');
@@ -88,7 +131,7 @@ const handleSubmit = async (e) => {
   setLoading(true);
   setError('');
   try {
-    const index = tableData.length + 1; // Unique index for each card
+    const index = tableData.length + 1;
 
     let uploadedImagePaths = [];
     if (images.length > 0) {
@@ -280,15 +323,34 @@ const handleImageDelete = async (imageName, entryIndex) => {
   }
 };
 
+  const [language, setLanguage] = useState('en');
+  const [showSection, setShowSection] = useState(true);
+
+  const t = translations[language];
+
   return (
-    <div className="bg-gray-200 w-full py-10 px-40">
-      <div className='bg-white p-20 rounded-lg'>
-      <h1 className="text-4xl font-black text-[#063828]">Session</h1>
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}
+    dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      
+      <div className='bg-white p-20 rounded-lg '>
+        <div className='flex justify-between'>
+      <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+          {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
+        </button>
+        <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
+          {showSection ? 'Hide' : 'Show'}
+        </button>
+        </div>
+      <h1 className="text-4xl font-black text-[#063828]">{t.domeTitle}</h1>
+      
       {loading && <p className="text-blue-500">Loading...</p>}
       {error && <p className="text-red-500">{error}</p>}
+
+      {showSection && (
+        <>
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t.title}</label>
           <input
             type="text"
             value={title}
@@ -298,7 +360,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t.description}</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -308,7 +370,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
           />
         </div>
         <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t.uploadImages}</label>
               <input
                 type="file"
                 accept="image/*"
@@ -321,16 +383,16 @@ const handleImageDelete = async (imageName, entryIndex) => {
           {editingIndex !== null ? 'Update' : 'Submit'}
         </button>
       </form>
-
+    
       <div className="mt-20">
-        <h2 className="text-xl font-bold mb-4">Submitted Entries</h2>
+        <h2 className="text-xl font-bold mb-4">{t.submitted_entries}</h2>
         <table className="w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 border border-gray-300">Title</th>
-              <th className="p-2 border border-gray-300">Description</th>
-              <th className="p-2 border border-gray-300">Images</th>
-              <th className="p-2 border border-gray-300">Actions</th>
+              <th className="p-2 border border-gray-300">{t.title}</th>
+              <th className="p-2 border border-gray-300">{t.description}</th>
+              <th className="p-2 border border-gray-300">{t.images}</th>
+              <th className="p-2 border border-gray-300">{t.actions}</th>
             </tr>
           </thead>
           <tbody>
@@ -364,13 +426,13 @@ const handleImageDelete = async (imageName, entryIndex) => {
                </td>
                 <td className="p-2">                   
                   <button onClick={() => handleEdit(index)} className="text-blue-500">
-                    Edit
+                  {t.edit}
                   </button>
                   <button
                     onClick={() => handleDelete(entry.title_meta, entry.description_meta)}
                     className="text-red-500"
                   >
-                    Delete
+                    {t.delete}
                   </button>
                 </td>
               </tr>
@@ -378,7 +440,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
           ) : (
             <tr>
               <td colSpan="4" className="text-center p-2">
-                No entries found.
+              {t.no_entries}
               </td>
             </tr>
           )}
@@ -387,6 +449,8 @@ const handleImageDelete = async (imageName, entryIndex) => {
         </table>
 
       </div>
+      </>
+      )}
       </div>
     </div>
   );
