@@ -11,7 +11,7 @@ import { getImageCall } from '../../utils/api';
 
 const CorporateNetworking = () => {
   const { t } = useTranslation();
-  const [latestEntry, setLatestEntry] = useState(null);
+  const [networkingEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -94,11 +94,11 @@ const CorporateNetworking = () => {
           </div>
         )}
 
-        {!loading && !error && latestEntry && (
+        {!loading && !error && networkingEntry && (
           <div
             className="relative w-full h-[240px] md:h-[319px] hover-trigger"
             style={{
-              backgroundImage: `url(${latestEntry.imageUrl})`,
+              backgroundImage: `url(${networkingEntry.imageUrl})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -114,10 +114,10 @@ const CorporateNetworking = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                  {latestEntry.title}
+                   {t('networkingEntry.title')}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {latestEntry.description}
+                  {t('networkingEntry.description')}
                 </p>
               </Link>
             </div>

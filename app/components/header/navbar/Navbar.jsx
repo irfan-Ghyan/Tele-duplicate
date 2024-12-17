@@ -439,21 +439,21 @@ const Navbar = ({ isTopBannerVisible }) => {
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
-              {t('WATCH PARTIES')}
+              {t('watchparties')}
             </Link>
             <Link
               href="/privateevents"
               className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
-              {t('PRIVATE EVENTS')}
+              {t('privateevents')}
             </Link>
             <Link
               href="/f&b"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >
-              {t('F & B')}
+              {t('f&b')}
             </Link>
             {/* Additional Links or Dropdowns can be added here */}
           </div>
@@ -525,21 +525,21 @@ const Navbar = ({ isTopBannerVisible }) => {
                 className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('WATCH PARTIES')}
+                {t('watchparties')}
               </Link>
               <Link
                 href="/privateevents"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('PRIVATE EVENTS')}
+                {t('privateevents')}
               </Link>
               <Link
                 href="/f&b"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('F&B')}
+                {t('f&b')}
               </Link>
               {/* Additional Links or Dropdowns can be added here */}
             </div>

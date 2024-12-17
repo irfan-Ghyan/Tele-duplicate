@@ -35,9 +35,9 @@ const Page = () => {
       <div className="min-h-screen flex flex-col items-center ">
         <div className="flex items-center justify-center xl:px-20 sm:px-4">
           <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] xl:px-80 lg:px-40 lg:pt-[50px] ">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('FOOD & BEVERAGE')}</h1>
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('f&b.title')}</h1>
             <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify">
-              {t("Food and beverages bring joy to life, uniting people over delicious meals and refreshing drinks.")}
+              {t("f&b.description")}
             </p>
           </div>
         </div>

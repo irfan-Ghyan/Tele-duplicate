@@ -7,11 +7,15 @@
     "corporate_events": "WATCH PARTIES",
     "education": "EDUCATION",
     "EXPERIENCES": "EXPERIENCES",
-    "DOME": "VENUE",
+    "VENUE": "VENUE",
     "CORPORATE EVENTS": "CORPORATE EVENTS",
     "EDUCATION": "PRIVATE EVENTS",
     "FOOD": "F&B",
-    
+    "watchparties": "WATCH PARTIES",
+    "privateevents": "PRIVATE EVENTS",
+    "f&b": "F & B",
+    "saudi_address": "Anas Ibn Malik Rd, Alyasmin, Riyadh 13326, Saudi Arabia",
+    "openningtime": "Tuesday - Sunday 12PM to 11PM",
 
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
@@ -384,8 +388,11 @@
    "conferenceEntry.title": "Conference",
   "conferenceEntry.description": "Enhance your conference with interactive simulator sessions, blending engagement with cutting-edge technology. Perfect for dynamic presentations and networking.",
 
-  "conferenceEntry.title": "Networking",
-  "conferenceEntry.description": " Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement."
+  "networkingEntry.title": "Networking",
+  "networkingEntry.description": "Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement.",
+  
+  "f&b.title": "FOOD & BEVERAGE",
+  "f&b.description": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures."
 
  
 

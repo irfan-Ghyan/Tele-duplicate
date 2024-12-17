@@ -79,17 +79,17 @@ const Footer = () => {
             </li>
             <li>
               <Link href="/watchparties" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-              {t('WATCH PARTIES')}
+              {t('watchparties')}
                </Link>
              </li>
              <li>
               <Link href="/privateevents" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-              {t('PRIVATE PARTIES')}
+              {t('privateevents')}
                </Link>
              </li>
              <li>
                <Link href="/f&b" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
-                {t('F & B')}
+                {t('f&b')}
                </Link>
              </li>
           </ul>
@@ -100,11 +100,11 @@ const Footer = () => {
           <div>
             <div className="mb-[10px]">
               <h3 className="text-[#e3ce90] font-jura text-[13px] font-bold">{t('address')}</h3>
-              <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">Anas Ibn Malik Rd, Alyasmin, Riyadh 13326, Saudi Arabia</Link>
+              <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="text-[#e3ce90] font-jura text-[13px] font-bold hover:underline">{t('saudi_address')}</Link>
             </div>
             <div className="mt-[10px]">
               <h3 className="text-[#e3ce90] font-jura text-[13px] font-bold">{t('hours')}</h3>
-              <p className="text-[#e3ce90] font-jura text-[13px] font-bold">Tuesday - Sunday 12PM to 11PM</p>
+              <p className="text-[#e3ce90] font-jura text-[13px] font-bold">{t('openningtime')}</p>
             </div>
           </div>
         </div>
