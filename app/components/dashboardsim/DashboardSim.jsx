@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { doPostCall, uploadImageCall, doGetCall, doDeleteCall } from '../../utils/api';
+import { useTranslation } from 'react-i18next';
 
 const DashboardSim = () => {
   const [title, setTitle] = useState('');
@@ -8,6 +9,7 @@ const DashboardSim = () => {
   const [tableData, setTableData] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
+    const { t } = useTranslation();
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleDescriptionChange = (e) => setDescription(e.target.value);
@@ -156,10 +158,10 @@ const DashboardSim = () => {
   return (
     <div className="w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40">
       <div className='bg-white p-20 rounded-lg'>
-      <h1 className="text-4xl text-[#063828] font-black font-orbitron">SIM CONFIGURATOR</h1>
+      <h1 className="text-4xl text-[#063828] font-black font-orbitron">{t('SIM CONFIGURATOR')}</h1>
       <form onSubmit={handleSubmit} className="w-full mb-8 max-w-4xl mt-10">
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Title</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('Title')}</label>
           <input
             type="text"
             value={title}
@@ -170,7 +172,7 @@ const DashboardSim = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('Description')}</label>
           <textarea
             value={description}
             onChange={handleDescriptionChange}
@@ -181,7 +183,7 @@ const DashboardSim = () => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">Upload Images</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">{t('Upload Images')}</label>
           <input
             type="file"
             accept="image/*"
@@ -199,16 +201,16 @@ const DashboardSim = () => {
         <table className="w-full border border-gray-300">
           <thead>
             <tr className="bg-gray-100">
-              <th className="p-2 border">Title</th>
-              <th className="p-2 border">Description</th>
-              <th className="p-2 border">Image</th>
+              <th className="p-2 border">{t('Title')}</th>
+              <th className="p-2 border">{t('Description')}</th>
+              <th className="p-2 border">{t('Image')}</th>
             </tr>
           </thead>
           <tbody>
             {tableData.length > 0 ? (
               <tr className="text-center">
-                <td className="p-2 border">{tableData[0].title}</td>
-                <td className="p-2 border">{tableData[0].description}</td>
+                <td className="p-2 border">{t('tableData[0].title')}</td>
+                <td className="p-2 border">{t('tableData[0].description')}</td>
                 <td className="p-2 border">
                   {tableData[0].images && tableData[0].images.length > 0 && (
                     <img
@@ -221,7 +223,7 @@ const DashboardSim = () => {
               </tr>
             ) : (
               <tr>
-                <td colSpan="3" className="text-center p-2">No entries found.</td>
+                <td colSpan="3" className="text-center p-2">{t('No entries found.')}</td>
               </tr>
             )}
           </tbody>

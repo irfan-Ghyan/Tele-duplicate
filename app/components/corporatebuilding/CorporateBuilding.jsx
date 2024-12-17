@@ -170,7 +170,7 @@ import { getImageCall } from '../../utils/api';
 
 const CorporateBuilding = () => {
   const { t } = useTranslation();
-  const [latestEntry, setLatestEntry] = useState(null);
+  const [teamEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -239,8 +239,8 @@ const CorporateBuilding = () => {
   return (
     <>
       <Head>
-        {latestEntry && latestEntry.imageUrl && (
-          <link rel="preload" href={latestEntry.imageUrl} as="image" />
+        {teamEntry && teamEntry.imageUrl && (
+          <link rel="preload" href={teamEntry.imageUrl} as="image" />
         )}
       </Head>
       <div className="w-full flex flex-wrap justify-center items-center my-0 md:my-20 lg:my-20">
@@ -256,13 +256,13 @@ const CorporateBuilding = () => {
           </div>
         )}
 
-        {!loading && !error && latestEntry && (
+        {!loading && !error && teamEntry && (
           <div className="relative w-full h-[240px] md:h-[319px] hover-trigger">
             <Image
-              src={latestEntry.imageUrl}
+              src={teamEntry.imageUrl}
               layout="fill"
               objectFit="cover"
-              alt={latestEntry.title}
+              alt={t('teamEntry.title')}
               className="absolute inset-0"
               priority
             />
@@ -277,10 +277,10 @@ const CorporateBuilding = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                  {latestEntry.title}
+                  {t('teamEntry.title')}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {latestEntry.description}
+                  {t('teamEntry.description')}
                 </p>
               </Link>
             </div>

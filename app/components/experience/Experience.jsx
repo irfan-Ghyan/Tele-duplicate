@@ -519,7 +519,7 @@ const Experience = () => {
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center text-[#e3ce90]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
-              EXPERIENCE
+              {t('EXPERIENCE')}
             </h1>
           </div>
         </div>
@@ -547,7 +547,6 @@ const Experience = () => {
                     />
                   </div>
                   <div className="flex flex-col justify-around items-center mx-4 pt-4 flex-1 w-full">
-                    {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
                     <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
                         className="button-slanted cursor-pointer w-[190px] lg:w-[190px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
@@ -559,14 +558,13 @@ const Experience = () => {
 
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                        {experience.title}
+                         {t('experience.title')}
                       </h1>
                       <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                        {experience.description}
+                        {t('experience.description')}
                       </p>
                     </div>
 
-                    {/* Second Button: Hidden on Small Screens, Visible on Large Screens */}
                     <div className="pt-[19px] pb-[22px] hidden lg:block">
                       <Link
                         className="button-slanted cursor-pointer w-[190px] lg:w-[190px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
@@ -579,7 +577,6 @@ const Experience = () => {
                 </div>
               ))}
 
-            {/* Render entries 4 and 5 */}
             {!loading && !error && faqEntries.length > 0 &&
               faqEntries.slice(3, 5).map((experience, index) => (
                 <div
@@ -610,10 +607,10 @@ const Experience = () => {
 
                     <div>
                       <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
-                        {experience.title}
+                        {t('experienxe.watchparties.title')}
                       </h1>
                       <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
-                        {experience.description}
+                        {t('experienxe.watchparties.description')}
                       </p>
                     </div>
 

@@ -18,8 +18,9 @@ const Dome = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { t } = useTranslation();
-  
 
+  
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,11 +108,10 @@ const Dome = () => {
         <link rel="preload" href="/assets/images/dome/S1.png" as="image" />
       </Head>
       <div className="relative w-full h-[700px] xl:h-[1000px] overflow-hidden flex justify-center items-center">
-        {/* Loading and Error Messages */}
-        {loading && <p className="text-[#e3ce90] text-xl">Loading...</p>}
+      
+        {loading && <p className="text-[#e3ce90] text-xl">{t('LOADING')}</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-        {/* Render Content if Not Loading or Error */}
         {!loading && !error && domes.map((dome, index) => (
           <div
             key={index}
@@ -126,10 +126,10 @@ const Dome = () => {
             <div className="absolute inset-0 bg-[#002718] bg-opacity-60 lg:bg-opacity-30%"></div>
             <div className="relative flex flex-col items-start justify-end h-full p-9 max-w-7xl mx-auto pb-40">
               <h2 className="text-[32px] md:text-[54px] mb-4 text-[#e3ce90] font-black font-orbitron">
-                {dome.title}
+              {t('dome.title')}
               </h2>
               <p className="text-[18px] mb-4 text-[#e3ce90] font-jura font-black leading-7 text-justify">
-                {dome.description}
+              {t('dome.description')} 
               </p>
               <Link
                 href="/dome"

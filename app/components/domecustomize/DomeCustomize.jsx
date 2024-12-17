@@ -10,7 +10,7 @@ import { getImageCall } from '@/app/utils/api';
 
 const DomeCustomize = () => {
   const { t } = useTranslation();
-  const [latestEntry, setLatestEntry] = useState(null);
+  const [simEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -94,17 +94,17 @@ const DomeCustomize = () => {
               </div>
 
               {/* Show loading indicator */}
-              {loading && <div className='text-center text-[#e3ce90] font-bold text-xl'>Loading...</div>}
+              {loading && <div className='text-center text-[#e3ce90] font-bold text-xl'>{t('Loading...')}</div>}
               
               {/* Show error message */}
               {error && <div className="text-red-500">Error: {error}</div>}
 
               {/* Render customize entries if data is available */}
-              {!loading && !error && latestEntry &&  (
+              {!loading && !error && simEntry &&  (
                 <div className="order-1 lg:order-2 lg:w-1/2 px-0 md:px-4 lg:px-4 xl:px-4">
                   <div className="flex flex-col justify-center flex-grow-4">
-                    <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron mt-6">{latestEntry.title}</h1>
-                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{latestEntry.description}</p>
+                    <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron mt-6">{t('simEntry.title')}</h1>
+                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{t('simEntry.description')}</p>
                   </div>
                 </div>
               )}

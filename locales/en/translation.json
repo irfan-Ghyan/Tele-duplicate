@@ -1,7 +1,7 @@
 {
     "header_title": "Teleios Dome",
     "experiences": "EXPERIENCES",
-    "title": "EXPERIENCES",
+   
     "description_fun": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
     "dome": "DOME",
     "corporate_events": "WATCH PARTIES",
@@ -11,32 +11,8 @@
     "CORPORATE EVENTS": "CORPORATE EVENTS",
     "EDUCATION": "PRIVATE EVENTS",
     "FOOD": "F&B",
-    "EXPERIENCE": "EXPERIENCE",
-    "experience.title": "20-Minute Sprint",
-    "experience.description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
-    "experience.button": "BOOK NOW",
     
-    "training.title": "Private Events",
-    "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
 
-    "dome.title": "DOME",
-    "dome.description": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.",
-    "education_title": "EDUCATION & TRAININGS",
-   
-    "EDUCATION & TRAININGS": "EDUCATION & TRAININGS",
-    "Discover immersive learning experiences at Teleios Dome.": "Discover immersive learning experiences at Teleios Dome. From educational trips exploring our factory to safety driving lessons and group racing instruction, we offer dynamic programs to engage learners of all ages. Prepare to embark on an educational journey at Teleios Dome.",
-    "FIND OUT MORE": "FIND OUT MORE",
-   
-
-      "20-Minute Sprint": "20-Minute Sprint",
-      "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
-      "40-Minute Session": "⭐ 40-Minute Session",
-      "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
-      "60-Minute Session": "60-Minute Session",
-      "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
-      "Private Events": "Private Events",
-      "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.",
-  
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
     "BOOK NOW": "BOOK NOW",
@@ -248,6 +224,16 @@
   "VIP_EXPERIENCE": "VIP EXPERIENCE",
   "VIP_EXPERIENCE_DEC": "Choose a first-class experience in your VIP room where two specially tailored simulators offer a premium experience for you and up to 4 friends. Enjoy unlimited pastries and beverages for 90 minutes. In this VIP room, you can compete and cheer in complete privacy.",
   
+  "EXPERIENCE": "EXPERIENCE",
+  "experience.title": "20-Minute Sprint",
+  "experience.description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
+  "experience.title": "⭐ 40-Minute Session",
+   "experience.description" : "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
+   "experience.title": "60-Minute Session",
+   "experience.description" : "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
+  "experienxe.watchparties.title": "VIP",
+   "experienxe.watchparties.description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.",
+  "experience.button": "BOOK NOW",
 
   "PIT_STOP": "PIT - STOP",
   "PIT_description": "Fast reactions require fuel. Recharge quickly with a wide selection of hot and cold beverages, including tea, coffee, milkshakes, and soft drinks, or grab a delicious pastry-like pain au chocolat and croissants for a quick energy boost.",
@@ -275,6 +261,12 @@
   "ErrorFetchingData": "An error occurred while fetching data.",
   "DiscoverTheDome": "Discover the Dome",
 
+  "LOADING": "Loading...",
+  "ERROR_MESSAGE": "An error occurred while fetching data.",
+  "DISCOVER_DOME": "Discover the Dome",
+  "DOME_TITLE": "Dome Section Title",
+  "DOME_DESCRIPTION": "Dome Section Description",
+
 "Dome": {
     "Loading": "Loading...",
     "ErrorFetchingData": "Failed to fetch data from the server.",
@@ -282,6 +274,18 @@
     "title": "Title",
     "description": "Description"
   },
+
+  "FAQ": "FAQ",
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "seeMore": "See More",
+    "seeLess": "See Less",
+    "otherQuestions": "Have More Questions?",
+    "contactUs": "Contact Us",
+    "moreInfo": "for more information.",
+    "Loading": "Loading..."
+  },
+  "ERROR": "An error occurred while fetching FAQs.",
 
   "Content": {
     "Title": "Experiences | Racing simulators and all-inclusive access",
@@ -315,7 +319,75 @@
     "noData": "No FAQ data found."
   }
 
-  }
+  },
+
+  
+  "training.title": "Private Events",
+  "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
+
+  "dome.title": "DOME",
+  "dome.description": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.",
+  "education_title": "EDUCATION & TRAININGS",
+ 
+  "EDUCATION & TRAININGS": "EDUCATION & TRAININGS",
+  "Discover immersive learning experiences at Teleios Dome.": "Discover immersive learning experiences at Teleios Dome. From educational trips exploring our factory to safety driving lessons and group racing instruction, we offer dynamic programs to engage learners of all ages. Prepare to embark on an educational journey at Teleios Dome.",
+  "FIND OUT MORE": "FIND OUT MORE",
+
+    "SIGN_UP_NEWSLETTER": "SIGN UP TO OUR NEWSLETTER",
+    "THANK_YOU_SUBSCRIBING": "THANK YOU FOR SUBSCRIBING",
+    "JOIN_COMMUNITY": "Join our community of codemod champions & migration experts.",
+    "STAY_UPDATED": "Stay updated with our latest news and offers.",
+    "PLACEHOLDER_EMAIL": "Enter your email address",
+    "SUBMIT": "SUBMIT",
+    "THANK_YOU_MESSAGE": "Thank you for subscribing! Your 10% coupon is on its way to your inbox. Stay tuned for the latest news and offers.",
+    "ERROR_INVALID_EMAIL": "Please enter a valid email address.",
+    "ERROR_GENERAL": "There was an unexpected error submitting your email. Please try again.",
+
+    "Loading": "Loading...",
+  "Error": "Error:",
+  "VIEW_OPTIONS": "VIEW OPTIONS",
+  "DEFAULT_TITLE": "Default Title",
+  "DEFAULT_DESCRIPTION": "This is the default description for the Gaming Room.",
+
+  "latestEntry.title": "GAMING ROOM",
+  "latestEntry.description": "Experience the thrill of racing on our cutting-edge simulators in the gaming area. With 19 state-of-the-art simulators, gear up for an adrenaline-fueled adventure like no other.",
+
+  
+  "vipEntry.title": "VIP EXPERIENCE",
+  "vipEntry.description": "Choose a first-class experience in your VIP room where two specially tailored simulators offer a premium experience for you and up to 4 friends. Enjoy unlimited pastries and beverages for 90 minutes. In this VIP room, you can compete and cheer in complete privacy.",
+
+  "tipEntry.title": "PIT - STOP",
+  "tipEntry.description": "Fast reactions require fuel. Recharge quickly with a wide selection of hot and cold beverages, including tea, coffee, milkshakes, and soft drinks, or grab a delicious pastry-like pain au chocolat and croissants for a quick energy boost.",
+
+  "simEntry.title": "SIM CONFIGURATOR",
+  "simEntry.description": "Dream it, build it! Create your own unique Teleios simulator in our customization area. Choose from a wide selection of colors, materials, and designs to make a one-of-a-kind masterpiece that is truly yours.",
+
+  "tipEntry.title": "PIT - STOP",
+  "tipEntry.description": "Fast reactions require fuel. Recharge quickly with a wide selection of hot and cold beverages, including tea, coffee, milkshakes, and soft drinks, or grab a delicious pastry-like pain au chocolat and croissants for a quick energy boost.",
+
+  "loungeEntry.title": "LOUNGE AREA",
+  "loungeEntry.description": "Relax and unwind in our stylish lounge area, designed for your comfort and enjoyment. Whether you are waiting for your racing session, or catching up with friends, our lounge is the perfect spot to kick back, enjoy the mood, and recharge.",
+
+  
+  "event_title": "UP COMING EVENTS",
+  "event_description": "Explore education at Teleios Dome, from factory visits to thrilling racing",
+  "event_description1": "experiences, engaging participants in immersive learning adventures.",
+  "upcomingEntry.title": "Virtual GP",
+  "upcomingEntry.description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology.",
+
+
+  "Corporate_Events": "CORPORATE EVENTS",
+   "teamEntry.title": "Team Building",
+  "teamEntry.description": "Boost team cohesion with a dynamic simulator challenge, combining immersive scenarios with collaborative problem-solving. Perfect for enhancing communication and teamwork.",
+
+
+   "conferenceEntry.title": "Conference",
+  "conferenceEntry.description": "Enhance your conference with interactive simulator sessions, blending engagement with cutting-edge technology. Perfect for dynamic presentations and networking.",
+
+  "conferenceEntry.title": "Networking",
+  "conferenceEntry.description": " Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement."
+
+ 
 
 }
 

@@ -73,10 +73,10 @@ const Coaching = () => {
                 {training && (
                   <div className="py-[30px]">
                     <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron">
-                      {training.title}
+                      {t('training.title')}
                     </h1>
                     <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-black font-jura mt-6 leading-7 text-justify">
-                      {training.description}
+                      {t('training.description')}
                     </p>
                   </div>
                 )}

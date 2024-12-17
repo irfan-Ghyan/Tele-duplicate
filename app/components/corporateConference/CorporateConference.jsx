@@ -10,7 +10,7 @@ import { getImageCall } from '../../utils/api';
 
 const CorporateConference = () => {
   const { t } = useTranslation();
-  const [latestEntry, setLatestEntry] = useState(null);
+  const [conferenceEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -93,11 +93,11 @@ const CorporateConference = () => {
           </div>
         )}
 
-        {!loading && !error && latestEntry && (
+        {!loading && !error && conferenceEntry && (
           <div
             className="relative w-full h-[240px] md:h-[319px] hover-trigger"
             style={{
-              backgroundImage: `url(${latestEntry.imageUrl})`,
+              backgroundImage: `url(${conferenceEntry.imageUrl})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
@@ -114,10 +114,10 @@ const CorporateConference = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                  {latestEntry.title}
+                {t('conferenceEntry.title')}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {latestEntry.description}
+                {t('conferenceEntry.description')}
                 </p>
               </Link>
             </div>

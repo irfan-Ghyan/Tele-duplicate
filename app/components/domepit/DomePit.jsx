@@ -8,7 +8,7 @@ import { getImageCall } from '@/app/utils/api';
 
 const DomePit = () => {
   const { t } = useTranslation();
-  const [latestEntry, setLatestEntry] = useState(null);
+  const [tipEntry, setLatestEntry] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -75,14 +75,14 @@ const DomePit = () => {
   return (
     <>
       <Head>
-        <link rel="preload" href={latestEntry?.imageUrl || '/assets/images/dome/default-image.jpg'} as="image" />
+        <link rel="preload" href={tipEntry?.imageUrl || '/assets/images/dome/default-image.jpg'} as="image" />
       </Head>
 
       <div
         className="relative w-full max-w-full overflow-hidden h-[750px] sm:h-[600px] md:h-[500px] lg:h-[600px] xl:h-[785px] bg-cover bg-right lg:bg-center px-4 md:px-0"
         style={{
-          backgroundImage: latestEntry?.imageUrl
-            ? `url(${latestEntry.imageUrl})`
+          backgroundImage: tipEntry?.imageUrl
+            ? `url(${tipEntry.imageUrl})`
             : `url('https://api.teleiosx.com/public/storage/images/PIT Stop/PIT Stop_image_0.jpg')`,
         }}
       >
@@ -101,13 +101,13 @@ const DomePit = () => {
                 </div>
               )}
 
-              {!loading && !error && latestEntry && (
+              {!loading && !error && tipEntry && (
                 <div className="py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px]">
                   <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron drop-shadow-4xl">
-                    {latestEntry.title}
+                    {t('tipEntry.title')}
                   </h1>
                   <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6 text-balance drop-shadow-4xl text-justify">
-                    {latestEntry.description}
+                    {t('tipEntry.description')}
                   </p>
                 </div>
               )}
