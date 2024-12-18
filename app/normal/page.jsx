@@ -684,7 +684,7 @@ const Page = ({ params } ) => {
                     <div className="relative">
                     <div
                         className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-green-500' : 'bg-[#c09e5f]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                        onClick={() => handleTabChange(3)} 
+                       
                     >
                         3
                     </div>
