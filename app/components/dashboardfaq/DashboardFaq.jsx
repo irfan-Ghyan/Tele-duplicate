@@ -21,7 +21,10 @@ const handleInputChange = (e) => {
   const { name, value } = e.target;
   setFormData((prevData) => ({ ...prevData, [name]: value }));
 };
-
+const labels = {
+  en: { heading: 'FAQ', title: 'Question', description: 'Answer', submit: 'Submit', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', edit: 'Edit', delete: 'Delete', actions: 'Actions',},
+  ar: { heading: 'التعليمات', title: 'سؤال', description: 'وصف', submit: 'إجابة', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', edit: 'يحرر', delete: 'يمسح', actions: 'الإجراءات', },
+};
 
   useEffect(() => {
     fetchData();
@@ -199,12 +202,7 @@ const handleInputChange = (e) => {
     setShowSection(!showSection);
   };
 
-  const labels = {
-    en: { heading: 'FAQ', title: 'Question', description: 'Answer', submit: 'Submit', update: 'Update Entry', show: 'Show', hide: 'Hide', upload: 'Upload Images', edit: 'Edit', delete: 'Delete', actions: 'Actions',},
-    ar: { heading: 'التعليمات', title: 'سؤال', description: 'وصف', submit: 'إجابة', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', edit: 'يحرر', delete: 'يمسح', actions: 'الإجراءات', },
-  };
-
-  const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
+ 
 
   return (
     <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
@@ -239,7 +237,7 @@ const handleInputChange = (e) => {
                   onChange={handleChange}
                   placeholder="Enter question"
                   className="w-full p-2 border border-gray-300"
-                  dir={getDirection()}
+    
                   required
                 />
               </div>
@@ -254,7 +252,7 @@ const handleInputChange = (e) => {
                   onChange={handleChange}
                   placeholder="Enter answer"
                   className="w-full p-2 border border-gray-300"
-                  dir={getDirection()}
+      
                   required
                 />
               </div>
