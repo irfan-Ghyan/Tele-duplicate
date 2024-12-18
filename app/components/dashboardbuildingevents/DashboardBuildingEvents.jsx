@@ -204,11 +204,11 @@ const DashboardBuildingEvents= () => {
       
       <div className='bg-white p-20 rounded-lg '>
         <div className='flex justify-between'>
-      <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
         <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
-          {showSection ? 'Hide' : 'Show'}
+          {showSection ? translations[language].hide : translations[language].show}
         </button>
         </div>
       <h1 className="text-4xl text-[#063828] font-black font-orbitron">{t.domeTitle}</h1>
