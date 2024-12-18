@@ -676,7 +676,7 @@ const Page = ({ params } ) => {
                     <div className={`text-[14px] ${activeTab === 2 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
                         Confirm
                     </div>
-                    <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
+                    {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
                     <div className="relative">
                     <div
@@ -688,9 +688,10 @@ const Page = ({ params } ) => {
                     <div className={`text-[14px] ${activeTab === 3 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
                         Thanks
                     </div>
-                    <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div>
+                    {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
                 </div>
+                
         </div>
         
 
