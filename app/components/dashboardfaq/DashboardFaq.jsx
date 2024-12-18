@@ -207,7 +207,7 @@ const handleInputChange = (e) => {
   const getDirection = () => (language === 'ar' ? 'rtl' : 'ltr');
 
   return (
-    <div className={`w-full py-[40px] md:py-[50px] lg:py-[100px] bg-gray-200 border-t-2 border-color-200 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}>
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className="bg-white p-20 rounded-lg">
       <div className="flex justify-between">
         <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
@@ -270,7 +270,7 @@ const handleInputChange = (e) => {
           </div>
 
           <div className="mt-10">
-            <h2 className="text-xl font-bold mb-4">Submitted FAQs</h2>
+            {/* <h2 className="text-xl font-bold mb-4">Submitted FAQs</h2> */}
             <table className="w-full border border-gray-300">
               <thead>
                 <tr className="bg-gray-100">

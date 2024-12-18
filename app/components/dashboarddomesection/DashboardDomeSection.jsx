@@ -272,16 +272,14 @@ const DashboardDomeSection = () => {
   
 
   return (
-    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`}
-    dir={language === 'ar' ? 'rtl' : 'ltr'}
-    >
+    <div className={`w-full py-10 bg-gray-200 border-t-2 px-40 ${language === 'ar' ? 'text-right' : 'text-left'}`} dir={language === 'ar' ? 'rtl' : 'ltr'}>
       <div className='bg-white p-20 rounded-lg'>
       <div className="flex justify-between ">
-        <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
+      <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="mb-4 p-2 text-[#063828]">
           {language === 'en' ? 'التبديل إلى اللغة العربية' : 'Switch to English'}
         </button>
         <button onClick={() => setShowSection(!showSection)} className="mb-4 p-2 text-[#063828]">
-          {showSection ? 'Hide' : 'Show'}
+          {showSection ? translations[language].hide : translations[language].show}
         </button>
       </div>
 
@@ -329,63 +327,62 @@ const DashboardDomeSection = () => {
             <button type="submit" className="w-full p-4 text-white bg-[#063828]">
               {isEditing ? 'Update Entry' : 'Submit'}
             </button>
-          </form>
+          </form>     
+
+        <div className="mt-20 ">
+          {/* <h2 className="text-xl font-bold mb-4">{t.submittedEntries}</h2> */}
+          <table className="w-full border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="p-2 border border-gray-300">{t.title}</th>
+                <th className="p-2 border border-gray-300">{t.description}</th>
+                <th className="p-2 border border-gray-300">{t.uploadImages}</th>
+                <th className="p-2 border border-gray-300">{t.Actions}</th>
+              </tr>
+            </thead>
+            <tbody>
+          {tableData.length > 0 ? (
+            tableData.map((entry, index) => (
+              <tr key={entry.id} className="border border-gray-300">
+                <td className="p-2">{entry.title}</td>
+                <td className="p-2">{entry.description}</td>
+                <td className="p-2">
+                  {entry.images.length > 0 ? (
+                    entry.images.map((image, i) => (
+                      <img
+                        key={i}
+                        src={image}
+                        alt={`Image ${i}`}
+                        className="w-12 h-12 object-cover mr-2"
+                      />
+                    ))
+                  ) : (
+                    <span>No images</span>
+                  )}
+                </td>
+                <td className="p-2">
+                  <button onClick={() => handleEdit(index)} className="text-blue-500 mr-2">
+                  {t.edit}
+                  </button>
+                  <button onClick={() => handleDelete(index)} className="text-red-500">
+                  {t.delete}
+                  </button>
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4" className="p-2 text-center text-gray-500">
+              {t.noEntries}
+              </td>
+            </tr>
+          )}
+        </tbody>
+
+          </table>
+        </div>
         </>
-      )}
-
-      <div className="mt-20 ">
-        <h2 className="text-xl font-bold mb-4">{t.submittedEntries}</h2>
-        <table className="w-full border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="p-2 border border-gray-300">{t.title}</th>
-              <th className="p-2 border border-gray-300">{t.description}</th>
-              <th className="p-2 border border-gray-300">{t.uploadImages}</th>
-              <th className="p-2 border border-gray-300">{t.Actions}</th>
-            </tr>
-          </thead>
-          <tbody>
-        {tableData.length > 0 ? (
-          tableData.map((entry, index) => (
-            <tr key={entry.id} className="border border-gray-300">
-              <td className="p-2">{entry.title}</td>
-              <td className="p-2">{entry.description}</td>
-              <td className="p-2">
-                {entry.images.length > 0 ? (
-                  entry.images.map((image, i) => (
-                    <img
-                      key={i}
-                      src={image}
-                      alt={`Image ${i}`}
-                      className="w-12 h-12 object-cover mr-2"
-                    />
-                  ))
-                ) : (
-                  <span>No images</span>
-                )}
-              </td>
-              <td className="p-2">
-                <button onClick={() => handleEdit(index)} className="text-blue-500 mr-2">
-                {t.edit}
-                </button>
-                <button onClick={() => handleDelete(index)} className="text-red-500">
-                {t.delete}
-                </button>
-              </td>
-            </tr>
-          ))
-        ) : (
-          <tr>
-            <td colSpan="4" className="p-2 text-center text-gray-500">
-            {t.noEntries}
-            </td>
-          </tr>
         )}
-      </tbody>
-
-        </table>
-      </div>
-
       </div>
     </div>
   );
