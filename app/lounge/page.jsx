@@ -1021,6 +1021,7 @@ import PlanSelectorVip from "../components/planselectorvip/PlanSelectorVip";
 import { doGetCall, doPostCall } from "../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 
 const Page = ({ params }) => {
   const router = useRouter();
@@ -1028,6 +1029,7 @@ const Page = ({ params }) => {
 
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
+   const { t } = useTranslation();
 
   const [bookingDetails, setBookingDetails] = useState([
     { key: "no_of_people", title: "Customers", description: "1" },
@@ -1465,7 +1467,7 @@ const Page = ({ params }) => {
     <>
       <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
         <button className="text-[#e3ce90]" onClick={goBack}>
-          Go back
+          {t('goBack')}
         </button>
 
         <div className="my-[60px] ">
@@ -1480,7 +1482,7 @@ const Page = ({ params }) => {
                 1
               </div>
               <div className={`text-[14px] ${activeTab === 1 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
-                Experiences
+                 {t('experiences')}
               </div>
             </div>
             <div className="relative">
@@ -1492,7 +1494,7 @@ const Page = ({ params }) => {
                 2
               </div>
               <div className={`text-[14px] ${activeTab === 2 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
-                Confirm
+                {t('confirm')}
               </div>
               {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
             </div>
@@ -1506,7 +1508,7 @@ const Page = ({ params }) => {
                 3
               </div>
               <div className={`text-[14px] ${activeTab === 3 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
-                Thanks
+              {t('thanks')}
               </div>
               {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
             </div>
@@ -1520,13 +1522,13 @@ const Page = ({ params }) => {
                 <div className="w-full flex">
                   <div className="">
                     <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">VIP SEATS</h1>
+                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('loungeSeats')}</h1>
                       <div className="flex justify-between">
                         <div className="py-4">
                           <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
-                            Choose a first-class VIP room where two specially tailored simulators
+                          {t('chooseloungeSeats')}
                             <br />
-                            offer a premium experience for you and up to 6 friends.
+                            {t('chooseloungeSeats1')}
                           </p>
                         </div>
                       </div>
@@ -1534,14 +1536,14 @@ const Page = ({ params }) => {
 
                     <div>
                       <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[600px] my-[20px] rounded-lg">
-                        <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Select Date</h1>
+                        <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseDate')}</h1>
                         <CalendarComponent onChange={handleDateChange} value={date} minDate={minDate} maxDate={maxDate} />
                       </div>
                     </div>
 
                     {/* Updated Time Slot Selection */}
                     <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
 
                       {timeChunks
                         .filter((chunk) => {
@@ -1549,16 +1551,15 @@ const Page = ({ params }) => {
                           const currentDate = now.toLocaleDateString("en-CA");
                           const selectedDateStr = date.toLocaleDateString("en-CA");
                           const isToday = selectedDateStr === currentDate;
-                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; // 9:00 AM
+                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
 
-                          // Check if at least one slot in the chunk is still available and before or at 11:00 PM
                           return chunk.some(([_, { time: timeValue = "" }]) => {
                             const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                            if (!match) return false; // Invalid time format
+                            if (!match) return false; 
                             const hours = Number(match[1]);
                             const minutes = Number(match[2]);
                             const slotTime = hours * 60 + minutes;
-                            return slotTime >= startTime && slotTime <= 1380; // 23:00
+                            return slotTime >= startTime && slotTime <= 1380;
                           });
                         })
                         .map((chunk, chunkIndex) => {
@@ -1566,18 +1567,18 @@ const Page = ({ params }) => {
                           const currentDate = now.toLocaleDateString("en-CA");
                           const selectedDateStr = date.toLocaleDateString("en-CA");
                           const isToday = selectedDateStr === currentDate;
-                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; // 9:00 AM
+                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
 
                           return (
                             <div key={chunkIndex} className="flex">
                               {chunk
                                 .filter(([_, { time: timeValue = "" }]) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                                  if (!match) return false; // Invalid time format
+                                  if (!match) return false; 
                                   const hours = Number(match[1]);
                                   const minutes = Number(match[2]);
                                   const slotTime = hours * 60 + minutes;
-                                  return slotTime <= 1380; // 23:00
+                                  return slotTime <= 1380;
                                 })
                                 .map(([timeKey, { time: timeValue = "", sims }], index) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
@@ -1620,8 +1621,8 @@ const Page = ({ params }) => {
             </div>
 
             {/* Booking Details Panel */}
-            <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
-              <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">Your booking details</h2>
+            <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
+              <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
                 .filter((detail) => detail.key !== "booking_type" && detail.key !== "duration" && detail.key !== "no_of_people")
                 .map((detail, index) => (
@@ -1658,13 +1659,13 @@ const Page = ({ params }) => {
 
         {activeTab === 2 && (
           <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl p-20">
-            <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">Payment Details</h2>
+            <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">{t('paymentDetails')}</h2>
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="firstName" className="block text-lg font-jura font-bold text-[#063828]">
-                      First Name
+                      {t('firstname')}
                     </label>
                     <input
                       type="text"
@@ -1680,7 +1681,7 @@ const Page = ({ params }) => {
                   </div>
                   <div>
                     <label htmlFor="lastName" className="block text-lg font-medium text-[#063828]">
-                      Last Name
+                    {t('lastname')}
                     </label>
                     <input
                       type="text"
@@ -1698,7 +1699,7 @@ const Page = ({ params }) => {
 
                 <div>
                   <label htmlFor="email" className="block text-lg font-jura font-bold text-[#063828]">
-                    Email Address
+                  {t('emailAddress')}
                   </label>
                   <input
                     type="email"
@@ -1715,7 +1716,7 @@ const Page = ({ params }) => {
 
                 <div>
                   <label htmlFor="phone" className="block text-lg font-jura font-bold text-[#063828]">
-                    Phone
+                  {t('phoneNormal')}
                   </label>
                   <input
                     type="tel"
@@ -1816,7 +1817,7 @@ const Page = ({ params }) => {
                     type="submit"
                     className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                   >
-                    <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Confirm</span>
+                    <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('confirm')}</span>
                   </button>
                 </div>
               </div>
@@ -1828,9 +1829,9 @@ const Page = ({ params }) => {
           <div className="flex justify-center py-20">
             <div className="">
               <div>
-                <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">Thank you for your purchase</h2>
+                <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
                 <p className=" text-lg font-jura font-bold text-[#e3ce90]">
-                  Check your e-mail inbox, Your ticket is waiting you there!
+                  {t('emailMessage')}
                 </p>
               </div>
               <div className="mt-20 w-[400px] ">
@@ -1838,7 +1839,7 @@ const Page = ({ params }) => {
                   href="/experience"
                   className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718] bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
-                  <span className="button-slanted-content text-lg font-bold py-2">CONTINUE EXPERIENCE</span>
+                  <span className="button-slanted-content text-lg font-bold py-2"> {t('continueExperience')}</span>
                 </Link>
               </div>
             </div>

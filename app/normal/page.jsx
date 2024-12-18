@@ -9,16 +9,19 @@ import { doGetCall, doPostCall } from "../utils/api";
 // import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useTranslation } from 'react-i18next';
 
 
 const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
+  const { t } = useTranslation();
 
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  
 
 
   const [bookingDetails, setBookingDetails] = useState([
@@ -649,7 +652,7 @@ const Page = ({ params } ) => {
           className="text-[#e3ce90]"
           onClick={goBack} 
         >
-          Go back
+           {t('goBack')}
         </button>
        
       <div>
@@ -663,7 +666,7 @@ const Page = ({ params } ) => {
                         1
                     </div>
                     <div className={`text-[14px] ${activeTab === 1 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-                        Experiences
+                    {t('experiences')}
                     </div>
                     </div>
                     <div className="relative">
@@ -674,7 +677,7 @@ const Page = ({ params } ) => {
                         2
                     </div>
                     <div className={`text-[14px] ${activeTab === 2 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-                        Confirm
+                    {t('confirm')}
                     </div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
@@ -686,7 +689,7 @@ const Page = ({ params } ) => {
                         3
                     </div>
                     <div className={`text-[14px] ${activeTab === 3 ? 'text-white' : 'text-[#c09e5f]'} font-bold font-orbitron`}>
-                        Thanks
+                    {t('thanks')}
                     </div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
@@ -703,12 +706,12 @@ const Page = ({ params } ) => {
 
                   <div className="w-[820] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Select Seats
+                    {t('normalSeats')}
                     </h1>
                     <div className="flex justify-between">
                       <div className="py-4">
                         <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
-                          Select your seats
+                        {t('selectSeats')}
                         </p>
                         {isPopupVisible && (
                             <>
@@ -749,7 +752,7 @@ const Page = ({ params } ) => {
                   <div className="my-4">
                     <div className="w-[820] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                        Select Date
+                      {t('chooseDate')}
                       </h1>
                       <CalendarComponent
                           onChange={handleDateChange}
@@ -814,7 +817,7 @@ const Page = ({ params } ) => {
 
 
               <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
-                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
+                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {/* 
                   Step 1: Filter out rows where all time slots have passed.
@@ -889,7 +892,7 @@ const Page = ({ params } ) => {
 
                     <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      Duration
+                      {t('duration')}
                     </h1>
                     <PlanSelector onPlanChange={handlePlanChange} />
                   </div>
@@ -945,9 +948,9 @@ const Page = ({ params } ) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#e3ce90] ml-[20px] p-[30px] rounded-lg ">
+          <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
           <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
-            Your booking details
+          {t('bookingDetails')}
           </h2>
           {bookingDetails
             .filter((detail) => detail.key !== "booking_type") // Exclude these keys
@@ -994,13 +997,13 @@ const Page = ({ params } ) => {
 
     {activeTab === 2 && (
       <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl p-20">
-        <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">Payment Details</h2>
+        <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">{t('paymentDetails')}</h2>
         <form onSubmit={handleSubmit} >
   <div className="space-y-4">
     <div className="grid grid-cols-2 gap-4">
       <div>
         <label htmlFor="firstName" className="block text-lg font-jura font-bold text-[#063828]">
-          First Name
+        {t('firstname')}
         </label>
         <input
           type="text"
@@ -1016,7 +1019,7 @@ const Page = ({ params } ) => {
       </div>
       <div>
         <label htmlFor="lastName" className="block text-lg font-medium text-[#063828]">
-          Last Name
+        {t('lastname')}
         </label>
         <input
           type="text"
@@ -1034,7 +1037,7 @@ const Page = ({ params } ) => {
 
     <div>
       <label htmlFor="email" className="block text-lg font-jura font-bold text-[#063828]">
-        Email Address
+      {t('emailAddress')}
       </label>
       <input
         type="email"
@@ -1051,7 +1054,7 @@ const Page = ({ params } ) => {
 
     <div>
       <label htmlFor="phone" className="block text-lg font-jura font-bold text-[#063828]">
-        Phone
+      {t('phoneNormal')}
       </label>
       <input
         type="tel"
@@ -1155,7 +1158,7 @@ const Page = ({ params } ) => {
       type="submit"
       className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
-      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">Pay Now</span>
+      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('confirm')}</span>
       </button>
       </div>
     </div>
@@ -1168,12 +1171,12 @@ const Page = ({ params } ) => {
         <div className="flex justify-center py-20">
           <div className="">
           <div>
-            <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">Thank you for your purchase</h2>
-            <p className=" text-lg font-jura font-bold text-[#e3ce90]">Check your e-mail inbox, Your ticket is waiting you there!</p>
+            <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
+            <p className=" text-lg font-jura font-bold text-[#e3ce90]">{t('emailMessage')}</p>
           </div>
           <div className="mt-20 w-[400px] ">
             <Link href="/experience" className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
-            <span className="button-slanted-content text-lg font-bold py-2">CONTINUE EXPERIENCE</span>
+            <span className="button-slanted-content text-lg font-bold py-2">{t('continueExperience')}</span>
             </Link>
           </div>
           </div>

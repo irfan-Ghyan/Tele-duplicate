@@ -392,9 +392,39 @@
   "networkingEntry.description": "Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement.",
   
   "f&b.title": "FOOD & BEVERAGE",
-  "f&b.description": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures."
+  "f&b.description": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.",
 
- 
+  
+    "goBack": "Go back",
+    "experiences": "Experiences",
+    "confirm": "Confirm",
+    "thanks": "Thanks",
+    "vipSeats": "VIP SEATS",
+    "chooseDate": "Select Date",
+    "chooseTime": "Choose Time",
+    "bookingDetails": "Your booking details",
+    "paymentDetails": "Payment Details",
+    "thankYouMessage": "Thank you for your purchase",
+    "emailMessage": "Check your e-mail inbox, Your ticket is waiting for you there!",
+    "continueExperience": "CONTINUE EXPERIENCE",
+    "loungeSeats": "LOUNGE SEATS",
+    "normalSeats": "Select Seats",
+    "selectSeats": "Select your seats",
+
+    "chooseloungeSeats": "Choose a first-class Lounge room where two specially tailored simulators",
+    "chooseloungeSeats1": "offer a premium experience for you and up to 6 friends.",
+
+    "choosevipSeats": "Choose a first-class VIP room where two specially tailored simulators",
+    "choosevipSeats1": "offer a premium experience for you and up to 6 friends.",
+    "customers": "Customers",
+    "date": "Date",
+    "time": "Time",
+    "duration": "Duration",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "emailAddress": "Last Name",
+    "phoneNormal": "Last Name"
+  
 
 }
 
