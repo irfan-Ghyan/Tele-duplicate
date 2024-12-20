@@ -426,9 +426,10 @@ import { doGetCall, getImageCall } from '@/app/utils/api';
 
 const Experience = () => {
   const { t } = useTranslation();
-  const [faqEntries, setFaqEntries] = useState([]);
+  // const [faqEntries, setFaqEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const faqEntries = t('Content.Entries', { returnObjects: true });
 
   useEffect(() => {
     fetchData();
@@ -476,7 +477,7 @@ const Experience = () => {
               };
             });
 
-          setFaqEntries(entries);
+          // setFaqEntries(entries);
         }
       }
     } catch (err) {
