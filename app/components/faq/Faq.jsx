@@ -260,7 +260,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => (
       onClick={onClick}
     >
       <h3 className="text-[#c09e5f] text-[24px] md:text-[34px] font-bold font-orbitron">
-        {t('question')}
+        {question}
       </h3>
       <button className="w-[18px] h-[2px] font-normal">
         {isOpen ? '-' : '+'}
@@ -268,7 +268,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => (
     </div>
     {isOpen && (
       <p className="mt-4 text-[#e3ce90] text-[20px] font-bold font-jura">
-        {t('answer')}
+        {answer}
       </p>
     )}
   </div>
@@ -277,9 +277,9 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => (
 const Faq = ({ language = 'en' }) => {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showMore, setShowMore] = useState(false);
-  // const { t, i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
-  const t = (key) => translations[language][key];
+  // const t = (key) => translations[language][key];
   const faqEntries = translations[language].Questions;
   
 
@@ -315,8 +315,8 @@ const Faq = ({ language = 'en' }) => {
         {faqEntries.slice(0, 4).map((faq, index) => (
           <FaqItem
             key={index}
-            question={t('faq.question')}
-            answer={t('faq.answer')}
+            question={faq.question}
+            answer={faq.answer}
             isOpen={openFaqIndex === index}
             onClick={() => toggleFaq(index)}
           />
@@ -326,8 +326,8 @@ const Faq = ({ language = 'en' }) => {
           faqEntries.slice(4).map((faq, index) => (
             <FaqItem
               key={index + 4}
-              question={t('faq.question')}
-              answer={t('faq.answer')}
+              question={faq.question}
+              answer={faq.answer}
               isOpen={openFaqIndex === index + 4}
               onClick={() => toggleFaq(index + 4)}
             />
