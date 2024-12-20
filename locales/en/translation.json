@@ -292,22 +292,43 @@
   "ERROR": "An error occurred while fetching FAQs.",
 
   "Content": {
-    "Title": "Experiences | Racing simulators and all-inclusive access",
-    "Description": "Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill.",
-    "Sessions": "SESSIONS",
-    "Loading": "Loading...",
-    "Error": "An error occurred while fetching data.",
-    "BookNow": "BOOK NOW",
-    "title": "60-Minute Session",
-    "description": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown.",
-    "title": "40-Minute Session",
-    "description": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
-    "title": "20-Minute Session",
-    "description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
-    "title": "VIP",
-    "description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
-    "lounge": "Lounge",
-    "description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
+    "Title": "Experience Sessions",
+    "Description": "Discover our exciting experience sessions.",
+    "Sessions": "Our Sessions",
+    "BOOK NOW": "Book Now",
+    "Entries": [
+      {
+        "title": "20-Minute Session",
+        "description": "Jump into a quick 20-minute sprint where your goal is to set the fastest lap. Perfect for those looking for a short, intense racing experience.",
+        "imageUrl": "/assets/images/experience/mintue1.jpg",
+        "href": "/normal"
+      },
+      {
+        "title": "40-Minute Session",
+        "description": "Choose between a sprint for the fastest lap or a qualifying and race session with your friends. A great option for fun and friendly competition.",
+        "imageUrl": "/assets/images/experience/30mn.png",
+        "href": "/40mints"
+      },
+      {
+        "title": "60-Minute Session",
+        "description": "Enjoy the full experience with a 60-minute session. Choose between a sprint for the fastest lap or a full qualifying and race session with your friends for the ultimate racing showdown",
+        "imageUrl": "/assets/images/experience/60mn.png",
+        "href": "/60mints"
+      },
+      {
+        "title": "VIP Experience",
+        "description": "Whether it's a vip, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.",
+        "imageUrl": "/assets/images/experience/privateevent.jpg",
+        "href": "/vip"
+      },
+      {
+        "title": "Lounge Experience",
+        "description": "Whether it's a lounge, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs.",
+        "imageUrl": "/assets/images/experience/90min.png",
+        "href": "/lounge"
+      }
+    ]
+  },
 
     "FAQ": "FAQ",
     "faq": {
@@ -321,11 +342,9 @@
     "moreInfo": "for more information.",
     "Loading": "Loading...",
     "noData": "No FAQ data found."
-  }
-
   },
 
-  
+ 
   "training.title": "Private Events",
   "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
 
@@ -424,6 +443,8 @@
     "lastname": "Last Name",
     "emailAddress": "Last Name",
     "phoneNormal": "Last Name"
+
+    
   
 
 }

@@ -30,6 +30,8 @@ const Home = () => {
         <meta property="og:type" content="website" />
         {/* <link rel="canonical" href="/" /> */}
       </Helmet>
+
+      
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
         <div className="w-full px-4 md:px-8">
           <Content />

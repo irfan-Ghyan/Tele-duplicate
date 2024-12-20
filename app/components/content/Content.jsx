@@ -216,9 +216,10 @@ import Link from 'next/link';
 
 const Content = () => {
   const { t, i18n } = useTranslation();
-  const [faqEntries, setFaqEntries] = useState([]);
+  // const [faqEntries, setFaqEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+ const faqEntries = t('Content.Entries', { returnObjects: true });
 
   useEffect(() => {
     fetchData();
@@ -265,7 +266,7 @@ const Content = () => {
               };
             });
 
-          setFaqEntries(entries);
+          // setFaqEntries(entries);
         }
       }
     } catch (err) {
@@ -285,7 +286,7 @@ const Content = () => {
     } else if (lowerTitle.includes('60')) {
       return '/60mints';
     }
-    return '/normal'; // Fallback route
+    return '/normal'; 
   };
 
   return (
