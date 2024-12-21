@@ -184,27 +184,37 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
-const FaqItem = ({ question, answer, isOpen, onClick }) => (
-  <div className="border-b border-[#c09e5f] border-opacity-50 py-4">
-    <div className="flex justify-between items-center cursor-pointer py-6" onClick={onClick}>
-      <h3 className="text-[#c09e5f] text-[24px] md:text-[34px] font-bold font-orbitron">{question}</h3>
-      <button className="w-[18px] h-[2px] font-normal">{isOpen ? '-' : '+'}</button>
+
+const FaqItem = ({ question, answer, isOpen, onClick }) => {
+  return (
+    <div className="border-b border-[#c09e5f] border-opacity-50 py-4">
+      <div
+        className="flex justify-between items-center cursor-pointer py-6"
+        onClick={onClick}
+      >
+        <h3 className="text-[#c09e5f] text-[24px] md:text-[34px] font-bold font-orbitron">
+          {question}
+        </h3>
+        <button className="w-[24px] h-[px] font-lg text-[#c09e5f] ">
+          {isOpen ? '-' : '+'}
+        </button>
+      </div>
+      {isOpen && (
+        <p className="mt-4 text-[#e3ce90] text-[20px] font-bold font-jura">
+          {answer}
+        </p>
+      )}
     </div>
-    {isOpen && <p className="mt-4 text-[#e3ce90] text-[20px] font-bold font-jura">{answer}</p>}
-  </div>
-);
+  );
+};
 
 const Faq = () => {
+  const { t, i18n } = useTranslation();
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [showMore, setShowMore] = useState(false);
-
-  const { t } = useTranslation();
-
-  // Fetch the list of questions and answers
-  const faqEntries = t('faq.questions', { returnObjects: true });
 
   const toggleFaq = (index) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
@@ -214,22 +224,26 @@ const Faq = () => {
     setShowMore(!showMore);
   };
 
+  const switchLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
+  const faqEntries = t('faq.questions', { returnObjects: true }) || [];
+  const faqList = Array.isArray(faqEntries) ? faqEntries : [];
+
   return (
     <div className="w-full px-4 lg:px-0 xl:px-0 max-w-full overflow-hidden pb-20">
-      <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px]">
-        <h1 className="text-[14px] text-[#e3ce90] font-normal font-orbitron pb-4">{t('FAQ')}</h1>
+      
+
+      <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-50 pt-[40px]">
+        <h1 className="text-[14px] text-[#e3ce90] font-normal pb-4">{t('FAQ')}</h1>
       </div>
       <div className="flex justify-between mt-[36px] mb-[41px]">
-        <div>
-          <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
-            {t('faq.title')}
-          </h1>
-        </div>
+        <h1 className="text-[34px] font-orbitron md:text-[54px] text-[#c09e5f] font-black">{t('faq.title')}</h1>
       </div>
 
-      {/* FAQ Items */}
-      <div className="text-[34px] text-[#e3ce90] font-normal font-orbitron py-6">
-        {faqEntries.slice(0, 4).map((faq, index) => (
+      <div className="py-6">
+        {faqList.slice(0, 4).map((faq, index) => (
           <FaqItem
             key={index}
             question={faq.question}
@@ -240,7 +254,7 @@ const Faq = () => {
         ))}
 
         {showMore &&
-          faqEntries.slice(4).map((faq, index) => (
+          faqList.slice(4).map((faq, index) => (
             <FaqItem
               key={index + 4}
               question={faq.question}
@@ -251,25 +265,21 @@ const Faq = () => {
           ))}
       </div>
 
-      {/* Show More Button */}
-      {faqEntries.length > 4 && (
+      {faqList.length > 4 && (
         <div className="flex justify-center">
           <button
             onClick={toggleShowMore}
-            className="w-[200px] h-[44px] px-8 bg-opacity-50 button border-[1px] border-[#c09e5f] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#e3ce90] hover:to-[#c09e5f] hover:text-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+            className="px-8 py-2 border-[1px] border-[#c09e5f] text-[#e3ce90] hover:bg-[#c09e5f] hover:text-[#002718] transition duration-300 rounded-lg"
           >
             {showMore ? t('faq.seeLess') : t('faq.seeMore')}
           </button>
         </div>
       )}
 
-      {/* Other Questions */}
-      <div className="text-[34px] text-[#e3ce90] font-normal font-orbitron py-6">
-        <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
-          {t('faq.otherQuestions')}
-        </h1>
-        <p className="text-[24px] md:text-[18px] text-[#c09e5f] font-bold font-jura">
-          <Link href="/experience" target="_blank" rel="noopener noreferrer" className="underline">
+      <div className="py-6">
+        <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black">{t('faq.otherQuestions')}</h1>
+        <p className="text-[24px] md:text-[18px] text-[#c09e5f] font-bold">
+          <Link href="/contact" className="underline">
             {t('faq.contactUs')}
           </Link>{' '}
           {t('faq.moreInfo')}

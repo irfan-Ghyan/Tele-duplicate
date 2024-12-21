@@ -25,47 +25,6 @@
     "Private": "Private",
     "Discover the Dome": "Discover the Dome",
 
-    "FAQ": "FAQ'S",
-    "faq": {
-      "title": "Frequently Asked Questions",
-      "question1": {
-        "title": "Do I need prior experience?",
-        "description": "No experience is necessary! Our simulators are user-friendly, and our staff is always available to assist you, practice makes perfect!"
-      },
-      "question2": {
-        "title": "What makes Teleios Dome unique?",
-        "description": "All these features! Professional-grade simulators: Experience the excitement of racing on the same simulators used by pro drivers, with advanced features like triple curved screens, F1-style controls, and authentic racing physics."
-      },
-      "question3": {
-        "title": "Who can use the simulators?",
-        "description": "Anyone aged 7 and above who meets our height requirements (110 cm to 200 cm) can experience the excitement of racing at Teleios Dome."
-      },
-      "question4": {
-        "title": "What is Teleios Dome?",
-        "description": "Teleios Dome is a state-of-the-art entertainment facility in Dubai Production City, offering an exhilarating racing simulation experience made accessible to all."
-      },
-      "question5": {
-        "title": "How do I book a session?",
-        "description": "Book online through our website or call us directly. We highly recommend booking in advance, especially during peak times."
-      },
-      "question6": {
-        "title": "Can I walk in without a booking?",
-        "description": "While we sometimes have availability for walk-ins, booking in advance is the best way to guarantee your spot."
-      },
-      "question7": {
-        "title": "Can I cancel my booking?",
-        "description": "Yes, you can cancel online bookings within 24 hours for a full refund."
-      },
-      "question8": {
-        "title": "Do you host birthday parties?",
-        "description": "Yes, we can accommodate parties of up to 100 guests. Please contact us for more details."
-      },
-      "seeMore": "SEE MORE",
-      "seeLess": "SEE LESS",
-      "otherQuestions": "Other Questions?",
-      "contactUs": "Contact us",
-      "moreInfo": "for more information or assistance..."
-    },
 
     "WHAT PEOPLE SAY ABOUT US": "WHAT PEOPLE SAY ABOUT US",
 
@@ -279,16 +238,7 @@
     "description": "Description"
   },
 
-  "FAQ": "FAQ",
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "seeMore": "See More",
-    "seeLess": "See Less",
-    "otherQuestions": "Have More Questions?",
-    "contactUs": "Contact Us",
-    "moreInfo": "for more information.",
-    "Loading": "Loading..."
-  },
+ 
   "ERROR": "An error occurred while fetching FAQs.",
 
   "Content": {
@@ -330,22 +280,9 @@
     ]
   },
 
-  "faq": {
-    "title": "Frequently Asked Questions",
-    "questions": [
-      { "question": "What is your refund policy?", "answer": "We offer a full refund within 30 days of purchase." },
-      { "question": "How can I contact support?", "answer": "You can contact us via the contact page or email us directly." },
-      { "question": "Do you offer group discounts?", "answer": "Yes, we offer discounts for groups larger than 10." },
-      { "question": "What are your working hours?", "answer": "Our working hours are from 9 AM to 6 PM, Monday to Friday." },
-      { "question": "Do you have a mobile app?", "answer": "Yes, our mobile app is available for iOS and Android devices." }
-    ],
-    "seeMore": "See More",
-    "seeLess": "See Less",
-    "otherQuestions": "Other Questions?",
-    "contactUs": "Contact Us",
-    "moreInfo": "for more information."
-  },
+  
  
+
   "training.title": "Private Events",
   "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
 
@@ -367,7 +304,7 @@
     "ERROR_INVALID_EMAIL": "Please enter a valid email address.",
     "ERROR_GENERAL": "There was an unexpected error submitting your email. Please try again.",
 
-    "Loading": "Loading...",
+  "Loading": "Loading...",
   "Error": "Error:",
   "VIEW_OPTIONS": "VIEW OPTIONS",
   "DEFAULT_TITLE": "Default Title",
@@ -443,9 +380,24 @@
     "firstname": "First Name",
     "lastname": "Last Name",
     "emailAddress": "Last Name",
-    "phoneNormal": "Last Name"
+    "phoneNormal": "Last Name",
 
-    
+    "FAQ": "FAQ",
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "questions": [
+        { "question": "What is your refund policy?", "answer": "Our return policy lasts 30 days." },
+        { "question": "How can I contact support?", "answer": "You can contact us via the contact page or email us directly." },
+        { "question": "Do you offer group discounts?", "answer": "Yes, we offer discounts for groups larger than 10." },
+        { "question": "What are your working hours?", "answer": "Our working hours are from 9 AM to 6 PM, Monday to Friday." },
+        { "question": "Do you have a mobile app?", "answer": "Yes, our mobile app is available for iOS and Android devices." }
+      ],
+      "seeMore": "See More",
+      "seeLess": "See Less",
+      "otherQuestions": "Other Questions?",
+      "contactUs": "Contact Us",
+      "moreInfo": "for more information."
+    }
   
 
 }
