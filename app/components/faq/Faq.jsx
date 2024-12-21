@@ -277,9 +277,9 @@ const Faq = () => {
       )}
 
       <div className="py-6">
-        <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black">{t('faq.otherQuestions')}</h1>
-        <p className="text-[24px] md:text-[18px] text-[#c09e5f] font-bold">
-          <Link href="/contact" className="underline">
+        <h1 className="text-[34px] font-orbitron md:text-[54px] text-[#c09e5f] font-black">{t('faq.otherQuestions')}</h1>
+        <p className="text-[24px] font-orbitron md:text-[18px] text-[#c09e5f] font-bold">
+          <Link href="/contact" className="underline ">
             {t('faq.contactUs')}
           </Link>{' '}
           {t('faq.moreInfo')}
