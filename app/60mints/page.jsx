@@ -593,7 +593,7 @@ const Page = ({ params } ) => {
       } else if (detail.key === "date" && (!detail.description || detail.description.trim() === "")) {
         errors.push("Please select a valid date.");
       } else if (detail.key === "time" && (!detail.description || detail.description.trim() === "")) {
-        errors.push("Please select a valid time slot.");
+        errors.push("Please pick a time slot.");
       } else if (detail.key === "duration" && (!detail.description || detail.description.trim() === "")) {
         errors.push("Please select a booking duration.");
       }
@@ -601,6 +601,8 @@ const Page = ({ params } ) => {
   
     setBookingErrors(errors);
     return errors.length === 0;
+    setBookingErrors(errors);
+  return errors.length === 0 && !timeSlotError;
   };
   
 

@@ -531,7 +531,7 @@ const BookingListing = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-3/5 p-4 border border-gray-300"
-          />
+          />  	  
           <select
             value={itemsPerPage}
             onChange={handleItemsPerPageChange}
@@ -539,8 +539,8 @@ const BookingListing = () => {
           >
             <option value={5}>{translations[language].itemsPerPage}</option>
             <option value={10}>10 {translations[language].itemsPerPage}</option>
-            <option value={15}>15 {translations[language].itemsPerPage}</option>
             <option value={20}>20 {translations[language].itemsPerPage}</option>
+            <option value={50}>50 {translations[language].itemsPerPage}</option>
           </select>
         </div>
 

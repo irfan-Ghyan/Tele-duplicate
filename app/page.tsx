@@ -67,6 +67,7 @@ const Home = () => {
         {/* <div className="w-full max-w-7xl md:px-8">
           <Newsletter />
         </div> */}
+    
         
       </main>
     </>

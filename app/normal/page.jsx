@@ -592,9 +592,9 @@ const Page = ({ params } ) => {
       if (detail.key === "no_of_people" && (!detail.description || detail.description === "0")) {
         errors.push("You must select at least one seat.");
       } else if (detail.key === "date" && (!detail.description || detail.description.trim() === "")) {
-        errors.push("Please select a valid date.");
+        errors.push("Please pick a valid date.");
       } else if (detail.key === "time" && (!detail.description || detail.description.trim() === "")) {
-        errors.push("Please pick time slot.");
+        errors.push("Please pick a time slot.");
       } else if (detail.key === "duration" && (!detail.description || detail.description.trim() === "")) {
         errors.push("Please select a booking duration.");
       }
