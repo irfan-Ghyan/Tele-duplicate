@@ -131,7 +131,7 @@ const Dome = () => {
               {t('dome.description')} 
               </p>
               <Link
-                href="/dome"
+                href="/venue"
                 className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#e3ce90] to-[#c09e5f] text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
               >
                 <span className="button-slanted-content">{t('Discover the Dome')}</span>

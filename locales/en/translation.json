@@ -288,9 +288,9 @@
 
    "dome.title": "DOME",
   "dome.description": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.",
-  "education_title": "EDUCATION & TRAININGS",
+  "education_title": "F & B",
  
-  "EDUCATION & TRAININGS": "EDUCATION & TRAININGS",
+  "EDUCATION & TRAININGS": "F & B",
   "Discover immersive learning experiences at Teleios Dome.": "Discover immersive learning experiences at Teleios Dome. From educational trips exploring our factory to safety driving lessons and group racing instruction, we offer dynamic programs to engage learners of all ages. Prepare to embark on an educational journey at Teleios Dome.",
   "FIND OUT MORE": "FIND OUT MORE",
 
@@ -360,8 +360,8 @@
     "chooseDate": "Select Date",
     "chooseTime": "Choose Time",
     "bookingDetails": "Your booking details",
-    "paymentDetails": "Payment Details",
-    "thankYouMessage": "Thank you for your purchase",
+    "paymentDetails": "Registration Details",
+    "thankYouMessage": "Thank you for confirmation",
     "emailMessage": "Check your e-mail inbox, Your ticket is waiting for you there!",
     "continueExperience": "CONTINUE EXPERIENCE",
     "loungeSeats": "LOUNGE SEATS",
@@ -379,8 +379,8 @@
     "duration": "Duration",
     "firstname": "First Name",
     "lastname": "Last Name",
-    "emailAddress": "Last Name",
-    "phoneNormal": "Last Name",
+    "emailAddress": "Email",
+    "phoneNormal": "Phone",
 
     "FAQ": "FAQ",
     "faq": {

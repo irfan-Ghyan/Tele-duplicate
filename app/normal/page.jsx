@@ -594,7 +594,7 @@ const Page = ({ params } ) => {
       } else if (detail.key === "date" && (!detail.description || detail.description.trim() === "")) {
         errors.push("Please select a valid date.");
       } else if (detail.key === "time" && (!detail.description || detail.description.trim() === "")) {
-        errors.push("Please select a valid time slot.");
+        errors.push("Please pick time slot.");
       } else if (detail.key === "duration" && (!detail.description || detail.description.trim() === "")) {
         errors.push("Please select a booking duration.");
       }
@@ -953,7 +953,7 @@ const Page = ({ params } ) => {
           {t('bookingDetails')}
           </h2>
           {bookingDetails
-            .filter((detail) => detail.key !== "booking_type") // Exclude these keys
+            .filter((detail) => detail.key !== "booking_type") 
             .map((detail, index) => (
               <div
                 className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
