@@ -11,6 +11,7 @@ const BookingListing = () => {
   const [language, setLanguage] = useState("en");
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [editingId, setEditingId] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
 
   const [selectedDate, setSelectedDate] = useState("");
   const [slotInterval, setSlotInterval] = useState(20);
@@ -244,6 +245,24 @@ const BookingListing = () => {
     }
   };
   
+
+  const handleSortByDate = () => {
+    const sortedBookings = [...bookings].sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+  
+      if (sortOrder === "asc") {
+        return dateA - dateB; // Ascending order
+      } else {
+        return dateB - dateA; // Descending order
+      }
+    });
+  
+    setBookings(sortedBookings);
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc")); // Toggle sorting order
+  };
+
+  
   const handleCreateClick = () => {
     setShowForm(true);
     setEditingId(null);
@@ -404,7 +423,7 @@ const BookingListing = () => {
   <label>Type</label>
   <select
     name="booking_type"
-    value={formData.booking_type || ""} // Ensure it uses the string value
+    value={formData.booking_type || ""} 
     onChange={handleInputChange}
     required
     className="w-full p-2 border border-gray-300"
@@ -564,7 +583,10 @@ const BookingListing = () => {
             <th className="p-2">{translations[language].noOfPeople}</th>
             <th className="p-2">{translations[language].type}</th>
             <th className="p-2">{translations[language].duration}</th>
-            <th className="p-2">{translations[language].date}</th>
+            <th className="p-2 cursor-pointer" onClick={handleSortByDate}>
+              {translations[language].date}{" "}
+              {sortOrder === "asc" ? "↑" : "↓"} {/* Display sorting indicator */}
+            </th>
             <th className="p-2">{translations[language].time}</th>
             <th className="p-2">Actions</th>
           </tr>

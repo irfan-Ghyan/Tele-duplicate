@@ -601,8 +601,7 @@ const Page = ({ params } ) => {
   
     setBookingErrors(errors);
     return errors.length === 0;
-    setBookingErrors(errors);
-  return errors.length === 0 && !timeSlotError;
+    
   };
   
 
