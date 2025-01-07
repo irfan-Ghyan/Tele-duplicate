@@ -1175,6 +1175,20 @@ const Page = ({ params }) => {
     }
   };
 
+
+  
+  useEffect(() => {
+    if (generalError || bookingErrors.length > 0) {
+      const timer = setTimeout(() => {
+        setGeneralError("");
+        setBookingErrors([]);
+      }, 2000); // Clear after 5 seconds
+  
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, [generalError, bookingErrors]);
+
+
   const handlePlanChange = async (newDuration) => {
     updateBookingDetail("duration", newDuration);
 
@@ -1546,22 +1560,22 @@ const Page = ({ params }) => {
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
 
                       {timeChunks
-                        .filter((chunk) => {
-                          const now = new Date();
-                          const currentDate = now.toLocaleDateString("en-CA");
-                          const selectedDateStr = date.toLocaleDateString("en-CA");
-                          const isToday = selectedDateStr === currentDate;
-                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
+                        // .filter((chunk) => {
+                        //   const now = new Date();
+                        //   const currentDate = now.toLocaleDateString("en-CA");
+                        //   const selectedDateStr = date.toLocaleDateString("en-CA");
+                        //   const isToday = selectedDateStr === currentDate;
+                        //   const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
 
-                          return chunk.some(([_, { time: timeValue = "" }]) => {
-                            const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                            if (!match) return false; 
-                            const hours = Number(match[1]);
-                            const minutes = Number(match[2]);
-                            const slotTime = hours * 60 + minutes;
-                            return slotTime >= startTime && slotTime <= 1380;
-                          });
-                        })
+                        //   return chunk.some(([_, { time: timeValue = "" }]) => {
+                        //     const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                        //     if (!match) return false; 
+                        //     const hours = Number(match[1]);
+                        //     const minutes = Number(match[2]);
+                        //     const slotTime = hours * 60 + minutes;
+                        //     return slotTime >= startTime && slotTime <= 1380;
+                        //   });
+                        // })
                         .map((chunk, chunkIndex) => {
                           const now = new Date();
                           const currentDate = now.toLocaleDateString("en-CA");

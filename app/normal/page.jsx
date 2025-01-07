@@ -541,6 +541,20 @@ const Page = ({ params } ) => {
 
 
 
+  useEffect(() => {
+    if (generalError || bookingErrors.length > 0) {
+      const timer = setTimeout(() => {
+        setGeneralError("");
+        setBookingErrors([]);
+      }, 2000); // Clear after 5 seconds
+  
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, [generalError, bookingErrors]);
+
+
+
+
   // Tab 1: Create Booking
   const handleCreateBooking = () => {
     // You can implement your logic to create the booking here.

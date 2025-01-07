@@ -212,6 +212,22 @@ const Page = ({ params } ) => {
   //   }
   // };
 
+
+  
+  useEffect(() => {
+    if (generalError || bookingErrors.length > 0) {
+      const timer = setTimeout(() => {
+        setGeneralError("");
+        setBookingErrors([]);
+      }, 2000); // Clear after 5 seconds
+  
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, [generalError, bookingErrors]);
+
+
+
+
   const handlePlanChange = async (newDuration) => {
     // updateBookingDetail("duration", newDuration);
     await fetchBookings();
@@ -825,25 +841,25 @@ const Page = ({ params } ) => {
                   availableTimeChunks will only include chunks with at least one available slot.
                 */}
                 {timeChunks
-                  .filter((chunk) => {
-                    const now = new Date();
-                    const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA");
-                    const isToday = selectedDateStr === currentDate;
-                    const startTime = isToday
-                      ? now.getHours() * 60 + now.getMinutes()
-                      : 540; // 540 minutes = 9:00 AM
+                  // .filter((chunk) => {
+                  //   const now = new Date();
+                  //   const currentDate = now.toLocaleDateString("en-CA");
+                  //   const selectedDateStr = date.toLocaleDateString("en-CA");
+                  //   const isToday = selectedDateStr === currentDate;
+                  //   const startTime = isToday
+                  //     ? now.getHours() * 60 + now.getMinutes()
+                  //     : 540; // 540 minutes = 9:00 AM
                     
-                    // Check if at least one slot in the chunk is still available
-                    return chunk.some(([_, { time: timeValue = "" }]) => {
-                      const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                      if (!match) return false; // Invalid time format
-                      const hours = Number(match[1]);
-                      const minutes = Number(match[2]);
-                      const slotTime = hours * 60 + minutes;
-                      return slotTime >= startTime;
-                    });
-                  })
+                  //   // Check if at least one slot in the chunk is still available
+                  //   return chunk.some(([_, { time: timeValue = "" }]) => {
+                  //     const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                  //     if (!match) return false; // Invalid time format
+                  //     const hours = Number(match[1]);
+                  //     const minutes = Number(match[2]);
+                  //     const slotTime = hours * 60 + minutes;
+                  //     return slotTime >= startTime;
+                  //   });
+                  // })
                   .map((chunk, chunkIndex) => {
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
