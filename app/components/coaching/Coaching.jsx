@@ -66,7 +66,7 @@ const Coaching = () => {
             <div className="w-full flex flex-col">
               <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-20 text-end">
                 <h1 className="text-[14px] text-[#e3ce90] font-normal font-orbitron pb-4 mt-10 md:mt-0">
-                  {t('COACHING')}
+                  {t('PRIVATE EVENTS')}
                 </h1>
               </div>
               <div className="flex flex-col justify-between md:mt-[36px] md:mb-[41px] ">

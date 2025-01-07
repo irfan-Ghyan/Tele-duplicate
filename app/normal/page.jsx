@@ -68,6 +68,8 @@ const Page = ({ params } ) => {
   });
   const [validationErrors, setValidationErrors] = useState({});
 
+  
+
 
   const closePopup = () => {
     setIsPopupVisible(false);
@@ -187,6 +189,8 @@ const Page = ({ params } ) => {
       updateBookingDetail("no_of_people", newCount.toString());
     }
   };
+
+  
 
   // const handlePlanChange = async (newDuration) => {
 
@@ -335,7 +339,7 @@ const Page = ({ params } ) => {
   };
 
   const timeEntries = Object.entries(times);
-  const timeChunks = chunkArray(timeEntries, 6);
+  const timeChunks = chunkArray(timeEntries, 3);
 
   const fetchBookings = useCallback(async () => {
     const payload = {
@@ -704,7 +708,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="w-full">
 
-                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
+                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                     {t('normalSeats')}
                     </h1>
@@ -750,7 +754,7 @@ const Page = ({ params } ) => {
                   
                  
                   <div className="my-4">
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
+                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       {t('chooseDate')}
                       </h1>
@@ -816,33 +820,29 @@ const Page = ({ params } ) => {
                 </div> */}
 
 
-              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                 <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
                 
-                {/* 
-                  Step 1: Filter out rows where all time slots have passed.
-                  availableTimeChunks will only include chunks with at least one available slot.
-                */}
                 {timeChunks
-                  .filter((chunk) => {
-                    const now = new Date();
-                    const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA");
-                    const isToday = selectedDateStr === currentDate;
-                    const startTime = isToday
-                      ? now.getHours() * 60 + now.getMinutes()
-                      : 540; // 540 minutes = 9:00 AM
+                  // .filter((chunk) => {
+                  //   const now = new Date();
+                  //   const currentDate = now.toLocaleDateString("en-CA");
+                  //   const selectedDateStr = date.toLocaleDateString("en-CA");
+                  //   const isToday = selectedDateStr === currentDate;
+                  //   const startTime = isToday
+                  //     ? now.getHours() * 60 + now.getMinutes()
+                  //     : 540; // 540 minutes = 9:00 AM
                     
-                    // Check if at least one slot in the chunk is still available
-                    return chunk.some(([_, { time: timeValue = "" }]) => {
-                      const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                      if (!match) return false; // Invalid time format
-                      const hours = Number(match[1]);
-                      const minutes = Number(match[2]);
-                      const slotTime = hours * 60 + minutes;
-                      return slotTime >= startTime;
-                    });
-                  })
+                  //   // Check if at least one slot in the chunk is still available
+                  //   return chunk.some(([_, { time: timeValue = "" }]) => {
+                  //     const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                  //     if (!match) return false; 
+                  //     const hours = Number(match[1]);
+                  //     const minutes = Number(match[2]);
+                  //     const slotTime = hours * 60 + minutes;
+                  //     return slotTime >= startTime;
+                  //   });
+                  // })
                   .map((chunk, chunkIndex) => {
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
@@ -850,7 +850,7 @@ const Page = ({ params } ) => {
                     const isToday = selectedDateStr === currentDate;
                     const startTime = isToday
                       ? now.getHours() * 60 + now.getMinutes()
-                      : 540; // 540 minutes = 9:00 AM
+                      : 540;
 
                     return (
                       <div key={chunkIndex} className="flex">
@@ -867,7 +867,7 @@ const Page = ({ params } ) => {
                           return (
                             <div
                               key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
+                              className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
                                 slotTime >= startTime
                                   ? timeKey === activeTime
                                     ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"

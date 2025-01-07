@@ -1264,7 +1264,7 @@ const Page = ({ params }) => {
   };
 
   const timeEntries = Object.entries(times);
-  const timeChunks = chunkArray(timeEntries, 6);
+  const timeChunks = chunkArray(timeEntries, 3);
 
   const fetchBookings = useCallback(async () => {
     const payload = {
@@ -1521,7 +1521,7 @@ const Page = ({ params }) => {
               <div className="flex max-w-7xl ">
                 <div className="w-full flex">
                   <div className="">
-                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
+                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('loungeSeats')}</h1>
                       <div className="flex justify-between">
                         <div className="py-4">
@@ -1535,14 +1535,14 @@ const Page = ({ params }) => {
                     </div>
 
                     <div>
-                      <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[600px] my-[20px] rounded-lg">
+                      <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto my-[20px] rounded-lg">
                         <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseDate')}</h1>
                         <CalendarComponent onChange={handleDateChange} value={date} minDate={minDate} maxDate={maxDate} />
                       </div>
                     </div>
 
                     {/* Updated Time Slot Selection */}
-                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
 
                       {timeChunks
@@ -1593,7 +1593,7 @@ const Page = ({ params }) => {
                                   return (
                                     <div
                                       key={timeKey}
-                                      className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
+                                      className={`button-slanted mt-[20px] cursor-pointer w-[240px] h-[40px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
                                         slotTime >= startTime
                                           ? timeKey === activeTime
                                             ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"

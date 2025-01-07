@@ -334,7 +334,7 @@ const Page = ({ params } ) => {
   };
 
   const timeEntries = Object.entries(times);
-  const timeChunks = chunkArray(timeEntries, 6);
+  const timeChunks = chunkArray(timeEntries, 3);
 
   const fetchBookings = useCallback(async () => {
     const payload = {
@@ -705,7 +705,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="w-full">
 
-                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[200px] rounded-lg">
+                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                     {t('normalSeats')}
                     </h1>
@@ -751,7 +751,7 @@ const Page = ({ params } ) => {
                   
                  
                   <div className="my-4">
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[605px] rounded-lg">
+                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       {t('chooseDate')}
                       </h1>
@@ -817,7 +817,7 @@ const Page = ({ params } ) => {
                 </div> */}
 
 
-              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
+              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
                 <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {/* 
@@ -868,7 +868,7 @@ const Page = ({ params } ) => {
                           return (
                             <div
                               key={timeKey}
-                              className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
+                              className={`button-slanted mt-[20px] cursor-pointer w-[240px] h-[40px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
                                 slotTime >= startTime
                                   ? timeKey === activeTime
                                     ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"

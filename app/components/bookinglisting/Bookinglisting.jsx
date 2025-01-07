@@ -252,14 +252,14 @@ const BookingListing = () => {
       const dateB = new Date(b.date);
   
       if (sortOrder === "asc") {
-        return dateA - dateB; // Ascending order
+        return dateA - dateB; 
       } else {
-        return dateB - dateA; // Descending order
+        return dateB - dateA;
       }
     });
   
     setBookings(sortedBookings);
-    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc")); // Toggle sorting order
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
   };
 
   
