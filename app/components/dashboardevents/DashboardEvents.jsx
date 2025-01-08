@@ -114,39 +114,91 @@ const DashboardEvents = () => {
     fetchData();
   }, []);
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   if (!title || !description) {
+  //     setError('Both title and description are required.');
+  //     return;
+  //   }
+
+  //   try {
+  //     let uploadedImagePaths = [];
+  //     if (images.length > 0) {
+  //       uploadedImagePaths = await uploadImages();
+  //     }
+
+  //     const payload = {
+  //       pageName: 'Upcoming Events',
+  //       sectionName: 'Virtual GP',
+  //       fields: [
+  //         { fieldName: tableData[0]?.title_meta || `title1`, fieldValue: title },
+  //         { fieldName: tableData[0]?.description_meta || `description1`, fieldValue: description },
+  //       ],
+  //       images: uploadedImagePaths,
+  //     };
+
+  //     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  //     const url = `${baseUrl}/api/content/setMultipleFieldValues`;
+
+  //     const response = await doPostCall(url, payload);
+
+  //     if (!response.ok) {
+  //       throw new Error('Failed to save data to the database.');
+  //     }
+
+  //     // Update table data and form fields
+  //     const updatedEntry = {
+  //       title,
+  //       description,
+  //       images: uploadedImagePaths,
+  //       title_meta: payload.fields[0].fieldName,
+  //       description_meta: payload.fields[1].fieldName,
+  //     };
+  //     setTableData([updatedEntry]);
+  //     setImages([]);
+  //   } catch (error) {
+  //     setError('Failed to save data. Please try again.');
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!title || !description) {
       setError('Both title and description are required.');
       return;
     }
-
+  
     try {
       let uploadedImagePaths = [];
       if (images.length > 0) {
         uploadedImagePaths = await uploadImages();
       }
+  
 
       const payload = {
         pageName: 'Upcoming Events',
         sectionName: 'Virtual GP',
         fields: [
-          { fieldName: tableData[0]?.title_meta || `title1`, fieldValue: title },
-          { fieldName: tableData[0]?.description_meta || `description1`, fieldValue: description },
+          { fieldName: tableData[0]?.title_meta || `title1_en`, fieldValue: title, language: 'en' },
+          { fieldName: tableData[0]?.description_meta || `description1_en`, fieldValue: description, language: 'en' },
+          { fieldName: tableData[0]?.title_meta || `title1_ar`, fieldValue: title, language: 'ar' },
+          { fieldName: tableData[0]?.description_meta || `description1_ar`, fieldValue: description, language: 'ar' },
         ],
         images: uploadedImagePaths,
       };
-
+  
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/content/setMultipleFieldValues`;
-
+  
       const response = await doPostCall(url, payload);
-
+  
       if (!response.ok) {
         throw new Error('Failed to save data to the database.');
       }
-
+  
       // Update table data and form fields
       const updatedEntry = {
         title,
@@ -161,7 +213,7 @@ const DashboardEvents = () => {
       setError('Failed to save data. Please try again.');
     }
   };
-
+  
   const uploadImages = async () => {
     const formData = new FormData();
     const section = 'Virtual GP';

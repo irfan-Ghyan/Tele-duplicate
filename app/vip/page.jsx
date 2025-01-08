@@ -1581,25 +1581,25 @@ const Page = ({ params }) => {
             <div className="relative">
               <div
                 className={`ml-[2rem] w-12 h-12 rounded-full ${
-                  activeTab === 1 ? "bg-green-500" : "bg-[#c09e5f]"
+                  activeTab === 1 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'
                 } text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
                 onClick={() => handleTabChange(1)}
               >
                 1
               </div>
-              <div className={`text-[14px] ${activeTab === 1 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
+              <div className={`text-[14px] ${activeTab === 1 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
               {t('experiences')}
               </div>
             </div>
             <div className="relative">
               <div
                 className={`w-12 h-12 rounded-full ${
-                  activeTab === 2 ? "bg-green-500" : "bg-[#c09e5f]"
+                  activeTab === 2 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'
                 } text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
               >
                 2
               </div>
-              <div className={`text-[14px] ${activeTab === 2 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
+              <div className={`text-[14px] ${activeTab === 2 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
               {t('confirm')}
               </div>
               {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
@@ -1607,13 +1607,13 @@ const Page = ({ params }) => {
             <div className="relative">
               <div
                 className={`mr-4 w-12 h-12 rounded-full ${
-                  activeTab === 3 ? "bg-green-500" : "bg-[#c09e5f]"
+                  activeTab === 3 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'
                 } text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
               
               >
                 3
               </div>
-              <div className={`text-[14px] ${activeTab === 3 ? "text-white" : "text-[#c09e5f]"} font-bold font-orbitron`}>
+              <div className={`text-[14px] ${activeTab === 3 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
               {t('thanks')}
               </div>
               {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
@@ -1719,7 +1719,7 @@ const Page = ({ params }) => {
                                       <button
                                         onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                         className="button-slanted-content w-full h-full flex items-center justify-center"
-                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES} // Disable if before startTime or after 11 PM
+                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES}
                                       >
                                         {formatToAMPM(timeValue)}
                                       </button>
@@ -1735,7 +1735,7 @@ const Page = ({ params }) => {
               </div>
             </div>
 
-            {/* Booking Details Panel */}
+
             <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails

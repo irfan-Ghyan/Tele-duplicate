@@ -8,7 +8,8 @@ module.exports = {
 
   images: {
     unoptimized: true,
-    domains: ['https://api.teleiosx.com'], 
+    // domains: ['https://api.teleiosx.com'], 
+    domains: ['https://dev.teleiosx.com/'], 
   },
 
   async headers() {
