@@ -219,17 +219,17 @@ const CorporateBuilding = () => {
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              console.log('Fetched Image URL:', imageData.data[0].url); // Debugging
+              console.log('Fetched Image URL:', imageData.data[0].url); 
               entry.imageUrl = imageData.data[0].url;
             }
           }
 
           setLatestEntry(entry);
-          console.log('Latest Entry Set:', entry); // Debugging
+          console.log('Latest Entry Set:', entry); 
         }
       }
     } catch (err) {
-      console.error('Error fetching data:', err); // Debugging
+      console.error('Error fetching data:', err); 
       setError(err.message || 'An error occurred while fetching data.');
     } finally {
       setLoading(false);
@@ -277,10 +277,10 @@ const CorporateBuilding = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                  {t('teamEntry.title')}
+                  {teamEntry.title}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {t('teamEntry.description')}
+                  {teamEntry.description}
                 </p>
               </Link>
             </div>

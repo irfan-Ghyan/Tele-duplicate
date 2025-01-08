@@ -11,6 +11,8 @@ const DomeData = () => {
     const domes = [
       { title: t('Corporate_Events'), description: t('Teleios_Dome_Corporate') },
     ];
+
+    
   return (
     <>
      <Head>

@@ -49,7 +49,7 @@ const DomeVip = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '',
             };
           }
 
@@ -58,7 +58,7 @@ const DomeVip = () => {
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url; 
             }
           }
 
@@ -105,10 +105,10 @@ const DomeVip = () => {
                 <div className='flex justify-end'>
                 <div className="py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px]">
                   <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron drop-shadow-4xl">
-                    {t('vipEntry.title')}
+                    {vipEntry.title}
                   </h1>
                   <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6 text-balance drop-shadow-4xl text-justify">
-                    {t('vipEntry.description')}
+                    {vipEntry.description}
                   </p>
                 </div>
                 </div>

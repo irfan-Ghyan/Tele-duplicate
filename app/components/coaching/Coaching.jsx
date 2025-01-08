@@ -83,7 +83,7 @@ const Coaching = () => {
                 <div className="flex justify-center lg:justify-start m-bottom">
                   <div className="pt-4 pb-10">
                     <Link
-                      href="HTTPS://wa.me/971566628585"
+                      href="https://api.whatsapp.com/send/?phone=966552249297&text&type=phone_number&app_absent=0"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="button-slanted w-[200px] lg:w-[233px] h-[44px] text-[#e3ce90] px-8 py-6 button font-jura font-bold border-[1px] border-[#e3ce90] hover:bg-gradient-to-r hover:from-[#c09e5f] hover:to-[#e3ce90] hover:border-0 hover:text-[#002718] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"

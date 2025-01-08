@@ -114,10 +114,10 @@ const CorporateNetworking = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                   {t('networkingEntry.title')}
+                   {networkingEntry.title}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {t('networkingEntry.description')}
+                  {networkingEntry.description}
                 </p>
               </Link>
             </div>
