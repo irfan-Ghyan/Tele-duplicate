@@ -120,6 +120,66 @@ useEffect(() => {
 }, []);
 
   
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+
+//   if (!title || !description) {
+//     setError('Both title and description are required.');
+//     return;
+//   }
+
+//   setLoading(true);
+//   setError('');
+//   try {
+//     const index = tableData.length + 1;
+
+//     let uploadedImagePaths = [];
+//     if (images.length > 0) {
+//       uploadedImagePaths = await uploadImages();
+//     }
+
+//     const payload = {
+//       pageName: 'Experience',
+//       sectionName: 'Session',
+//       fields: [
+//         { fieldName: `title${index}`, fieldValue: title },
+//         { fieldName: `description${index}`, fieldValue: description },
+//       ],
+//       images: uploadedImagePaths,
+//     };
+
+//     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+//     const url = `${baseUrl}/api/content/setMultipleFieldValues`;
+//     const response = await doPostCall(url, payload);
+
+//     if (!response.ok) throw new Error('Failed to save data to the database.');
+
+//     if (images.length > 0) {
+//       const uploadedImagePaths = await uploadImages();
+//       payload.images = uploadedImagePaths;
+//     }
+
+//     const newEntry = {
+//       title,
+//       description,
+//       images: uploadedImagePaths,
+//       title_meta: `title${index}`,
+//       description_meta: `description${index}`,
+//     };
+
+//     setTableData((prevData) => [...prevData, newEntry]);
+//     setTitle('');
+//     setDescription('');
+//     setImages([]);
+//   } catch (error) {
+//     setError('Error saving data: ' + error.message);
+//   } finally {
+//     setLoading(false);
+//   }
+// };
+  
+
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -130,9 +190,8 @@ const handleSubmit = async (e) => {
 
   setLoading(true);
   setError('');
-  try {
-    const index = tableData.length + 1;
 
+  try {
     let uploadedImagePaths = [];
     if (images.length > 0) {
       uploadedImagePaths = await uploadImages();
@@ -142,8 +201,8 @@ const handleSubmit = async (e) => {
       pageName: 'Experience',
       sectionName: 'Session',
       fields: [
-        { fieldName: `title${index}`, fieldValue: title },
-        { fieldName: `description${index}`, fieldValue: description },
+        { fieldName: `title${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: title },
+        { fieldName: `description${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`, fieldValue: description },
       ],
       images: uploadedImagePaths,
     };
@@ -154,20 +213,25 @@ const handleSubmit = async (e) => {
 
     if (!response.ok) throw new Error('Failed to save data to the database.');
 
-    if (images.length > 0) {
-      const uploadedImagePaths = await uploadImages();
-      payload.images = uploadedImagePaths;
-    }
-
-    const newEntry = {
+    const updatedEntry = {
       title,
       description,
       images: uploadedImagePaths,
-      title_meta: `title${index}`,
-      description_meta: `description${index}`,
+      title_meta: `title${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`,
+      description_meta: `description${editingIndex !== null ? editingIndex + 1 : tableData.length + 1}`,
     };
 
-    setTableData((prevData) => [...prevData, newEntry]);
+    if (editingIndex !== null) {
+      // Update the existing entry
+      setTableData((prevData) =>
+        prevData.map((entry, index) => (index === editingIndex ? { ...entry, ...updatedEntry } : entry))
+      );
+      setEditingIndex(null); // Reset editing index
+    } else {
+      // Add a new entry
+      setTableData((prevData) => [...prevData, updatedEntry]);
+    }
+
     setTitle('');
     setDescription('');
     setImages([]);
@@ -177,7 +241,6 @@ const handleSubmit = async (e) => {
     setLoading(false);
   }
 };
-  
 
   const uploadImages = async () => {
     const formData = new FormData();
@@ -309,7 +372,6 @@ const handleImageDelete = async (imageName, entryIndex) => {
     const result = await response.json();
     console.log("Image deleted successfully:", result);
 
-    // Update the table data by removing the deleted image
     setTableData((prevData) =>
       prevData.map((entry, index) =>
         index === entryIndex
@@ -399,7 +461,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
           {tableData.length > 0 ? (
             tableData.map((entry, index) => (
               <tr key={index} className="border border-gray-300">
-                <td className="p-2">{entry.title || 'N/A'}</td>
+                <td className="p-2">{tentry.title || 'N/A'}</td>
                 <td className="p-2">{entry.description || 'N/A'}</td>
                <td className='p-2'>
                 {entry.images && entry.images.length > 0 ? (
