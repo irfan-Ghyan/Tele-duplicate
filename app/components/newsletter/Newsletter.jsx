@@ -14,7 +14,7 @@ const SearchComponent = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
-    setSuccessMessage(''); // Clear any previous success messages
+    setSuccessMessage(''); 
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

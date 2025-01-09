@@ -21,7 +21,7 @@ const Page = () => {
       <Experience />
     <div className="w-full ">
       <Coaching />
-      <Newsletter />
+      {/* <Newsletter /> */}
     </div>
 
   </div>
