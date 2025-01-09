@@ -277,10 +277,10 @@ const CorporateBuilding = () => {
                   priority={true}
                 />
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
-                  {teamEntry.title}
+                   {teamEntry.title}
                 </h1>
                 <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
-                  {teamEntry.description}
+                   {teamEntry.description}
                 </p>
               </Link>
             </div>
