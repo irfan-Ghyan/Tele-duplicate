@@ -35,13 +35,15 @@ const DomeCustomize = () => {
       let entry = null;
 
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'SIM Configurator');
+        const domeSection = sectionData.data.sections.find(
+          (section) => section.title === 'SIM Configurator'
+        );
 
         if (domeSection && domeSection.section_fields) {
           // Assume the fields are sorted by the backend or sort them here
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
-            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
 
           const descriptionField = domeSection.section_fields.find(
             (field) => field.key === `description${latestField.key.replace('title', '')}`
@@ -51,11 +53,11 @@ const DomeCustomize = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
+              updatedAt: latestField.updated_at,
               imageUrl: '', // Placeholder for now
             };
           }
 
-          // Fetch the image data dynamically
           const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Gaming Room`);
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
@@ -100,11 +102,11 @@ const DomeCustomize = () => {
               {error && <div className="text-red-500">Error: {error}</div>}
 
               {/* Render customize entries if data is available */}
-              {!loading && !error && simEntry &&  (
+              {!loading && !error && simEntry?.title && simEntry?.description &&  (
                 <div className="order-1 lg:order-2 lg:w-1/2 px-0 md:px-4 lg:px-4 xl:px-4">
                   <div className="flex flex-col justify-center flex-grow-4">
-                    <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron mt-6">{t('simEntry.title')}</h1>
-                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{t('simEntry.description')}</p>
+                    <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron mt-6">{simEntry.title}</h1>
+                    <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{simEntry.description}</p>
                   </div>
                 </div>
               )}

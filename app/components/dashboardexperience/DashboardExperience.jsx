@@ -461,7 +461,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
           {tableData.length > 0 ? (
             tableData.map((entry, index) => (
               <tr key={index} className="border border-gray-300">
-                <td className="p-2">{tentry.title || 'N/A'}</td>
+                <td className="p-2">{entry.title || 'N/A'}</td>
                 <td className="p-2">{entry.description || 'N/A'}</td>
                <td className='p-2'>
                 {entry.images && entry.images.length > 0 ? (

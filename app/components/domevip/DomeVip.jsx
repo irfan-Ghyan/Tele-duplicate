@@ -33,13 +33,15 @@ const DomeVip = () => {
       let entry = null;
 
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'VIP Experience');
+        const domeSection = sectionData.data.sections.find(
+          (section) => section.title === 'VIP Experience'
+        );
 
         if (domeSection && domeSection.section_fields) {
           // Assume the fields are sorted by the backend or sort them here
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
-            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
 
           const descriptionField = domeSection.section_fields.find(
             (field) => field.key === `description${latestField.key.replace('title', '')}`
@@ -49,6 +51,7 @@ const DomeVip = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
+              updatedAt: latestField.updated_at,
               imageUrl: '',
             };
           }
@@ -101,7 +104,7 @@ const DomeVip = () => {
                 </div>
               )}
 
-              {!loading && !error && vipEntry && (
+              {!loading && !error && vipEntry?.title && vipEntry?.description && (
                 <div className='flex justify-end'>
                 <div className="py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px]">
                   <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron drop-shadow-4xl">

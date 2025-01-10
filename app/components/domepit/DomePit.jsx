@@ -39,7 +39,7 @@ const DomePit = () => {
           // Assume the fields are sorted by the backend or sort them here
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
-            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
 
           const descriptionField = domeSection.section_fields.find(
             (field) => field.key === `description${latestField.key.replace('title', '')}`
@@ -49,7 +49,8 @@ const DomePit = () => {
             entry = {
               title: latestField.value,
               description: descriptionField.value,
-              imageUrl: '', // Placeholder for now
+              updatedAt: latestField.updated_at,
+              imageUrl: '',
             };
           }
 
@@ -101,7 +102,7 @@ const DomePit = () => {
                 </div>
               )}
 
-              {!loading && !error && tipEntry && (
+              {!loading && !error && tipEntry?.title && tipEntry?.description  && (
                 <div className="py-[15px] lg:py-[30px] xl:pt-[70px] lg:mt-[0px]">
                   <h1 className="text-[34px] md:text-[54px] text-[#e3ce90] font-black font-orbitron drop-shadow-4xl">
                     {tipEntry.title}

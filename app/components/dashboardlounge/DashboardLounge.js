@@ -163,6 +163,7 @@ const DashboardLounge = () => {
     }
   };
 
+
   const uploadImages = async () => {
     const formData = new FormData();
     const section = 'Lounge Area';

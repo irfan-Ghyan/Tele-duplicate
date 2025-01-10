@@ -21,51 +21,56 @@ const DomeLounge = () => {
   const fetchData = async () => {
     setLoading(true);
     setError('');
-
+  
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
+  
       // Fetch the section data
       const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Dome`);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');
       }
-
+  
       const sectionData = await sectionResponse.json();
       let entry = null;
-
+  
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'Lounge Area');
-
-        if (domeSection && domeSection.section_fields) {
-          // Assume the fields are sorted by the backend or sort them here
-          const latestField = domeSection.section_fields
-            .filter((field) => field.key.startsWith('title'))
-            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))[0];
-
-          const descriptionField = domeSection.section_fields.find(
-            (field) => field.key === `description${latestField.key.replace('title', '')}`
+        // Find the Lounge Area section
+        const loungeSection = sectionData.data.sections.find(
+          (section) => section.title === 'Lounge Area'
+        );
+  
+        if (loungeSection && loungeSection.section_fields) {
+          // Sort fields by updated_at in descending order
+          const sortedFields = loungeSection.section_fields.sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
           );
-
-          if (latestField && descriptionField) {
+  
+          // Get the latest title and corresponding description
+          const latestTitleField = sortedFields.find((field) => field.key.startsWith('title'));
+          const descriptionKey = `description${latestTitleField.key.replace('title', '')}`;
+          const latestDescriptionField = sortedFields.find((field) => field.key === descriptionKey);
+  
+          if (latestTitleField && latestDescriptionField) {
             entry = {
-              title: latestField.value,
-              description: descriptionField.value,
+              title: latestTitleField.value,
+              description: latestDescriptionField.value,
+              updatedAt: latestTitleField.updated_at,
               imageUrl: '', // Placeholder for now
             };
-          }
-
-          // Fetch the image data dynamically
-          const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Lounge Area`);
-          if (imageResponse.ok) {
-            const imageData = await imageResponse.json();
-            if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+  
+            // Fetch the image data dynamically
+            const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Lounge Area`);
+            if (imageResponse.ok) {
+              const imageData = await imageResponse.json();
+              if (imageData.success && imageData.data.length > 0) {
+                entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              }
             }
           }
-
-          setLatestEntry(entry);
         }
+  
+        setLatestEntry(entry);
       }
     } catch (err) {
       setError(err.message || 'An error occurred while fetching data.');
@@ -73,6 +78,8 @@ const DomeLounge = () => {
       setLoading(false);
     }
   };
+
+  
   return (
     <>
      <Head>
@@ -81,12 +88,12 @@ const DomeLounge = () => {
     <div className="w-full max-w-full lg:overflow-hidden xl:h-[700px] px-4 bg-cover bg-center">
       <div className="inset-0 bg-transparent flex md:flex-col md:pr-6">
         <div className="flex flex-col justify-between pt-[20px] py-[30px]">
-        {!loading && !error && loungeEntry &&  (
+        {!loading && !error && loungeEntry?.title && loungeEntry?.description &&  (
             <div className="flex flex-col lg:flex-row items-center justify-between lg:space-x-8 mb-10 lg:mb-0">
               <div className="order-2 lg:order-1 lg:w-1/2 flex flex-col justify-between">
                 {/* <h4 className="text-[34px] xl:text-[35px] text-[#D008A6] font-bold font-jura">{dome.subtitle}</h4> */}
-                <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron">{t('loungeEntry.title')}</h1>
-                <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{t('loungeEntry.description')}</p>
+                <h1 className="text-[24px] md:text-[38px] text-[#c09e5f] font-black font-orbitron">{loungeEntry.title}</h1>
+                <p className="md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6 text-justify">{loungeEntry.description}</p>
                 {/* <div className="py-10">
                   <Link href="https://feverup.com/m/187813" target="_blank" rel="noopener noreferrer" className="button-slanted w-[233px] h-[44px] px-8 py-6 button font-jura font-bold bg-gradient-to-r from-[#7E51F8] to-[#D007A6] text-white ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                     <span className='button-slanted-content'>BOOK NOW</span>
