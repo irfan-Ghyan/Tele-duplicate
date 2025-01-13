@@ -603,7 +603,7 @@ const BookingListing = () => {
               </td>
               <td className="border p-2">{item.duration}</td>
               <td className="border p-2">{item.date}</td>
-              <td className="border p-2">{item.time}</td>
+              <td className="border p-2">{item.time ? item.time.slice(0, 5) : "N/A"}</td>
               <td className="px-6 py-4 text-center whitespace-nowrap text-sm text-gray-900 border border-gray-300">
                 <button className="text-blue-500" onClick={() => handleEditClick(item)}>Edit</button>
                 <button className="text-red-500 ml-2" onClick={() => handleDelete(item.id)}>Delete</button>
