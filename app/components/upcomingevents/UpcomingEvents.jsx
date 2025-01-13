@@ -194,7 +194,6 @@ const UpcomingEvents = () => {
               imageUrl: '',
             };
 
-            // Fetch image data
             const imageResponse = await getImageCall(`${baseUrl}/api/content/getImages/Virtual GP`);
             if (imageResponse.ok) {
               const imageData = await imageResponse.json();

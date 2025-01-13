@@ -133,8 +133,10 @@ const DashboardGaming = () => {
         pageName: 'Dome',
         sectionName: 'Gaming Room',
         fields: [
-          { fieldName: tableData[0]?.title_meta || `title1`, fieldValue: title },
-          { fieldName: tableData[0]?.description_meta || `description1`, fieldValue: description },
+          { fieldName: tableData[0]?.title_meta || `title1_en`, fieldValue: title, language: 'en' },
+          { fieldName: tableData[0]?.description_meta || `description1_en`, fieldValue: description, language: 'en' },
+          { fieldName: tableData[0]?.title_meta || `title1_ar`, fieldValue: title, language: 'ar' },
+          { fieldName: tableData[0]?.description_meta || `description1_ar`, fieldValue: description, language: 'ar' },
         ],
         images: uploadedImagePaths,
       };

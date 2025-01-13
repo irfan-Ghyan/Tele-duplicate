@@ -40,7 +40,6 @@ const DomeCustomize = () => {
         );
 
         if (domeSection && domeSection.section_fields) {
-          // Assume the fields are sorted by the backend or sort them here
           const latestField = domeSection.section_fields
             .filter((field) => field.key.startsWith('title'))
             .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))[0];
@@ -54,7 +53,7 @@ const DomeCustomize = () => {
               title: latestField.value,
               description: descriptionField.value,
               updatedAt: latestField.updated_at,
-              imageUrl: '', // Placeholder for now
+              imageUrl: '',
             };
           }
 
@@ -62,7 +61,7 @@ const DomeCustomize = () => {
           if (imageResponse.ok) {
             const imageData = await imageResponse.json();
             if (imageData.success && imageData.data.length > 0) {
-              entry.imageUrl = imageData.data[0].url; // Use the first image URL
+              entry.imageUrl = imageData.data[0].url;
             }
           }
 
@@ -95,13 +94,10 @@ const DomeCustomize = () => {
                 />
               </div>
 
-              {/* Show loading indicator */}
               {loading && <div className='text-center text-[#e3ce90] font-bold text-xl'>{t('Loading...')}</div>}
               
-              {/* Show error message */}
               {error && <div className="text-red-500">Error: {error}</div>}
 
-              {/* Render customize entries if data is available */}
               {!loading && !error && simEntry?.title && simEntry?.description &&  (
                 <div className="order-1 lg:order-2 lg:w-1/2 px-0 md:px-4 lg:px-4 xl:px-4">
                   <div className="flex flex-col justify-center flex-grow-4">
