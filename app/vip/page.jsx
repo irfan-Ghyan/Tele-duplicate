@@ -1749,7 +1749,7 @@ const Page = ({ params }) => {
                                       <button
                                         onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                         className="button-slanted-content w-full h-full flex items-center justify-center"
-                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES }
+                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES || isDisabled }
                                       >
                                         {formatToAMPM(timeValue)}
                                       </button>
