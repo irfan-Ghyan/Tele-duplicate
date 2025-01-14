@@ -1682,9 +1682,9 @@ const Page = ({ params }) => {
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
 
                       {/* User Feedback for No Available Slots */}
-                      {timeChunks.length === 0 && (
+                      {/* {timeChunks.length === 0 && (
                         <p className="text-red-500 text-center">No available time slots for the selected date.</p>
-                      )}
+                      )} */}
 
                       {/* Time Slots Rendering */}
                       {timeChunks
@@ -1749,7 +1749,7 @@ const Page = ({ params }) => {
                                       <button
                                         onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                         className="button-slanted-content w-full h-full flex items-center justify-center"
-                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES}
+                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES }
                                       >
                                         {formatToAMPM(timeValue)}
                                       </button>
