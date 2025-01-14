@@ -110,10 +110,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="language-switcher">
+      {/* <div className="language-switcher">
         <button onClick={() => handleLanguageChange('en')}>English</button>
         <button onClick={() => handleLanguageChange('ar')}>العربية</button>
-      </div>
+      </div> */}
       <Helmet>
         <title>{t('Header | Teleios Dome')}</title>
         <meta

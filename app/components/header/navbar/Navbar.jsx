@@ -285,7 +285,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
   const menuRef = useRef(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const hiddenRoutes = [
     '/experience',
