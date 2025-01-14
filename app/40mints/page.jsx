@@ -321,7 +321,36 @@ const Page = ({ params } ) => {
   
   };
 
- 
+  const addMissingSlots = (data) => {
+    const timeToMinutes = (time) => {
+        const [hours, minutes] = time.split(":").map(Number);
+        return hours * 60 + minutes;
+    };
+    
+    const timeSlots = [];
+    const startTime = timeToMinutes(data[0].time);
+    const endTime = timeToMinutes(data[data.length - 1].time);
+
+    // Generate all 20-minute slots
+    for (let time = startTime; time <= endTime; time += 20) {
+        const hours = String(Math.floor(time / 60)).padStart(2, "0");
+        const minutes = String(time % 60).padStart(2, "0");
+        timeSlots.push(`${hours}:${minutes}`);
+    }
+
+    // Identify missing slots and add them to the data
+    const missingSlots = timeSlots
+        .filter((slot) => !data.some((entry) => entry.time === slot))
+        .map((slot) => ({ time: slot, sims: 0 }));
+
+    // Combine original data with missing slots
+    const updatedData = [...data, ...missingSlots];
+
+    // Sort the data by time
+    updatedData.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+
+    return updatedData;
+};
 
   const updateBookingDetailsForDate = (newDate) => {
     const formattedDate = newDate.toLocaleDateString();
@@ -367,7 +396,9 @@ const Page = ({ params } ) => {
       let response = await doGetCall(url);
       const data = await response.json();
       
-      const fetchedTimes = data.reduce((acc, slot) => {
+      const data_ = addMissingSlots(data)
+      console.log(data_)
+      const fetchedTimes = data_.reduce((acc, slot) => {
         if (slot.time) {
           acc[`time${slot.time}`] = {
             time: String(slot.time),
@@ -878,21 +909,24 @@ const Page = ({ params } ) => {
                           const minutes = Number(match[2]);
                           const slotTime = hours * 60 + minutes;
 
+                          const isDisabled = sims === 0 || slotTime < startTime ;
+
                           return (
                             <div
                               key={timeKey}
                               className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
-                                slotTime >= startTime
+                                // slotTime >= startTime
+                                isDisabled
                                   ? timeKey === activeTime
                                     ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                                  : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                                    : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"                               
                               } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
                               <button
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                 className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime}
+                                disabled={slotTime < startTime || isDisabled}
                               >
                                 {formatToAMPM(timeValue)}
                               </button>
