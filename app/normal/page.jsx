@@ -698,7 +698,7 @@ const Page = ({ params } ) => {
       <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
         
       <button
-          className="text-[#e3ce90]"
+          className="text-[#e3ce90] mt-[40px]"
           onClick={goBack} 
         >
            {t('goBack')}
@@ -914,14 +914,13 @@ const Page = ({ params } ) => {
                           return (
                             <div
                               key={timeKey}
-                              className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
-                                // slotTime >= startTime
-                                isDisabled
-                                  ? timeKey === activeTime
-                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718]"
-                                    : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
+                              className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal mx-2
+                                ${timeKey === activeTime 
+                                  ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
+                                  : isDisabled
+                                  ? "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
+                                transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
                               <button
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
