@@ -303,7 +303,7 @@ const Experience = () => {
 
             {/* Render only the first 3 entries */}
             {!loading && !error && faqEntries.length > 0 &&
-              faqEntries.slice(0, 3).map((experience, index) => (
+              faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
                   className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto my-8"

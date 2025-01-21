@@ -26,12 +26,13 @@ const Page = ({ params } ) => {
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
-    { key: "no_of_people", title: "Customers", description: "1" },
+    { key: "no_of_people", title: "Participants", description: "1" },
     // { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
     { key: "duration", title: "Duration", description: "20" },
+    { key: "price", title: "Price", description: "95 SAR" },
   ]);
   
 
@@ -223,6 +224,31 @@ const Page = ({ params } ) => {
     setSlotInterval(newDuration)
   
     updateBookingDetail("duration", `${newDuration}`);
+  
+  let updatedPrice;
+  if (count <= 3) {
+    // Logic for persons less than or equal to 3
+    if (newDuration === 20) {
+      updatedPrice = "95 SAR";
+    } else if (newDuration === 40) {
+      updatedPrice = "170 SAR";
+    } else if (newDuration === 60) {
+      updatedPrice = "250 SAR";
+    }
+  } else {
+    // Logic for persons more than 3
+    if (newDuration === 20) {
+      updatedPrice = "95 SAR";
+    } else if (newDuration === 40) {
+      updatedPrice = "140 SAR";
+    } else if (newDuration === 60) {
+      updatedPrice = "200 SAR";
+    }
+  }
+
+  updateBookingDetail("price", updatedPrice);
+
+  await fetchBookings();
     // if (activeTime) {
     //   const isSelectedTimeAvailable = Object.values(times).some(
     //     (slot) => slot.time === activeTime && slot.sims >= count
@@ -248,6 +274,7 @@ const Page = ({ params } ) => {
 
     //   }
     // }
+    
   };
   
 
@@ -377,6 +404,7 @@ const Page = ({ params } ) => {
       date: selectedDate,
       duration: slotInterval.toString(),
       booking_type: selectedSlotType,
+      price: count.toString(),
     };
 
     const queryString = new URLSearchParams(payload).toString();
@@ -484,6 +512,7 @@ const Page = ({ params } ) => {
       email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
       duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, 10),
+      price: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, "95 SAR"),
       date: bookingDetails.find((detail) => detail.key === "date")?.description,
       time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
       booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
@@ -797,6 +826,13 @@ const Page = ({ params } ) => {
                       )}
                   </div>
                   
+
+                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
+                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
+                      {t('duration')}
+                    </h1>
+                    <PlanSelector onPlanChange={handlePlanChange} />
+                  </div>
                  
                   <div className="my-4">
                     <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
@@ -865,29 +901,32 @@ const Page = ({ params } ) => {
                 </div> */}
 
 
-              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
+                  
+
+
+              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg mt-[20px]">
                 <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {timeChunks
-                  // .filter((chunk) => {
-                  //   const now = new Date();
-                  //   const currentDate = now.toLocaleDateString("en-CA");
-                  //   const selectedDateStr = date.toLocaleDateString("en-CA");
-                  //   const isToday = selectedDateStr === currentDate;
-                  //   const startTime = isToday
-                  //     ? now.getHours() * 60 + now.getMinutes()
-                  //     : 540; // 540 minutes = 9:00 AM
+                  .filter((chunk) => {
+                    const now = new Date();
+                    const currentDate = now.toLocaleDateString("en-CA");
+                    const selectedDateStr = date.toLocaleDateString("en-CA");
+                    const isToday = selectedDateStr === currentDate;
+                    const startTime = isToday
+                      ? now.getHours() * 60 + now.getMinutes()
+                      : 540; // 540 minutes = 9:00 AM
                     
-                  //   // Check if at least one slot in the chunk is still available
-                  //   return chunk.some(([_, { time: timeValue = "" }]) => {
-                  //     const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                  //     if (!match) return false; 
-                  //     const hours = Number(match[1]);
-                  //     const minutes = Number(match[2]);
-                  //     const slotTime = hours * 60 + minutes;
-                  //     return slotTime >= startTime;
-                  //   });
-                  // })
+                    // Check if at least one slot in the chunk is still available
+                    return chunk.some(([_, { time: timeValue = "" }]) => {
+                      const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                      if (!match) return false; 
+                      const hours = Number(match[1]);
+                      const minutes = Number(match[2]);
+                      const slotTime = hours * 60 + minutes;
+                      return slotTime >= startTime;
+                    });
+                  })
                   .map((chunk, chunkIndex) => {
                     const now = new Date();
                     const currentDate = now.toLocaleDateString("en-CA");
@@ -942,12 +981,7 @@ const Page = ({ params } ) => {
                   })}
               </div>
 
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
-                      {t('duration')}
-                    </h1>
-                    <PlanSelector onPlanChange={handlePlanChange} />
-                  </div>
+                    
 
 
                   {/* <div className="w-[734px] bg-[#e3ce90] p-[30px] h-[183px] my-[20px]">
@@ -955,7 +989,7 @@ const Page = ({ params } ) => {
                       Booking Type
                     </h1>
                     <BookingType selectedBookingType={bookingType} onBookingTypeChange={handleBookingTypeChange} />
-                  </div> */}
+                  </div>  */}
                  
                 </div>
               </div>
@@ -1017,6 +1051,7 @@ const Page = ({ params } ) => {
                 <p className="text-[18px] text-[#063828] font-jura py-2">
                   {detail.description}
                 </p>
+                
               </div>
             ))}
 

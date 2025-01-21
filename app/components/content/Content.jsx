@@ -101,7 +101,7 @@ const Content = () => {
 
             {!loading &&
               !error &&
-              faqEntries.slice(0, 3).map((experience, index) => (
+              faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
                   className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
@@ -146,12 +146,12 @@ const Content = () => {
                 </div>
               ))}
       
-          </div>
-          <div className="xl:flex xl:justify-center flex-wrap gap-2 lg:mx-80 ">
+          {/* </div>
+          <div className="xl:flex xl:justify-center flex-wrap gap-2 lg:mx-80 "> */}
             {faqEntries.slice(3, 5).map((experience, index) => (
               <div
                 key={index}
-                className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[430px] lg:w-[560px] my-8"
+                className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
               >
                 <div className="flex justify-center items-center w-full h-[282px]">
                   <Image

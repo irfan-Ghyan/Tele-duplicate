@@ -196,9 +196,9 @@ const Header = () => {
         )}
 
         <div className={`relative z-10 xl:py-[32px] ${isTopBannerVisible ? '' : 'pt-0'}`}>
-          {!shouldHideBannersAndBackground && isTopBannerVisible && (
+          {/* {!shouldHideBannersAndBackground && isTopBannerVisible && (
             <TopBanner onClose={handleCloseTopBanner} />
-          )}
+          )} */}
           <Navbar isTopBannerVisible={isTopBannerVisible} isNavbarBgVisible={isNavbarBgVisible} />
         </div>
       </div>

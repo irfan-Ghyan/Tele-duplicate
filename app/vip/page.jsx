@@ -1122,7 +1122,7 @@ const Page = ({ params }) => {
   const [date, setDate] = useState(new Date());
 
   const [bookingDetails, setBookingDetails] = useState([
-    { key: "no_of_people", title: "Customers", description: "1" },
+    { key: "no_of_people", title: "Participants", description: "1" },
     { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "VIP" },
@@ -1688,23 +1688,23 @@ const Page = ({ params }) => {
 
                       {/* Time Slots Rendering */}
                       {timeChunks
-                        // .filter((chunk) => {
-                        //   const now = new Date();
-                        //   const currentDate = now.toLocaleDateString("en-CA");
-                        //   const selectedDateStr = date.toLocaleDateString("en-CA");
-                        //   const isToday = selectedDateStr === currentDate;
-                        //   const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : OPENING_TIME_MINUTES;
+                        .filter((chunk) => {
+                          const now = new Date();
+                          const currentDate = now.toLocaleDateString("en-CA");
+                          const selectedDateStr = date.toLocaleDateString("en-CA");
+                          const isToday = selectedDateStr === currentDate;
+                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : OPENING_TIME_MINUTES;
 
-                        //   // Check if at least one slot in the chunk is still available and before or at 11:00 PM
-                        //   return chunk.some(([_, { time: timeValue = "" }]) => {
-                        //     const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                        //     if (!match) return false; // Invalid time format
-                        //     const hours = Number(match[1]);
-                        //     const minutes = Number(match[2]);
-                        //     const slotTime = hours * 60 + minutes;
-                        //     return slotTime >= startTime && slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
-                        //   });
-                        // })
+                          // Check if at least one slot in the chunk is still available and before or at 11:00 PM
+                          return chunk.some(([_, { time: timeValue = "" }]) => {
+                            const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
+                            if (!match) return false; // Invalid time format
+                            const hours = Number(match[1]);
+                            const minutes = Number(match[2]);
+                            const slotTime = hours * 60 + minutes;
+                            return slotTime >= startTime && slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
+                          });
+                        })
                         .map((chunk, chunkIndex) => {
                           const now = new Date();
                           const currentDate = now.toLocaleDateString("en-CA");

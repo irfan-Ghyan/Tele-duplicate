@@ -13,6 +13,9 @@ const Sidebar = () => {
         <Link href="/dashboard/content" className="flex items-center  text-[#919191] pt-8 hover:text-white">
           <FaFileAlt className="mr-2" /> Content
         </Link>
+        <Link href="/dashboard/price" className="flex items-center  text-[#919191] pt-8 hover:text-white">
+          <FaFileAlt className="mr-2" /> Price
+        </Link>
       </ul>
     </div>
   );

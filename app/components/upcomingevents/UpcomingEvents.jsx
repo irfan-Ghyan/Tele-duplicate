@@ -264,7 +264,7 @@ const UpcomingEvents = () => {
                 </div>
               </>
             ) : (
-              <p className="text-red-500">
+              <p className="text-[#c09e5f]">
                 {loading ? 'Loading...' : error || 'No upcoming events found.'}
               </p>
             )}

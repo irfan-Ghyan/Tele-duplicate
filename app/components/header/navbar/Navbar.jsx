@@ -285,7 +285,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
   const menuRef = useRef(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const hiddenRoutes = [
     '/experience',
@@ -390,7 +390,7 @@ const Navbar = ({ isTopBannerVisible }) => {
       </Helmet>
       <nav
         className={`fixed ${
-          isTopBannerVisible ? 'top-9' : 'top-0'
+          isTopBannerVisible ? 'top-0' : 'top-0'
         } w-full z-40 transition-all duration-300 px-[10px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
       >
         <div className="flex justify-between items-center w-full h-auto">
@@ -426,6 +426,20 @@ const Navbar = ({ isTopBannerVisible }) => {
               onClick={closeMenu}
             >
               {t('EXPERIENCES')}
+            </Link>
+            <Link
+              href="/executivelounge"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
+              onClick={closeMenu}
+            >
+              {t('executivelounge')}
+            </Link>
+            <Link
+              href="/watchparties"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
+              onClick={closeMenu}
+            >
+              {t('watchparties')}
             </Link>
             <Link
               href="/venue"
@@ -514,11 +528,11 @@ const Navbar = ({ isTopBannerVisible }) => {
                 {t('EXPERIENCES')}
               </Link>
               <Link
-                href="/venue"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
+                href="/executivelounge"
+                className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
-                {t('VENUE')}
+                {t('executivelounge')}
               </Link>
               <Link
                 href="/watchparties"
@@ -527,6 +541,14 @@ const Navbar = ({ isTopBannerVisible }) => {
               >
                 {t('watchparties')}
               </Link>
+              <Link
+                href="/venue"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
+                onClick={closeMenu}
+              >
+                {t('VENUE')}
+              </Link>
+            
               <Link
                 href="/privateevents"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
