@@ -146,8 +146,9 @@ const Content = () => {
                 </div>
               ))}
       
-          {/* </div>
-          <div className="xl:flex xl:justify-center flex-wrap gap-2 lg:mx-80 "> */}
+          {/* </div> */}
+          {/* sm:w-[430px] lg:w-[560px */}
+          {/* <div className="xl:flex xl:justify-center flex-wrap gap-2 lg:mx-80 "> */}
             {faqEntries.slice(3, 5).map((experience, index) => (
               <div
                 key={index}
