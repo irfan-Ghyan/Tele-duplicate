@@ -26,7 +26,9 @@ const Page = ({ params }) => {
     { key: "price", title: "Price", description: "800 SAR" },
   ]);
 
- 
+  const OPENING_TIME_MINUTES = 540;
+  const CLOSING_TIME_MINUTES = 1380;
+
   const [times, setTimes] = useState({});
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [activeTime, setActiveTime] = useState(null);
@@ -585,25 +587,32 @@ const Page = ({ params }) => {
                       </div>
                     </div>
 
-                    {/* Updated Time Slot Selection */}
+                    {/* Choose Time Section */}
                     <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
+                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
 
+                      {/* User Feedback for No Available Slots */}
+                      {/* {timeChunks.length === 0 && (
+                        <p className="text-red-500 text-center">No available time slots for the selected date.</p>
+                      )} */}
+
+                      {/* Time Slots Rendering */}
                       {timeChunks
                         .filter((chunk) => {
                           const now = new Date();
                           const currentDate = now.toLocaleDateString("en-CA");
                           const selectedDateStr = date.toLocaleDateString("en-CA");
                           const isToday = selectedDateStr === currentDate;
-                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
+                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : OPENING_TIME_MINUTES;
 
+                          // Check if at least one slot in the chunk is still available and before or at 11:00 PM
                           return chunk.some(([_, { time: timeValue = "" }]) => {
                             const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                            if (!match) return false; 
+                            if (!match) return false; // Invalid time format
                             const hours = Number(match[1]);
                             const minutes = Number(match[2]);
                             const slotTime = hours * 60 + minutes;
-                            return slotTime >= startTime && slotTime <= 1380;
+                            return slotTime >= startTime && slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
                           });
                         })
                         .map((chunk, chunkIndex) => {
@@ -611,18 +620,18 @@ const Page = ({ params }) => {
                           const currentDate = now.toLocaleDateString("en-CA");
                           const selectedDateStr = date.toLocaleDateString("en-CA");
                           const isToday = selectedDateStr === currentDate;
-                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : 540; 
+                          const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : OPENING_TIME_MINUTES;
 
                           return (
                             <div key={chunkIndex} className="flex">
                               {chunk
                                 .filter(([_, { time: timeValue = "" }]) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                                  if (!match) return false; 
+                                  if (!match) return false; // Invalid time format
                                   const hours = Number(match[1]);
                                   const minutes = Number(match[2]);
                                   const slotTime = hours * 60 + minutes;
-                                  return slotTime <= 1380;
+                                  return slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
                                 })
                                 .map(([timeKey, { time: timeValue = "", sims }], index) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
@@ -633,7 +642,6 @@ const Page = ({ params }) => {
                                   const hours = Number(match[1]);
                                   const minutes = Number(match[2]);
                                   const slotTime = hours * 60 + minutes;
-
                                   const isDisabled = sims === 0 || slotTime < startTime ;
 
                                   return (
@@ -650,7 +658,7 @@ const Page = ({ params }) => {
                                       <button
                                         onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                         className="button-slanted-content w-full h-full flex items-center justify-center"
-                                        disabled={slotTime < startTime || slotTime > 1380 || isDisabled }
+                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES || isDisabled }
                                       >
                                         {formatToAMPM(timeValue)}
                                       </button>
@@ -670,7 +678,7 @@ const Page = ({ params }) => {
             <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
-                .filter((detail) => detail.key !== "booking_type" && detail.key !== "no_of_people")
+                .filter((detail) => detail.key !== "booking_type"  && detail.key !== "no_of_people")
                 .map((detail, index) => (
                   <div
                     className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
