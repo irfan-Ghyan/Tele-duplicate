@@ -225,26 +225,24 @@ const Page = ({ params } ) => {
   
     let basePrice;
   
-    // Logic for determining the base price based on duration
     if (count <= 3) {
       if (newDuration === 20) {
-        basePrice = 95; // Base price for 20 minutes for <= 3 people
+        basePrice = 95;
       } else if (newDuration === 40) {
-        basePrice = 170; // Base price for 40 minutes for <= 3 people
+        basePrice = 170;
       } else if (newDuration === 60) {
-        basePrice = 250; // Base price for 60 minutes for <= 3 people
+        basePrice = 250;
       }
     } else {
       if (newDuration === 20) {
-        basePrice = 95; // Base price for 20 minutes for > 3 people
+        basePrice = 95; 
       } else if (newDuration === 40) {
-        basePrice = 140; // Base price for 40 minutes for > 3 people
+        basePrice = 140;
       } else if (newDuration === 60) {
-        basePrice = 200; // Base price for 60 minutes for > 3 people
+        basePrice = 200; 
       }
     }
   
-    // Multiply the base price by the number of people to get the updated price
     const updatedPrice = `${basePrice * count} SAR`;
   
     updateBookingDetail("price", updatedPrice);
