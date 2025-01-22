@@ -306,7 +306,7 @@ const Experience = () => {
               faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto my-8"
+                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
                 >
                   <div className="flex justify-center items-center w-full h-[282px]">
                     <Image
@@ -357,7 +357,7 @@ const Experience = () => {
               faqEntries.slice(3, 5).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] mx-auto my-8"
+                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
                 >
                   <div className="flex justify-center items-center w-full h-[282px]">
                     <Image
