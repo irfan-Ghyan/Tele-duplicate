@@ -217,64 +217,39 @@ const Page = ({ params } ) => {
   //     }
   //   }
   // };
-
   const handlePlanChange = async (newDuration) => {
-    // updateBookingDetail("duration", newDuration);
     await fetchBookings();
-    setSlotInterval(newDuration)
+    setSlotInterval(newDuration);
   
     updateBookingDetail("duration", `${newDuration}`);
   
-  let updatedPrice;
-  if (count <= 3) {
-    // Logic for persons less than or equal to 3
-    if (newDuration === 20) {
-      updatedPrice = "95 SAR";
-    } else if (newDuration === 40) {
-      updatedPrice = "170 SAR";
-    } else if (newDuration === 60) {
-      updatedPrice = "250 SAR";
-    }
-  } else {
-    // Logic for persons more than 3
-    if (newDuration === 20) {
-      updatedPrice = "95 SAR";
-    } else if (newDuration === 40) {
-      updatedPrice = "140 SAR";
-    } else if (newDuration === 60) {
-      updatedPrice = "200 SAR";
-    }
-  }
-
-  updateBookingDetail("price", updatedPrice);
-
-  await fetchBookings();
-    // if (activeTime) {
-    //   const isSelectedTimeAvailable = Object.values(times).some(
-    //     (slot) => slot.time === activeTime && slot.sims >= count
-    //   );
+    let basePrice;
   
-
-    //   if (!isSelectedTimeAvailable) {
-    //     setActiveTime(null);
-    //   updateBookingDetail("time", "")
-    //   }
-    // }
-
-    //     if (activeTime) {
-    //   const isSelectedTimeAvailable = Object.values(times).some(
-    //     (slot) => slot.time === activeTime && slot.sims >= count
-    //   );
+    // Logic for determining the base price based on duration
+    if (count <= 3) {
+      if (newDuration === 20) {
+        basePrice = 95; // Base price for 20 minutes for <= 3 people
+      } else if (newDuration === 40) {
+        basePrice = 170; // Base price for 40 minutes for <= 3 people
+      } else if (newDuration === 60) {
+        basePrice = 250; // Base price for 60 minutes for <= 3 people
+      }
+    } else {
+      if (newDuration === 20) {
+        basePrice = 95; // Base price for 20 minutes for > 3 people
+      } else if (newDuration === 40) {
+        basePrice = 140; // Base price for 40 minutes for > 3 people
+      } else if (newDuration === 60) {
+        basePrice = 200; // Base price for 60 minutes for > 3 people
+      }
+    }
   
-    //   // Deselect the time slot if it's not available
-    //   if (!isSelectedTimeAvailable) {
-    //     setActiveTime(null);
-    //     // updateBookingDetail("time", "");
-    //     setSeatError("The selected time slot is not available.");
-
-    //   }
-    // }
-    
+    // Multiply the base price by the number of people to get the updated price
+    const updatedPrice = `${basePrice * count} SAR`;
+  
+    updateBookingDetail("price", updatedPrice);
+  
+    await fetchBookings();
   };
   
 
@@ -469,6 +444,8 @@ const Page = ({ params } ) => {
     });
   };
 
+
+  
   const validateForm = () => {
     const errors = {};
   
