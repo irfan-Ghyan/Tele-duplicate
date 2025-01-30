@@ -43,7 +43,7 @@ const translations = {
   },
 };
 
-const DashboardEvents = () => {
+const DashboardExecutiveLounge = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [images, setImages] = useState([]);
@@ -302,5 +302,5 @@ const DashboardEvents = () => {
   );
 };
 
-export default DashboardEvents;
+export default DashboardExecutiveLounge;
 

@@ -618,7 +618,7 @@ border: none !important;
 
 /* cookie-notice */
 #cookie-notice {
-  background-color: #f3c23b;
+  background-color: #e4cd8e;
   color: #141414;
   padding: 10px;
   position: fixed;
@@ -634,7 +634,7 @@ border: none !important;
 }
 
 #cookie-notice .button {
-  background-color: #A72CCF;
+  background-color: #97031b;
   color: white;
   border: none;
   padding: 8px 16px;

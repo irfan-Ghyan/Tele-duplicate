@@ -394,10 +394,8 @@ const Navbar = ({ isTopBannerVisible }) => {
         } w-full z-40 transition-all duration-300 px-[10px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
       >
         <div className="flex justify-between items-center w-full h-auto">
-          {/* Logo Section */}
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
-              {/* Desktop Logo */}
               <Image
                 src="/assets/images/dome/logo.png"
                 alt="Logo"
@@ -406,7 +404,6 @@ const Navbar = ({ isTopBannerVisible }) => {
                 priority={true}
                 className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[165px] lg:h-[92px] xl:w-[185px] xl:h-[120px]"
               />
-              {/* Responsive (Mobile) Logo */}
               <Image
                 src="/assets/images/dome/logo1.png"
                 alt="Logo Responsive"
@@ -418,7 +415,6 @@ const Navbar = ({ isTopBannerVisible }) => {
             </Link>
           </div>
 
-          {/* Navigation Links */}
           <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
             <Link
               href="/experience"
@@ -434,6 +430,14 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
               {t('executivelounge')}
             </Link>
+            {/* <Link
+              href="/watchparties"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
+              onClick={closeMenu}
+            >
+              {t('watchparties')}
+            </Link> */}
+          
             <Link
               href="/watchparties"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
@@ -449,13 +453,6 @@ const Navbar = ({ isTopBannerVisible }) => {
               {t('VENUE')}
             </Link>
             <Link
-              href="/watchparties"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('watchparties')}
-            </Link>
-            <Link
               href="/privateevents"
               className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
@@ -469,10 +466,8 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
               {t('f&b')}
             </Link>
-            {/* Additional Links or Dropdowns can be added here */}
           </div>
 
-          {/* Language Switcher */}
           <div className="language-switcher mx-2">
             <button
               onClick={() => handleLanguageChange('en')}
