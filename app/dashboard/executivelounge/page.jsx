@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import Sidebar from '../../components/siderbar/Sidebar';
 import DashboardNavbar from '../../components/dashboardnavbar/Dashboardnavbar';
-import DashboardExecutiveLounge from '../../components/dashboarexecutivelounge/DashboardExecutiveLounge';
+import DashboardExecutiveLounge from '../../components/dashboardexecutivelounge/DashboardExecutiveLounge';
 import DashboardMainNavbar from '../../components/dashboardmainnavbar/DashboardMainNavbar';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';

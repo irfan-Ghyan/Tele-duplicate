@@ -7,7 +7,7 @@ import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
-import Experience from '../components/experience/Experience';
+import Executive from '../components/executive/Executive';
 import Coaching from '../components/coaching/Coaching';
 import Newsletter from '../components/newsletter/Newsletter';
 
@@ -18,7 +18,7 @@ const Page = () => {
   
   return (
     <div className='w-full'>
-      <Experience />
+      <Executive />
     <div className="w-full ">
       <Coaching />
       {/* <Newsletter /> */}

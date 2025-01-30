@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
-const DomeData = () => {
+const PrivateEvent= () => {
   const { t } = useTranslation();
 
     const domes = [
-      { title: t('Private_Events_heading'), description: t('Private_Event_Descrition') },
+      { title: t('Private_Events_Heading'), description: t('Private_Events_Descrption') },
     ];
 
     
@@ -24,8 +24,8 @@ const DomeData = () => {
      {domes.map((dome, index) => (
        <div key={index} className='py-[15px] lg:py-[50px] md:w-[400px] lg:w-[700px] xl:w-[700px] '>
            {/* <h4 className='text-[34px] xl:text-[35px] text-[#D008A6] font-bold font-jura drop-shadow-4xl'>{dome.subtitle}</h4> */}
-         <h1 className='text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron drop-shadow-4xl'>{dome.title}</h1>
-         <p className='md:text-[14px] lg:text-[18px] text-[#c09e5f] font-black font-jura mt-6 text-balance drop-shadow-4xl lg:leading-10 xl:leading-10 text-justify'>{dome.description}</p>
+         <h1 className='text-[24px] md:text-[34px] text-[#c09e5f] font-black font-orbitron drop-shadow-4xl'>{dome.title}</h1>
+         <p className='md:text-[14px] lg:text-[18px] text-[#c09e5f] font-black font-jura mt-6 text-balance drop-shadow-4xl lg:leading-8 xl:leading-8 text-justify'>{dome.description}</p>
        </div>
      ))}
      {/* <div className="flex items-start m-bottom">
@@ -43,5 +43,5 @@ const DomeData = () => {
   )
 }
 
-export default DomeData;
+export default PrivateEvent;
 

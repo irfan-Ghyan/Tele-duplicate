@@ -123,7 +123,7 @@
 
   "Discover_best_racing_simulator": "Discover how the best racing simulator is assembled in the Teleios Factory: from raw materials and electronics to the finished state-of-the-art device. Students learn how the simulator is made and then experience firsthand its performance racing on a circuit.",
 
-  "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.",
+  "The ultimate destination for luxury entertainment. Where the thrill of racing meets the sophistication of Riyadh’s most dynamic venue.": "The ultimate destination for luxury entertainment. Where the thrill of racing meets the sophistication of Riyadh’s most dynamic venue.",
   
   "EDUCATIONAL_VISITS": "Educational visits",
   "DESCRIPTION": "Embark on an immersive educational journey at Teleios. Explore our factory with a comprehensive tour, delving into the learning of simulator construction and operation. Then, experience the thrill of racing in a simulator competition at the Teleios Dome. Learn, engage, and have fun with Teleios Dome's educational trips.",
@@ -138,8 +138,11 @@
   "WHY_TELEIOS": "Why Teleios?",
   "DESCRIPTION1": "Students are eager to learn about technology, and Teleios Factory provides a unique opportunity...",
 
-  "WHAT_TO_EXPECT": "WHAT TO EXPECT ",
+  "WHAT_TO_EXPECT": "Our menu features a selection of handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites to complement your visit. ",
 
+ "heading.feature":"FEATURES",
+"executive.heading": "EXECUTIVE LOUNGE",
+"executive.paragraph": "",
   "FirstName": "First Name",
   "LastName": "Last Name",
   "CompanyName": "Company Name",
@@ -282,6 +285,7 @@
   },
 
   
+  "f&b":"F & B",
  
 
   "training.title": "Private Events",
@@ -292,7 +296,7 @@
   "education_title": "F & B",
  
   "EDUCATION & TRAININGS": "F & B",
-  "Discover immersive learning experiences at Teleios Dome.": "TeleiosX cuisine is a blend of rich flavors and cultural traditions. Popular dishes like Kabsa and Mandi feature spiced rice and tender meats, while breakfast often includes Ful medames with fresh bread. Arabic coffee, brewed with cardamom, is a staple, paired with sweet, chewy dates. Refreshing beverages like Laban and fresh fruit juices are common. Desserts such as Baklava and Ma'amoul add a sweet touch, making Saudi cuisine a delightful experience of flavor and hospitality.",
+  "Discover immersive learning experiences at Teleios Dome.": "Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere of Riyadh’s premier venue.",
   "FIND OUT MORE": "FIND OUT MORE",
 
     "SIGN_UP_NEWSLETTER": "SIGN UP TO OUR NEWSLETTER",
@@ -338,7 +342,10 @@
   "upcomingEntry.description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology.",
 
 
-  "Corporate_Events": "CORPORATE EVENTS",
+  "Private_Events": "PRIVATE EVENTS",
+  "Private_Events_Heading": "Celebrate in Style, Create Unforgettable Memories",
+  "Private_Events_Descrption": "Make your special day truly extraordinary at TeleiosX. Whether it’s a birthday party, a festive gathering, or any milestone celebration, our venue transforms into a playground of excitement, luxury, and personalized touches. Designed for fun and sophistication, TeleiosX is where memories are made.",
+
    "teamEntry.title": "Team Building",
   "teamEntry.description": "Boost team cohesion with a dynamic simulator challenge, combining immersive scenarios with collaborative problem-solving. Perfect for enhancing communication and teamwork.",
 
@@ -350,8 +357,9 @@
   "networkingEntry.description": "Elevate networking at our simulator venue with interactive experiences that spark conversations and foster connections. Ideal for blending fun with professional engagement.",
   
   "f&b.title": "FOOD & BEVERAGE",
-  "f&b.description": "Explore education at Teleios Dome, from factory visits to thrilling racing experiences, engaging participants in immersive learning adventures.",
-
+  "f&b.description1": "Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere of Riyadh’s premier venue.",
+  "f&b.description":"Experience the thrill of racing paired with Riyadh’s finest mocktails and specialty coffee.",
+  "f&b.features": "Our menu features a selection of handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites to complement your visit.",
   
     "goBack": "Go back",
     "experiences": "Experiences",

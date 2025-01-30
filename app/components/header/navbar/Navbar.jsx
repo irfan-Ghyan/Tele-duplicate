@@ -414,7 +414,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               />
             </Link>
           </div>
-
+        
           <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
             <Link
               href="/experience"
@@ -446,7 +446,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               {t('watchparties')}
             </Link>
             <Link
-              href="/venue"
+              href="/teleiosx"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
               onClick={closeMenu}
             >

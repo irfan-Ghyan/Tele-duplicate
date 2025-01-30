@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Helmet } from 'react-helmet-async'; 
-import CorporateEvent from '../components/corporateevent/CorporateEvent.js';
+import PrivateEvent from '../components/privateevent/PrivateEvent.jsx';
 import CorporateBuilding from '../components/corporatebuilding/CorporateBuilding.jsx';
 import CorporateConference from '../components/corporateConference/CorporateConference.jsx';
 import CorporateNetworking from '../components/corporateNetworking/CorporateNetworking.jsx'
@@ -38,12 +38,12 @@ const Page = () => {
         <div className="xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
-            {t('Corporate_Events')}
+            {t('Private_Events')}
             </h1>
           </div>
         </div>
         <div className="w-full">
-          <CorporateEvent />
+          <PrivateEvent />
         </div>
         <div className='flex w-full'> 
         <div className="w-full md:flex lg:flex">

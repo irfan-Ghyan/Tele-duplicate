@@ -69,22 +69,27 @@ const FullWidthSlider = () => {
   };
 
   return (
-    <div className="slider-wrapper h-auto py-[40px] lg:py-[80px]">
-      <h1 className="text-[32px] md:text-[54px] mb-4 text-[#c09e5f] font-black text-center font-orbitron">{t('WHAT_TO_EXPECT')}</h1>
+    <div className="slider-wrapper h-auto py-10 ">
+      <h1 className="text-[34px] mb-4 text-[#c09e5f] font-black text-center font-orbitron pb-2 ">{t('heading.feature')}</h1>
+      <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] text-center font-bold px-[8px] pt-2 pb-10 ">{t('WHAT_TO_EXPECT')}</p>
       <div className="slider-container py-4 relative">
         <Slider {...settings}>
+         
           <div className="slide">
-            <Image src="/assets/images/dome/slide1.png" alt="Slide1" width={1400} height={569} />
+            <Image src="/assets/images/dome/slide2.png" alt="Slide2" width={1400} height={569} />
           </div>
+
+          <div className="slide">
+            <Image src="/assets/images/dome/slide2.png" alt="Slide2" width={1400} height={569} />
+          </div>
+
           <div className="slide">
             <Image src="/assets/images/dome/slide2.png" alt="Slide2" width={1400} height={569} />
           </div>
           <div className="slide">
-            <Image src="/assets/images/dome/pic-101.jpg" alt="Slide3" width={1400} height={569} />
+            <Image src="/assets/images/dome/slide2.png" alt="Slide2" width={1400} height={569} />
           </div>
-          <div className="slide">
-            <Image src="/assets/images/dome/pic-102.jpg" alt="Slide4" width={1400} height={569} />
-          </div>
+        
         </Slider>
       </div>
 
