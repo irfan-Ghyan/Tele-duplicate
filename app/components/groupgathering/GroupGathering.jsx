@@ -12,7 +12,7 @@ const GroupGathering = () => {
     <div className="w-full max-w-full lg:overflow-hidden px-4 bg-cover bg-center flex items-center justify-center mx-auto ">
       <div className="inset-0 bg-transparent flex flex-col md:flex-col md:pr-6 xl:my-24">
             <div className="flex flex-col justify-center  ">
-            <h2 className="text-[18px] lg:text-[34px] xl:text-[54px] font-bold text-[#c09e5f] mb-6 text-center">
+            <h2 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 text-center">
                 {t('group.heading')}
             </h2>
 

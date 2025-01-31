@@ -29,7 +29,7 @@ const ExperienceSection = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      <h2 className="text-[18px] lg:text-[34px] xl:text-[54px] font-bold text-[#c09e5f] mb-6 text-center">
+      <h2 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 text-center">
         Experience the Ultimate Entertainment
       </h2>
 
