@@ -12,24 +12,24 @@ const GroupGathering = () => {
     <div className="w-full max-w-full lg:overflow-hidden px-4 bg-cover bg-center flex items-center justify-center mx-auto ">
       <div className="inset-0 bg-transparent flex flex-col md:flex-col md:pr-6 xl:my-24">
             <div className="flex flex-col justify-center  ">
-            <h2 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 text-center">
+            <h2 className="font-orbitron text-[24px] lg:text-[34px] text-[#c09e5f] font-black mb-4 text-center">
                 {t('group.heading')}
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl w-full items-center ">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl w-full items-center pt-4">
             
-                <div  className="bg-[#002718] shadow-lg rounded-lg p-6 text-center flex flex-col ">
-                <FaGamepad className="text-[100px] text-[#e3ce90]" />
+                <div  className="bg-[#002718] shadow-lg rounded-lg p-6 text-center flex flex-col items-center ">
+                <FaGamepad className="text-[50px] text-[#e3ce90]" />
                     <h3 className="text-[18px] lg:text-[24px] text-[#c09e5f] font-black font-orbitron">{t('group.title')}</h3>
                     <p className="text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6">{t('group.description')}</p>
                 </div>
                 <div className="bg-[#002718] shadow-lg rounded-lg p-6 text-center flex flex-col items-center">
-                <FaUsers className="text-[100px] text-[#e3ce90]" />
+                <FaUsers className="text-[50px] text-[#e3ce90]" />
                 <h3 className="text-[18px] lg:text-[24px] text-[#c09e5f] font-black font-orbitron">{t('group.title1')}</h3>
                 <p className="md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6">{t('group.description1')}</p>
                 </div>
                 <div className="bg-[#002718] shadow-lg rounded-lg p-6 text-center flex flex-col items-center">
-                <FaTv className="text-[100px] text-[#e3ce90]" />
+                <FaTv className="text-[50px] text-[#e3ce90]" />
                 <h3 className="text-[18px] lg:text-[24px] text-[#c09e5f] font-black font-orbitron">{t('group.title2')}</h3>
                 <p className="md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6">{t('group.description2')}</p>
             </div>

@@ -28,7 +28,7 @@ const FlexiblePackages = () => {
 
   return (
     <div className="xl:flex xl:flex-col p-6 mb-40">
-      <h2 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 text-center ">
+      <h2 className="font-orbitron text-[24px] lg:text-[34px] text-[#c09e5f] font-black mb-4 text-center ">
         Flexible Packages For Groups
       </h2>
 

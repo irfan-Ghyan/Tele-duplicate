@@ -29,11 +29,11 @@ const ExperienceSection = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      <h2 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 text-center">
+      <h2 className="font-orbitron text-[24px] lg:text-[34px] text-[#c09e5f] font-black mb-4 text-center">
         Experience the Ultimate Entertainment
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-7xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 max-w-7xl w-full pt-4">
         {features.map((feature, index) => (
           <div key={index} className="bg-[#002718] shadow-lg rounded-lg flex flex-col items-center px-10 py-10">
             {feature.icon}
