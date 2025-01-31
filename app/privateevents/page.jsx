@@ -46,17 +46,17 @@ const Page = () => {
           <PrivateEvent />
         </div>
         <div className='flex w-full'> 
-        <div className="w-full md:flex lg:flex">
+        {/* <div className="w-full md:flex lg:flex">
           <CorporateBuilding />
      
           <CorporateNetworking />
        
           <CorporateConference />
+        </div> */}
         </div>
-        </div>
-        <div className="w-full">
+        {/* <div className="w-full">
           <Venues />
-        </div>
+        </div> */}
         {/* <div className="w-full max-w-7xl px-4 md:px-8 mx-auto">
           <Partners />
         </div> */}
