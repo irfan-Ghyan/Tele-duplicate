@@ -28,7 +28,7 @@ const Training = () => {
                 {t('f&b')}
               </h1>
               <p className='md:w-[400px] lg:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6 text-justify leading-7'>
-                {t('Discover immersive learning experiences at Teleios Dome.')}
+                {t('f&b_des')}
               </p>
             </div>
 

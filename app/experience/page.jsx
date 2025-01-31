@@ -12,12 +12,14 @@ import Coaching from '../components/coaching/Coaching';
 import Newsletter from '../components/newsletter/Newsletter';
 
 
+
 const Page = () => {
   
 
   
   return (
     <div className='w-full'>
+     
       <Experience />
     <div className="w-full ">
       <Coaching />

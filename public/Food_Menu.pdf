@@ -1,0 +1,63 @@
+from fpdf import FPDF
+
+# Create a PDF document
+pdf = FPDF()
+pdf.set_auto_page_break(auto=True, margin=15)
+pdf.add_page()
+pdf.set_font("Arial", style='B', size=16)
+
+# Title
+pdf.cell(200, 10, "Food Menu", ln=True, align='C')
+pdf.ln(10)
+
+# Table Headers
+pdf.set_font("Arial", style='B', size=12)
+pdf.cell(10, 10, "ID", border=1, align='C')
+pdf.cell(40, 10, "Name", border=1, align='C')
+pdf.cell(90, 10, "Description", border=1, align='C')
+pdf.cell(30, 10, "Price", border=1, align='C')
+pdf.ln()
+
+# Menu Items
+menu_items = [
+    (1, "Mansaf", "Traditional Jordanian dish with lamb and yogurt sauce.", "20 SAR"),
+    (2, "Kabsa", "Saudi rice dish with meat, spices, and vegetables.", "25 SAR"),
+    (3, "Shawarma", "Grilled meat served with garlic sauce and pita bread.", "15 SAR"),
+    (4, "Baklava", "Sweet pastry filled with nuts and honey.", "10 SAR"),
+    (5, "Hummus", "Creamy chickpea dip served with olive oil and pita.", "12 SAR"),
+    (6, "Falafel", "Deep-fried balls made from ground chickpeas or fava beans.", "8 SAR"),
+    (7, "Tabbouleh", "Lebanese salad with parsley, tomatoes, and bulgur.", "14 SAR"),
+    (8, "Fattoush", "Levantine salad with toasted bread and fresh vegetables.", "14 SAR"),
+    (9, "Kunafa", "Sweet cheese pastry soaked in syrup.", "18 SAR"),
+    (10, "Mandi", "Yemeni dish of spiced rice and meat cooked underground.", "30 SAR"),
+    (11, "Sambousek", "Pastry filled with spiced meat or cheese.", "10 SAR"),
+    (12, "Warak Enab", "Grape leaves stuffed with rice and meat.", "15 SAR"),
+    (13, "Mutabbal", "Smoky eggplant dip with tahini and olive oil.", "12 SAR"),
+    (14, "Kebabs", "Grilled meat skewers served with rice or bread.", "22 SAR"),
+    (15, "Umm Ali", "Egyptian bread pudding with nuts and raisins.", "16 SAR"),
+    (16, "Maqlooba", "Upside-down rice dish with vegetables and meat.", "28 SAR"),
+    (17, "Shakshuka", "Poached eggs in spiced tomato and pepper sauce.", "18 SAR"),
+    (18, "Luqaimat", "Sweet fried dough balls drizzled with syrup.", "8 SAR"),
+    (19, "Fatayer", "Baked pastries with spinach, cheese, or meat filling.", "10 SAR"),
+    (20, "Koshari", "Egyptian dish of rice, lentils, and pasta with tomato sauce.", "20 SAR"),
+    (21, "Freekeh", "Roasted green wheat cooked with meat or chicken.", "22 SAR"),
+    (22, "Basbousa", "Sweet semolina cake soaked in syrup.", "10 SAR"),
+    (23, "Qatayef", "Sweet stuffed pancakes filled with nuts or cream.", "12 SAR"),
+    (24, "Muhammara", "Red pepper and walnut dip with olive oil.", "12 SAR"),
+    (25, "Harira", "Moroccan soup with lentils, chickpeas, and tomatoes.", "18 SAR")
+]
+
+pdf.set_font("Arial", size=10)
+for item in menu_items:
+    pdf.cell(10, 10, str(item[0]), border=1, align='C')
+    pdf.cell(40, 10, item[1], border=1, align='C')
+    pdf.cell(90, 10, item[2], border=1, align='L')
+    pdf.cell(30, 10, item[3], border=1, align='C')
+    pdf.ln()
+
+# Save PDF file
+pdf_filename = "/mnt/data/Food_Menu.pdf"
+pdf.output(pdf_filename)
+
+# Return the generated PDF file path
+pdf_filename

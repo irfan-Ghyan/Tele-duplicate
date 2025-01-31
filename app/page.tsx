@@ -9,6 +9,7 @@ import Corprate from './components/corporate/Corprate';
 import Training from './components/training/Training';
 import Testimonial from './components/testimonial/Testimonial';
 import Faq from './components/faq/Faq';
+import BookNow from './components/booknow/BookNow'; 
 import Newsletter from './components/newsletter/Newsletter';
 // import { ReactGoogleReviews } from "./components/ReactGoogleReviews/ReactGoogleReviews";
 // import GoogleReviews from "./components/googlereviews/GoogleReviews";

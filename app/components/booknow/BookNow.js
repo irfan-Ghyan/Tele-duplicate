@@ -12,3 +12,5 @@ const BookNowButton = ({ href, children, ariaLabel }) => (
 );
 
 export default BookNowButton;
+
+

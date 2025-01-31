@@ -21,9 +21,9 @@ const Page = () => {
           </p>
         </div>
       </div>
-      <div className="w-full flex flex-col items-center">
+      {/* <div className="w-full flex flex-col items-center">
         <UpcomingEvents />
-        {/* <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center">
           <PremierLeague />
         </div>
         <div className="w-full flex justify-center">
@@ -31,8 +31,8 @@ const Page = () => {
         </div>
         <div className="w-full flex justify-center">
           <BahrainParty />
-        </div> */}
-      </div>
+        </div>
+      </div> */}
     </div>
   );
 }

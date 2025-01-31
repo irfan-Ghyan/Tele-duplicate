@@ -101,7 +101,7 @@ const Executive = () => {
       <div className="flex flex-col items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4 pb-10">
           <div className="text-center text-[#e3ce90]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
        {t('executive.heading')}
             </h1>
             <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify max-w-7xl px-4 sm:px-0">

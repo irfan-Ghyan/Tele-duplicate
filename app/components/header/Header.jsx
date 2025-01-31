@@ -201,6 +201,7 @@ const Header = () => {
           )} */}
           <Navbar isTopBannerVisible={isTopBannerVisible} isNavbarBgVisible={isNavbarBgVisible} />
         </div>
+        
       </div>
     </>
   );

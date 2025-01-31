@@ -8,12 +8,12 @@ import WhyteleiosData from '../components/whyteleios/WhyteleiosData';
 import FullwidthSlider from '../components/slider/FullwidthSilder';
 import Form from '../components/form/Form';
 import { useTranslation } from 'react-i18next';
-import FoodMenu from '../../public/foodmenu/FoodMenu.jsx';
+import FoodMenu from '../components/foodmenu/FoodMenu';
 import Link from 'next/link';
 
 const Page = () => {
   const { t, i18n } = useTranslation();
-  const menuPdfUrl = "/Food_Menu.pdf";
+  
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -36,12 +36,14 @@ const Page = () => {
       </Helmet>
       <div className="min-h-screen flex flex-col items-center ">
         <div className="flex items-center justify-center xl:px-20 sm:px-4">
-          <div className="text-center p-6 text-[#c09e5f] mx-auto lg:pt-[50px] ">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('f&b.title')}</h1>
-            <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] font-bold px-[8px] text-justify pt-4 pb-10">
+          <div className="text-justify p-6 text-[#c09e5f] max-w-7xl lg:pt-[50px] ">
+            <h1 className="font-orbitron text-center text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('f&b.title')}</h1>
+            <p className="text-[#e3ce90] text-center font-jura text-[14px] lg:text-[18px] font-bold px-[8px] pb-10">
               {t("f&b.description")}
             </p>
           </div>
+           
+            
         </div>
         {/* <div className="w-full">
           <EducationData />
@@ -58,18 +60,10 @@ const Page = () => {
         {/* <div className="w-full max-w-7xl px-4 md:px-8 mx-auto">
           <Form />
         </div> */}
-        <div className='w-full px-4 max-w-7xl md:px-8 mx-auto py-20'>
-        {/* <FoodMenu /> */}
-        <div className="mt-4 text-start">
-                <Link 
-                    href={menuPdfUrl} 
-                    download="Food_Menu.pdf" 
-                    className="px-4 py-2 bg-[#c09e5f] text-[#002718] rounded-lg font-bold hover:bg-[#e3ce90]"
-                >
-                    Download Menu PDF
-                </Link>
-            </div>
-        </div>
+        {/* <div className='w-full px-4 max-w-7xl md:px-8 mx-auto py-20'>
+        <FoodMenu />
+        
+        </div> */}
 
       </div>
     </>

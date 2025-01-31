@@ -1,6 +1,8 @@
 import React from "react";
+import Link from "next/link";
 
 const FoodMenu = () => {
+ 
     const menuItems = [
         { id: 1, name: "Mansaf", description: "Traditional Jordanian dish with lamb and yogurt sauce.", price: "20 SAR" },
         { id: 2, name: "Kabsa", description: "Saudi rice dish with meat, spices, and vegetables.", price: "25 SAR" },
@@ -31,7 +33,10 @@ const FoodMenu = () => {
       
 
   return (
+
+   
     <div className="bg-[#002718] mb-40 border-8 border-[#e3ce90] border-opacity-30 rounded-lg">
+     
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left border border-[#002718]">
           <thead className="bg-[#002718] text-[#c09e5f]">
@@ -55,6 +60,7 @@ const FoodMenu = () => {
         </table>
       </div>
     </div>
+
   );
 };
 

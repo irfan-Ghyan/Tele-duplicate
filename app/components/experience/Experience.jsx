@@ -1,6 +1,4 @@
 
-
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -10,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { doGetCall, getImageCall } from '@/app/utils/api';
+import PriceTable from '../../components/pricetable/PricingTable';
 
 const Experience = () => {
   const { t } = useTranslation();
@@ -105,20 +104,20 @@ const Experience = () => {
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center text-[#e3ce90]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
-              EXPERIENCE
+            {t('Exp_heading')}
             </h1>
             <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify">
-              {t('Enjoy getting behind the wheel of a race car against your friends.')}
+              {t('Exp_des')}
             </p>
           </div>
         </div>
 
         <div className="w-full">
+        {/* <PriceTable /> */}
           <div className="xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
             {loading && <p className="text-[#c09e5f]">Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
 
-            {/* Render only the first 3 entries */}
             {!loading && !error && faqEntries.length > 0 &&
               faqEntries.slice(0, 1).map((experience, index) => (
                 <div
@@ -137,7 +136,6 @@ const Experience = () => {
                   </div>
                   <div className="flex flex-col justify-around items-center mx-4 pt-4 flex-1 w-full">
                     
-                    {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
                     <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"

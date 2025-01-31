@@ -9,17 +9,26 @@
     "education": "EDUCATION",
     "EXPERIENCES": "EXPERIENCES",
     "VENUE": "TELEIOSX",
+    "Venue.description": "The ultimate destination for luxury entertainment. Where the thrill of racing meets the sophistication of Riyadh’s most dynamic venue.",
+    "Venue.description1": "Step into a space crafted to thrill and inspire. From cutting-edge racing simulators that put you in the driver’s seat to expansive screens broadcasting the biggest events, every detail is designed to captivate.",
     "CORPORATE EVENTS": "CORPORATE EVENTS",
     "EDUCATION": "PRIVATE EVENTS",
     "FOOD": "F&B",
     "watchparties": "WATCH PARTIES",
     "privateevents": "PRIVATE EVENTS",
+    "corporateevents": "CORPORATE EVENTS",
     "f&b": "F & B",
     "saudi_address": "Anas Ibn Malik Rd, Alyasmin, Riyadh 13326, Saudi Arabia",
     "openningtime": "Tuesday - Sunday 12PM to 11PM",
 
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
+    "Exp_heading": "EXPERIENCES",
+    "Exp_des": "Enjoy getting behind the wheel of a race car against your friends",
+    "Corporate_Events": "CORPORATE EVENTS",
+    "Corporate_Events_Heading": "CORPORATE EVENTS",
+    "Corporate_Events_Description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology. Our stunning open-plan Reception and Lounge area is complemented by a Cafeteria and Private Conference Room. You and your guests can then step into our spacious Gaming Room and experience exhilarating simulator racing. For the select few, enjoy the exclusivity of our VIP room. A blend of advanced technology with refined surroundings, book The Teleios Dome for your next Corporate Event.",
+    
     "BOOK NOW": "BOOK NOW",
     "ENQUIRE NOW": "ENQUIRE NOW",
 
@@ -138,11 +147,11 @@
   "WHY_TELEIOS": "Why Teleios?",
   "DESCRIPTION1": "Students are eager to learn about technology, and Teleios Factory provides a unique opportunity...",
 
-  "WHAT_TO_EXPECT": "Our menu features a selection of handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites to complement your visit. ",
+  "WHAT_TO_EXPECT": "Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere of Riyadh’s premier venue. ",
 
  "heading.feature":"FEATURES",
 "executive.heading": "EXECUTIVE LOUNGE",
-"executive.paragraph": "",
+"executive.paragraph": "Step into the Executive Lounge at TeleiosX , a space designed for those who value privacy, comfort, and sophistication.Located on the first floor of Riyadh’s most dynamic venue, the Executive Lounge is your sanctuary to relax, connect, and elevate every moment",
   "FirstName": "First Name",
   "LastName": "Last Name",
   "CompanyName": "Company Name",
@@ -296,7 +305,7 @@
   "education_title": "F & B",
  
   "EDUCATION & TRAININGS": "F & B",
-  "Discover immersive learning experiences at Teleios Dome.": "Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere of Riyadh’s premier venue.",
+  "f&b_des": "Our menu features a selection of handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites to complement your visit.",
   "FIND OUT MORE": "FIND OUT MORE",
 
     "SIGN_UP_NEWSLETTER": "SIGN UP TO OUR NEWSLETTER",
@@ -341,6 +350,31 @@
   "upcomingEntry.title": "Virtual GP",
   "upcomingEntry.description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology.",
 
+  "art.title": "State-of-the-Art Racing Simulator",
+  "art.description": "Feel the adrenaline rush with our premium simulator—perfect for friendly competition or solo adventures.",
+
+"group.heading":"Perfect for Group Gathering",
+  "gaming.title": "Gaming & Entertainment Zone",
+  "gaming.description": "Gather your group for hours of fun with racing simulators,a PS5 and two large TVs all in a sleek, luxurious setting.",
+
+  "group.title": "PLAY",
+  "group.description": "Challenge your friends to a racing duel or enjoy multiplayer games on the PS5.",
+
+  "group.title1": "CONNECT",
+  "group.description1": "Host intimate gatherings, from casual meet-ups to milestone celebrations, in a private and inviting space.",
+
+  "group.title2": "WATCH",
+  "group.description2": "Cheer for your favorite F1 team, sports teams or enjoy a cinematic experience with friends.",
+
+
+"packageItem.price": "",
+"packageItem.duration": "",
+
+  "premium.title": "PREMIUM LOUNGE SETTING",
+  "premium.description": "Designed with elegance and comfort in mind, the Executive Lounge offers plush seating, ambient lighting, and a contemporary vibe for any occasion.",
+
+  "exclusive.title":"Exclusive F&B Offerings",
+  "exclusive.description":"Share moments over handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites curated to enhance your experience.",
 
   "Private_Events": "PRIVATE EVENTS",
   "Private_Events_Heading": "Celebrate in Style, Create Unforgettable Memories",

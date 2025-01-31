@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 
-const DomeData = () => {
+const CorporateEvent = () => {
   const { t } = useTranslation();
 
     const domes = [
-      { title: t('Private_Events_heading'), description: t('Private_Event_Descrition') },
+      { title: t('Corporate_Events_Heading'), description: t('Corporate_Events_Description') },
     ];
 
     
@@ -43,5 +43,5 @@ const DomeData = () => {
   )
 }
 
-export default DomeData;
+export default CorporateEvent;
 

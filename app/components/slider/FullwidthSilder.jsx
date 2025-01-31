@@ -6,8 +6,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
 
 const CustomPrevArrow = ({ onClick }) => (
+  
   <button
     className="absolute left-0 lg:left-20 transform -translate-y-1/2 z-10 "
     style={{ top: '50%' }}
@@ -28,6 +30,7 @@ const CustomNextArrow = ({ onClick }) => (
 );
 
 const FullWidthSlider = () => {
+  const menuPdfUrl = "/Food_Menu.pdf";
   const { t } = useTranslation();
   const settings = {
     dots: true,
@@ -69,10 +72,20 @@ const FullWidthSlider = () => {
   };
 
   return (
+    <>
+    <div className="mt-4 text-start mb-10 max-w-7xl mx-auto">
+    <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] text-justify font-bold px-[8px] py-10 ">{t('WHAT_TO_EXPECT')}</p>
+    <Link 
+        href={menuPdfUrl} 
+        download="Food_Menu.pdf" 
+        className="px-4 py-2 bg-[#c09e5f] text-[#002718] rounded-lg font-bold hover:bg-[#e3ce90]"
+    >
+        Download Menu PDF
+    </Link>
+</div>
     <div className="slider-wrapper h-auto py-10 ">
-      <h1 className="text-[34px] mb-4 text-[#c09e5f] font-black text-center font-orbitron pb-2 ">{t('heading.feature')}</h1>
-      <p className="text-[#e3ce90] font-jura text-[14px] lg:text-[18px] text-center font-bold px-[8px] pt-2 pb-10 ">{t('WHAT_TO_EXPECT')}</p>
-      <div className="slider-container py-4 relative">
+     
+      <div className="slider-container py-4 relative mb-20">
         <Slider {...settings}>
          
           <div className="slide">
@@ -142,6 +155,7 @@ const FullWidthSlider = () => {
         }
       `}</style>
     </div>
+    </>
   );
 };
 
