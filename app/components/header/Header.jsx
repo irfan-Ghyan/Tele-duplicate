@@ -12,6 +12,7 @@ import Corprate from '../../components/corporate/Corprate';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { switchLanguage } from '../../utils/language.js';
+import Link from 'next/link';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -136,6 +137,7 @@ const Header = () => {
         className={`relative max-w-full overflow-hidden ${pathname === '/' ? ' bg-header-bg bg-cover bg-center min-h-screen' : 'h-[140px] '
           } text-white flex flex-col justify-between`}
       >
+         
         {pathname === '/' && videoUrl && (
           <video
             preload="auto"
@@ -149,6 +151,7 @@ const Header = () => {
             <source src={videoUrl} type="video/webm" />
             Your browser does not support the video tag.
           </video>
+          
         )}
 
         {pathname === '/' && (
@@ -163,12 +166,14 @@ const Header = () => {
             <div className="flex">
               <Image src="/assets/video/play.png" width={80} height={80} alt="Play Video" />
             </div>
+           
           </button>
         )}
 
         {pathname === '/' && (
+          <>
           <button
-            className="absolute bottom-10 md:bottom-20 lg:bottom-20 xl:bottom-20 left-1/2 transform -translate-x-1/2 z-20 p-2 rounded-full hover:opacity-80 transition"
+            className="flex absolute bottom-10 md:bottom-20 lg:bottom-20 xl:bottom-20 left-1/2 transform -translate-x-1/2 z-20 p-2 rounded-full hover:opacity-80 transition"
             onClick={scrollToSection}
           >
             <Image
@@ -178,7 +183,17 @@ const Header = () => {
               alt="Scroll Down"
               priority
             />
+             <div className="w-full px-4 md:px-8 ml-[40px]">
+           <Link
+             href="/experience"
+             className="button-slanted w-[160px] md:w-[300px] h-[60px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+           >
+             <span className="button-slanted-content">{t('BOOK NOW')}</span>
+           </Link>
+         </div>
           </button>
+         
+         </>
         )}
 
         {showCorpratePopup && (
@@ -191,18 +206,24 @@ const Header = () => {
                 &times;
               </button>
               <Corprate />
+              
             </div>
+            
           </div>
         )}
+        
 
         <div className={`relative z-10 xl:py-[32px] ${isTopBannerVisible ? '' : 'pt-0'}`}>
           {/* {!shouldHideBannersAndBackground && isTopBannerVisible && (
             <TopBanner onClose={handleCloseTopBanner} />
           )} */}
+         
           <Navbar isTopBannerVisible={isTopBannerVisible} isNavbarBgVisible={isNavbarBgVisible} />
+          
         </div>
-        
+      
       </div>
+      
     </>
   );
 };

@@ -9,6 +9,7 @@ import DomeCustomize from '../components/domecustomize/DomeCustomize';
 import DomeLounge from '../components/domelounge/DomeLounge';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import TeleiosxFeatures from '../components/teleiosxfeatures/TeleiosxFeatures';
 
 
 const Page = () => {
@@ -48,7 +49,9 @@ const Page = () => {
           
           </div>
         </div>
-
+        <div className="w-full px-4 py-10 lg:py-20">
+       <TeleiosxFeatures />
+       </div>
        {/* <DomeData />
         <DomeVip />
         <DomePit />

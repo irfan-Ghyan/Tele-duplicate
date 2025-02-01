@@ -11,10 +11,14 @@ import Testimonial from './components/testimonial/Testimonial';
 import Faq from './components/faq/Faq';
 import BookNow from './components/booknow/BookNow'; 
 import Newsletter from './components/newsletter/Newsletter';
+import Link from 'next/link';
+import { useTranslation } from 'react-i18next';
+
 // import { ReactGoogleReviews } from "./components/ReactGoogleReviews/ReactGoogleReviews";
 // import GoogleReviews from "./components/googlereviews/GoogleReviews";
 
 const Home = () => {
+const { t } = useTranslation();
   return (
     <>
       <Helmet>
@@ -34,7 +38,9 @@ const Home = () => {
 
       
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
+      
         <div className="w-full px-4 md:px-8">
+          
           <Content />
         </div>
         <div className="w-full">
