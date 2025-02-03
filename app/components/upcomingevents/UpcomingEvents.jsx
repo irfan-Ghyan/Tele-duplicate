@@ -103,7 +103,7 @@ const UpcomingEvents = () => {
                   <h1 className="text-[24px] lg:text-[34px] text-[#c09e5f] font-black font-orbitron">
                     {upcomingEntry.title || t('defaultTitle')}
                   </h1>
-                  <p className="w-[340px] md:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#c09e5f] font-bold font-jura mt-6">
+                  <p className="w-[340px] md:w-[550px] xl:w-[600px] md:text-[14px] lg:text-[18px] text-[#e3ce90] font-bold font-jura mt-6">
                     {upcomingEntry.description || t('defaultDescription')}
                   </p>
                   <div className="py-10">

@@ -212,14 +212,14 @@ const Navbar = ({ isTopBannerVisible }) => {
           </div>
 
           {/* Book Now Button */}
-          {/* <div className="hidden xl:flex items-center">
+          <div className="hidden xl:flex items-center">
             <Link
               href="/experience"
               className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content">{t('BOOK NOW')}</span>
             </Link>
-          </div> */}
+          </div>
 
           {/* Hamburger Menu for Mobile */}
           <div className="xl:hidden">
@@ -241,7 +241,7 @@ const Navbar = ({ isTopBannerVisible }) => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div ref={menuRef} className="mx-8 xl:hidden bg-[#002718] absolute right-0 top-full w-[400px]">
+          <div ref={menuRef} className="mx-8 xl:hidden bg-[#002718] absolute right-0 top-full w-[300px]">
             <div className="flex flex-col items-start px-4 py-4">
               <Link
                 href="/experience"
@@ -293,7 +293,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               >
                 {t('f&b')}
               </Link>
-              {/* Additional Links or Dropdowns can be added here */}
+          
             </div>
           </div>
         )}

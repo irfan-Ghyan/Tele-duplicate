@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { doGetCall, getImageCall } from '@/app/utils/api';
-import PriceTable from '../../components/pricetable/PricingTable';
+
 
 const Experience = () => {
   const { t } = useTranslation();
@@ -100,10 +100,10 @@ const Experience = () => {
         <link rel="preload" href="/assets/images/experience/mintue1.jpg" as="image" />
       </Head>
 
-      <div className="flex flex-col items-center overflow-x-hidden lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
+      <div className="flex flex-col items-center overflow-x-hidden lg:pt-[50px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center text-[#e3ce90]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#e3ce90] font-black mb-4">
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
             {t('Exp_heading')}
             </h1>
             <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify">
@@ -113,7 +113,7 @@ const Experience = () => {
         </div>
 
         <div className="w-full">
-        {/* <PriceTable /> */}
+        
           <div className="xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
             {loading && <p className="text-[#c09e5f]">Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}

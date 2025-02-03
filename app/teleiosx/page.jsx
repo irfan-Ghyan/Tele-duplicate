@@ -20,12 +20,12 @@ const Page = () => {
   return (
     <>
       <Helmet>
-        <title>{t('DOME')} | {t('Thrill of racing on our cutting-edge simulators')}</title>
+        <title>{t('VENUE')} | {t('Thrill of racing on our cutting-edge simulators')}</title>
         <meta
           name="description"
           content={t('Explore the Teleios Dome, from factory visits to thrilling racing experiences, and engage in immersive learning adventures.')}
         />
-        <meta property="og:title" content={`${t('DOME')} | Teleios Dome`} />
+        <meta property="og:title" content={`${t('VENUE')} | Teleios Dome`} />
         <meta
           property="og:description"
           content={t('Discover education at Teleios Dome, including factory tours and exciting racing experiences that offer immersive learning for participants.')}

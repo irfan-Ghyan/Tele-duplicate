@@ -10,6 +10,7 @@ import Link from 'next/link';
 import Experience from '../components/experience/Experience';
 import Coaching from '../components/coaching/Coaching';
 import Newsletter from '../components/newsletter/Newsletter';
+import PriceTable from '../components/pricetable/PricingTable';
 
 
 
@@ -21,10 +22,11 @@ const Page = () => {
     <div className='w-full'>
      
       <Experience />
-    <div className="w-full ">
+      <PriceTable />
+    {/* <div className="w-full ">
       <Coaching />
-      {/* <Newsletter /> */}
-    </div>
+      <Newsletter />
+    </div> */}
 
   </div>
   );

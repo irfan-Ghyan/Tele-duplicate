@@ -31,7 +31,7 @@ const Page = () => {
           <ArtRacingSimulator />
         </div>
 
-        <div className="w-full flex justify-center">
+        {/* <div className="w-full flex justify-center">
           <GamingEntertainmentZone />
         </div>
         <div className="w-full flex justify-center">
@@ -42,7 +42,7 @@ const Page = () => {
         </div>
         <div className="w-full flex justify-center">
           <GroupGathering />
-        </div>
+        </div> */}
 
         <div className="w-full flex justify-center">
           <FlexiblePackages />

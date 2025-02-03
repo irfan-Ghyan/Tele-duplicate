@@ -22,7 +22,7 @@ const Page = () => {
   return (
     <>
       <Helmet>
-        <title>{t('FOOD & BEVERAGE ')}</title>
+        <title>{t('F&B ')}</title>
         <meta
           name="description"
           content={t("Food and beverages bring joy to life, uniting people over delicious meals and refreshing drinks. Whether it's a cozy coffee, a sweet treat, or a hearty dish, they create moments of comfort and celebration, making every gathering special.")}

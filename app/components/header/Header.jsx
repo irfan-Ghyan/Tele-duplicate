@@ -183,14 +183,7 @@ const Header = () => {
               alt="Scroll Down"
               priority
             />
-             <div className="w-full px-4 md:px-8 ml-[40px]">
-           <Link
-             href="/experience"
-             className="button-slanted w-[160px] md:w-[300px] h-[60px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
-           >
-             <span className="button-slanted-content">{t('BOOK NOW')}</span>
-           </Link>
-         </div>
+            
           </button>
          
          </>

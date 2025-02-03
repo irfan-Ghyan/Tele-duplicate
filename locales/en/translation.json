@@ -380,6 +380,58 @@
   "Private_Events_Heading": "Celebrate in Style, Create Unforgettable Memories",
   "Private_Events_Descrption": "Make your special day truly extraordinary at TeleiosX. Whether it’s a birthday party, a festive gathering, or any milestone celebration, our venue transforms into a playground of excitement, luxury, and personalized touches. Designed for fun and sophistication, TeleiosX is where memories are made.",
 
+"Simulator_Sessions_Title": "Simulator Sessions up to 3 people:",
+"Simulator_Sessions_Price20": "20’",
+"Simulator_Sessions_Person20": " 95 SAR per person",
+
+"Simulator_Sessions_Price40": "40’",
+"Simulator_Sessions_Person40": "170 SAR per person",
+
+"Simulator_Sessions_Price40": "60’",
+"Simulator_Sessions_Person40": "250 SAR per person",
+
+"Racing_Sessions_Title": "Group Racing 4 people and above :",
+
+"Racing_Sessions_Price40": "40’",
+"Racing_Sessions_Person40": "140 SAR per person",
+
+"Racing_Sessions_Price40": "60’",
+"Racing_Sessions_Person40": "200 SAR per person",
+
+
+
+  "simulatorSessions": {
+    "title": "Simulator Sessions (Up to 3 People)",
+    "duration": "{{duration}}",
+    "price": "{{price}} per person"
+  },
+  "groupRacing": {
+    "title": "Group Racing (4+ People)",
+    "duration": "{{duration}}",
+    "price": "{{price}} per person"
+  },
+
+
+  "art": {
+    "title": "",
+    "description": "",
+    "card1": {
+      "title": "State-of-the-Art Racing Simulator",
+      "description": "Feel the adrenaline rush with our premium simulator—perfect for friendly competition or solo adventures."
+    },
+    "card2": {
+      "title": "Gaming & Entertainment Zone",
+      "description": "Gather your group for hours of fun with racing simulators,a PS5 and two large TVs all in a sleek, luxurious setting."
+    },
+    "card3": {
+      "title": "Premium Lounge Setting",
+      "description": "Designed with elegance and comfort in mind, the Executive Lounge offers plush seating, ambient lighting, and a contemporary vibe for any occasion."
+    },
+    "card4": {
+      "title": "Exclusive F&B Offerings",
+      "description": "Share moments over handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites curated to enhance your experience."
+    }
+  },
 
   
   "Teleios_Heading": "TeleiosX",

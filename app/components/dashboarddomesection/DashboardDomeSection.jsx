@@ -11,7 +11,7 @@ const translations = {
     show: 'Show',
     loading: 'Loading...',
     error: 'Failed to load data. Please try again.',
-    domeTitle: 'DOME',
+    domeTitle: 'Venue',
     title: 'Title',
     description: 'Description',
     uploadImages: 'Upload Images',
