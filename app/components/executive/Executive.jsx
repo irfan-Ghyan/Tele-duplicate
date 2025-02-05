@@ -84,11 +84,11 @@ const Executive = () => {
   return (
     <>
       <Helmet>
-        <title>{t('Executive Lounge | Racing simulators and all-inclusive access')}</title>
+        <title>{t('EXECUTIVE LOUNGE | Step into the Executive Lounge at TeleiosX')}</title>
         <meta
           name={t('description')}
           content={t(
-            'Explore various racing experiences at Teleios Dome, from beginner sessions to exclusive VIP experiences. Enjoy adrenaline-packed moments tailored to your level of skill.'
+            'Step into the Executive Lounge at TeleiosX , a space designed for those who value privacy, comfort, and sophistication.Located on the first floor of Riyadh’s most dynamic venue, the Executive Lounge is your sanctuary to relax, connect, and elevate every moment.'
           )}
         />
       </Helmet>

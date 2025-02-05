@@ -279,7 +279,7 @@ const CorporateBuilding = () => {
                 <h1 className="text-[18px] text-[#c09e5f] font-bold font-orbitron">
                    {teamEntry.title}
                 </h1>
-                <p className="text-[#c09e5f] font-jura text-center hidden md:block text-balance">
+                <p className="text-[#e3ce90] font-jura text-center hidden md:block text-balance">
                    {teamEntry.description}
                 </p>
               </Link>

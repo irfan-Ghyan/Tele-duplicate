@@ -16,7 +16,6 @@ const Page = () => {
   const { t } = useTranslation();
 
 
-
   return (
     <>
       <Helmet>
@@ -49,7 +48,7 @@ const Page = () => {
           
           </div>
         </div>
-        <div className="w-full px-4 py-10 lg:py-20">
+        <div className="w-full">
        <TeleiosxFeatures />
        </div>
        {/* <DomeData />

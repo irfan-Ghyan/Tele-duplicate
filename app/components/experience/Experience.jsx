@@ -101,7 +101,7 @@ const Experience = () => {
       </Head>
 
       <div className="flex flex-col items-center overflow-x-hidden lg:pt-[50px]">
-        <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4">
+        <div className="flex items-center justify-center px-[10px] xl:px-40 lg:px-20 sm:px-4">
           <div className="text-center text-[#e3ce90]">
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
             {t('Exp_heading')}
@@ -112,9 +112,9 @@ const Experience = () => {
           </div>
         </div>
 
-        <div className="w-full">
+        <div className="w-full px-4">
         
-          <div className="xl:flex xl:justify-center gap-4 my-6 lg:mx-80">
+          <div className=" md:flex lg:flex xl:flex xl:justify-center gap-4 my-6 ">
             {loading && <p className="text-[#c09e5f]">Loading...</p>}
             {error && <p className="text-red-500">{error}</p>}
 
@@ -138,7 +138,7 @@ const Experience = () => {
                     
                     <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        className="button-slanted cursor-pointer w-[200px] md:w-[220px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={getHref(experience.title)} 
                       >
                         <span className="button-slanted-content">{t('BOOK NOW')}</span>
@@ -157,7 +157,7 @@ const Experience = () => {
                     {/* Second Button: Hidden on Small Screens, Visible on Large Screens */}
                     <div className="pt-[19px] pb-[22px] hidden lg:block">
                       <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        className="button-slanted cursor-pointer w-[200px] md:w-[220px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={getHref(experience.title)} 
                       >
                         <span className="button-slanted-content">{t('BOOK NOW')}</span>
@@ -187,10 +187,9 @@ const Experience = () => {
                   
                   <div className="flex flex-col justify-around  items-center mx-4 pt-4 flex-1 w-full">
                     
-                    {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
                     <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        className="button-slanted cursor-pointer w-[200px] md:w-[220px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={index === 0 ? `/vip` : `/lounge`}
                       >
                         <span className="button-slanted-content">{t('BOOK NOW')}</span>
@@ -206,10 +205,9 @@ const Experience = () => {
                       </p>
                     </div>
 
-                    {/* Second Button: Hidden on Small Screens, Visible on Large Screens */}
                     <div className="pt-[19px] pb-[22px] hidden lg:block">
                       <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        className="button-slanted cursor-pointer w-[200px] md:w-[220px] lg:w-[250px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={index === 0 ? `/vip` : `/lounge`}
                       >
                         <span className="button-slanted-content">{t('BOOK NOW')}</span>

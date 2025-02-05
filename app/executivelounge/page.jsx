@@ -23,26 +23,10 @@ const Page = () => {
       <Coaching />
       <Newsletter />
     </div> */}
-
-{/* <div className="w-full flex justify-center">
-          <ExperienceSection />
-        </div> */}
         <div className="w-full flex justify-center">
           <ArtRacingSimulator />
         </div>
 
-        {/* <div className="w-full flex justify-center">
-          <GamingEntertainmentZone />
-        </div>
-        <div className="w-full flex justify-center">
-          <PremiumLoungeSetting />
-        </div>
-        <div className="w-full flex justify-center">
-          <ExclusiveOfferongs />
-        </div>
-        <div className="w-full flex justify-center">
-          <GroupGathering />
-        </div> */}
 
         <div className="w-full flex justify-center">
           <FlexiblePackages />

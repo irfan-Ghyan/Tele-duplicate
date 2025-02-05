@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import EducationData from '../components/educationdata/EducationData';
 import DrivingData from '../components/drivingdata/DrivingData';
 import WhyteleiosData from '../components/whyteleios/WhyteleiosData';
-import FullwidthSlider from '../components/slider/FullwidthSilder';
+import SmallSlider from '../components/smallslider/SmallSlider';
 import Form from '../components/form/Form';
 import { useTranslation } from 'react-i18next';
 import FoodMenu from '../components/foodmenu/FoodMenu';
@@ -55,7 +55,7 @@ const Page = () => {
           <WhyteleiosData /> 
         </div>*/}
         <div className="w-full">
-          <FullwidthSlider />
+          <SmallSlider />
         </div>
         {/* <div className="w-full max-w-7xl px-4 md:px-8 mx-auto">
           <Form />

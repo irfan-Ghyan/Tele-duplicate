@@ -803,7 +803,7 @@ const Page = ({ params } ) => {
                   </div>
                   
 
-                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
+                  <div className="w-[380px] lg:w-[820px] bg-[#e3ce90] px-[20px] lg:p-[30px] h-[183px] rounded-lg mt-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>

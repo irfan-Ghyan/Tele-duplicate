@@ -43,9 +43,9 @@ const { t } = useTranslation();
           
           <Content />
         </div>
-        <div className="w-full">
+        {/* <div className="w-full">
           <ReserveSeat />
-        </div>
+        </div> */}
         <div className="w-full">
           <Dome />
         </div>

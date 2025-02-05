@@ -376,9 +376,100 @@
   "exclusive.title":"Exclusive F&B Offerings",
   "exclusive.description":"Share moments over handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites curated to enhance your experience.",
 
+  "Celebrate_Events_Heading": "Celebrate in Style, Create Unforgettable Memories",
+  "Celebrate_Events_Description": "Make your special day truly extraordinary at TeleiosX. Whether it’s a birthday party, a festive gathering, or any milestone celebration, our venue transforms into a playground of excitement, luxury, and personalized touches. Designed for fun and sophistication, TeleiosX is where memories are made.",
+
+
+  
+    "offerEvent": {
+      "title": "What We Offer",
+      "vipBays": {
+        "heading": "VIP Bays",
+        "description": "Perfect for small groups to enjoy private racing sessions, gaming, and entertainment."
+      },
+      "vipSuite": {
+        "heading": "VIP Suite",
+        "description": "A premium lounge for larger gatherings, complete with a racing simulator, PS5, and luxurious seating."
+      },
+      "festiveDecor": {
+        "heading": "Festive Decor",
+        "description": "Optional themed decorations to enhance the party vibe."
+      },
+      "fbPackages": {
+        "heading": "F&B Packages",
+        "description": "Handcrafted mocktails, specialty coffee, and light bites tailored to your celebration."
+      },
+      "bigScreens": {
+        "heading": "Big Screens",
+        "description": "Showcase personal videos, slideshows, or enjoy live entertainment with your loved ones."
+      }
+    },
+  
+      "privateEvent": {
+        "title": "Why Choose TeleiosX for Your Private Event?",
+        "exclusivity": {
+          "heading": "Exclusivity at its Best",
+          "description": "Celebrate in a private and luxurious setting, ensuring every moment feels special."
+        },
+        "customizable": {
+          "heading": "Customizable Experiences",
+          "description": "From themed setups to personalized activities, we tailor every detail to match your vision."
+        },
+        "entertainment": {
+          "heading": "Entertainment for All Ages",
+          "description": "Enjoy our state-of-the-art racing simulators, PS5 gaming, and big screens for sports and entertainment."
+        }
+      },
+
+  
+        "occasionEvent": {
+          "title": "Perfect for Every Occasion",
+          "birthday": {
+            "heading": "Birthday Parties",
+            "description": "Celebrate another year with thrilling activities and a luxurious ambiance."
+          },
+          "festive": {
+            "heading": "Festive Gatherings",
+            "description": "From family reunions to holiday parties, make every celebration unique."
+          },
+          "milestone": {
+            "heading": "Milestone Moments",
+            "description": "Whether it’s an anniversary or a personal achievement, TeleiosX is the place to celebrate it in style."
+          }
+        },
+      
+          "howItWorks": {
+            "title": "How It Works",
+            "plan": {
+              "heading": "Plan with Us",
+              "description": "Share your vision, and our team will handle the rest."
+            },
+            "create": {
+              "heading": "Create the Experience",
+              "description": "Enjoy personalized entertainment, decor, and food options."
+            },
+            "celebrate": {
+              "heading": "Celebrate",
+              "description": "Sit back, relax, and make unforgettable memories with your loved ones."
+            },
+            "finalMessage": "Make your private event one to remember at TeleiosX.",
+            "contactUs": "Contact Us",
+            "riyadhMessage": "Celebrate, play, and connect in Riyadh’s ultimate entertainment destination."
+          },
+        
+
   "Private_Events": "PRIVATE EVENTS",
-  "Private_Events_Heading": "Celebrate in Style, Create Unforgettable Memories",
-  "Private_Events_Descrption": "Make your special day truly extraordinary at TeleiosX. Whether it’s a birthday party, a festive gathering, or any milestone celebration, our venue transforms into a playground of excitement, luxury, and personalized touches. Designed for fun and sophistication, TeleiosX is where memories are made.",
+  "Private_Events_Heading": "Why Choose TeleiosX for Your Private Event?",
+  "Private_Events_Descrption": "Exclusivity at its Best: Celebrate in a private and luxurious setting, ensuring every moment feels special",
+"Private_Events_Descrption1": "Customizable Experiences: From themed setups to personalized activities, we tailor every detail to match your vision.",
+"Private_Events_Descrption2": "Entertainment for All Ages: Enjoy our state-of-the-art racing simulators, PS5 gaming, and big screens for sports and entertainment.",
+
+"Private_Events_Descrption3":"What We Offer",
+"Private_Events_Descrption4":"VIP Bays: Perfect for small groups to enjoy private racing sessions, gaming, and entertainment.",
+"Private_Events_Descrption5": "VIP Suite: A premium lounge for larger gatherings, complete with a racing simulator, PS5, and luxurious seating.",
+"Private_Events_Descrption6":"Festive Decor: Optional themed decorations to enhance the party vibe.",
+"Private_Events_Descrption7":"F&B Packages: Handcrafted mocktails, specialty coffee, and light bites tailored to your celebration.",
+"Private_Events_Descrption8":"Big Screens: Showcase personal videos, slideshows, or enjoy live entertainment with your loved ones.",
 
 "Simulator_Sessions_Title": "Simulator Sessions up to 3 people:",
 "Simulator_Sessions_Price20": "20’",
@@ -400,6 +491,42 @@
 
 
 
+"flexiSessions_Title": "VIP Bays at TeleiosX",
+"flexiSessions_Price20": "60’",
+"flexiSessions_Person20": " 400 SAR",
+
+"flexiSessions_Price40": "90’",
+"flexiSessions_Person40": "500 SAR",
+
+"flexiSessions_Price40": "120’",
+"flexiSessions_Person40": "600 SAR",
+
+"groSessions_Title": "VIP Suite at TeleiosX",
+
+"groSessions_Price40": "60’",
+"groSessions_Person40": " 800  SAR",
+
+"groSessions_Price60": "90’",
+"groSessions_Person90": "1000 SAR",
+"groSessions_Price120": "120’",
+"groSessions_Person40": "1000 SAR",
+
+
+
+  "flexiSessions": {
+    "heading": "VIP Bays at TeleiosX",
+    "duration": "Duration: {{duration}}",
+    "price": "Price: {{price}}"
+  },
+  "groRacing": {
+    "title": "VIP Suite at TeleiosX",
+    "duration": "Duration: {{duration}}",
+    "price": "Price: {{price}}"
+  },
+
+
+
+
   "simulatorSessions": {
     "title": "Simulator Sessions (Up to 3 People)",
     "duration": "{{duration}}",
@@ -413,7 +540,7 @@
 
 
   "art": {
-    "title": "",
+    "title": "Flexible Packages For Groups",
     "description": "",
     "card1": {
       "title": "State-of-the-Art Racing Simulator",
