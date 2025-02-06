@@ -5,8 +5,6 @@ import React, { useState, useCallback, useEffect } from "react";
 import CalendarComponent from "../components/calendar/Calendar";
 import PlanSelector from "../components/planselector/PlanSelector";
 import { doGetCall, doPostCall } from "../utils/api";
-// import BookingType from "../components/bookingtype/BookingType";
-// import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
@@ -193,31 +191,6 @@ const Page = ({ params } ) => {
   };
 
   
-
-  // const handlePlanChange = async (newDuration) => {
-
-  //   //step 4
-  //     // 1 - fetch fresh time slots
-  //     // 2 - de-select time slot if that slot for that many people is not availablef 
-    
-  //   updateBookingDetail("duration", newDuration);
-  //   await fetchBookings();
-
-  // // Validate the selected time slot
-  //   if (activeTime) {
-  //     const isSelectedTimeAvailable = Object.values(times).some(
-  //       (slot) => slot.time === activeTime && slot.sims >= count
-  //     );
-  
-  //     // Deselect the time slot if it's not available
-  //     if (!isSelectedTimeAvailable) {
-  //       setActiveTime(null);
-  //       updateBookingDetail("time", "");
-  //       setSeatError("The selected time slot is not available.");
-
-  //     }
-  //   }
-  // };
   const handlePlanChange = async (newDuration) => {
     await fetchBookings();
     setSlotInterval(newDuration);
@@ -253,11 +226,6 @@ const Page = ({ params } ) => {
   
 
   const handleDateChange = async (newDate) => {
-    //step 3
-    //when clicked a day
-     // 1 - fetch fresh time slots
-      // 2 - deselect the selected time slot ( de select only if this slot is not available on this day for this many people)
-   
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
     const formattedDate = newDate.toLocaleDateString("en-CA"); 
     const selectedDate = new Date(newDate);
@@ -322,22 +290,18 @@ const Page = ({ params } ) => {
     const startTime = timeToMinutes(data[0].time);
     const endTime = timeToMinutes(data[data.length - 1].time);
 
-    // Generate all 20-minute slots
     for (let time = startTime; time <= endTime; time += 20) {
         const hours = String(Math.floor(time / 60)).padStart(2, "0");
         const minutes = String(time % 60).padStart(2, "0");
         timeSlots.push(`${hours}:${minutes}`);
     }
 
-    // Identify missing slots and add them to the data
     const missingSlots = timeSlots
         .filter((slot) => !data.some((entry) => entry.time === slot))
         .map((slot) => ({ time: slot, sims: 0 }));
 
-    // Combine original data with missing slots
     const updatedData = [...data, ...missingSlots];
 
-    // Sort the data by time
     updatedData.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
 
     return updatedData;
@@ -356,11 +320,6 @@ const Page = ({ params } ) => {
   };
 
 
-    // step 1
-  //save available number of sim for the clicked slot 
-  //available sims are fetched when slots are fetched
-  //To-Do:
-    // available sims for this clicked slots needs to be saved so we can access them in number of people counter
   const chunkArray = (array, chunkSize) => {
     const result = [];
     for (let i = 0; i < array.length; i += chunkSize) {
@@ -460,18 +419,6 @@ const Page = ({ params } ) => {
     if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
       errors.phone = "A valid phone number is required.";
      }
-    // if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
-    //   errors.cardNumber = "Card number must be 16 digits.";
-    // }
-    // if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
-    //   errors.expiryDate = "Expiry date must be in MM/YY format.";
-    // }
-    // if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
-    //   errors.securityCode = "CVV must be 3 or 4 digits.";
-    // }
-    // if (!formData.cardHolderName.trim()) {
-    //   errors.cardHolderName = "Cardholder name is required.";
-    // }
   
     setValidationErrors(errors);
     return Object.keys(errors).length === 0;
@@ -509,36 +456,14 @@ const Page = ({ params } ) => {
       // billingAddress: formData.billingAddress,
     };
   
-    // const fullBookingData = { ...bookingData, ...paymentData };
-  
-    // if (validateForm()) {
-    //   console.log("Form is valid. Proceeding to submit:", formData);
-    // } else {
-    //   console.error("Form validation failed.");
-    // }
+ 
 
     if (!formData.firstName.trim()) errors.firstName = "First name is required.";
     if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "A valid email is required.";
     }
-    // if (!formData.phone.trim() || !/^\d+$/.test(formData.phone)) {
-    //   errors.phone = "A valid phone number is required.";
-    // }
-    // if (!formData.cardNumber.trim() || !/^\d{16}$/.test(formData.cardNumber)) {
-    //   errors.cardNumber = "Card number must be 16 digits.";
-    // }
-    // if (!formData.expiryDate.trim() || !/^(0[1-9]|1[0-2])\/\d{2}$/.test(formData.expiryDate)) {
-    //   errors.expiryDate = "Expiry date must be in MM/YY format.";
-    // }
-    // if (!formData.securityCode.trim() || !/^\d{3,4}$/.test(formData.securityCode)) {
-    //   errors.securityCode = "CVV must be 3 or 4 digits.";
-    // }
-    // if (!formData.cardHolderName.trim()) {
-    //   errors.cardHolderName = "Cardholder name is required.";
-    // }
-  
-    // Update state with validation errors
+
     setValidationErrors(errors);
   
     if (Object.keys(errors).length > 0) {
@@ -546,7 +471,6 @@ const Page = ({ params } ) => {
       return;
     }
   
-    // If no validation errors, clear general error and proceed
     setGeneralError("");
     handleTabChange(3);
 
@@ -582,39 +506,31 @@ const Page = ({ params } ) => {
       const timer = setTimeout(() => {
         setGeneralError("");
         setBookingErrors([]);
-      }, 2000); // Clear after 5 seconds
+      }, 2000); 
   
-      return () => clearTimeout(timer); // Cleanup on unmount
+      return () => clearTimeout(timer);
     }
   }, [generalError, bookingErrors]);
 
 
 
 
-  // Tab 1: Create Booking
   const handleCreateBooking = () => {
-    // You can implement your logic to create the booking here.
     console.log("Create Booking logic...");
   };
 
-  // Tab 2: Payment
+ 
   const handlePayment = () => {
-    // Implement the payment logic here (for instance, invoking a payment gateway API).
     console.log("Payment logic...");
   };
 
-  // Tab 3: Thank You
+
   const handleThankYou = () => {
-    // Show thank you message after successful booking and payment.
+
     console.log("Thank you logic...");
   };
 
-  // const handleButtonClick = (timeKey, timeValue, sims) => {
-  //   setActiveTime(timeKey);
-  //   updateBookingDetail("time", timeValue);
-  //   setAvailableSIMs(sims); // Save the available SIMs for the clicked slot step.1
-  //   console.log(`Available SIMs for slot ${timeValue}:`, sims);
-  // };
+
   const handleButtonClick = (timeKey, timeValue, sims) => {
     if (sims >= count) {
       setActiveTime(timeKey);
@@ -626,18 +542,6 @@ const Page = ({ params } ) => {
     }
   };
 
-  // const validateBookingDetails = () => {
-  //   const errors = [];
-  
-  //   bookingDetails.forEach((detail) => {
-  //     if (detail.key !== "name" && (!detail.description || detail.description.trim() === "")) {
-  //       errors.push(`The field "${detail.title}" is required.`);
-  //     }
-  //   });
-  
-  //   setBookingErrors(errors);
-  //   return errors.length === 0;
-  // };
 
   const validateBookingDetails = () => {
     const errors = [];
@@ -659,27 +563,18 @@ const Page = ({ params } ) => {
   };
   
 
-  // const handleTabChange = (tabIndex) => {
-  //     if (tabIndex === 2 && !validateBookingDetails()) {
-  //       return;
-  //     }
-    
-  //     setActiveTab(tabIndex);
-  // };
-  
   const handleTabChange = (tabIndex) => {
     if (tabIndex === 2) {
       if (count === 0) {
         setGeneralError("Please select at least one seat before continuing.");
-        return; // Prevent tab change
+        return;
       }
   
       if (!validateBookingDetails()) {
-        return; // Prevent tab change if other validations fail
+        return;
       }
     }
   
-    // Clear error and proceed to next tab
     setGeneralError("");
     setActiveTab(tabIndex);
   };
@@ -692,7 +587,7 @@ const Page = ({ params } ) => {
   
     const [hours, minutes] = time.split(":").map(Number);
     const ampm = hours >= 12 ? "PM" : "AM";
-    const formattedHours = hours % 12 || 12; // Convert 0 to 12 for midnight
+    const formattedHours = hours % 12 || 12; 
     return `${formattedHours}:${minutes.toString().padStart(2, "0")} ${ampm}`;
   }
   
@@ -703,15 +598,15 @@ const Page = ({ params } ) => {
       <div className="min-h-screen w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
         
       <button
-          className="text-[#e3ce90] mt-[40px]"
+          className="text-[#e3ce90] mt-[40px] px-4"
           onClick={goBack} 
         >
            {t('goBack')}
         </button>
        
       <div>
-        <div className="my-[60px] ">
-            <div className="flex justify-between items-center w-[403px] max-w-7xl mx-auto my-8">
+        <div className="my-[60px] px-4">
+            <div className="flex justify-between items-center w-full lg:w-[403px] md:w-[403px] max-w-7xl mx-auto my-8">
                     <div className="relative">
                     <div
                         className={`ml-[1.2rem] w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
@@ -726,7 +621,7 @@ const Page = ({ params } ) => {
                     <div className="relative">
                     <div
                         className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                        // Add a click handler to set active tab to 2
+                     
                     >
                         2
                     </div>
@@ -747,24 +642,23 @@ const Page = ({ params } ) => {
                     </div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
-                </div>
+              </div>
         </div>
         
-
       {activeTab === 1 && (
-        <div className="flex my-20">
-          <div className="left">
+        <div className="flex flex-col lg:flex-row gap-4 md:gap-0 lg:gap-0 my-20">
+          <div className="w-full left">
             <div className="flex max-w-7xl ">
               <div className="w-full flex">
-                <div className="w-full">
+                <div className="w-full xl:w-full lg:w-[680px] px-4">
 
-                  <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
+                  <div className="bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
+                    <h1 className="text-lg text-[#063828] font-black font-orbitron">
                     {t('normalSeats')}
                     </h1>
                     <div className="flex justify-between">
                       <div className="py-4">
-                        <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
+                        <p className="text-md text-[#063828] font-bold font-jura mb-4">
                         {t('selectSeats')}
                         </p>
                         {isPopupVisible && (
@@ -803,16 +697,16 @@ const Page = ({ params } ) => {
                   </div>
                   
 
-                  <div className="w-[380px] lg:w-[820px] bg-[#e3ce90] px-[20px] lg:p-[30px] h-[183px] rounded-lg mt-[20px]">
-                    <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
+                  <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
+                    <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
                     <PlanSelector onPlanChange={handlePlanChange} />
                   </div>
                  
                   <div className="my-4">
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
+                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
+                      <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('chooseDate')}
                       </h1>
                       <CalendarComponent
@@ -880,8 +774,8 @@ const Page = ({ params } ) => {
                   
 
 
-              <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg mt-[20px]">
-                <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
+              <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
+                <h1 className="text-lg text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {timeChunks
                   .filter((chunk) => {
@@ -891,9 +785,8 @@ const Page = ({ params } ) => {
                     const isToday = selectedDateStr === currentDate;
                     const startTime = isToday
                       ? now.getHours() * 60 + now.getMinutes()
-                      : 540; // 540 minutes = 9:00 AM
+                      : 540;
                     
-                    // Check if at least one slot in the chunk is still available
                     return chunk.some(([_, { time: timeValue = "" }]) => {
                       const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
                       if (!match) return false; 
@@ -929,7 +822,7 @@ const Page = ({ params } ) => {
                           return (
                             <div
                               key={timeKey}
-                              className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal mx-2
+                              className={`button-slanted mt-[10px] cursor-pointer w-[180px] lg:w-[240px] h-[40px] font-jura font-normal mx-2
                                 ${timeKey === activeTime 
                                   ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
                                   : isDisabled
@@ -1010,8 +903,8 @@ const Page = ({ params } ) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
-          <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
+          <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full h-[750px] rounded-lg mt-10 lg:mt-0">
+          <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
           {t('bookingDetails')}
           </h2>
           {bookingDetails

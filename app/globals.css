@@ -391,6 +391,7 @@ button:hover p{
 background-color:transparent !important;
 border: none !important;
 }
+
 .react-calendar button{
   border: #063828 1 solid !important;
   flex-basis: 40px !important;
@@ -408,8 +409,7 @@ border: none !important;
   color:#002718 ;
   font-size: 24px !important;
   font-family: jura;
-
-  
+  padding-left: 10px;
 }
 
 .react-calendar button {
@@ -429,7 +429,6 @@ border: none !important;
   font-size: 16px;
   font-family: jura;
   text-decoration: none;
-  
   
 }
 
@@ -616,7 +615,6 @@ border: none !important;
 }
 
 
-/* cookie-notice */
 #cookie-notice {
   background-color: #e4cd8e;
   color: #141414;
@@ -687,3 +685,37 @@ border: none !important;
 
 
 
+@media (max-width: 450px) {
+  .react-calendar button {
+    margin-left: -2px !important;
+    margin-right: 1px !important;
+
+}
+}
+@media (max-width: 450px) {
+.react-calendar button {
+  flex-basis: 40px !important;
+}
+
+}
+
+
+  @media (min-width: 301px) and (max-width: 391px) {
+    .react-calendar__month-view__days{
+      column-gap: 5px !important;
+    }
+    
+    } 
+
+@media (min-width: 392px) and (max-width: 470px) {
+  .react-calendar__month-view__days{
+    column-gap: 11px !important;
+  }
+  
+  }
+
+  @media (min-width: 389px) and(max-width: 430px) {
+  .react-calendar__navigation button{
+    font-size: 19px !important;
+  }
+}

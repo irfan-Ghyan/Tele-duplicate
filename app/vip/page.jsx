@@ -511,12 +511,12 @@ const Page = ({ params }) => {
   return (
     <>
       <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
-        <button className="text-[#e3ce90] mt-[40px]" onClick={goBack}>
+        <button className="text-[#e3ce90] mt-[40px] px-4" onClick={goBack}>
         {t('goBack')}
         </button>
 
-        <div className="my-[60px] ">
-          <div className="flex justify-between items-center w-[427px] max-w-7xl mx-auto my-8">
+        <div className="my-[60px] px-4">
+          <div className="flex justify-between items-center w-full lg:w-[403px] md:w-[403px] max-w-7xl mx-auto my-8">
             <div className="relative">
               <div
                 className={`ml-[2rem] w-12 h-12 rounded-full ${
@@ -563,13 +563,13 @@ const Page = ({ params }) => {
         
 
         {activeTab === 1 && (
-          <div className="flex my-20">
+          <div className="flex flex-col lg:flex-row gap-4 md:gap-0 lg:gap-0 my-20">
             <div className="left">
               <div className="flex max-w-7xl ">
                 <div className="w-full flex">
-                  <div className="">
-                    {/* VIP Seats Section */}
-                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
+                  <div className="w-full xl:w-full lg:w-[680px] px-4">
+
+                    <div className="bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('vipSeats')}</h1>
                       <div className="flex justify-between">
                         <div className="py-4">
@@ -583,24 +583,22 @@ const Page = ({ params }) => {
                     </div>
 
 
-                    <div className="w-[820] bg-[#e3ce90] p-[30px] h-[183px] rounded-lg mt-[20px]">
+                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
                     <PlanSelectorVip onPlanChange={handlePlanChange} />
                   </div>
 
-
-                    {/* Select Date Section */}
                     <div>
-                      <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto my-[20px] rounded-lg">
+                      <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto my-[20px] rounded-lg">
                         <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseDate')}</h1>
                         <CalendarComponent onChange={handleDateChange} value={date} minDate={minDate} maxDate={maxDate} />
                       </div>
                     </div>
 
                     {/* Choose Time Section */}
-                    <div className="w-[820px] bg-[#e3ce90] p-[30px] h-auto rounded-lg">
+                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
 
                       {/* User Feedback for No Available Slots */}
@@ -659,7 +657,7 @@ const Page = ({ params }) => {
                                   return (
                                     <div
                                       key={timeKey}
-                                      className={`button-slanted mt-[10px] cursor-pointer w-[240px] h-[40px] font-jura font-normal mx-2
+                                      className={`button-slanted mt-[10px] cursor-pointer w-[180px] lg:w-[240px] h-[40px] font-jura font-normal mx-2
                                         ${timeKey === activeTime 
                                           ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
                                           : isDisabled
@@ -687,7 +685,7 @@ const Page = ({ params }) => {
             </div>
 
            
-            <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
+            <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full h-[750px] rounded-lg  mt-10 lg:mt-0">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
                 .filter((detail) => detail.key !== "booking_type" && detail.key !== "no_of_people")

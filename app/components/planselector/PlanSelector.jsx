@@ -27,11 +27,11 @@ const PlanSelector = ({ onPlanChange }) => {
 
   return (
     <div>
-      <form className="flex mt-[27px] gap-x-2">
+      <form className="flex flex-col md:flex-row lg:flex-row xl:flex-row mt-[27px] gap-2">
         {['bronze', 'silver', 'gold'].map((plan) => (
           <label
             key={plan}
-            className={`button-slanted w-[200px] h-[55px] px-4 py-4 font-jura font-bold text-[#c09e5f] transition duration-300 rounded-tl-lg rounded-br-lg ${
+            className={`button-slanted w-full h-auto px-4 py-4 font-jura font-bold text-[#c09e5f] transition duration-300 rounded-tl-lg rounded-br-lg ${
               selectedPlan === plan
                 ? 'active-duration bg-gradient-to-r to-[#063828] from-[#002718]'
                 : 'bg-opacity-50 border-[1px] border-[#063828] text-[#063828] hover:text-[#c09e5f] hover:bg-gradient-to-r to-[#063828] from-[#002718]'

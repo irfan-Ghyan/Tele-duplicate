@@ -997,7 +997,7 @@ const Page = ({ params } ) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#e3ce90] mx-[20px] p-[30px] rounded-lg ">
+          <div className="bg-[#e3ce90] mx-[20px] p-[30px]  rounded-lg ">
           <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">
           {t('bookingDetails')}
           </h2>

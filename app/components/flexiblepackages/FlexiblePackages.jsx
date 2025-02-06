@@ -152,8 +152,8 @@ const PackageComponent = () => {
           <table className="w-full border-collapse border border-[#c09e5f] text-center">
           <thead>
               <tr className="bg-[#002718] text-[#e3ce90]">
-                <th className="border border-[#c09e5f] px-4 py-4">Duration</th>
-                <th className="border border-[#c09e5f] px-4 py-4">Price</th>
+                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Duration</th>
+                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Price</th>
                 {/* <th className="border border-[#c09e5f] px-4 py-2">{t("actions")}</th> */}
               </tr>
             </thead>
