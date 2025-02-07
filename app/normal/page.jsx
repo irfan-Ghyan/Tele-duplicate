@@ -903,7 +903,7 @@ const Page = ({ params } ) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full h-[750px] rounded-lg mt-10 lg:mt-0">
+          <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-lg mt-10 lg:mt-0">
           <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
           {t('bookingDetails')}
           </h2>

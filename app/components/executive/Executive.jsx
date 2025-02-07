@@ -104,7 +104,7 @@ const Executive = () => {
             <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
        {t('executive.heading')}
             </h1>
-            <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify max-w-7xl px-4 sm:px-0">
+            <p className="text-[#e3ce90] font-jura text-[16px] lg:text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify max-w-7xl px-4 sm:px-0">
               {t('executive.paragraph')}
             </p>
           </div>

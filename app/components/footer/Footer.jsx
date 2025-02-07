@@ -73,7 +73,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link href="/venue" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
+              <Link href="/teleiosx" className="hover:underline text-[#e3ce90] font-jura text-[13px] font-bold">
                 {t('VENUE')}
               </Link>
             </li>

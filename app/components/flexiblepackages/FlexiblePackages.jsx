@@ -141,7 +141,7 @@ const PackageComponent = () => {
   ];
 
   return (
-    <div className={`w-full flex flex-col items-center justify-center px-2 mt-4 md:mt-20 lg:mt-20 pt-[40px] pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
+    <div className={`w-full flex flex-col items-center justify-center px-4 mt-4 md:mt-20 lg:mt-20 pt-[40px] pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
       <div className="w-full max-w-7xl mb-4 md:mb-20 lg:mb-40">
         
         {/* Flexi Sessions Table */}

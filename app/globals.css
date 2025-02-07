@@ -699,6 +699,26 @@ border: none !important;
 
 }
 
+@media  (min-width: 400px) and (max-width: 412px) {
+  .exp-width{
+    width: 375px !important;
+  }
+  
+  } 
+
+@media  (min-width: 413px) and (max-width: 430px) {
+  .exp-width{
+    width: 390px !important;
+  }
+  
+  } 
+
+@media (min-width: 301px) and (max-width: 391px) {
+  .react-calendar__month-view__days{
+    column-gap: 5px !important;
+  }
+  
+  } 
 
   @media (min-width: 301px) and (max-width: 391px) {
     .react-calendar__month-view__days{
