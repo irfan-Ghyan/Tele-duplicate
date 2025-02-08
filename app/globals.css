@@ -699,14 +699,14 @@ border: none !important;
 
 }
 
-@media  (min-width: 400px) and (max-width: 412px) {
+@media  (min-width: 400px) and (max-width: 415px) {
   .exp-width{
     width: 375px !important;
   }
   
   } 
 
-@media  (min-width: 413px) and (max-width: 430px) {
+@media  (min-width: 415px) and (max-width: 430px) {
   .exp-width{
     width: 390px !important;
   }

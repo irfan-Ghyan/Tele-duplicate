@@ -510,7 +510,7 @@ const Page = ({ params }) => {
 
   return (
     <>
-      <div className="min-h-screen overflow-x-hidden max-w-7xl mx-auto pb-[60px]">
+      <div className="w-full overflow-x-hidden max-w-7xl mx-auto pb-[60px] lg:pb-[40px]">
         <button className="text-[#e3ce90] mt-[40px] px-4" onClick={goBack}>
         {t('goBack')}
         </button>
@@ -724,7 +724,8 @@ const Page = ({ params }) => {
         )}
 
         {activeTab === 2 && (
-          <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl p-20">
+           <div className="mx-4 mb-8">
+          <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16">
             <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">{t('paymentDetails')}</h2>
             <form onSubmit={handleSubmit}>
               <div className="space-y-4">
@@ -890,6 +891,7 @@ const Page = ({ params }) => {
                 </div>
               </div>
             </form>
+          </div>
           </div>
         )}
 
