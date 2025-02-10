@@ -141,12 +141,15 @@ const CorporateConference = () => {
           }
           @media (max-width: 764px) {
             .hover-content {
-              transform: translateY(0);
-            }
-            .hover-content p,
-            .hover-content button {
-              display: block !important;
-            }
+            transform: translateY(100%);
+          }
+          .hover-trigger:hover .hover-content {
+            transform: translateY(0);
+          }
+          .hover-trigger:hover .hover-content p,
+          .hover-trigger:hover .hover-content button {
+            display: block;
+          }
           }
         `}</style>
       </div>

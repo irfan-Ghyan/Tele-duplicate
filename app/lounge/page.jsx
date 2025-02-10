@@ -504,7 +504,7 @@ const Page = ({ params }) => {
 
   return (
     <>
-      <div className=" overflow-x-hidden max-w-7xl mx-auto pb-[60px] lg:pb-[40px]">
+      <div className=" overflow-x-hidden max-w-7xl mx-auto lg:pb-[40px]">
         <button className="text-[#e3ce90] mt-[40px] px-4" onClick={goBack}>
           {t('goBack')}
         </button>
@@ -675,7 +675,7 @@ const Page = ({ params }) => {
             </div>
 
             {/* Booking Details Panel */}
-            <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-lg  mt-10 lg:mt-0">
+            <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-lg  mt-2 lg:mt-0">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
                 .filter((detail) => detail.key !== "booking_type"  && detail.key !== "no_of_people")
@@ -882,15 +882,15 @@ const Page = ({ params }) => {
         )}
 
         {activeTab === 3 && (
-          <div className="flex justify-center py-20">
+          <div className="flex justify-center items-center py-20 px-4">
             <div className="">
               <div>
-                <h2 className=" text-[40px] font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
-                <p className=" text-lg font-jura font-bold text-[#e3ce90]">
+                <h2 className=" text-[40px] text-center font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
+                <p className=" text-lg text-center font-jura font-bold text-[#e3ce90]">
                   {t('emailMessage')}
                 </p>
               </div>
-              <div className="mt-20 w-[400px] ">
+              <div className="mt-20 w-[320px] lg:w-[360px]">
                 <Link
                   href="/experience"
                   className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718] bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
