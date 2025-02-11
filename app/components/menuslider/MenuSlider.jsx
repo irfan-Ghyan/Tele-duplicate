@@ -51,7 +51,7 @@ export default function MenuSlider() {
 
       <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full max-w-[300px] lg:max-w-[1200px] lg:mt-[20px] ">
         <div className="w-full lg:w-3/5 text-center md:text-left py-[20px]">
-          <p className="text-[#e3ce90] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-normal pb-6 sm:pb-10">
+          <p className="text-[#e3ce90] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-normal font-jura pb-6 sm:pb-10">
             Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. 
             Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere 
             of Riyadh’s premier venue.
@@ -75,11 +75,11 @@ export default function MenuSlider() {
 
 
           {menuOpen && (
-            <div className="mt-4 p-4 bg-gray-800 rounded-lg shadow-md max-h-60 overflow-y-auto text-sm sm:text-base">
+            <div className="mt-4 p-4 bg-[#063828] rounded-lg shadow-md max-h-60 overflow-y-auto text-sm sm:text-base">
               <ul className="space-y-2">
                 {menuItems.map(([id, name, description, price]) => (
-                  <li key={id} className="p-2 border-b border-gray-700">
-                    <span className="font-semibold">{name}</span> - {description} <span className="text-green-400">{price}</span>
+                  <li key={id} className="p-2 border-b border-[#e3ce90]">
+                    <span className="font-semibold text-[#c09e5f] font-orbitron">{name}</span> - <span className="font-jura text-[#e3ce90]">{description}</span> <span className="text-[#c09e5f] font-orbitron">{price}</span>
                   </li>
                 ))}
               </ul>
