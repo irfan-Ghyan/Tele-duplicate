@@ -10,6 +10,7 @@ import Form from '../components/form/Form';
 import { useTranslation } from 'react-i18next';
 import FoodMenu from '../components/foodmenu/FoodMenu';
 import Link from 'next/link';
+import MenuSlider from '../components/menuslider/MenuSlider';
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -34,15 +35,19 @@ const Page = () => {
         />
         <meta property="og:type" content="website" />
       </Helmet>
-      <div className="min-h-screen flex flex-col items-center ">
+      <div className="flex flex-col items-center ">
         <div className="flex items-center justify-center xl:px-20 sm:px-4">
           <div className="text-justify p-6 text-[#c09e5f] max-w-7xl lg:pt-[50px] ">
             <h1 className="font-orbitron text-center text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('f&b.title')}</h1>
             <p className="text-[#e3ce90] text-center font-jura text-[14px] lg:text-[18px] font-bold px-[8px] pb-10">
               {t("f&b.description")}
             </p>
-          </div>
+            <div className='py-0 lg:py-[40px]'>
+            <MenuSlider />
+            </div>
            
+          </div>
+          
             
         </div>
         {/* <div className="w-full">
@@ -54,9 +59,9 @@ const Page = () => {
         {/* <div className="w-full bg-[#063828]">
           <WhyteleiosData /> 
         </div>*/}
-        <div className="w-full">
+        {/* <div className="w-full">
           <SmallSlider />
-        </div>
+        </div> */}
         {/* <div className="w-full max-w-7xl px-4 md:px-8 mx-auto">
           <Form />
         </div> */}

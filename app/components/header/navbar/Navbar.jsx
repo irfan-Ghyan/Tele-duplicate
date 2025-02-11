@@ -265,7 +265,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 {t('watchparties')}
               </Link>
               <Link
-                href="/venue"
+                href="/teleiosx"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
@@ -280,7 +280,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 {t('privateevents')}
               </Link>
               <Link
-                href="/privateevents"
+                href="/corporateevents"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >

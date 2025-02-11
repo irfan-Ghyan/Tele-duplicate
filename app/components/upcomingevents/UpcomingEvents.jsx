@@ -98,7 +98,7 @@ const UpcomingEvents = () => {
                   />
                 </div>
 
-                {/* Text Section */}
+
                 <div className="lg:w-1/2 flex flex-col items-center lg:items-start text-center md:text-left mb-6 lg:mb-0">
                   <h1 className="text-[24px] lg:text-[34px] text-[#c09e5f] font-black font-orbitron">
                     {upcomingEntry.title || t('defaultTitle')}
@@ -118,7 +118,6 @@ const UpcomingEvents = () => {
                   </div>
                 </div>
 
-                {/* Desktop Image */}
                 <div className="lg:w-1/2 flex justify-center lg:justify-end hidden lg:flex">
                   <Image
                     src={upcomingEntry.imageUrl || bahrain}
