@@ -49,7 +49,7 @@ export default function MenuSlider() {
       </h2>
 
 
-      <div className="flex flex-col md:flex-row items-center justify-between gap-6 w-full max-w-[300px] lg:max-w-[1200px] lg:mt-[20px] ">
+      <div className="flex flex-col xl:flex-row items-center justify-between gap-6 w-full max-w-[300px] md:max-w-[500px] lg:max-w-[1200px] lg:mt-[20px]">
         <div className="w-full lg:w-3/5 text-center md:text-left py-[20px]">
           <p className="text-[#e3ce90] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-normal font-jura pb-6 sm:pb-10">
             Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. 
@@ -75,7 +75,7 @@ export default function MenuSlider() {
 
 
           {menuOpen && (
-            <div className="mt-4 p-4 bg-[#063828] rounded-lg shadow-md max-h-60 overflow-y-auto text-sm sm:text-base">
+            <div className="mt-4 p-4 bg-[#092d22] max-h-60 overflow-y-auto text-sm sm:text-base">
               <ul className="space-y-2">
                 {menuItems.map(([id, name, description, price]) => (
                   <li key={id} className="p-2 border-b border-[#e3ce90]">
