@@ -50,7 +50,7 @@ export default function MenuSlider() {
 
 
       <div className="flex flex-col xl:flex-row items-center justify-between gap-6 w-full max-w-[300px] md:max-w-[500px] lg:max-w-[1200px] lg:mt-[20px]">
-        <div className="w-full lg:w-3/5 text-center md:text-left py-[20px]">
+        <div className="w-full file:text-center md:text-left py-[20px]">
           <p className="text-[#e3ce90] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-normal font-jura pb-6 sm:pb-10">
             Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. 
             Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere 
@@ -58,7 +58,7 @@ export default function MenuSlider() {
           </p>
 
 
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex gap-4">
             <button 
               onClick={() => setMenuOpen(!menuOpen)}
               className="px-6 py-2 text-[#e3ce90] text-[16px] sm:text-[20px] font-orbitron font-bold border border-[#e3ce90] rounded-lg hover:bg-[#c09e5f] transition"
@@ -87,8 +87,9 @@ export default function MenuSlider() {
           )}
         </div>
 
+
     
-        <div className="w-full lg:w-2/5">
+        {/* <div className="w-full lg:w-2/5">
           <Swiper
             modules={[Autoplay]}
             autoplay={{ delay: 2500, disableOnInteraction: false }}
@@ -125,7 +126,7 @@ export default function MenuSlider() {
               />
             </SwiperSlide>
           </Swiper>
-        </div>
+        </div> */}
       </div>
     </div>
   );

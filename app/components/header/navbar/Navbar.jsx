@@ -119,18 +119,18 @@ const Navbar = ({ isTopBannerVisible }) => {
       <nav
         className={`fixed ${
           isTopBannerVisible ? 'top-0' : 'top-0'
-        } w-full z-40 transition-all duration-300 px-[10px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
+        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
       >
-        <div className="flex justify-between items-center w-full h-auto">
+        <div className="flex justify-between items-center w-full h-auto py-2">
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
               <Image
                 src="/assets/images/dome/logo.png"
                 alt="Logo"
-                width={185}
+                width={170}
                 height={120}
                 priority={true}
-                className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[165px] lg:h-[92px] xl:w-[185px] xl:h-[120px]"
+                className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[170px] lg:h-[92px] xl:w-[170px] xl:h-[120px]"
               />
               <Image
                 src="/assets/images/dome/logo1.png"
@@ -138,7 +138,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 width={185}
                 height={120}
                 priority={true}
-                className="block xl:hidden sm:w-[100px] sm:h-[52px] md:w-[185px] md:h-[92px] lg:w-[165px] lg:h-[92px]"
+                className="block xl:hidden sm:w-[100px] sm:h-[52px] md:w-[170px] md:h-[92px] lg:w-[165px] lg:h-[92px]"
               />
             </Link>
           </div>

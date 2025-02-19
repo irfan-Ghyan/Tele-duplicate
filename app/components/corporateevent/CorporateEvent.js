@@ -40,7 +40,7 @@ const CorporateEvent = () => {
                 <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron drop-shadow-4xl">
                   {dome.title}
                 </h1>
-                <p className="md:text-[14px] lg:text-[18px] text-[#e3ce90] font-black font-jura mt-6 text-balance drop-shadow-4xl lg:leading-10 xl:leading-10 text-justify">
+                <p className="text-[18px] text-[#e3ce90] font-black font-jura mt-6 text-start text-normal drop-shadow-4xl lg:leading-8 xl:leading-10">
                   {dome.description}
                 </p>
               </div>

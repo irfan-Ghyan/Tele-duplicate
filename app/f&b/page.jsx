@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import FoodMenu from '../components/foodmenu/FoodMenu';
 import Link from 'next/link';
 import MenuSlider from '../components/menuslider/MenuSlider';
+import FoodSlider from  '../components/foodslider/FoodSlider';
 
 const Page = () => {
   const { t, i18n } = useTranslation();
@@ -50,6 +51,9 @@ const Page = () => {
           
             
         </div>
+        <div className='mb-10 lg:mb-20'>
+          <FoodSlider />
+          </div>
         {/* <div className="w-full">
           <EducationData />
         </div> */}

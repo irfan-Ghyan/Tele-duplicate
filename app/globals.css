@@ -683,13 +683,71 @@ border: none !important;
 }
 
 
+/* food slider */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.containerp {
+  display: flex;
+ width: 60vw;
+}
+
+.panel {
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60vh;
+  border-radius: 25px;
+  color: #fff;
+  cursor:pointer;
+  flex: 0.5;
+  margin:10px;
+  position: relative;
+  transition: flex 0.7s ease-in;
+
+}
+
+.panel h3 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 20px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+
+}
+
+.panel.active {
+  flex: 5;
+}
+
+.panel.active h3 {
+  opacity: 1;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100vw;
+  }
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    display: none;
+  }
+}
 
 
 @media (max-width: 450px) {
   .react-calendar button {
     margin-left: -2px !important;
     margin-right: 1px !important;
-
 }
 }
 @media (max-width: 450px) {

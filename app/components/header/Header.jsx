@@ -1,18 +1,19 @@
 
 
 'use client';
-
+import React, {Suspense} from 'react';
 import { usePathname } from 'next/navigation';
 import TopBanner from '../header/top/TopBanner';
 import Navbar from './navbar/Navbar';
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Image from 'next/image';
-import Corprate from '../../components/corporate/Corprate';
+// import Corprate from '../../components/corporate/Corprate';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import { switchLanguage } from '../../utils/language.js';
 import Link from 'next/link';
+const Corprate = React.lazy(() => import('../../components/corporate/Corprate'));
 
 const Header = () => {
   const { t } = useTranslation();
@@ -191,6 +192,7 @@ const Header = () => {
 
         {showCorpratePopup && (
           <div className="fixed inset-0 bg-[#002718] bg-opacity-100 z-50 flex items-center justify-center p-4">
+             <Suspense fallback={<p className='text-white text-2xl'>This is loading .....</p>}>
             <div className="relative w-full max-w-7xl bg-white px-4 py-4 rounded-lg max-w-custom">
               <button
                 className="absolute top-2 right-2 text-black text-2xl"
@@ -198,9 +200,11 @@ const Header = () => {
               >
                 &times;
               </button>
+             
               <Corprate />
-              
+            
             </div>
+            </Suspense>
             
           </div>
         )}
