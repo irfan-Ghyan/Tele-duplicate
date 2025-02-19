@@ -20,7 +20,7 @@ const Footer = () => {
             className="w-[185px] h-[126px]"
             priority={true}
           />
-          <p className="text-[#e3ce90] font-jura text-[13px] font-bold py-4">
+          <p className="text-[#e3ce90] font-jura text-[13px] font-bold py-4 flex-wrap">
             {t('experience')}
           </p>
           <div className="flex space-x-4 mt-[15px]">

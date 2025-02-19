@@ -51,9 +51,7 @@ const Page = () => {
           
             
         </div>
-        <div className='mb-10 lg:mb-20'>
-          <FoodSlider />
-          </div>
+        
         {/* <div className="w-full">
           <EducationData />
         </div> */}

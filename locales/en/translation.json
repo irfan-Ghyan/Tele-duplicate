@@ -251,6 +251,18 @@
     "description": "Description"
   },
 
+
+    "Mocktails & Specialty Coffee": "Mocktails & Specialty Coffee",
+    "exclusive": "Our exclusive mocktails and specialty coffee offerings are designed to elevate every visit. Indulge in expertly crafted drinks and light bites while you soak in the high-energy atmosphere of Riyadh’s premier venue.",
+    "Food Menu": "Food Menu",
+    "View Menu": "View Menu",
+    "Download Menu PDF": "Download Menu PDF",
+    "Mansaf": "Mansaf",
+    "Kabsa": "Kabsa",
+    "Shawarma": "Shawarma",
+    "Baklava": "Baklava",
+  
+  
  
   "ERROR": "An error occurred while fetching FAQs.",
 
