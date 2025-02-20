@@ -125,12 +125,12 @@ const Navbar = ({ isTopBannerVisible }) => {
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
               <Image
-                src="/assets/images/dome/logo.png"
+                src="/assets/images/dome/logo2.png"
                 alt="Logo"
-                width={170}
-                height={120}
+                width={185}
+                height={30}
                 priority={true}
-                className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[170px] lg:h-[92px] xl:w-[170px] xl:h-[120px]"
+                className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[180px] lg:h-[30px] xl:w-[180px] xl:h-[30px]"
               />
               <Image
                 src="/assets/images/dome/logo1.png"
@@ -196,7 +196,35 @@ const Navbar = ({ isTopBannerVisible }) => {
             </Link>
           </div>
 
-          <div className="language-switcher mx-2">
+         
+
+          {/* Book Now Button */}
+          <div className="hidden xl:flex items-center">
+            <Link
+              href="/experience"
+              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+            >
+              <span className="button-slanted-content">{t('BOOK NOW')}</span>
+            </Link>
+          </div>
+
+          <div className="language-switcher items-center ml-[31PX]">
+            <Image
+              src="/assets/images/dome/globe.png"
+              alt="Language Icon"
+              width={20}
+              height={20}
+              className="mr-2"
+            />
+            <button
+              onClick={() => handleLanguageChange('en')}
+              className="font-jura text-[#C09E5F] text-[12px] font-bold hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
+            >
+              EN
+            </button>
+          </div>
+
+          {/* <div className="language-switcher mx-2">
             <button
               onClick={() => handleLanguageChange('en')}
               className="px-2 font-jura text-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
@@ -209,17 +237,7 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
               العربية
             </button>
-          </div>
-
-          {/* Book Now Button */}
-          <div className="hidden xl:flex items-center">
-            <Link
-              href="/experience"
-              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
-            >
-              <span className="button-slanted-content">{t('BOOK NOW')}</span>
-            </Link>
-          </div>
+          </div> */}
 
           {/* Hamburger Menu for Mobile */}
           <div className="xl:hidden">
@@ -241,7 +259,7 @@ const Navbar = ({ isTopBannerVisible }) => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div ref={menuRef} className="mx-8 xl:hidden bg-[#002718] absolute right-0 top-full w-[300px]">
+          <div ref={menuRef} className="mx-8 xl:hidden bg-[#063828] absolute right-0 top-full w-[300px]">
             <div className="flex flex-col items-start px-4 py-4">
               <Link
                 href="/experience"

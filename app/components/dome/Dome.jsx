@@ -123,19 +123,32 @@ const Dome = () => {
             }}
           >
             <div className="absolute inset-0 bg-[#002718] bg-opacity-60 lg:bg-opacity-30%"></div>
-            <div className="relative flex flex-col items-start justify-end h-full p-9 max-w-7xl mx-auto pb-40">
-              <h2 className="text-[32px] md:text-[54px] mb-4 text-[#e3ce90] font-black font-orbitron">
+            <div className="relative flex items-end justify-end h-full p-9 max-w-7xl mx-auto pb-40">
+              <div className='w-2/3'>
+              <h2 className="text-[32px] md:text-[54px] mb-4 text-[#FFFFFF] font-black font-orbitron">
               {t('dome.title')}
               </h2>
-              <p className="text-[18px] mb-4 text-[#e3ce90] font-jura font-black leading-7 text-justify">
+              <p className="text-[18px] mb-4 text-[#FFFFFF] font-jura font-black leading-7 text-justify">
               {t('dome.description')} 
               </p>
+              <div className="absolute bottom-20 left-2/4 transform -translate-x-1/2 flex space-x-4 max-w-7xl md:px-8 mx-auto">
+              {domes.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`p-[1px] w-[45px] md:w-[39px] lg:w-[39px] xl:w-[39px] ${index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'}`}
+                />
+              ))}
+            </div>
+              </div>
+              <div className='w-1/3 flex justify-end items-center'>
               <Link
                 href="/venue"
                 className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#e3ce90] to-[#c09e5f] text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
               >
                 <span className="button-slanted-content">{t('Discover the Dome')}</span>
               </Link>
+              </div>
             </div>
   
             <button
@@ -152,15 +165,7 @@ const Dome = () => {
             </button>
   
             {/* Slide Indicators */}
-            <div className="absolute bottom-20 left-2/4 transform -translate-x-1/2 flex space-x-4 max-w-7xl md:px-8 mx-auto">
-              {domes.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`p-[1px] w-[45px] md:w-[100px] lg:w-[145px] xl:w-[190px] ${index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'}`}
-                />
-              ))}
-            </div>
+           
           </div>
         ))}
       </div>
