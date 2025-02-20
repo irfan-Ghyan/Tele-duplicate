@@ -159,7 +159,7 @@ export default function MenuSlider() {
           <FoodSlider />
       </div>
 
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row lg:flex-row gap-4">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
           className="px-6 py-2 text-[#e3ce90] text-[16px] sm:text-[20px] font-orbitron font-bold border border-[#e3ce90] rounded-lg hover:bg-[#c09e5f] transition"

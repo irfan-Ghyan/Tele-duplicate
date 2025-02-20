@@ -700,7 +700,7 @@ border: none !important;
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
-  height: 60vh;
+  height: 50vh;
   border-radius: 25px;
   color: #fff;
   cursor:pointer;
@@ -733,12 +733,14 @@ border: none !important;
   opacity: 1;
 }
 
+
 @media (max-width: 480px) {
   
   .panel:nth-of-type(4),
   .panel:nth-of-type(5) {
     display: none;
   }
+
 }
 
 
