@@ -223,7 +223,7 @@ const Navbar = ({ isTopBannerVisible }) => {
             </Link>
           </div>
 
-          <div className="relative ml-[31px] " ref={dropdownRef}>
+          <div className="relative ml-[31px] mr-[31px]" ref={dropdownRef}>
             <button
               onClick={toggleDropdown}
               className="flex items-center focus:outline-none"
