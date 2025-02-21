@@ -136,7 +136,7 @@ const Navbar = ({ isTopBannerVisible }) => {
           isTopBannerVisible ? 'top-0' : 'top-0'
         } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
       >
-        <div className="flex justify-between items-center w-full h-auto py-2">
+        <div className="flex justify-between items-center w-full h-[84px] py-4">
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
               <Image
@@ -217,7 +217,7 @@ const Navbar = ({ isTopBannerVisible }) => {
           <div className="hidden xl:flex items-center">
             <Link
               href="/experience"
-              className="button-slanted w-[80px] md:w-[142px] h-[39px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+              className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-normal leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content">{t('BOOK NOW')}</span>
             </Link>
