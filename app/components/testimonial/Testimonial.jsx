@@ -132,7 +132,7 @@ export default function Testimonial() {
     setIsDragging(false);
   };
 
-  // Handle touch-based dragging for mobile
+ 
   const handleTouchStart = (e) => {
     setIsDragging(true);
     setStartX(e.touches[0].pageX - scrollContainerRef.current.offsetLeft);

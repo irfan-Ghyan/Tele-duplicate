@@ -44,7 +44,7 @@ const Profile = ({ imageUrl, title, rating, description }) => {
           </div>
         </div>
         <div>
-          <p className="text-[#e3ce90] font-jura font-bold text-[18px]">{description}</p>
+          <p className="text-[#C09E5F] font-jura font-bold text-[18px]">{description}</p>
         </div>
       </div>
     </div>

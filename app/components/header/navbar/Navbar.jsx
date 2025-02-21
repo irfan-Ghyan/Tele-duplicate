@@ -212,8 +212,6 @@ const Navbar = ({ isTopBannerVisible }) => {
           </div>
 
          
-
-          {/* Book Now Button */}
           <div className="hidden xl:flex items-center">
             <Link
               href="/experience"
