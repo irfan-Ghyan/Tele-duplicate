@@ -161,7 +161,7 @@ const Header = () => {
 
         {pathname === '/' && (
           <button
-            className="absolute bottom-40 md:top-20 lg:top-20 xl:top-20 right-2 md:right-10 lg:right-10 xl:right-10 z-30 p-2 rounded-full hover:opacity-80 transition"
+            className="absolute top-[50%] right-2 md:right-10 lg:right-10 xl:right-10 z-30 p-2 rounded-full hover:opacity-80 transition"
             onClick={handlePlayButtonClick}
           >
             <div className="flex">

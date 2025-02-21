@@ -123,32 +123,41 @@ const Dome = () => {
             }}
           >
             <div className="absolute inset-0 bg-[#002718] bg-opacity-60 lg:bg-opacity-30%"></div>
-            <div className="relative flex items-end justify-end h-full p-9 max-w-7xl mx-auto pb-40">
-              <div className='w-2/3'>
+            <div className="relative flex items-end justify-end h-full px-9 max-w-7xl mx-auto pb-28">
+              <div className='w-full'>
+              
+              <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row'>
+                <div className='w-2/3'>
               <h2 className="text-[32px] md:text-[54px] mb-4 text-[#FFFFFF] font-black font-orbitron">
               {t('dome.title')}
               </h2>
-              <p className="text-[18px] mb-4 text-[#FFFFFF] font-jura font-black leading-7 text-justify">
+              <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura text-justify">
               {t('dome.description')} 
               </p>
-              <div className="absolute bottom-20 left-2/4 transform -translate-x-1/2 flex space-x-4 max-w-7xl md:px-8 mx-auto">
+              <div className="absolute mt-[100px] md:mt-[20px] lg:mt-[20px]">
               {domes.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`p-[1px] w-[45px] md:w-[39px] lg:w-[39px] xl:w-[39px] ${index === currentSlide ? 'bg-[#e3ce90] ml-4' : 'bg-white bg-opacity-50 hover:bg-opacity-100 ml-4'}`}
+                  className={`p-[1px] w-[39px] md:w-[39px] lg:w-[39px] xl:w-[39px] h-[5px] ${index === currentSlide ? 'bg-[#C09E5F] rounded-[20px] mr-2' : 'bg-white hover:shadow-black-700 bg-opacity-[26%] rounded-[20px] hover:bg-opacity-100 mr-2'}`}
                 />
               ))}
             </div>
-              </div>
-              <div className='w-1/3 flex justify-end items-center'>
+                </div>
+              <div className='w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end'>
               <Link
                 href="/venue"
-                className="w-[220px] lg:w-[233px] h-[44px] px-8 py-6 button-slanted font-jura font-bold bg-gradient-to-r from-[#e3ce90] to-[#c09e5f] text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
+                className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
               >
                 <span className="button-slanted-content">{t('Discover the Dome')}</span>
               </Link>
               </div>
+              
+              </div>
+              
+           
+              </div>
+             
             </div>
   
             <button

@@ -12,7 +12,10 @@ const Navbar = ({ isTopBannerVisible }) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
-  const menuRef = useRef(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const dropdownRef = useRef(null);
+  const menuRef = useRef(null)
   const { t, i18n } = useTranslation();
 
   const hiddenRoutes = [
@@ -35,6 +38,18 @@ const Navbar = ({ isTopBannerVisible }) => {
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLanguageChange = (lng) => {
+    setSelectedLanguage(lng);
+    i18n.changeLanguage(lng);
+    switchLanguage(lng);
+    setIsDropdownOpen(false); // Close dropdown after selection
   };
 
   const handleScroll = () => {
@@ -102,10 +117,10 @@ const Navbar = ({ isTopBannerVisible }) => {
 
   const { title, description } = getDynamicMeta();
 
-  const handleLanguageChange = (lng) => {
-    i18n.changeLanguage(lng);
-    switchLanguage(lng);
-  };
+  // const handleLanguageChange = (lng) => {
+  //   i18n.changeLanguage(lng);
+  //   switchLanguage(lng);
+  // };
 
   return (
     <>
@@ -208,7 +223,45 @@ const Navbar = ({ isTopBannerVisible }) => {
             </Link>
           </div>
 
-          <div className="language-switcher items-center ml-[31PX]">
+          <div className="relative ml-[31px] " ref={dropdownRef}>
+            <button
+              onClick={toggleDropdown}
+              className="flex items-center focus:outline-none"
+            >
+              <div className='flex flex-col'>
+              <Image
+                src="/assets/images/dome/globe.png"
+                alt="Language Icon"
+                width={20}
+                height={20}
+                className="cursor-pointer"
+              />
+              <span className="font-jura text-[#C09E5F] text-[12px] font-bold mt-1">
+                {selectedLanguage === 'en' ? 'EN' : 'العربية'}
+              </span>
+              </div>
+            </button>
+
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute top-12 left-[-24px] bg-[#063828] border border-[#C09E5F] shadow-md rounded-md w-12">
+                <button
+                  onClick={() => handleLanguageChange('en')}
+                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#063828] hover:bg-[#C09E5F]"
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => handleLanguageChange('ar')}
+                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#063828] hover:bg-[#C09E5F]"
+                >
+                  العربية
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* <div className="language-switcher items-center ml-[31PX]">
             <Image
               src="/assets/images/dome/globe.png"
               alt="Language Icon"
@@ -222,15 +275,6 @@ const Navbar = ({ isTopBannerVisible }) => {
             >
               EN
             </button>
-          </div>
-
-          {/* <div className="language-switcher mx-2">
-            <button
-              onClick={() => handleLanguageChange('en')}
-              className="px-2 font-jura text-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
-            >
-              EN
-            </button>
             <button
               onClick={() => handleLanguageChange('ar')}
               className="px-2 font-jura text-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
@@ -238,6 +282,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               العربية
             </button>
           </div> */}
+
 
           {/* Hamburger Menu for Mobile */}
           <div className="xl:hidden">
