@@ -114,10 +114,10 @@ const Footer = () => {
       <div className="mt-[60px] container mx-auto">
         <div className="md:flex justify-between">
           <div>
-            <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold opacity-80">{t('all_rights_reserved')}</p>
+            <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold">{t('all_rights_reserved')}</p>
           </div>
           <div className="md:text-end">
-            <Link href="/privacy" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold opacity-60 hover:underline">{t('privacy_policy')}</Link>
+            <Link href="/privacy" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold  hover:underline">{t('privacy_policy')}</Link>
             <span className='mx-1 font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] '> | </span>
             <Link href="/terms&conditions" className="font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] hover:underline">{t('terms_conditions')}</Link>
           </div>
