@@ -10,7 +10,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-[#002718] text-white pt-10 lg:pt-20 px-8 lg:px-20 padding-px xl:px-40 max-w-full overflow-hidden">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16">
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-16 ">
         <div className="flex flex-col items-start">
           <Image
             src={logo}
@@ -91,14 +91,14 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="flex space-x-4">
+        <div className="flex">
             <Link
               href="https://www.instagram.com/teleiosx/"
               target="_blank"
               rel="noopener noreferrer"
               className=""
             >
-              <Image src="/assets/icons/insta.png" width={30} height={30} alt="Instagram" className="h-[30px] w-[30px]"  priority={true}/>
+              <Image src="/assets/icons/insta.png" width={30} height={30} alt="Instagram" className="h-[30px] w-[30px] mr-4 ml-4"  priority={true}/>
             </Link>
             <Link
               href="https://www.tiktok.com/@teleiosx"
@@ -110,6 +110,7 @@ const Footer = () => {
             </Link>
 
           </div>
+
       </div>
       <div className="mt-[60px] container mx-auto">
         <div className="md:flex justify-between">
