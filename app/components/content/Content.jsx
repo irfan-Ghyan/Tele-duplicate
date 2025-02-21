@@ -95,7 +95,7 @@ const Content = () => {
         </div>
 
         <div className="w-full lg:my-8 my-4">
-          <div className="flex flex-col lg:flex-row xl:flex-row justify-center gap-[50px] ">
+          <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center gap-[50px] flex-wrap">
             {loading && <p className="text-[#c09e5f]">{t('Content.Loading')}</p>}
             {error && <p className="text-red-500">{error}</p>}
 
@@ -104,7 +104,7 @@ const Content = () => {
               faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#063828] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px]"
+                  className="overflow-hidden bg-[#063828] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] "
                 >
                   <div className="flex justify-center items-center w-full h-[282px] bg-gradient-to-r from-[#c09e5f]-[100%] to-[#e3ce90]-[0%] relative">
                     <Image
@@ -127,7 +127,7 @@ const Content = () => {
                     </div>
                   <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                     <div className=''>
-                      <h1 className="text-[#ffffff] text-[46px] font-orbitron font-bold  lg:px-8 ">
+                      <h1 className="text-[#ffffff] text-[46px] font-orbitron font-bold  px-8 ">
                         {experience.title}
                       </h1>
                       <p className="text-[#ffffff] text-opacity-70 text-[18px] text-start font-jura py-4 px-8">
@@ -152,7 +152,7 @@ const Content = () => {
             {faqEntries.slice(3,4).map((experience, index) => (
               <div
                 key={index}
-                className="overflow-hidden bg-[#C09E5F] flex flex-col items-center h-[756px] sm:w-[330px] lg:w-[396px] xl:w-[396px] border border-[#C09E5F]"
+                className="overflow-hidden bg-[#C09E5F] flex flex-col items-center h-[650px] xl:h-[756px] sm:w-[330px] lg:w-[396px] xl:w-[396px] border border-[#C09E5F]"
               >
                 <div className="flex justify-center items-center w-full h-[282px] relative">
                   <Image
