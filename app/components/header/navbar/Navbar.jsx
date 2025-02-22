@@ -11,9 +11,17 @@ import { useTranslation } from 'react-i18next';
 const Navbar = ({ isTopBannerVisible }) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuEventsOpen, setMenuEventsOpen] = useState(false);
+  const [menuAboutOpen, setMenuAboutOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('en');
+  const [isExperienceDropdownOpen, setIsExperienceDropdownOpen] = useState(false);
+  const [isEventsDropdownOpen, setIsEventsDropdownOpen] = useState(false);
+  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isMobileExperienceDropdownOpen, setIsMobileExperienceDropdownOpen] = useState(false);
+  const [isMobileEventsDropdownOpen, setIsMobileEventsDropdownOpen] = useState(false);
+  const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const menuRef = useRef(null)
   const { t, i18n } = useTranslation();
@@ -32,24 +40,60 @@ const Navbar = ({ isTopBannerVisible }) => {
   ];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
 
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
 
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+  const toggleLanguageDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleExperienceDropdown = () => {
+    setIsExperienceDropdownOpen(!isExperienceDropdownOpen);
+    setIsEventsDropdownOpen(false);
+    setIsAboutDropdownOpen(false);
+  };
+  const toggleEventsDropdown = () => {
+    setIsEventsDropdownOpen(!isEventsDropdownOpen);
+    setIsExperienceDropdownOpen(false);
+    setIsAboutDropdownOpen(false);
+  };
+  const toggleAboutDropdown = () => {
+    setIsAboutDropdownOpen(!isAboutDropdownOpen);
+    setIsExperienceDropdownOpen(false);
+    setIsEventsDropdownOpen(false);
+  };
+  const toggleMobileExperienceDropdown = () => {
+    setIsMobileExperienceDropdownOpen(!isMobileExperienceDropdownOpen);
+    setIsMobileEventsDropdownOpen(false);
+    setIsMobileAboutDropdownOpen(false);
+  };
+  const toggleMobileEventsDropdown = () => {
+    setIsMobileEventsDropdownOpen(!isMobileEventsDropdownOpen);
+    setIsMobileExperienceDropdownOpen(false);
+    setIsMobileAboutDropdownOpen(false);
+  };
+  const toggleMobileAboutDropdown = () => {
+    setIsMobileAboutDropdownOpen(!isMobileAboutDropdownOpen);
+    setIsMobileExperienceDropdownOpen(false);
+    setIsMobileEventsDropdownOpen(false);
+  };
+  
+  const closeMenu = () => {
+    setMenuOpen(false);
+    setIsMobileExperienceDropdownOpen(false);
+    setIsMobileEventsDropdownOpen(false);
+    setIsMobileAboutDropdownOpen(false);
+    setIsExperienceDropdownOpen(false);
+    setIsEventsDropdownOpen(false);
+    setIsAboutDropdownOpen(false);
+  };
+  
   const handleLanguageChange = (lng) => {
     setSelectedLanguage(lng);
     i18n.changeLanguage(lng);
     switchLanguage(lng);
-    setIsDropdownOpen(false); // Close dropdown after selection
+    setIsDropdownOpen(false);
   };
 
   const handleScroll = () => {
@@ -134,7 +178,7 @@ const Navbar = ({ isTopBannerVisible }) => {
       <nav
         className={`fixed ${
           isTopBannerVisible ? 'top-0' : 'top-0'
-        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px] ${navbarBg} navbar`}
+        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar`}
       >
         <div className="flex justify-between items-center w-full h-[84px] py-4">
           <div className="flex items-center">
@@ -157,68 +201,94 @@ const Navbar = ({ isTopBannerVisible }) => {
               />
             </Link>
           </div>
+
+      
         
-          <div className="flex-grow hidden xl:flex justify-center space-x-6 md:space-x-5 lg:space-x-5 ">
-            <Link
+          <div className="flex-grow hidden xl:flex justify-center space-x-4 md:space-x-6 lg:space-x-8 ">
+          <Link
+              href="/"
+              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
+              onClick={closeMenu}
+            >
+              {t('HOME')}
+            </Link>
+            {/* <Link
               href="/experience"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
               onClick={closeMenu}
             >
               {t('EXPERIENCES')}
-            </Link>
-            <Link
-              href="/executivelounge"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('executivelounge')}
-            </Link>
-        
-            <Link
-              href="/watchparties"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('watchparties')}
-            </Link>
-            <Link
-              href="/teleiosx"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('VENUE')}
-            </Link>
-            <Link
-              href="/privateevents"
-              className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('privateevents')}
-            </Link>
-            <Link
-              href="/corporateevents"
-              className="text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold font-jura text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('corporateevents')}
-            </Link>
-            <Link
-              href="/f&b"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1"
-              onClick={closeMenu}
-            >
-              {t('f&b')}
-            </Link>
-          </div>
+            </Link> */}
 
-         
-          <div className="hidden xl:flex items-center">
-            <Link
-              href="/experience"
-              className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-normal leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
-            >
-              <span className="button-slanted-content">{t('BOOK NOW')}</span>
-            </Link>
+             {/* Experience Dropdown */}
+             <div className="relative" ref={dropdownRef}>
+              <button
+                className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
+                onClick={toggleExperienceDropdown}
+              >
+                {t('EXPERIENCES')}
+        
+              </button>
+
+              {isExperienceDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                  <Link href="/experience" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('BOOK NOW')}
+                  </Link>
+                  <Link href="/executivelounge" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('EXECUTIVE LOUNGE')}
+                  </Link>
+                  <Link href="/f&b" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('F&B')}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+
+             <div className="relative" ref={dropdownRef}>
+              <button
+                className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
+                onClick={toggleEventsDropdown}
+              >
+                {t('EVENTS')}
+        
+              </button>
+
+              {isEventsDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                  <Link href="/watchparties" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('watchparties')}
+                  </Link>
+                  <Link href="/privateevents" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('privateevents')}
+                  </Link>
+                  <Link href="/corporateevents" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('corporateevents')}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+
+            <div className="relative" ref={dropdownRef}>
+              <button
+                className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
+                onClick={toggleAboutDropdown}
+              >
+                {t('ABOUT')}
+        
+              </button>
+
+              {isAboutDropdownOpen && (
+                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                  <Link href="/teleiosx" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
+                    {t('VENUE')}
+                  </Link>
+                </div>
+              )}
+            </div>
+        
           </div>
 
           <div className="relative ml-[31px] mr-[31px]" ref={dropdownRef}>
@@ -258,31 +328,19 @@ const Navbar = ({ isTopBannerVisible }) => {
               </div>
             )}
           </div>
-
-          {/* <div className="language-switcher items-center ml-[31PX]">
-            <Image
-              src="/assets/images/dome/globe.png"
-              alt="Language Icon"
-              width={20}
-              height={20}
-              className="mr-2"
-            />
-            <button
-              onClick={() => handleLanguageChange('en')}
-              className="font-jura text-[#C09E5F] text-[12px] font-bold hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
+         
+          <div className="hidden xl:flex items-center">
+            <Link
+              href="/experience"
+              className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-normal leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
-              EN
-            </button>
-            <button
-              onClick={() => handleLanguageChange('ar')}
-              className="px-2 font-jura text-[12px] hover:text-[#c09e5f] hover:border-b-2 hover:border-[#c09e5f]"
-            >
-              العربية
-            </button>
-          </div> */}
+              <span className="button-slanted-content">{t('BOOK NOW')}</span>
+            </Link>
+          </div>
+
+          
 
 
-          {/* Hamburger Menu for Mobile */}
           <div className="xl:hidden">
             <button onClick={toggleMenu} className="text-[#c09e5f] text-4xl">
               {menuOpen ? (
@@ -304,56 +362,80 @@ const Navbar = ({ isTopBannerVisible }) => {
         {menuOpen && (
           <div ref={menuRef} className="mx-8 xl:hidden bg-[#063828] absolute right-0 top-full w-[300px]">
             <div className="flex flex-col items-start px-4 py-4">
-              <Link
+            <Link
+                href="/"
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura "
+                onClick={closeMenu}
+              >
+                {t('HOME')}
+              </Link>
+
+              {/* <Link
                 href="/experience"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
                 onClick={closeMenu}
               >
                 {t('EXPERIENCES')}
-              </Link>
-              <Link
-                href="/executivelounge"
-                className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
+              </Link> */}
+
+               <button
+                onClick={toggleMobileExperienceDropdown}
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90] "
               >
-                {t('executivelounge')}
-              </Link>
-              <Link
-                href="/watchparties"
-                className="w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
+                {t('EXPERIENCES')}
+              </button>
+
+              {isMobileExperienceDropdownOpen && (
+                <div className="pl-4">
+                  <Link href="/experience" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:bg-[#C09E5F] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('BOOK NOW')}
+                  </Link>
+                  <Link href="/executivelounge" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:bg-[#C09E5F] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('EXECUTIVE LOUNGE')}
+                  </Link>
+                  <Link href="/f&b" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:bg-[#C09E5F] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('F&B')}
+                  </Link>
+                </div>
+              )}
+
+
+              <button
+                onClick={toggleMobileEventsDropdown}
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90] "
               >
-                {t('watchparties')}
-              </Link>
-              <Link
-                href="/teleiosx"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
+                {t('EVENTS')}
+              </button>
+
+              {isMobileEventsDropdownOpen && (
+                <div className="pl-4">
+                  <Link href="/watchparties" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('watchparties')}
+                  </Link>
+                  <Link href="/privateevents" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('privateevents')}
+                  </Link>
+                  <Link href="/corporateevents" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('corporateevents')}
+                  </Link>
+                </div>
+              )}
+
+              <button
+                onClick={toggleMobileAboutDropdown}
+                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90] "
               >
-                {t('VENUE')}
-              </Link>
+                {t('ABOUT')}
+              </button>
+
+              {isMobileAboutDropdownOpen && (
+                <div className="pl-4">
+                  <Link href="/teleiosx" className="block px-4 py-2 text-[#c09e5f] text-[14px] hover:text-[#e3ce90] " onClick={closeMenu}>
+                    {t('VENUE')}
+                  </Link>
+                </div>
+              )}
             
-              <Link
-                href="/privateevents"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
-              >
-                {t('privateevents')}
-              </Link>
-              <Link
-                href="/corporateevents"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
-              >
-                {t('corporateevents')}
-              </Link>
-              <Link
-                href="/f&b"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
-              >
-                {t('f&b')}
-              </Link>
           
             </div>
           </div>
