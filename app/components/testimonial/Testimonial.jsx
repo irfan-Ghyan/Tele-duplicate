@@ -167,7 +167,7 @@ export default function Testimonial() {
   };
 
   return (
-    <div className="w-full overflow-hidden relative flex justify-center items-center py-[40px] md:py-[50px] lg:py-[100px]">
+    <div className="w-full overflow-hidden relative flex justify-center items-center py-[20px] md:py-[50px] lg:py-[100px]">
       <div className="max-w-7xl w-full px-4 md:px-8">
         <div className="mx-auto py-8">
           <div className="border-solid border-b-[1px] border-[#fff] border-opacity-50 text-end"></div>
@@ -220,6 +220,19 @@ export default function Testimonial() {
           </div>
         </div>
       </div>
+
+      <div className="md:hidden lg:hidden flex justify-center gap-4 absolute bottom-2 left-1/2 transform -translate-x-1/2">
+      <button
+        onClick={scrollPrev}
+        className="flex items-center justify-center w-4 h-4 bg-[#fff] rounded-full shadow-md"
+      >
+      </button>
+      <button
+        onClick={scrollNext}
+        className="flex items-center justify-center w-4 h-4 bg-[#fff] rounded-full shadow-md"
+      >
+      </button>
+    </div>
     </div>
   );
 }
