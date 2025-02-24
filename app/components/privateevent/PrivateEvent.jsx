@@ -62,7 +62,7 @@ const PrivateEvent = () => {
                 {section.cards.map((card, idx) => (
                   <div 
                     key={idx} 
-                    className="group relative grid h-[35rem] max-w-lg flex-col items-end justify-center overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2"
+                    className="group relative grid h-[35rem] max-w-lg flex-col items-end  overflow-hidden rounded-lg bg-white shadow-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2"
                   >
 
                     <div 

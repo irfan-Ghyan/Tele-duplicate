@@ -175,7 +175,7 @@ const Header = () => {
           <>
           <button
             className="flex absolute bottom-10 md:bottom-20 lg:bottom-20 xl:bottom-20 left-1/2 transform -translate-x-1/2 z-20 p-2 rounded-full hover:opacity-80 transition"
-            onClick={scrollToSection}
+            onClick={scrollToSection }
           >
             <Image
               src="/assets/images/dome/arrowdpown.png"

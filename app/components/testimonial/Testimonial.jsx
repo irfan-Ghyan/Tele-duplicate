@@ -179,17 +179,17 @@ export default function Testimonial() {
               <div className="mt-[20px] md:mt-[0px] w-65 h-45">
                 <button
                   onClick={scrollPrev}
-                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                  className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
-                  <Image src="/assets/images/dome/left.png" alt="arrow" width={18} height={13} />
+                  <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18}  />
                 </button>
               </div>
               <div className="mt-[20px] md:mt-[0px] w-65 h-45">
                 <button
                   onClick={scrollNext}
-                  className="button-slanted cursor-pointer flex items-center justify-center px-6 py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                  className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#e3ce90] font-jura font-bold text-[#e3ce90] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
-                  <Image src="/assets/images/dome/right.png" alt="arrow" width={18} height={13} />
+                  <Image src="/assets/images/dome/right.png" alt="arrow" width={30} height={18}  />
                 </button>
               </div>
             </div>

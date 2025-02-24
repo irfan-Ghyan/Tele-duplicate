@@ -23,7 +23,9 @@ const Navbar = ({ isTopBannerVisible }) => {
   const [isMobileEventsDropdownOpen, setIsMobileEventsDropdownOpen] = useState(false);
   const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const menuRef = useRef(null)
+  const menuRef = useRef(null);
+  
+
   const { t, i18n } = useTranslation();
 
   const hiddenRoutes = [
@@ -88,6 +90,8 @@ const Navbar = ({ isTopBannerVisible }) => {
     setIsEventsDropdownOpen(false);
     setIsAboutDropdownOpen(false);
   };
+  
+  
   
   const handleLanguageChange = (lng) => {
     setSelectedLanguage(lng);
@@ -220,6 +224,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               {t('EXPERIENCES')}
             </Link> */}
 
+
              {/* Experience Dropdown */}
              <div className="relative" ref={dropdownRef}>
               <button
@@ -231,7 +236,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               </button>
 
               {isExperienceDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
                   <Link href="/experience" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('BOOK NOW')}
                   </Link>
@@ -256,7 +261,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               </button>
 
               {isEventsDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
                   <Link href="/watchparties" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('watchparties')}
                   </Link>
@@ -281,7 +286,7 @@ const Navbar = ({ isTopBannerVisible }) => {
               </button>
 
               {isAboutDropdownOpen && (
-                <div className="absolute left-0 mt-2 w-[160px] bg-[#063828]">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
                   <Link href="/teleiosx" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('VENUE')}
                   </Link>
