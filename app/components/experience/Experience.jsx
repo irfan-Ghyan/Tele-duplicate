@@ -146,10 +146,10 @@ const Experience = () => {
                     </div>
 
                     <div>
-                      <h1 className="text-[#c09e5f] text-[18px] font-orbitron font-bold px-8">
+                      <h1 className="text-[#fff] text-[18px] font-orbitron font-bold px-8">
                         {experience.title}
                       </h1>
-                      <p className="text-[#e3ce90] text-[18px] font-jura font-bold py-4 px-8">
+                      <p className="text-[#fff] text-[18px] font-jura font-bold py-4 px-8">
                         {experience.description}
                       </p>
                     </div>

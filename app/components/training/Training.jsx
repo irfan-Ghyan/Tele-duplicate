@@ -34,7 +34,7 @@ const Training = () => {
 
             <div className="flex justify-center lg:justify-start m-bottom ">
               <div className='pt-4 pb-10'>
-                <Link href="/f&b" className="md:mt-[77px] lg:mt-[77px] button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button text-[16px] leading-[24px] font-jura border-[1px] border-[#C09E5F] hover:to-[#c09e5f] hover:text-[#C09E5F] hover:border-[#C09E5F] text-[#C09E5F] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                <Link href="/f&b" className="md:mt-[77px] lg:mt-[77px] button-slanted w-[200px] lg:w-[233px] h-[44px] px-8 py-6 button text-[16px] leading-[24px] font-jura border-[1px] border-[#fff] hover:to-[#c09e5f] hover:text-[#C09E5F] hover:border-[#C09E5F] text-[#fff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                   <span className='button-slanted-content'>{t('FIND OUT MORE')}</span>
                 </Link>
               </div>
@@ -47,7 +47,7 @@ const Training = () => {
       <style jsx>{`
         @media (max-width: 430px) {
           .training-section {
-            height: 772px;
+            height: 600px;
           }
         }
       `}</style>

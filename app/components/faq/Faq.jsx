@@ -8,12 +8,12 @@ import { useTranslation } from 'react-i18next';
 
 const FaqItem = ({ question, answer, isOpen, onClick }) => {
   return (
-    <div className="border-b border-[#c09e5f] border-opacity-50 py-4">
+    <div className="border-b border-[#fff] border-opacity-50 py-4">
       <div
         className="flex justify-between items-center cursor-pointer py-6"
         onClick={onClick}
       >
-        <h3 className="text-[#c09e5f] text-[24px] md:text-[34px] font-bold font-orbitron">
+        <h3 className="text-[#fff]  text-[24px] md:text-[34px] font-bold font-orbitron">
           {question}
         </h3>
         <button className="w-[18px] h-[2px] font-normal">
@@ -21,7 +21,7 @@ const FaqItem = ({ question, answer, isOpen, onClick }) => {
         </button>
       </div>
       {isOpen && (
-        <p className="mt-4 text-[#e3ce90] text-[20px] font-bold font-jura">
+        <p className="mt-4 text-[#fff] ] text-[20px] font-bold font-jura">
           {answer}
         </p>
       )}
@@ -99,12 +99,12 @@ const Faq = () => {
 
   return (
     <div className="w-full px-4 lg:px-[0px] xl:px-[0px] max-w-full overflow-hidden pb-20">
-      <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px] text-end">
-        <h1 className="text-[14px] text-[#e3ce90] font-normal font-orbitron pb-4">{t('FAQ')}</h1>
+      <div className="border-solid border-b-[1px] border-[#fff]  border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px] text-end">
+        <h1 className="text-[14px] text-[#fff] font-normal font-orbitron pb-4">{t('FAQ')}</h1>
       </div>
       <div className="flex justify-between mt-[36px] mb-[41px]">
         <div>
-          <h1 className="text-[34px] md:text-[54px] text-[#c09e5f] font-black font-orbitron">
+          <h1 className="text-[34px] md:text-[54px] text-[#fff]  font-black font-orbitron">
             {t('faq.title')}
           </h1>
         </div>
@@ -112,7 +112,7 @@ const Faq = () => {
 
       {loading && (
         <div className="text-center">
-          <p className="text-[#c09e5f] text-xl">{t('Loading')}</p>
+          <p className="text-[#fff] text-xl">{t('Loading')}</p>
         </div>
       )}
       
@@ -124,7 +124,7 @@ const Faq = () => {
 
       {!loading && !error && (
         <>
-          <div className="text-[34px] text-[#e3ce90] font-normal font-orbitron py-6">
+          <div className="text-[34px] text-[#fff] font-normal font-orbitron py-6">
             {faqEntries.slice(0, 4).map((faq, index) => (
               <FaqItem
                 key={index}
@@ -150,8 +150,8 @@ const Faq = () => {
           {faqEntries.length > 4 && (
             <div className="flex justify-center">
               <div className='py-8 button-slanted'>
-                <button onClick={toggleShowMore} className="w-[200px] h-[44px] px-8 bg-opacity-50 button border-[1px] border-[#C09E5F] font-jura font-bold text-[#C09E5F] hover:bg-gradient-to-r ml-2 hover:from-[#C09E5F] hover:to-[#C09E5F] hover:text-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
-                  <span className='button-slanted-content text-[18px] md:text-[24px] text-[#C09E5F] font-bold font-jura hover:text-[#002718]'>
+                <button onClick={toggleShowMore} className="w-[200px] h-[44px] px-8 bg-opacity-50 button border-[1px] border-[#ffffff] font-jura font-bold text-[#ffffff] hover:bg-gradient-to-r ml-2 hover:from-[#C09E5F] hover:to-[#C09E5F] hover:text-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
+                  <span className='button-slanted-content text-[18px] md:text-[24px] text-[#ffff] font-bold font-jura hover:text-[#002718]'>
                     {showMore ? t('faq.seeLess') : t('faq.seeMore')}
                   </span>
                 </button>
@@ -161,15 +161,15 @@ const Faq = () => {
         </>
       )}
 
-      <div className="text-[34px] text-[#C09E5F] font-normal font-orbitron py-6">
-        <h1 className="text-[34px] md:text-[54px] text-[#C09E5F] font-black font-orbitron">
+      <div className="text-[34px] text-[#fff] font-normal font-orbitron py-6">
+        <h1 className="text-[34px] md:text-[54px] text-[#fff] font-black font-orbitron">
           {t('faq.otherQuestions')}
         </h1>
 
-          <Link href="/experience" target="_blank" rel="noopener noreferrer" className='text-[18px] md:text-[18px] text-[#C09E5F] font-bold font-jura underline'>
+          <Link href="https://api.whatsapp.com/send/?phone=966552249297&text&type=phone_number&app_abse" target="_blank" rel="noopener noreferrer" className='text-[18px] md:text-[18px] text-[#fff] font-bold font-jura underline'>
             {t('faq.contactUs')}
           </Link>{' '}
-          <span className='text-[18px] md:text-[18px] text-[#C09E5F] font-bold font-jura leading-[27px]"'>{t('faq.moreInfo')}</span>
+          <span className='text-[18px] md:text-[18px] text-[#fff] font-bold font-jura leading-[27px]"'>{t('faq.moreInfo')}</span>
 
       </div>
     </div>
@@ -179,114 +179,3 @@ const Faq = () => {
 export default Faq;
 
 
-
-
-// 'use client';
-
-// import React, { useState } from 'react';
-// import { useTranslation } from 'react-i18next';
-// import Link from 'next/link';
-
-
-// const FaqItem = ({ question, answer, isOpen, onClick }) => {
-//   return (
-//     <div className="border-b border-[#c09e5f] border-opacity-50 py-4">
-//       <div
-//         className="flex justify-between items-center cursor-pointer py-6"
-//         onClick={onClick}
-//       >
-//         <h3 className="text-[#c09e5f] text-[24px] md:text-[34px] font-bold font-orbitron">
-//           {question}
-//         </h3>
-//         <button className="w-[24px] h-[px] font-lg text-[#c09e5f] ">
-//           {isOpen ? '-' : '+'}
-//         </button>
-//       </div>
-//       {isOpen && (
-//         <p className="mt-4 text-[#e3ce90] text-[20px] font-bold font-jura">
-//           {answer}
-//         </p>
-//       )}
-//     </div>
-//   );
-// };
-
-// const Faq = () => {
-//   const { t, i18n } = useTranslation();
-//   const [openFaqIndex, setOpenFaqIndex] = useState(null);
-//   const [showMore, setShowMore] = useState(false);
-
-//   const toggleFaq = (index) => {
-//     setOpenFaqIndex(openFaqIndex === index ? null : index);
-//   };
-
-//   const toggleShowMore = () => {
-//     setShowMore(!showMore);
-//   };
-
-//   const switchLanguage = (lang) => {
-//     i18n.changeLanguage(lang);
-//   };
-
-//   const faqEntries = t('faq.questions', { returnObjects: true }) || [];
-//   const faqList = Array.isArray(faqEntries) ? faqEntries : [];
-
-//   return (
-//     <div className="w-full px-4 lg:px-0 xl:px-0 max-w-full overflow-hidden pb-20">
-      
-
-//       <div className="border-solid border-b-[1px] border-[#e3ce90] border-opacity-50 pt-[40px]">
-//         <h1 className="text-[14px] text-[#e3ce90] font-normal pb-4">{t('FAQ')}</h1>
-//       </div>
-//       <div className="flex justify-between mt-[36px] mb-[41px]">
-//         <h1 className="text-[34px] font-orbitron md:text-[54px] text-[#c09e5f] font-black">{t('faq.title')}</h1>
-//       </div>
-
-//       <div className="py-6">
-//         {faqList.slice(0, 4).map((faq, index) => (
-//           <FaqItem
-//             key={index}
-//             question={faq.question}
-//             answer={faq.answer}
-//             isOpen={openFaqIndex === index}
-//             onClick={() => toggleFaq(index)}
-//           />
-//         ))}
-
-//         {showMore &&
-//           faqList.slice(4).map((faq, index) => (
-//             <FaqItem
-//               key={index + 4}
-//               question={faq.question}
-//               answer={faq.answer}
-//               isOpen={openFaqIndex === index + 4}
-//               onClick={() => toggleFaq(index + 4)}
-//             />
-//           ))}
-//       </div>
-
-//       {faqList.length > 4 && (
-//         <div className="flex justify-center">
-//           <button
-//             onClick={toggleShowMore}
-//             className="px-8 py-2 border-[1px] border-[#c09e5f] text-[#e3ce90] hover:bg-[#c09e5f] hover:text-[#002718] transition duration-300 rounded-lg"
-//           >
-//             {showMore ? t('faq.seeLess') : t('faq.seeMore')}
-//           </button>
-//         </div>
-//       )}
-
-//       <div className="py-6">
-//         <h1 className="text-[34px] font-orbitron md:text-[54px] text-[#c09e5f] font-black">{t('faq.otherQuestions')}</h1>
-//         <p className="text-[24px] font-orbitron md:text-[18px] text-[#c09e5f] font-bold">
-//           <Link href="/contact" className="underline ">
-//             {t('faq.contactUs')}
-//           </Link>{' '}
-//           {t('faq.moreInfo')}
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Faq;

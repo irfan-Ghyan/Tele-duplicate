@@ -18,7 +18,7 @@ const Dome = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { t } = useTranslation();
-
+  const [isMobile, setIsMobile] = useState(false);
   
 
   useEffect(() => {
@@ -101,6 +101,22 @@ const Dome = () => {
     setCurrentSlide((prev) => (prev === 0 ? (domes?.length ?? 0) - 1 : prev - 1));
   };
 
+
+  
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(window.innerWidth < 768); // Adjust as needed
+  };
+
+  handleResize(); // Check on mount
+  window.addEventListener('resize', handleResize);
+
+  return () => window.removeEventListener('resize', handleResize);
+}, []);
+
+
+
   return (
     <>
       <Head>
@@ -112,23 +128,24 @@ const Dome = () => {
         {error && <p className="text-red-500">{error}</p>}
 
         {!loading && !error && domes.map((dome, index) => (
-          <div
-            key={index}
-            className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
-            style={{
-              backgroundImage: `url(${dome.imageUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          >
-            <div className="absolute inset-0 bg-[#002718] bg-opacity-60 lg:bg-opacity-30%"></div>
-            <div className="relative flex items-end justify-end h-full px-9 max-w-7xl mx-auto pb-28">
-              <div className='w-full'>
+         <div 
+         className={`absolute w-full h-full transition-opacity duration-1000 ease-in-out ${
+           index === currentSlide ? 'opacity-100' : 'opacity-0'
+         } ${isMobile ? 'bg-[#002718]' : ''}`} 
+         style={{
+           backgroundImage: `url(${dome.imageUrl})`,
+           backgroundSize: 'cover',
+           backgroundPosition: 'center',
+           backgroundRepeat: 'no-repeat',
+         }}
+       >
+            <div className="absolute inset-0 bg-[#002718] bg-opacity-80 md:bg-opacity-30% lg:bg-opacity-30% xl:bg-opacity-30% "></div>
+            <div className="relative flex items-end justify-end h-full lg:px-9 max-w-7xl mx-auto lg:pb-28">
+              <div className='w-full  p-8'>
               
-              <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row'>
-                <div className='w-2/3'>
-              <h2 className="text-[32px] md:text-[54px] mb-4 text-[#FFFFFF] font-black font-orbitron">
+              <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row  '>
+                <div className='w-full md:w-2/3 lg:w-2/3 '>
+              <h2 className=" text-[32px] md:text-[54px] mb-4 text-[#FFFFFF] font-black font-orbitron">
               {t('dome.title')}
               </h2>
               <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura text-justify">

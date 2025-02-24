@@ -22,6 +22,7 @@ const Header = () => {
   const [showCorpratePopup, setShowCorpratePopup] = useState(false);
   const [isNavbarBgVisible, setIsNavbarBgVisible] = useState(false);
   const [videoUrl, setVideoUrl] = useState(""); 
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const handleLanguageChange = (lng) => {
     switchLanguage(lng);
@@ -41,6 +42,23 @@ const Header = () => {
   ];
 
   const shouldHideBannersAndBackground = hiddenRoutes.includes(pathname);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+
 
   useEffect(() => {
     if (shouldHideBannersAndBackground) {
@@ -161,7 +179,9 @@ const Header = () => {
 
         {pathname === '/' && (
           <button
-            className="absolute top-[50%] right-2 md:right-10 lg:right-10 xl:right-10 z-30 p-2 rounded-full hover:opacity-80 transition"
+          className={`absolute top-[50%] right-2 md:right-10 lg:right-10 xl:right-10 z-[999] p-2 rounded-full hover:opacity-80 transition transform ${
+            isScrolled ? "opacity-0 translate-y-5" : "opacity-100"
+          }`}
             onClick={handlePlayButtonClick}
           >
             <div className="flex">
@@ -174,7 +194,9 @@ const Header = () => {
         {pathname === '/' && (
           <>
           <button
-            className="flex absolute bottom-10 md:bottom-20 lg:bottom-20 xl:bottom-20 left-1/2 transform -translate-x-1/2 z-20 p-2 rounded-full hover:opacity-80 transition"
+             className={`absolute bottom-10 md:bottom-20 lg:bottom-20 xl:bottom-20 left-1/2 transform -translate-x-1/2 z-[999] p-2 rounded-full hover:opacity-80 transition ${
+      isScrolled ? "opacity-0 translate-y-5" : "opacity-100"
+    }`}
             onClick={scrollToSection }
           >
             <Image

@@ -38,9 +38,9 @@ const Page = () => {
       </Helmet>
       <div className="flex flex-col items-center ">
         <div className="flex items-center justify-center xl:px-20 sm:px-4">
-          <div className="text-justify p-6 text-[#c09e5f] max-w-7xl lg:pt-[50px] ">
-            <h1 className="font-orbitron text-center text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4 ">{t('f&b.title')}</h1>
-            <p className="text-[#e3ce90] text-center font-jura text-[14px] lg:text-[18px] font-bold px-[8px] pb-10">
+          <div className="text-justify p-6 text-[#fff] max-w-7xl lg:pt-[50px] ">
+            <h1 className="font-orbitron text-center text-[34px] lg:text-[54px] text-[#fff]font-black mb-4 ">{t('f&b.title')}</h1>
+            <p className="text-[#fff] text-center font-jura text-[14px] lg:text-[18px] font-bold px-[8px] pb-10">
               {t("f&b.description")}
             </p>
             <div className='py-0 lg:py-[40px]'>

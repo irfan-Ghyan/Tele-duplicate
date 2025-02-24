@@ -88,7 +88,7 @@ const Content = () => {
       <div className="flex flex-col items-center overflow-x-hidden  lg:pb-[70px] lg:pt-[80px] py-8 md:py-[80px] lg:py-[80px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4 md:flex lg:flex xl:flex xl:justify-center">
           <div className="text-center text-[#e3ce90]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#C09E5F] font-black ">
+            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#fff] font-black ">
               {t('Content.Sessions')}
             </h1>
           </div>
