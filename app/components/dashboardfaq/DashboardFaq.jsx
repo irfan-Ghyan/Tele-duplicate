@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useFaq } from "../../FaqContext";
 import {doPostCall} from '../../utils/api';
 import {doGetCall} from '../../utils/api';
@@ -26,51 +26,50 @@ const labels = {
   ar: { heading: 'التعليمات', title: 'سؤال', description: 'وصف', submit: 'إجابة', update: 'تحديث', show: 'عرض', hide: 'إخفاء', upload: 'تحميل الصور', edit: 'يحرر', delete: 'يمسح', actions: 'الإجراءات', },
 };
 
+const fetchData = useCallback(async () => {
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+    const url = `${baseUrl}/api/content/sections/Home`;
+    let response = await doGetCall(url);
+
+    if (response.ok) {
+      response = await response.json();
+      if (response.success) {
+        const faqSection = response.data.sections.find(
+          (section) => section.title === "FAQ"
+        );
+        const faq = { next: null, data: [] };
+
+        if (faqSection) {
+          faqSection.section_fields.forEach((field, index, fields) => {
+            if (field.key.startsWith("q")) {
+              const answerField = fields.find(
+                (f) => f.key === "a" + field.key.slice(1)
+              );
+              if (answerField) {
+                faq["data"].push({
+                  question: { key: field.key, value: field.value },
+                  answer: { key: answerField.key, value: answerField.value },
+                });
+              }
+            }
+          });
+        }
+        faq.next = faq.data.length + 1;
+        updateFaqData(faq);
+        setFaqEntries(faq.data.reverse());
+        setFaqEntries(faq.data);
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}, [updateFaqData]);
+
+
   useEffect(() => {
     fetchData();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/content/sections/Home`;
-      let response = await doGetCall(url);
-      
-      if (response.ok) {
-        response = await response.json();
-        if (response.success) {
-          const faqSection = response.data.sections.find(
-            (section) => section.title === "FAQ"
-          );
-          const faq = { next: null, data: [] };
-
-          if (faqSection) {
-            faqSection.section_fields.forEach((field, index, fields) => {
-              if (field.key.startsWith("q")) {
-                const answerField = fields.find(
-                  (f) => f.key === "a" + field.key.slice(1)
-                );
-                if (answerField) {
-                  faq["data"].push({
-                    question: { key: field.key, value: field.value },
-                    answer: { key: answerField.key, value: answerField.value },
-                  });
-                }
-              }
-            });
-          }
-          faq.next = faq.data.length + 1;
-          updateFaqData(faq);
-          setFaqEntries(faq.data.reverse());
-          setFaqEntries(faq.data);
-
-          console.log(faq);
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  }, [fetchData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

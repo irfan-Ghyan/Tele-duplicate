@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import {doPostCall} from '../../utils/api';
+import Image from 'next/image';
 
 const DashboardExperience = () => {
   const [language, setLanguage] = useState('en');
@@ -170,7 +171,7 @@ const DashboardExperience = () => {
             <div className="mb-4 grid grid-cols-3 gap-4">
               {images.map((img, index) => (
                 <div key={index} className="relative">
-                  <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
+                  <Image src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
                   <button
                     type="button"
                     onClick={() => handleRemoveImage(index)}

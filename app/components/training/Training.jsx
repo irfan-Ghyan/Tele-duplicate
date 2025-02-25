@@ -10,7 +10,7 @@ const Training = () => {
 
   return (
     <div
-      className="training-section w-full max-w-full overflow-hidden lg:h-[550px] xl:h-[550px] bg-cover bg-right lg:bg-right xl:bg-center px-4 md:px-0 lg:px-0 xl:px-0"
+      className="training-section w-full max-w-full overflow-hidden h-[200px] sm:h-[400px] md:h-[550px] lg:h-[550px] xl:h-[550px] lg:bg-cover bg-right lg:bg-right xl:bg-center px-4 md:px-0 lg:px-0 xl:px-0"
       style={{ backgroundImage: "url('/assets/images/dome/f&b.png')" }}
     >
       <div className='w-full bg-[#002718] bg-opacity-80 lg:bg-opacity-60 md:bg-opacity-60 xl:bg-opacity-0 px-4 mt-[230px] sm:mt-0 md:mt-0 lg:mt-0 xl:mt-0'>

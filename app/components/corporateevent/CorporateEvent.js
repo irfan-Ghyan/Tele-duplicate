@@ -3,6 +3,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const CorporateEvent = () => {
   const { t } = useTranslation();
@@ -25,10 +26,12 @@ const CorporateEvent = () => {
           style={{ backgroundImage: "url('/assets/images/experience/corbg.jpg')" }}
         ></div>
 
-        <img
+        <Image
           src="/assets/images/dome/S1.png"
           alt="Corporate Event"
           className="block md:hidden w-full h-[400px] object-cover"
+          height={100}
+          width={100}
         />
         <div className="relative bg-[#002718] bg-opacity-80 xl:bg-opacity-0 px-4 md:flex md:flex-col md:pr-6 py-[20px] lg:py-[80px] xl:py-[80px] max-w-7xl mx-auto mt-0 z-10">
           <div className="relative px-4 flex flex-col justify-between md:mt-[36px] md:mb-[41px]">

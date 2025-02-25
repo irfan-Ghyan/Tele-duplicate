@@ -64,8 +64,6 @@ const BookingListing = () => {
   }, []);
   
 
-  
-
   useEffect(() => {
     const currentDate = new Date();
     const formattedDate = currentDate.toISOString().split("T")[0];
@@ -151,50 +149,73 @@ const BookingListing = () => {
     }
   };
 
-  useEffect(() => {
-    if (formData.duration && formData.date) {
-      generateTimeSlots();
-    }
-  }, [formData.duration, formData.date]);
+  // useEffect(() => {
+  //   if (formData.duration && formData.date) {
+  //     generateTimeSlots();
+  //   }
+  // }, [formData.duration, formData.date]);
 
 
-  const generateTimeSlots = () => {
-    const duration = 20; 
-    if (!formData.date) return;
-  
-    const now = new Date();
-    const selectedDate = new Date(formData.date);
-  
-    let startTime;
-  
+
+  const generateTimeSlots = useCallback(() => {
+    const duration = 20
+    if (!formData.date) return
+
+    const now = new Date()
+    const selectedDate = new Date(formData.date)
+
+    let startTime
+
     if (selectedDate.toDateString() === now.toDateString()) {
-      const currentMinutes = now.getHours() * 60 + now.getMinutes();
-      const nextRoundedMinutes = Math.ceil(currentMinutes / duration) * duration;
-  
+      const currentMinutes = now.getHours() * 60 + now.getMinutes()
+      const nextRoundedMinutes = Math.ceil(currentMinutes / duration) * duration
+
       startTime = new Date(
         now.getFullYear(),
         now.getMonth(),
         now.getDate(),
         Math.floor(nextRoundedMinutes / 60),
-        nextRoundedMinutes % 60
-      );
+        nextRoundedMinutes % 60,
+      )
     } else {
-      startTime = new Date(selectedDate.setHours(9, 0, 0));
+      startTime = new Date(selectedDate.setHours(9, 0, 0))
     }
-  
 
-    const endTime = new Date(selectedDate.setHours(24, 0, 0));
-    const slots = [];
+    const endTime = new Date(selectedDate.setHours(24, 0, 0))
+    const slots = []
 
     while (startTime < endTime) {
-      slots.push(startTime.toTimeString().slice(0, 5));
-      startTime = new Date(startTime.getTime() + duration * 60 * 1000);
+      slots.push(startTime.toTimeString().slice(0, 5))
+      startTime = new Date(startTime.getTime() + duration * 60 * 1000)
     }
+
+    setTimeSlots(slots)
+    setIsVisible(true)
+  }, [formData.date])
+
+
+  useEffect(() => {
+    if (formData.duration && formData.date) {
+      generateTimeSlots()
+    }
+  }, [formData.duration, formData.date, generateTimeSlots])
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
   
-    setTimeSlots(slots);
-    setIsVisible(true);
+    if (name === "booking_type") {
+      setFormData((prevData) => ({
+        ...prevData,
+        booking_type: value,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
-  
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -299,21 +320,7 @@ const BookingListing = () => {
   
   
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-  
-    if (name === "booking_type") {
-      setFormData((prevData) => ({
-        ...prevData,
-        booking_type: value,
-      }));
-    } else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-  };
+
   
 
   const toggleLanguage = () => {

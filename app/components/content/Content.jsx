@@ -1,62 +1,62 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Newsletter from '../../components/newsletter/Newsletter';
-import Coaching from '../../components/coaching/Coaching';
 import { Helmet } from 'react-helmet-async';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 
+
+
 const Content = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const [faqEntries, setFaqEntries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   const fetchData = async () => {
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
+
+      if (typeof window === "undefined") return;
+      
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      if (!baseUrl) throw new Error("API base URL is missing.");
 
       const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Experience`);
-      if (!sectionResponse.ok) {
-        throw new Error(t('Content.Error'));
+      if (!sectionResponse.ok) { throw new Error(t("Content.Error"));
       }
 
       const sectionData = await sectionResponse.json();
       let entries = [];
 
       if (sectionData.success) {
-        const domeSection = sectionData.data.sections.find((section) => section.title === 'Session');
+        const domeSection = sectionData.data.sections.find((section) => section.title === "Session");
 
         if (domeSection && domeSection.section_fields) {
           entries = domeSection.section_fields
-            .filter((field) => field.key.startsWith('title'))
+            .filter((field) => field.key.startsWith("title"))
             .map((field, index) => {
               const descriptionField = domeSection.section_fields.find(
-                (f) => f.key === `description${field.key.replace('title', '')}`
+                (f) => f.key === `description${field.key.replace("title", "")}`
               );
 
               const staticImageUrls = [
-                '/assets/images/experience/mintue1.jpg',
-                '/assets/images/experience/30mn.png',
-                '/assets/images/experience/60mn.png',
-                '/assets/images/experience/privateevent.jpg',
-                '/assets/images/experience/90min.png',
+                "/assets/images/experience/mintue1.jpg",
+                "/assets/images/experience/30mn.png",
+                "/assets/images/experience/60mn.png",
+                "/assets/images/experience/privateevent.jpg",
+                "/assets/images/experience/90min.png",
               ];
 
               return {
                 title: field.value,
-                description: descriptionField ? descriptionField.value : '',
-                imageUrl: staticImageUrls[index] || '/assets/images/static/default.jpg',
+                description: descriptionField ? descriptionField.value : "",
+                imageUrl: staticImageUrls[index] || "/assets/images/static/default.jpg",
               };
             });
 
@@ -64,12 +64,19 @@ const Content = () => {
         }
       }
     } catch (err) {
-      setError(err.message || t('Content.Error'));
+      console.error("Error fetching content:", err);
+      setError(err.message || t("Content.Error"));
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      fetchData();
+    }
+  }, []);
+  
   return (
     <>
       <Helmet>
@@ -96,7 +103,7 @@ const Content = () => {
 
         <div className="w-full lg:my-8 my-4">
           <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center gap-[50px] flex-wrap">
-            {loading && <p className="text-[#c09e5f]">{t('Content.Loading')}</p>}
+            {loading && <p className="text-[#c09e5f]">{t('Loading ...')}</p>}
             {error && <p className="text-red-500">{error}</p>}
 
             {!loading &&

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { doPostCall, doDeleteCall, uploadImageCall, doGetCall } from '../../utils/api';
+import Image from 'next/image';
 
 
 const translations = {
@@ -468,7 +469,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
                         <div className="flex flex-wrap">
                           {entry.images.map((image, i) => (
                             <div key={i} className="relative">
-                              <img
+                              <Image
                                 src={image}
                                 alt={`Image ${i}`}
                                 className="w-12 h-12 object-cover mr-2"

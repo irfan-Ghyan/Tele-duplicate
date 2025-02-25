@@ -12,6 +12,11 @@ const GoogleReviews = () => {
 
 
   useEffect(() => {
+    if (!apiKey || !placeId) {
+      console.error("API Key or Place ID is missing");
+      return;
+    }
+
     fetch(`https://maps.googleapis.com/maps/api/place/details/json?placeid=${placeId}&key=${apiKey}&fields=reviews,rating,user_ratings_total`)
   
 
@@ -24,7 +29,7 @@ const GoogleReviews = () => {
         console.error("Error loading reviews:", error);
         setLoading(false);
       });
-  }, []);
+  }, [apiKey, placeId]);
 
   if (isLoading) return <p className='text-white'>Loading reviews...</p>;
   if (!reviews.length) return <p className='text-white'>No reviews available.</p>;

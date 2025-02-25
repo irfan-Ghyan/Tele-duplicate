@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { doPostCall, uploadImageCall, doGetCall, doDeleteCall } from '../../utils/api';
+import Image from 'next/image';
 
 const translations = {
   en: {
@@ -276,7 +277,7 @@ const DashboardNetworking= () => {
                 <td className="p-2 border">{tableData[0].description}</td>
                 <td className="p-2 border">
                   {tableData[0].images && tableData[0].images.length > 0 && (
-                    <img
+                    <Image
                       src={tableData[0].images[0].previewUrl}
                       alt="Entry"
                       className="w-16 h-16 object-cover"

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {doPostCall} from '../../utils/api';
+import Image from 'next/image';
 
 const DashboardPrivateEvents = () => {
   const [title, setTitle] = useState('');
@@ -153,7 +154,7 @@ const DashboardPrivateEvents = () => {
         <div className="mb-4 grid grid-cols-3 gap-4">
           {images.map((entry, index) => (
             <div key={index} className="relative">
-              <img src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
+              <Image src={img.previewUrl} alt="Preview" className="w-full h-24 object-cover rounded" />
               <button
                 type="button"
                 onClick={() => handleDelete(entry.title, entry.description)}
@@ -193,7 +194,7 @@ const DashboardPrivateEvents = () => {
                 <td className="p-2 border">{entry.description}</td>
                 <td className="p-2 border">
                   {entry.images && entry.images.length > 0 && (
-                    <img
+                    <Image
                       src={entry.images[0].previewUrl}
                       alt="Entry"
                       className="w-16 h-16 object-cover"

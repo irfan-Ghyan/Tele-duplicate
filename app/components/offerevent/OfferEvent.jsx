@@ -99,6 +99,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const OfferEvent = () => {
   const { t, i18n } = useTranslation();
@@ -158,10 +159,12 @@ const OfferEvent = () => {
                   >
                     {/* Image with Hover Zoom & Rotate Effect */}
                     <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
-                      <img 
+                      <Image
                         src={card.image} 
                         alt={card.heading} 
                         className="h-full w-full rounded-md md:rounded-lg object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
+                        width={400}
+                        height={400}
                       />
                     </div>
 

@@ -112,6 +112,7 @@
 // export default FlexiblePackages;
 
 
+
 "use client";
 
 import React, { Suspense } from "react";
@@ -141,29 +142,38 @@ const PackageComponent = () => {
   ];
 
   return (
-    <div className={`w-full flex flex-col items-center justify-center px-4 mt-4 md:mt-20 lg:mt-20 pt-[40px] pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
-      <div className="w-full max-w-7xl mb-4 md:mb-20 lg:mb-40">
-        
+    <div
+      className={`w-full flex flex-col items-center justify-center px-4 mt-4 md:mt-20 lg:mt-20 pt-[40px] pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${
+        i18n.language === "ar" ? "rtl" : "ltr"
+      }`}
+    >
+      <div className="w-full max-w-7xl mb-4 md:mb-20 lg:mb-40 flex flex-col items-center">
         {/* Flexi Sessions Table */}
         <h3 className="text-[18px] md:text-[34px] text-[#c09e5f] text-center font-black font-orbitron pb-4">
           {t("flexiSessions.heading")}
         </h3>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full flex justify-center">
           <table className="w-full border-collapse border border-[#c09e5f] text-center">
-          <thead>
+            <thead>
               <tr className="bg-[#002718] text-[#e3ce90]">
-                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Duration</th>
-                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Price</th>
-                {/* <th className="border border-[#c09e5f] px-4 py-2">{t("actions")}</th> */}
+                <th className="border border-[#c09e5f] px-6 py-4 w-1/2 font-orbitron">
+                  Duration
+                </th>
+                <th className="border border-[#c09e5f] px-6 py-4 w-1/2 font-orbitron">
+                  Price
+                </th>
               </tr>
             </thead>
             <tbody>
               {flexiSessions.map((session, index) => (
-                <tr key={index} className="border border-[#c09e5f] hover:bg-[#134532] transition duration-300">
-                  <td className="border border-[#c09e5f] px-4 py-4 font-bold text-[#c09e5f] text-lg font-jura">
+                <tr
+                  key={index}
+                  className="border border-[#c09e5f] hover:bg-[#134532] transition duration-300"
+                >
+                  <td className="border border-[#c09e5f] px-6 py-4 font-bold text-[#c09e5f] text-lg font-jura">
                     {session.duration}
                   </td>
-                  <td className="border border-[#c09e5f] px-4 py-4 text-[#e3ce90] font-jura">
+                  <td className="border border-[#c09e5f] px-6 py-4 text-[#e3ce90] font-jura">
                     {session.price}
                   </td>
                 </tr>
@@ -176,22 +186,28 @@ const PackageComponent = () => {
         <h3 className="text-[18px] md:text-[34px] text-[#c09e5f] text-center font-black font-orbitron pt-8 pb-4">
           {t("groRacing.title")}
         </h3>
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto w-full flex justify-center">
           <table className="w-full border-collapse border border-[#c09e5f] text-center">
-          <thead>
+            <thead>
               <tr className="bg-[#002718] text-[#e3ce90]">
-                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Duration</th>
-                <th className="border border-[#c09e5f] px-4 font-orbitron py-4">Price</th>
-                {/* <th className="border border-[#c09e5f] px-4 py-2">{t("actions")}</th> */}
+                <th className="border border-[#c09e5f] px-6 py-4 w-1/2 font-orbitron">
+                  Duration
+                </th>
+                <th className="border border-[#c09e5f] px-6 py-4 w-1/2 font-orbitron">
+                  Price
+                </th>
               </tr>
             </thead>
             <tbody>
               {groupRacing.map((race, index) => (
-                <tr key={index} className="border border-[#c09e5f] hover:bg-[#134532] transition duration-300">
-                  <td className="border border-[#c09e5f] px-4 py-4 font-bold text-[#c09e5f] text-lg font-jura">
+                <tr
+                  key={index}
+                  className="border border-[#c09e5f] hover:bg-[#134532] transition duration-300"
+                >
+                  <td className="border border-[#c09e5f] px-6 py-4 font-bold text-[#c09e5f] text-lg font-jura">
                     {race.duration}
                   </td>
-                  <td className="border border-[#c09e5f] px-4 py-4 text-[#e3ce90] font-jura">
+                  <td className="border border-[#c09e5f] px-6 py-4 text-[#e3ce90] font-jura">
                     {race.price}
                   </td>
                 </tr>
@@ -199,7 +215,6 @@ const PackageComponent = () => {
             </tbody>
           </table>
         </div>
-
       </div>
     </div>
   );

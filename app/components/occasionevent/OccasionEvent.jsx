@@ -77,6 +77,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const OccasionEvent = () => {
   const { t, i18n } = useTranslation();
@@ -121,10 +122,11 @@ const OccasionEvent = () => {
                 key={idx} 
                 className="group bg-[#002718] duration-300 text-center shadow-sm border border-[#002718] rounded-lg overflow-hidden p-4"
               >
-                <img 
+                <Image
                   src={card.image} 
                   alt={card.heading} 
                   className="w-full h-[200px] rounded-lg transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
+                  width={100} height={100}
                 />
 
                 <div className="p-6 transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">

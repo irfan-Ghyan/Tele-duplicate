@@ -73,26 +73,41 @@ const Page = ({ params } ) => {
     setPopupMessage("");
   };
   
-  useEffect(() => {
-    if (id) fetchEventDetails();
-    setBookingDetails((prevDetails) =>
-      prevDetails.map((detail) =>
-        detail.title === "name" ? { ...detail, description: formData.firstName } : detail
-      )
-    );
-  }, [id, formData.firstName]);
+  // useEffect(() => {
+  //   if (id) fetchEventDetails();
+  //   setBookingDetails((prevDetails) =>
+  //     prevDetails.map((detail) =>
+  //       detail.title === "name" ? { ...detail, description: formData.firstName } : detail
+  //     )
+  //   );
+  // }, [id, formData.firstName]);
 
-  useEffect(() => {
-    setBookingDetails((prevDetails) =>
-      prevDetails.map((detail) =>
-        detail.key === "date"
-          ? { ...detail, description: new Date().toLocaleDateString("en-CA") }
-          : detail
-      )
-    );
-  }, []);
+  // useEffect(() => {
+  //   setBookingDetails((prevDetails) =>
+  //     prevDetails.map((detail) =>
+  //       detail.key === "date"
+  //         ? { ...detail, description: new Date().toLocaleDateString("en-CA") }
+  //         : detail
+  //     )
+  //   );
+  // }, []);
 
-  const fetchEventDetails = async () => {
+  // const fetchEventDetails = async () => {
+  //   try {
+  //     const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; 
+  //     const response = await fetch(`${baseUrl}/api/content/sections/${id}`);
+  //     const data = await response.json();
+  //     console.log("Fetched Event Details:", data);
+  //     setEventDetails(data);
+  //   } catch (error) {
+  //     console.error("Error fetching event details:", error);
+  //   }
+  // };
+
+
+  const fetchEventDetails = useCallback(async () => {
+    if (!id) return;
+    
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; 
       const response = await fetch(`${baseUrl}/api/content/sections/${id}`);
@@ -102,8 +117,17 @@ const Page = ({ params } ) => {
     } catch (error) {
       console.error("Error fetching event details:", error);
     }
-  };
-
+  }, [id]);
+  
+  useEffect(() => {
+    fetchEventDetails();
+    setBookingDetails((prevDetails) =>
+      prevDetails.map((detail) =>
+        detail.title === "name" ? { ...detail, description: formData.firstName } : detail
+      )
+    );
+  }, [id, formData.firstName, fetchEventDetails]);
+  
 
   const handleBookingTypeChange = (type) => {
     setBookingDetails((prevDetails) =>

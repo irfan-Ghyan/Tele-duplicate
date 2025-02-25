@@ -87,6 +87,7 @@ import React from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const HowItWorks = () => {
   const { t, i18n } = useTranslation();
@@ -128,10 +129,12 @@ const HowItWorks = () => {
                 key={idx} 
                 className="group bg-[#002718] duration-300  overflow-hidden"
               >
-                <img 
+                <Image
                   src={step.image} 
                   alt={step.heading} 
                   className="w-full h-[400px] object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
+                  width={100}
+                  height={100}
                 />
 
                 <div className="p-6 text-center transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 ">

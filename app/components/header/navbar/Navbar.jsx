@@ -42,10 +42,39 @@ const Navbar = ({ isTopBannerVisible }) => {
   ];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
 
+// States for dropdowns
+const [openDropdown, setOpenDropdown] = useState(null);
 
+// Refs for click detection
+const navbarRef = useRef(null);
+
+
+// Close all dropdowns
+const closeAllDropdowns = () => {
+  setOpenDropdown(null);
+};
+
+
+
+// Click outside handler
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+      closeMenu();
+    }
+  };
+
+  document.addEventListener('mousedown', handleClickOutside);
+  return () => {
+    document.removeEventListener('mousedown', handleClickOutside);
+  };
+}, []);
+
+  
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
   };
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
@@ -60,6 +89,7 @@ const Navbar = ({ isTopBannerVisible }) => {
     setIsExperienceDropdownOpen(false);
     setIsAboutDropdownOpen(false);
   };
+  
   const toggleAboutDropdown = () => {
     setIsAboutDropdownOpen(!isAboutDropdownOpen);
     setIsExperienceDropdownOpen(false);
@@ -83,6 +113,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   
   const closeMenu = () => {
     setMenuOpen(false);
+    closeAllDropdowns();
     setIsMobileExperienceDropdownOpen(false);
     setIsMobileEventsDropdownOpen(false);
     setIsMobileAboutDropdownOpen(false);
@@ -91,6 +122,23 @@ const Navbar = ({ isTopBannerVisible }) => {
     setIsAboutDropdownOpen(false);
   };
   
+  
+  // Click outside handler
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        menuRef.current && !menuRef.current.contains(event.target) &&
+        dropdownRef.current && !dropdownRef.current.contains(event.target)
+      ) {
+        closeMenu();
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   
   const handleLanguageChange = (lng) => {
@@ -170,6 +218,8 @@ const Navbar = ({ isTopBannerVisible }) => {
   //   switchLanguage(lng);
   // };
 
+
+
   return (
     <>
       <Helmet>
@@ -179,10 +229,10 @@ const Navbar = ({ isTopBannerVisible }) => {
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
       </Helmet>
-      <nav
+      <nav ref={navbarRef}
         className={`fixed ${
           isTopBannerVisible ? 'top-0' : 'top-0'
-        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar`}
+        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar` }
       >
         <div className="flex justify-between items-center w-full h-[84px] py-4">
           <div className="flex items-center">
@@ -194,6 +244,7 @@ const Navbar = ({ isTopBannerVisible }) => {
                 height={30}
                 priority={true}
                 className="hidden xl:block sm:w-[100px] sm:h-[52px] md:w-[165px] md:h-[60px] lg:w-[180px] lg:h-[30px] xl:w-[180px] xl:h-[30px]"
+
               />
               <Image
                 src="/assets/images/dome/logo1.png"
@@ -208,7 +259,7 @@ const Navbar = ({ isTopBannerVisible }) => {
 
       
         
-          <div className="flex-grow hidden xl:flex justify-center space-x-4 md:space-x-6 lg:space-x-8 ">
+          <div ref={dropdownRef} className="flex-grow hidden xl:flex justify-center space-x-4 md:space-x-6 lg:space-x-8 ">
           <Link
               href="/"
               className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
@@ -226,7 +277,7 @@ const Navbar = ({ isTopBannerVisible }) => {
 
 
              {/* Experience Dropdown */}
-             <div className="relative" ref={dropdownRef}>
+             <div className="relative" ref={dropdownRef} >
               <button
                 className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
                 onClick={toggleExperienceDropdown}
@@ -251,17 +302,18 @@ const Navbar = ({ isTopBannerVisible }) => {
             </div>
 
 
-             <div className="relative" ref={dropdownRef}>
+             <div className="relative" ref={dropdownRef} >
               <button
                 className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
                 onClick={toggleEventsDropdown}
+              
               >
                 {t('EVENTS')}
         
               </button>
 
               {isEventsDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2 ">
                   <Link href="/watchparties" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('watchparties')}
                   </Link>
@@ -337,9 +389,9 @@ const Navbar = ({ isTopBannerVisible }) => {
           <div className="hidden xl:flex items-center">
             <Link
               href="/experience"
-              className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-normal leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+              className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
-              <span className="button-slanted-content">{t('BOOK NOW')}</span>
+              <span className="button-slanted-content font-jura text-[16px] font-bold">{t('BOOK NOW')}</span>
             </Link>
           </div>
 

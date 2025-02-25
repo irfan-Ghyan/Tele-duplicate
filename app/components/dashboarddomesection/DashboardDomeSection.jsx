@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { doPostCall, doGetCall, uploadImageCall, doDeleteCall } from '../../utils/api';
+import Image from 'next/image';
 
 const translations = {
   en: {
@@ -349,7 +350,7 @@ const DashboardDomeSection = () => {
                 <td className="p-2">
                   {entry.images.length > 0 ? (
                     entry.images.map((image, i) => (
-                      <img
+                      <Image
                         key={i}
                         src={image}
                         alt={`Image ${i}`}

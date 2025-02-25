@@ -48,6 +48,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
+import Image from 'next/image';
 
 const TeleiosxFeatures = () => {
   const { t } = useTranslation();
@@ -89,7 +90,7 @@ const TeleiosxFeatures = () => {
  
         {isSmallScreen && (
           <div className="w-full">
-            <img
+            <Image
               src="/assets/images/dome/S6.JPG"
               alt="Small Screen Image"
               className="w-full h-[300px]"
