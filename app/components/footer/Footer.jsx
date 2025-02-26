@@ -90,7 +90,7 @@ const Footer = () => {
             </div>
           </div>
           </div>
-        <div className="flex mt-4 md:mt-4">
+        <div className="flex mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0">
             <Link
               href="https://www.instagram.com/teleiosx/"
               target="_blank"

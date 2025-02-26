@@ -72,10 +72,11 @@ useEffect(() => {
 
   
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-    setOpenDropdown(openDropdown === dropdown ? null : dropdown);
-  };
+const toggleDropdown = () => {
+  setIsDropdownOpen(!isDropdownOpen);
+  setOpenDropdown(openDropdown === "language" ? null : "language");
+};
+
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const toggleLanguageDropdown = () => setIsDropdownOpen(!isDropdownOpen);
