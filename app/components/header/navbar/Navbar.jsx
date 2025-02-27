@@ -24,6 +24,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const [isMobileAboutDropdownOpen, setIsMobileAboutDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const menuRef = useRef(null);
+ const buttonRef = useRef(null);
   
 
   const { t, i18n } = useTranslation();
@@ -53,6 +54,7 @@ const navbarRef = useRef(null);
 const closeAllDropdowns = () => {
   setOpenDropdown(null);
 };
+
 
 
 
@@ -121,17 +123,19 @@ const toggleDropdown = () => {
     setIsExperienceDropdownOpen(false);
     setIsEventsDropdownOpen(false);
     setIsAboutDropdownOpen(false);
+    
   };
   
-  
-  // Click outside handler
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        menuRef.current && !menuRef.current.contains(event.target) &&
-        dropdownRef.current && !dropdownRef.current.contains(event.target)
+        dropdownRef.current && !dropdownRef.current.contains(event.target) && 
+        buttonRef.current && !buttonRef.current.contains(event.target)
       ) {
         closeMenu();
+        setIsDropdownOpen(false);
+        
       }
     };
 
@@ -147,6 +151,7 @@ const toggleDropdown = () => {
     i18n.changeLanguage(lng);
     switchLanguage(lng);
     setIsDropdownOpen(false);
+    
   };
 
   const handleScroll = () => {
@@ -350,7 +355,8 @@ const toggleDropdown = () => {
           </div>
 
           <div className="relative ml-[31px] mr-[31px]" ref={dropdownRef}>
-            <button
+            <button 
+            ref={buttonRef}
               onClick={toggleDropdown}
               className="flex items-center focus:outline-none"
             >
@@ -370,7 +376,7 @@ const toggleDropdown = () => {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div className="absolute top-12 left-[-24px] bg-[#063828] border border-[#C09E5F] shadow-md rounded-md w-12">
+              <div ref={dropdownRef} className="absolute top-12 left-[-24px] bg-[#063828] border border-[#C09E5F] shadow-md rounded-md w-12">
                 <button
                   onClick={() => handleLanguageChange('en')}
                   className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#063828] hover:bg-[#C09E5F]"
