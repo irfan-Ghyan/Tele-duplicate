@@ -119,7 +119,7 @@ const Content = () => {
                       alt={t('Content.Title')}
                       width={300}
                       height={282}
-                      className="w-[360px] h-[282px] object-cover"
+                      className="w-full h-[282px] object-cover"
                       priority={true}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
@@ -167,7 +167,7 @@ const Content = () => {
                     alt="Experience Image"
                     width={300}
                     height={282}
-                    className="w-[560px] h-[282px] object-cover"
+                    className="w-full h-[282px] object-cover"
                     priority={true}
                   />
                    <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div>
@@ -213,7 +213,7 @@ const Content = () => {
                     alt="Experience Image"
                     width={300}
                     height={282}
-                    className="w-[560px] h-[282px] object-cover"
+                    className="w-full h-[282px] object-cover"
                     priority={true}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>

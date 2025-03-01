@@ -61,8 +61,9 @@ const closeAllDropdowns = () => {
 // Click outside handler
 useEffect(() => {
   const handleClickOutside = (event) => {
-    if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+    if (navbarRef.current && !navbarRef.current.contains(event.target) ) {
       closeMenu();
+      setIsDropdownOpen(false);
     }
   };
 
@@ -72,11 +73,30 @@ useEffect(() => {
   };
 }, []);
 
+
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (
+  //       dropdownRef.current && !dropdownRef.current.contains(event.target) && 
+  //       buttonRef.current && !buttonRef.current.contains(event.target)
+  //     ) {
+  //       closeMenu();
+  //       setIsDropdownOpen(false);
+        
+  //     }
+  //   };
+
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
   
 
 const toggleDropdown = () => {
   setIsDropdownOpen(!isDropdownOpen);
-  setOpenDropdown(openDropdown === "language" ? null : "language");
+  setOpenDropdown(openDropdown === "dropdown" ? null : "dropdown");
 };
 
 
@@ -127,23 +147,6 @@ const toggleDropdown = () => {
   };
   
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-        buttonRef.current && !buttonRef.current.contains(event.target)
-      ) {
-        closeMenu();
-        setIsDropdownOpen(false);
-        
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
   
   
   const handleLanguageChange = (lng) => {

@@ -28,9 +28,9 @@ const { t, i18n } = useTranslation();
         <div className=" flex items-center justify-center max-w-7xl mx-auto my-[20px] ">
             <Link
               href="/experience"
-              className="button-slanted w-[242px] h-[55px]  font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
+              className="button-slanted w-[242px] h-[55px] font-jura font-normal md:font-bold bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
-              <span className="button-slanted-content">{t('BOOK NOW')}</span>
+              <span className="button-slanted-content font-jura text-[24px] font-bold leading-[24px]">{t('BOOK NOW')}</span>
             </Link>
           </div>
           <ArtRacingSimulator />

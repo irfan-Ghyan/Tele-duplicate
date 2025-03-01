@@ -148,7 +148,7 @@ const HowItWorks = () => {
           <div className="mt-10 text-center ">
             <p className="text-[#e3ce90] text-lg md:text-xl font-jura mb-4">{t('howItWorks.finalMessage')}</p>
             <Link href="/experience">
-              <span className="inline-block px-6 py-3 bg-[#c09e5f] text-[#002718] text-lg font-bold rounded-lg transition hover:bg-[#b08d4f] cursor-pointer">
+              <span className="inline-block px-6 py-3 font-jura bg-[#c09e5f] text-[#002718] text-lg font-bold rounded-lg transition hover:bg-[#b08d4f] cursor-pointer">
                 {t('howItWorks.contactUs')}
               </span>
             </Link>
