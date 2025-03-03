@@ -39,11 +39,11 @@ const Page = () => {
 
       <div className="flex flex-col items-center">
         <div className="px-4 max-w-7xl">
-          <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
-            <h1 className="font-orbitron text-[30px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
+          <div className="text-center p-6 text-[#C09E5F] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
+            <h1 className="font-orbitron text-[30px] lg:text-[54px] text-[#C09E5F] font-black mb-4">
             {t('Celebrate_Events_Heading')}
             </h1>
-            <p className="md:text-[14px] lg:text-[18px] text-[#e3ce90] font-black font-jura mt-6 text-justify">
+            <p className="md:text-[14px] lg:text-[18px] text-[#C09E5F] font-black font-jura mt-6 text-justify">
             {t('Celebrate_Events_Description')}
                 </p>
           </div>

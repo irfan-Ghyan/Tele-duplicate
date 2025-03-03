@@ -127,8 +127,9 @@ const HowItWorks = () => {
             {steps.map((step, idx) => (
               <div 
                 key={idx} 
-                className="group bg-[#002718] duration-300  overflow-hidden"
+                className="group bg-[#063828] duration-300  border border-[#C09E5F] overflow-hidden"
               >
+                <div className="relative overflow-hidden group">
                 <Image
                   src={step.image} 
                   alt={step.heading} 
@@ -136,23 +137,24 @@ const HowItWorks = () => {
                   width={100}
                   height={100}
                 />
-
+                <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                </div>
                 <div className="p-6 text-center transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 ">
                   <h3 className="text-[#c09e5f] font-bold text-lg font-orbitron md:text-xl mb-3">{step.heading}</h3>
-                  <p className="text-[#e3ce90] font-jura text-sm md:text-base">{step.description}</p>
+                  <p className="text-[#c09e5f] font-jura text-sm md:text-base">{step.description}</p>
                 </div>
               </div>
             ))}
           </div>
 
           <div className="mt-10 text-center ">
-            <p className="text-[#e3ce90] text-lg md:text-xl font-jura mb-4">{t('howItWorks.finalMessage')}</p>
+            <p className="text-[#c09e5f] text-lg md:text-xl font-jura mb-4">{t('howItWorks.finalMessage')}</p>
             <Link href="/experience">
               <span className="inline-block px-6 py-3 font-jura bg-[#c09e5f] text-[#002718] text-lg font-bold rounded-lg transition hover:bg-[#b08d4f] cursor-pointer">
                 {t('howItWorks.contactUs')}
               </span>
             </Link>
-            <p className="mt-4 text-[#e3ce90] text-sm md:text-base font-jura ">
+            <p className="mt-4 text-[#c09e5f] text-sm md:text-base font-jura ">
               {t('howItWorks.riyadhMessage')}
             </p>
           </div>

@@ -248,6 +248,13 @@
   "DOME_TITLE": "Dome Section Title",
   "DOME_DESCRIPTION": "Dome Section Description",
 
+
+    "perfectForGroupGatherings": "Perfect for Group Gatherings",
+    "play": "Play: Challenge your friends to a racing duel or enjoy multiplayer games on the PS5.",
+    "connect": "Connect: Host intimate gatherings, from casual meet-ups to milestone celebrations, in a private and inviting space.",
+    "watch": "Watch: Cheer for your favorite F1 team, sports teams or enjoy a cinematic experience with friends.",
+  
+
 "Dome": {
     "Loading": "Loading...",
     "ErrorFetchingData": "Failed to fetch data from the server.",

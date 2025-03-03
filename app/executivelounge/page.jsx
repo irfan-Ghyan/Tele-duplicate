@@ -34,6 +34,7 @@ const { t, i18n } = useTranslation();
             </Link>
           </div>
           <ArtRacingSimulator />
+          <GroupGathering />
         </div>
 
 

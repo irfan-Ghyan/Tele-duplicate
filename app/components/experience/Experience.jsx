@@ -122,9 +122,10 @@ const Experience = () => {
               faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
+                  className="overflow-hidden bg-[#002718] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
                 >
-                  <div className="flex justify-center items-center w-full h-[282px]">
+                  <div className="flex justify-center items-center w-full h-[282px] group overflow-hidden ">
+                    <div className='relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2'>
                     <Image
                       src={experience.imageUrl} 
                       alt="Experience Image"
@@ -133,6 +134,8 @@ const Experience = () => {
                       className="w-[360px] h-[282px] object-cover"
                       priority={true}
                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                    </div>
                   </div>
                   <div className="flex flex-col justify-around items-center mx-4 pt-4 flex-1 w-full">
                     
@@ -172,9 +175,10 @@ const Experience = () => {
               faqEntries.slice(3, 5).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#002718] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
+                  className="overflow-hidden bg-[#002718] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] my-8"
                 >
-                  <div className="flex justify-center items-center w-full h-[282px]">
+                  <div className="flex justify-center items-center w-full h-[282px] group overflow-hidden">
+                  <div className='relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2'>
                     <Image
                       src={experience.imageUrl} 
                       alt="Experience Image"
@@ -183,6 +187,8 @@ const Experience = () => {
                       className="w-[360px] h-[282px] object-cover"
                       priority={true}
                     />
+                     <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                    </div>
                   </div>
                   
                   <div className="flex flex-col justify-around  items-center mx-4 pt-4 flex-1 w-full">

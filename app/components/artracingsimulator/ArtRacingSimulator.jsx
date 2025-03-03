@@ -103,9 +103,12 @@ const ArtRacingSimulator = () => {
     <div className="w-full bg-cover bg-center px-4">
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-4 max-w-7xl mx-auto pt-2 lg:pt-0 xl:pt-0">
         {cards.map((card, index) => (
-          <div key={index} className="flex flex-col bg-[#e3ce90] shadow-sm border border-[#e3ce90] rounded-lg my-2 w-full">
-            <div className="m-2.5 overflow-hidden rounded-md h-80 flex justify-center items-center group ">
+          <div key={index} className="flex flex-col bg-[#C09E5F] shadow-sm border border-[#C09E5F] rounded-lg my-2 w-full">
+            <div className=" overflow-hidden rounded-md flex justify-center items-center group ">
+              <div className='relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2'>
               <Image src={card.image} alt={`Card Image ${index + 1}`} className=" w-full h-full object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div>
+              </div>
             </div>
             <div className="p-6 text-center">
               <h4 className="text-[24px] font-bold text-[#002718] font-orbitron">{card.title}</h4>

@@ -155,25 +155,28 @@ const OfferEvent = () => {
                 {section.cards.map((card, idx) => (
                   <div 
                     key={idx} 
-                    className="group relative flex flex-col md:flex-row w-full bg-[#002718] shadow-sm rounded-lg"
+                    className="group relative flex flex-col md:flex-row w-full border border-[#C09E5F] bg-[#c09e5f] shadow-sm rounded-lg"
                   >
                     {/* Image with Hover Zoom & Rotate Effect */}
-                    <div className="relative p-2.5 md:w-2/5 shrink-0 overflow-hidden">
+                    <div className="relative p-2.5 md:w-2/5 shrink-0 ">
+                    <div  className='relative transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2'>
                       <Image
                         src={card.image} 
                         alt={card.heading} 
-                        className="h-full w-full rounded-md md:rounded-lg object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
+                        className="h-full w-full rounded-md md:rounded-lg object-cover "
                         width={400}
                         height={400}
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#c09e5f] to-transparent opacity-100"></div>
+                      </div>
                     </div>
 
                     {/* Text with Slide-up and Fade-in Effect */}
                     <div className="p-6 transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
-                      <h3 className="text-[#c09e5f] text-[24px] font-orbitron font-bold">
+                      <h3 className="text-[#063828] text-[24px] font-orbitron font-bold">
                         {card.heading}
                       </h3>
-                      <p className="text-[#e3ce90] text-[14px] font-jura">
+                      <p className="text-[#063828] font-bold text-[14px] font-jura">
                         {card.description}
                       </p>
                     </div>

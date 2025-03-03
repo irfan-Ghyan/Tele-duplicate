@@ -271,7 +271,7 @@ const toggleDropdown = () => {
           <div ref={dropdownRef} className="flex-grow hidden xl:flex justify-center space-x-4 md:space-x-6 lg:space-x-8 ">
           <Link
               href="/"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
+              className={`font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ${selectedLanguage === 'ar' ? 'ml-[36px]' : 'ml-4'}`}
               onClick={closeMenu}
             >
               {t('HOME')}

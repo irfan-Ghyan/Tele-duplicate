@@ -143,13 +143,13 @@ const PackageComponent = () => {
 
   return (
     <div
-      className={`w-full flex flex-col items-center justify-center px-4 mt-4 md:mt-20 lg:mt-20 pt-[40px] pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${
+      className={`w-full flex flex-col items-center justify-center px-4 mt-4 sm:pt-[40px] md:pt-0 lg:pt-0 pb-[60px] md:pb-0 lg:pb-0 xl:pb-0 ${
         i18n.language === "ar" ? "rtl" : "ltr"
       }`}
     >
       <div className="w-full max-w-7xl mb-4 md:mb-20 lg:mb-40 flex flex-col items-center">
         {/* Flexi Sessions Table */}
-        <h3 className="text-[18px] md:text-[34px] text-[#c09e5f] text-center font-black font-orbitron pb-4">
+        <h3 className="text-[18px] md:text-[34px] text-[#c09e5f] text-center font-black font-orbitron pb-4 sm:mt-4">
           {t("flexiSessions.heading")}
         </h3>
         <div className="overflow-x-auto w-full flex justify-center">

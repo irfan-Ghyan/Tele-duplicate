@@ -112,26 +112,28 @@ const OccasionEvent = () => {
       <div className={`w-full px-4 md:px-0 py-[20px] xl:pb-[80px] max-w-7xl mx-auto ${i18n.language === 'ar' ? 'rtl' : 'ltr'}`}>
         <div className="px-0 md:px-4 lg:px-4 xl:px-4 flex flex-col max-w-7xl mx-auto ">
           
-          <h1 className="text-[24px] md:text-[34px] text-[#c09e5f] font-black font-orbitron mb-6 text-center">
+          <h1 className="text-[24px] md:text-[34px] text-[#C09E5F] font-black font-orbitron mb-6 text-center">
             {eventDetails.title}
           </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 ">
             {eventDetails.cards.map((card, idx) => (
               <div 
-                key={idx} 
-                className="group bg-[#002718] duration-300 text-center shadow-sm border border-[#002718] rounded-lg overflow-hidden p-4"
+                key={idx}  
+                className="group bg-[#063828] duration-300 text-center shadow-sm  border border-[#C09E5F] rounded-lg overflow-hidden  "
               >
+                <div className="relative overflow-hidden group" >
                 <Image
                   src={card.image} 
                   alt={card.heading} 
                   className="w-full h-[200px] rounded-lg transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
                   width={100} height={100}
                 />
-
+                 <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                </div>
                 <div className="p-6 transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">
-                  <h3 className="text-[#c09e5f] font-bold text-[24px] font-orbitron md:text-xl mb-3">{card.heading}</h3>
-                  <p className="text-[#e3ce90] font-normal text-[14px] font-jura md:text-xl mb-3">{card.description}</p>
+                  <h3 className="text-[#C09E5F] font-bold text-[24px] font-orbitron mb-3">{card.heading}</h3>
+                  <p className="text-[#C09E5F] font-bold text-[14px] font-jura mb-3">{card.description}</p>
                 </div>
               </div>
             ))}
