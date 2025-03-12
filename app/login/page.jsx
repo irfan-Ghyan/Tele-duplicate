@@ -49,7 +49,7 @@ const Login = () => {
   };
   
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#063828]">
+    <div className="flex items-center justify-center min-h-screen bg-[#00352F]">
       <div className="w-full max-w-lg space-y-6 bg-white py-20 px-10 rounded-lg">
         <h2 className="text-2xl font-bold text-gray-800">LOGIN</h2>
         {error && <p className="text-red-500">{error}</p>} 
@@ -82,7 +82,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full cursor-pointer bg-gray-800 border border-primary bg-primary py-6 text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:bg-[#063828]"
+            className="w-full cursor-pointer bg-gray-800 border border-primary bg-primary py-6 text-white font-black font-orbitron hover:bg-gradient-to-r hover:border-0 hover:bg-[#00352F]"
           >
             Login
           </button>

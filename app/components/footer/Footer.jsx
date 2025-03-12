@@ -9,7 +9,7 @@ const Footer = () => {
   const { t } = useTranslation();
 
   return (
-    <footer className="bg-[#002718] text-white pt-10 lg:pt-20 px-8 lg:px-20 padding-px xl:px-40 max-w-full overflow-hidden">
+    <footer className="bg-[#022F29] text-white pt-10 lg:pt-20 px-8 lg:px-20 padding-px xl:px-40 max-w-full overflow-hidden">
       <div className="container mx-auto flex flex-col md:flex-row lg:flex-row flex-wrap justify-between">
         <div className="flex flex-col items-start lg:w-[352px]">
           <Image

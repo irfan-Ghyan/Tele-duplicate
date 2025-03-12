@@ -9,7 +9,7 @@ const CardComponent = ({ imageUrl, title, description, button, link }) => {
 
   return (
     
-    <div className="overflow-hidden bg-[#371F76] mb-5 items-center flex flex-col h-full">
+    <div className="overflow-hidden bg-[#00352F] mb-5 items-center flex flex-col h-full">
       <Head>
         <title>{title} | Teleios Dome</title>
         <meta name="description" content={description} />

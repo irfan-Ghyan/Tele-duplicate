@@ -8,6 +8,7 @@ import { doGetCall, doPostCall } from "../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
+import Image from "next/image";
 
 
 const Page = ({ params } ) => {
@@ -597,47 +598,38 @@ const Page = ({ params } ) => {
  
       <div className=" w-full overflow-x-hidden max-w-7xl mx-auto lg:pb-[40px]">
         
-      <button
-          className="text-[#e3ce90] mt-[40px] px-4"
-          onClick={goBack} 
-        >
-           {t('goBack')}
-        </button>
-       
+     
       <div>
         <div className="my-[60px] px-4">
-            <div className="flex justify-between items-center w-full lg:w-[403px] md:w-[403px] max-w-7xl mx-auto my-8">
-                    <div className="relative">
-                    <div
-                        className={`ml-[1.2rem] w-12 h-12 rounded-full ${activeTab === 1 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                        onClick={() => handleTabChange(1)}
-                    >
-                        1
+            <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center w-full lg:w-[720px] md:w-[720px] max-w-7xl mx-auto my-8">
+  
+                    <div className="mt-[20px] md:mt-[0px] w-[84px] h-[54px]">
+                      <button
+                        onClick={goBack}
+                        className="button-slanted cursor-pointer flex items-center justify-center px-4 py-3  border-[0.5px] border-opacity-30 border-[#C09E5F]  font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg "
+                      >
+                      <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
+                      </button>
                     </div>
-                    <div className={`text-[14px] ${activeTab === 1 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
-                    {t('experiences')}
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    
+                    <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 1 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`} onClick={() => handleTabChange(1)}>
+                        01
                     </div>
+                    <div className={`text-[14px]  ml-4 ${activeTab === 1 ? 'text-[#C09E5F] ' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('experiences')}</div>
                     </div>
-                    <div className="relative">
-                    <div
-                        className={`w-12 h-12 rounded-full ${activeTab === 2 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                     
-                    >
-                        2
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 2 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-[#C09E5F]`}>
+                        02
                     </div>
-                    <div className={`text-[14px] ${activeTab === 2 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
-                    {t('confirm')}
-                    </div>
+                    <div className={`text-[14px] ml-4 ${activeTab === 2 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('confirm')}</div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
-                    <div className="relative">
-                    <div
-                        className={`mr-4 w-12 h-12 rounded-full ${activeTab === 3 ? 'bg-[#c09e5f]' : 'bg-[#0e4b25]'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}
-                       
-                    >
-                        3
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center px-6 py-2  border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    <div className={`mr-4 w-[30px] mt-1 h-[30px] rounded-full ${activeTab === 3 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}>
+                        03
                     </div>
-                    <div className={`text-[14px] ${activeTab === 3 ? 'text-[#c09e5f]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
+                    <div className={`text-[14px] ml-4 ${activeTab === 3 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
                     {t('thanks')}
                     </div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
@@ -652,7 +644,7 @@ const Page = ({ params } ) => {
               <div className="w-full flex">
                 <div className="w-full xl:w-full lg:w-[680px] px-4">
 
-                  <div className="bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
+                  <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
                     <h1 className="text-lg text-[#063828] font-black font-orbitron">
                     {t('normalSeats')}
                     </h1>
@@ -671,9 +663,9 @@ const Page = ({ params } ) => {
                       <div className="flex items-center justify-center mb-4 ">
                         <button
                           onClick={decreaseCount}
-                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#e3ce90] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
                         >
-                          <span className="button-slanted-content text-[#063828] hover:text-[#e3ce90] font-jura text-[18px] font-bold">
+                          <span className="button-slanted-content text-[#063828] hover:text-[#C09E5F] font-jura text-[18px] font-bold">
                             -
                           </span>
                         </button>
@@ -682,7 +674,7 @@ const Page = ({ params } ) => {
                         </span>
                         <button
                           onClick={increaseCount}
-                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#e3ce90] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
                         >
                           <span className="button-slanted-content font-jura text-[18px] font-bold">
                             +
@@ -697,7 +689,7 @@ const Page = ({ params } ) => {
                   </div>
                   
 
-                  <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
+                  <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
                     <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
@@ -705,7 +697,7 @@ const Page = ({ params } ) => {
                   </div>
                  
                   <div className="my-4">
-                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
+                    <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
                       <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('chooseDate')}
                       </h1>
@@ -774,8 +766,8 @@ const Page = ({ params } ) => {
                   
 
 
-              <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
-                <h1 className="text-lg text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
+              <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
+                <h1 className="text-lg text-[#00352F] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {timeChunks
                   .filter((chunk) => {
@@ -826,8 +818,8 @@ const Page = ({ params } ) => {
                                 ${timeKey === activeTime 
                                   ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
                                   : isDisabled
-                                  ? "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                                  : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
+                                  ? "text-[#C09E5F] border-opacity-80 cursor-not-allowed border border-[#C09E5F]"
+                                  : "hover:text-[#C09E5F] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
                                 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
                               <button
@@ -903,7 +895,7 @@ const Page = ({ params } ) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-lg mt-2 lg:mt-0">
+          <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
           <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
           {t('bookingDetails')}
           </h2>
@@ -924,7 +916,7 @@ const Page = ({ params } ) => {
               </div>
             ))}
 
-          <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
+          <div className="max-w-3xl mx-auto bg-[#C09E5F] rounded-lg mt-20">
             {generalError && (
               <p className="text-red-500 text-md font-normal">{generalError}</p>
             )}
@@ -952,80 +944,85 @@ const Page = ({ params } ) => {
 
 
     {activeTab === 2 && (
-      <div className="mx-4 mb-8">
-      <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16 ">
-        <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">{t('paymentDetails')}</h2>
+      <div className="mx-4 mb-8 ">
+      <div className="bg-[#C09E5F] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16 rounded-[15px]">
+        <h2 className="text-[32px] font-black font-orbitron text-[#063828] leading-[28px] mb-4 pb-4">{t('paymentDetails')}</h2>
+        <hr className="border-[#063828] opacity-30"/>
         <form onSubmit={handleSubmit} >
-  <div className="space-y-4">
-    <div className="grid grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="firstName" className="block text-lg font-jura font-bold text-[#063828]">
-        {t('firstname')}
-        </label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          className="mt-1 px-4 py-2 w-full"
-        />
-        {validationErrors.firstName && (
-          <p className="text-red-500 text-sm">{validationErrors.firstName}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="lastName" className="block text-lg font-medium text-[#063828]">
-        {t('lastname')}
-        </label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          className="mt-1 px-4 py-2 w-full"
-        />
-        {validationErrors.lastName && (
-          <p className="text-red-500 text-sm">{validationErrors.lastName}</p>
-        )}
-      </div>
-    </div>
+        <div className="space-y-4 pt-8">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="firstName" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+              {t('firstname')}
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="Enter your Firtst Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              />
+              {validationErrors.firstName && (
+                <p className="text-red-500 text-sm">{validationErrors.firstName}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+              {t('lastname')}
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                 placeholder="Enter your Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              />
+              {validationErrors.lastName && (
+                <p className="text-red-500 text-sm">{validationErrors.lastName}</p>
+              )}
+            </div>
+          </div>
 
-    <div>
-      <label htmlFor="email" className="block text-lg font-jura font-bold text-[#063828]">
-      {t('emailAddress')}
-      </label>
-      <input
-        type="email"
-        id="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        className="mt-1 px-4 py-2 w-full"
-      />
-      {validationErrors.email && (
-        <p className="text-red-500 text-sm">{validationErrors.email}</p>
-      )}
-    </div>
+          <div>
+            <label htmlFor="email" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+            {t('emailAddress')}
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828]  rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+            />
+            {validationErrors.email && (
+              <p className="text-red-500 text-sm">{validationErrors.email}</p>
+            )}
+          </div>
 
-    <div>
-      <label htmlFor="phone" className="block text-lg font-jura font-bold text-[#063828]">
-      {t('phoneNormal')}
-      </label>
-      <input
-        type="tel"
-        id="phone"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        className="mt-1 px-4 py-2 w-full"
-      />
-      {validationErrors.phone && (
-        <p className="text-red-500 text-sm">{validationErrors.phone}</p>
-      )}
-    </div>
-  </div>
+          <div>
+            <label htmlFor="phone" className="block text-[16px] font-orbitron font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+            {t('phoneNormal')}
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+                placeholder="+966 241 0002 202"
+              onChange={handleChange}
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+            />
+            {validationErrors.phone && (
+              <p className="text-red-500 text-sm">{validationErrors.phone}</p>
+            )}
+          </div>
+        </div>
 
   {/* Payment Information */}
   {/* <div className="space-y-4 mt-6">
@@ -1113,9 +1110,9 @@ const Page = ({ params } ) => {
     <div className="mt-6 flex justify-center">
       <button
       type="submit"
-      className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+      className="button-slanted mt-[20px] w-full h-[40px] md:h-[59px] lg:h-[59px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
-      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('confirm')}</span>
+      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('CONTINUE')}</span>
       </button>
       </div>
     </div>
@@ -1126,14 +1123,14 @@ const Page = ({ params } ) => {
       )}
 
       {activeTab === 3 && (
-        <div className="flex justify-center items-center py-20 px-4">
+        <div className="bg-[#C09E5F] flex justify-center items-center py-20 px-4 rounded-[15px] lg:w-[826px] mx-auto mb-[100px]">
           <div className="">
           <div>
-            <h2 className=" text-[40px] text-center font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
-            <p className=" text-lg font-jura text-center font-bold text-[#e3ce90]">{t('emailMessage')}</p>
+            <h2 className=" text-[32px] leading-[28px] text-center font-orbitron font-black text-[#063828] mb-4">{t('thankYouMessage')}</h2>
+            <p className=" text-[20px] leading-[24px] font-jura text-center font-bold text-[#063828]">{t('emailMessage')}</p>
           </div>
-          <div className="mt-20 w-[320px] lg:w-[360px] ">
-            <Link href="/experience" className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718]  bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0">
+          <div className="mt-20 w-[320px] lg:w-[725px] ">
+            <Link href="/experience" className="button-slanted w-full  cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-[#063828] rounded-tl-lg rounded-br-lg hover:border-0">
             <span className="button-slanted-content text-lg font-bold py-2">{t('continueExperience')}</span>
             </Link>
           </div>

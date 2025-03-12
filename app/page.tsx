@@ -6,18 +6,19 @@ import { Helmet } from 'react-helmet-async';
 // import Dome from './components/dome/Dome';
 import ReserveSeat from './components/reserveseat/ReserveSeat';
 import Corprate from './components/corporate/Corprate';
-// import Training from './components/training/Training';
-// import Testimonial from './components/testimonial/Testimonial';
-// import Faq from './components/faq/Faq';
 import BookNow from './components/booknow/BookNow'; 
 import Newsletter from './components/newsletter/Newsletter';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
+import dynamic from 'next/dynamic';
+
 const Dome = React.lazy(() => import('./components/dome/Dome'));
-const Training = React.lazy(() => import('./components/training/Training'));
+const OfferSpecials = React.lazy(() => import('./components/offerspecials/OfferSpecials'));
 const Content = React.lazy(() => import('./components/content/Content'));
 const Testimonial = React.lazy(() => import('./components/testimonial/Testimonial'));
+const HowToReachUs = React.lazy(() => import('./components/howtoreachus/HowToReachUs'));
 const Faq = React.lazy(() => import('./components/faq/Faq'));
+
 
 // import { ReactGoogleReviews } from "./components/ReactGoogleReviews/ReactGoogleReviews";
 // import GoogleReviews from "./components/googlereviews/GoogleReviews";
@@ -42,7 +43,7 @@ const { t } = useTranslation();
       </Helmet>
       
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
-      <Suspense fallback={<p>This is loading .....</p>}>
+      <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
         <div className="w-full px-4 md:px-8">
           <Content />
         </div>
@@ -50,7 +51,8 @@ const { t } = useTranslation();
         {/* <div className="w-full">
           <ReserveSeat />
         </div> */}
-        <Suspense fallback={<p>This is loading .....</p>}>
+
+        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
         <div className="w-full">
           <Dome />
         </div>
@@ -58,17 +60,27 @@ const { t } = useTranslation();
         {/* <div className="w-full max-w-7xl md:px-8">
           <Corprate />
         </div> */}
-        <Suspense fallback={<p>This is loading .....</p>}>
+         <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
         <div className="w-full">
-          <Training />
+          <OfferSpecials />
         </div>
         </Suspense>
-        <Suspense fallback={<p>This is loading .....</p>}>
-        <div className="w-full bg-[#063828]">
+        {/* <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
+        <div className="w-full">
+          <Offers />
+        </div>
+        </Suspense> */}
+        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <div className="w-full bg-[#00352F]">
           <Testimonial />
         </div>
         </Suspense>
-        <Suspense fallback={<p>This is loading .....</p>}>
+        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <div className="w-full bg-[#00352F]">
+          <HowToReachUs />
+        </div>
+        </Suspense>
+        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
         <div className="w-full max-w-7xl md:px-8">
           <Faq />
         </div>

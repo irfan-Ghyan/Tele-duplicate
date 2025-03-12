@@ -11,6 +11,8 @@ import Experience from '../components/experience/Experience';
 import Coaching from '../components/coaching/Coaching';
 import Newsletter from '../components/newsletter/Newsletter';
 import PriceTable from '../components/pricetable/PricingTable';
+import RacingExperienceCards from '../components/racingexperiencecard/RacingExperiencedCard';
+import Offer from '../components/offers/Offers'
 
 
 
@@ -21,8 +23,8 @@ const Page = () => {
   return (
     <div className='w-full'>
      
-      <Experience />
-      <PriceTable />
+      <RacingExperienceCards />
+      <Offer />
     {/* <div className="w-full ">
       <Coaching />
       <Newsletter />

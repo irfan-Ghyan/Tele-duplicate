@@ -10,6 +10,9 @@ import DomeLounge from '../components/domelounge/DomeLounge';
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
 import TeleiosxFeatures from '../components/teleiosxfeatures/TeleiosxFeatures';
+import SimulatorShowCase from '../components/simulatorshowcase/SimulatorShowCase';
+import HowToReachUs from '../components/howtoreachus/HowToReachUs';
+import Faq from '../components/faq/Faq';
 
 
 const Page = () => {
@@ -48,16 +51,16 @@ const Page = () => {
           
           </div>
         </div>
-        <div className="w-full">
+        {/* <div className="w-full">
        <TeleiosxFeatures />
-       </div>
-       {/* <DomeData />
-        <DomeVip />
-        <DomePit />
-        <div className="w-full max-w-7xl px-4 py-10 lg:py-20">
-          <DomeCustomize />
-          <DomeLounge />
-        </div> */}
+       </div> */}
+
+       <SimulatorShowCase />
+
+       <HowToReachUs />
+       <div className="w-full max-w-7xl md:px-8">
+        <Faq />
+      </div>
       </div>
     </>
   );

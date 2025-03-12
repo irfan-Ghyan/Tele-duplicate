@@ -168,7 +168,7 @@ const DashboardPrivateEvents = () => {
 
         <button
           type="submit"
-          className="w-full p-4 bg-[#063828] text-white hover:bg-[#002718]"
+          className="w-full p-4 bg-[#00352F] text-white hover:bg-[#002718]"
         >
           {isEditing ? labels[language].update : labels[language].submit}
         </button>

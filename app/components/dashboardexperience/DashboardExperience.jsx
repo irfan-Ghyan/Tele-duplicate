@@ -442,7 +442,7 @@ const handleImageDelete = async (imageName, entryIndex) => {
                 className="w-full"
               />
         </div>
-        <button type="submit" className="w-full p-4 bg-[#063828] text-white" disabled={loading}>
+        <button type="submit" className="w-full p-4 bg-[#00352F] text-white" disabled={loading}>
           {editingIndex !== null ? 'Update' : 'Submit'}
         </button>
       </form>

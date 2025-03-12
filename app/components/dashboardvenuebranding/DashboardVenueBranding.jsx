@@ -151,7 +151,7 @@ const DashboardVenueBranding = () => {
         </div>
         <button
           type="submit"
-          className="w-full p-3 bg-[#063828] text-white rounded hover:bg-[#063828]"
+          className="w-full p-3 bg-[#00352F] text-white rounded hover:bg-[#00352F]"
         >
           {isEditing ? 'Update Title' : 'Submit Title'}
         </button>

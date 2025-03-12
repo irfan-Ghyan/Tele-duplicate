@@ -37,8 +37,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     setShowNotice(false);
   };
 
-  // Check if the current path is either /login or /dashboard
-  // const hideHeaderFooter = pathname.startsWith("/login") || pathname.startsWith("/dashboard");
   const hideHeaderFooter = (pathname || "").startsWith("/login") || (pathname || "").startsWith("/dashboard");
 
   return (

@@ -174,7 +174,7 @@ const Header = () => {
         )}
 
         {pathname === '/' && (
-          <div className="absolute inset-0 bg-[#002718] bg-opacity-80 z-0"></div>
+          <div className="absolute inset-0 bg-[#00352F] bg-opacity-80 z-0"></div>
         )}
 
         {pathname === '/' && (
@@ -213,7 +213,7 @@ const Header = () => {
         )}
 
         {showCorpratePopup && (
-          <div className="fixed inset-0 bg-[#002718] bg-opacity-100 z-50 flex items-center justify-center p-4">
+          <div className="fixed inset-0 bg-[#00352F] bg-opacity-100 z-50 flex items-center justify-center p-4">
              <Suspense fallback={<p className='text-white text-2xl'>This is loading .....</p>}>
             <div className="relative w-full max-w-7xl bg-white px-4 py-4 rounded-lg max-w-custom">
               <button

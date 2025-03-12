@@ -255,7 +255,7 @@ const DashboardCoaching = () => {
           />
         </div>
 
-        <button type="submit" className="w-full p-4 bg-[#063828] text-white">
+        <button type="submit" className="w-full p-4 bg-[#00352F] text-white">
         {t.submit}
         </button>
       </form>

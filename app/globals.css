@@ -6,7 +6,7 @@
 @tailwind utilities;
 
 body {
-  background-color: #063828;
+  background-color: #00352F;
   margin: 0;
   padding: 0;
   overflow-x: hidden; 
@@ -291,10 +291,13 @@ body {
 
 
 .react-calendar__navigation button:disabled{
-  background: inline!important;
+  background: #c09e5f !important;
+
+
 }
 .react-calendar__navigation__arrow {
   display: #c09e5f !important;
+  border: 1px solid #002718 !important;
 } 
 
 /* .button {
@@ -377,7 +380,7 @@ button:hover p{
 
 /* Add this in your global CSS file */
 .square-radio {
-  @apply appearance-none w-4 h-4 border border-[#002718] rounded-sm checked:bg-[#063828] checked:border-transparent focus:outline-none;
+  @apply appearance-none w-4 h-4 border border-[#00352F] rounded-sm checked:bg-[#00352F] checked:border-transparent focus:outline-none;
 }
 
 .square-radio:checked::after {
@@ -393,7 +396,7 @@ border: none !important;
 }
 
 .react-calendar button{
-  border: #063828 1 solid !important;
+  border: #00352F 1 solid !important;
   flex-basis: 40px !important;
   margin-left: 31px !important;
   margin-right: 25px !important;
@@ -406,10 +409,10 @@ border: none !important;
   border-bottom-right-radius: 0.5rem; 
 }
 .react-calendar__navigation button{
-  color:#002718 ;
+  color:#00352F;
   font-size: 24px !important;
   font-family: jura;
-  padding-left: 10px;
+
 }
 
 .react-calendar button {
@@ -418,11 +421,11 @@ border: none !important;
 
 .react-calendar__tile--active{
   background: none !important;
-  color: #063828;
+  color: #00352F;
 }
 
 .react-calendar__month-view__days__day--weekend{
-  color: #002718 !important;
+  color: #00352F !important;
 }
 .react-calendar__month-view__weekdays__weekday{
   color:#063828;
@@ -460,15 +463,15 @@ border: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #063828;
+  color: #00352F;
   transition: background 0.3s;
-  border: 0.5px solid #002718 !important;
+  border: 0.5px solid #00352F !important;
 }
 
 
 
 .react-calendar__tile--active {
-  background: linear-gradient(to right, #002718, #063828);
+  background: linear-gradient(to right, #00352F, #063828);
   color: #c09e5f;
 }
 
@@ -479,25 +482,25 @@ border: none !important;
 }
 
 .react-calendar__tile--now {
-  background: linear-gradient(to right, #002718, #063828) !important;
+  background: linear-gradient(to right, #00352F, #063828) !important;
   color: #c09e5f;
 }
 
 
 .react-calendar__tile.selected-date {
-  background-color: #063828 !important; /* Selected date background color */
+  background-color: #00352F !important; /* Selected date background color */
   color: white !important;            /* Selected date text color */
 }
 
 .react-calendar__tile.current-date {
-  border: 0.5px solid #002718 !important; /* Current date background color */
+  border: 0.5px solid #00352F !important; /* Current date background color */
   color: #063828 !important; /* Current date text color */
   background: none !important;
 }
 
 .react-calendar__tile:hover {
-  background-color: #063828 !important; /* Hover effect */
-  color: #e3ce90 !important;
+  /* background-color: #00352F !important; */
+  /* color: #e3ce90 !important; */
 }
 
 
@@ -672,14 +675,15 @@ border: none !important;
 
 /* Hide single arrow icons (>) */
 .react-calendar__navigation__arrow {
-  display:inline;
   background-color: #002718;
+
 }
 
 /* Hide double arrow icons (>>) */
 .react-calendar__navigation__double-arrow {
   display: inline !important;
   background-color: #063828;
+
 }
 
 
@@ -797,3 +801,5 @@ border: none !important;
     font-size: 19px !important;
   }
 }
+
+

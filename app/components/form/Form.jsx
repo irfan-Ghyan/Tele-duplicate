@@ -76,12 +76,12 @@ const Form = () => {
     setHasSubmitted(true);
 
     if (!validateForm() && isCheckboxChecked ) {
-      return; // If form validation fails, do nothing
+      return; 
     }
    
 
     if (!isRadioSelected) {
-      setShowRadioError(true); // Show error if radio button is not selected
+      setShowRadioError(true); 
       return;
     }
 
@@ -123,8 +123,8 @@ const Form = () => {
         hearAboutUs: '',
         message: '',
       });
-      setIsRadioSelected(false); // Uncheck the radio after submission
-        setHasSubmitted(false); // Reset the form submission state
+      setIsRadioSelected(false); 
+        setHasSubmitted(false); 
         setIsCheckboxChecked(false);
     } catch (error) {
       console.error('Error adding data:', error);

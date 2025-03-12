@@ -325,7 +325,7 @@ const DashboardDomeSection = () => {
               />
             </div>
 
-            <button type="submit" className="w-full p-4 text-white bg-[#063828]">
+            <button type="submit" className="w-full p-4 text-white bg-[#00352F]">
               {isEditing ? 'Update Entry' : 'Submit'}
             </button>
           </form>     

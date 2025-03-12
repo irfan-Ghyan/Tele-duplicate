@@ -58,7 +58,7 @@ const Page = () => {
         {/* <div className="w-full">
           <DrivingData />
         </div> */}
-        {/* <div className="w-full bg-[#063828]">
+        {/* <div className="w-full bg-[#00352F]">
           <WhyteleiosData /> 
         </div>*/}
         {/* <div className="w-full">

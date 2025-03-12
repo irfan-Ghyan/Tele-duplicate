@@ -120,7 +120,7 @@ const OccasionEvent = () => {
             {eventDetails.cards.map((card, idx) => (
               <div 
                 key={idx}  
-                className="group bg-[#063828] duration-300 text-center shadow-sm  border border-[#C09E5F] rounded-lg overflow-hidden  "
+                className="group bg-[#00352F] duration-300 text-center shadow-sm  border border-[#C09E5F] rounded-lg overflow-hidden  "
               >
                 <div className="relative overflow-hidden group" >
                 <Image

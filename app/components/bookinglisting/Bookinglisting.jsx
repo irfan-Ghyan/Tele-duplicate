@@ -524,7 +524,7 @@ const BookingListing = () => {
 
 
 
-  <button type="submit" className="w-[160px] h-[40px] bg-[#063828] text-white">
+  <button type="submit" className="w-[160px] h-[40px] bg-[#00352F] text-white">
     {editingId ? "Update" : translations[language].submit}
   </button>
     </form>
@@ -571,7 +571,7 @@ const BookingListing = () => {
         </div>
 
         <button
-          className="w-[160px] h-[60px] bg-[#063828] text-white py-4 mt-10 mb-4"
+          className="w-[160px] h-[60px] bg-[#00352F] text-white py-4 mt-10 mb-4"
           onClick={handleCreateClick}
         >
           {translations[language].create}
@@ -622,13 +622,13 @@ const BookingListing = () => {
       </table>
     
       <div className="flex justify-between mt-4">
-        <button onClick={handlePrevPage} disabled={currentPage === 1} className="p-2 bg-[#063828] text-white px-4">
+        <button onClick={handlePrevPage} disabled={currentPage === 1} className="p-2 bg-[#00352F] text-white px-4">
           {translations[language].previous}
         </button>
         <span className="p-2">
           {translations[language].page} {currentPage} {translations[language].of} {totalPages}
         </span>
-        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="p-2 bg-[#063828] text-white px-4">
+        <button onClick={handleNextPage} disabled={currentPage === totalPages} className="p-2 bg-[#00352F] text-white px-4">
           {translations[language].next}
         </button>
       </div>

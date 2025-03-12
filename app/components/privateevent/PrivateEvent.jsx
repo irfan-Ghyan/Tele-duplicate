@@ -62,14 +62,14 @@ const PrivateEvent = () => {
                 {section.cards.map((card, idx) => (
                   <div 
                     key={idx} 
-                    className="group relative grid h-[35rem] max-w-lg flex-col items-end  overflow-hidden rounded-lg bg-[#063828] border border-[#C09E5F] shadow-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2"
+                    className="group relative grid h-[35rem] max-w-lg flex-col items-end  overflow-hidden rounded-lg bg-[#00352F] border border-[#C09E5F] shadow-lg transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-2"
                   >
 
                     <div 
                       className="absolute inset-0 m-0 h-full w-full overflow-hidden rounded-none bg-cover bg-center transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2"
                       style={{ backgroundImage: `url(${card.image})` }}
                     >
-                      <div className="absolute inset-0 h-full w-full bg-[#063828] bg-opacity-50 transition-all duration-300 ease-in-out group-hover:bg-opacity-70"></div>
+                      <div className="absolute inset-0 h-full w-full bg-[#00352F] bg-opacity-50 transition-all duration-300 ease-in-out group-hover:bg-opacity-70"></div>
                     </div>
 
                     <div className="relative p-6 px-6 py-14 md:px-8 bg-gradient-to-t from-[#063828] via-[#063828] transition-all duration-300 ease-in-out opacity-100 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0">

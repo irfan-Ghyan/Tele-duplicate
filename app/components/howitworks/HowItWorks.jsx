@@ -127,7 +127,7 @@ const HowItWorks = () => {
             {steps.map((step, idx) => (
               <div 
                 key={idx} 
-                className="group bg-[#063828] duration-300  border border-[#C09E5F] overflow-hidden"
+                className="group bg-[#00352F] duration-300  border border-[#C09E5F] overflow-hidden"
               >
                 <div className="relative overflow-hidden group">
                 <Image

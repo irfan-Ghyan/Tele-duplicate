@@ -46,11 +46,11 @@ const Content = () => {
               );
 
               const staticImageUrls = [
-                "/assets/images/experience/mintue1.jpg",
+                "/assets/images/experience/race.png",
                 "/assets/images/experience/30mn.png",
                 "/assets/images/experience/60mn.png",
-                "/assets/images/experience/privateevent.jpg",
-                "/assets/images/experience/90min.png",
+                "/assets/images/experience/vipbay.png",
+                "/assets/images/experience/vipsoute.png",
               ];
 
               return {
@@ -111,7 +111,7 @@ const Content = () => {
               faqEntries.slice(0, 1).map((experience, index) => (
                 <div
                   key={index}
-                  className="overflow-hidden bg-[#063828] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] "
+                  className="overflow-hidden bg-[#00352F] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px] "
                 >
                   <div className="flex justify-center items-center w-full h-[282px] bg-gradient-to-r from-[#c09e5f]-[100%] to-[#e3ce90]-[0%] relative">
                     <Image
@@ -122,7 +122,7 @@ const Content = () => {
                       className="w-full h-[282px] object-cover"
                       priority={true}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                    {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
                   </div>
                    <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
@@ -134,7 +134,7 @@ const Content = () => {
                     </div>
                   <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                     <div className=''>
-                      <h1 className="text-[#ffffff] text-[46px] font-orbitron font-bold  px-8 ">
+                      <h1 className="text-[#ffffff] text-[46px] font-orbitron font-bold px-8 ">
                         {experience.title}
                       </h1>
                       <p className="text-[#ffffff] text-opacity-70 text-[18px] text-start font-jura py-4 px-8">
@@ -170,7 +170,7 @@ const Content = () => {
                     className="w-full h-[282px] object-cover"
                     priority={true}
                   />
-                   <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div>
+                   {/* <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div> */}
                 </div>
                 {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
                 <div className="pt-[19px] pb-[22px] block lg:hidden">
@@ -183,10 +183,10 @@ const Content = () => {
                     </div>
                 <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                   <div className='px-[12px]'>
-                    <h1 className="text-[#063828] text-[48px] font-orbitron font-bold px-8">
+                    <h1 className="text-[#00352F] text-[48px] font-orbitron font-bold px-8">
                       {experience.title}
                     </h1>
-                    <p className="text-[#063828] text-[18px] font-jura font-bold py-4 px-8">
+                    <p className="text-[#00352F] text-[18px] font-jura font-bold py-4 px-8">
                       {experience.description}
                     </p>
                   </div>
@@ -205,7 +205,7 @@ const Content = () => {
         {faqEntries.slice(4, 5).map((experience, index) => (
               <div
                 key={index}
-                className="overflow-hidden bg-[#063828] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px]"
+                className="overflow-hidden bg-[#00352F] border border-[#C09E5F] flex flex-col items-center h-[650px] sm:w-[330px] lg:w-[360px]"
               >
                 <div className="flex justify-center items-center w-full h-[282px] relative">
                   <Image
@@ -216,7 +216,7 @@ const Content = () => {
                     className="w-full h-[282px] object-cover"
                     priority={true}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div>
+                  {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
                 </div>
                 {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
                 <div className="pt-[19px] pb-[22px] block lg:hidden">

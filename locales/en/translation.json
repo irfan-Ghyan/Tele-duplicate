@@ -22,14 +22,14 @@
     "watchparties": "WATCH PARTIES",
     "privateevents": "PRIVATE EVENTS",
     "corporateevents": "CORPORATE EVENTS",
-    "f&b": "F & B",
+    "f&b": "Offers & Specials",
     "saudi_address": "Anas Ibn Malik Rd, Alyasmin, Riyadh 13326, Saudi Arabia",
     "openningtime": "Tuesday - Sunday 12PM to 11PM",
 
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
-    "Exp_heading": "EXPERIENCES",
-    "Exp_des": "Enjoy getting behind the wheel of a race car against your friends",
+    "Exp_heading": "Experiences",
+    "Exp_des": "Ready for the ultimate rush? Whether you're racing against friends, hosting a private party, engaging with an office team, or just relaxing and enjoying the thrills of live sports, TeleiosX has something for everyone. Choose your racing experience and get ready for an exclusive high-performance adventure.",
     "Corporate_Events": "CORPORATE EVENTS",
     "Corporate_Events_Heading": "CORPORATE EVENTS",
     "Corporate_Events_Description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology. Our stunning open-plan Reception and Lounge area is complemented by a Cafeteria and Private Conference Room. You and your guests can then step into our spacious Gaming Room and experience exhilarating simulator racing. For the select few, enjoy the exclusivity of our VIP room. A blend of advanced technology with refined surroundings, book The Teleios Dome for your next Corporate Event.",
@@ -318,18 +318,22 @@
   },
 
   
-  "f&b":"F & B",
+  "f&b":"Offers & Specials",
  
+  "how.title":"HOW TO REACH US",
+  "how.des":"Anas Ibn Malik Rd, Aluasmin,",
+  "how.des1":"Riyadh 13326, Saudi Arabia",
 
   "training.title": "Private Events",
   "training.description": "Host an unforgettable private event at Teleios Dome, where you and your guests can experience the thrill of racing together in a professional level venue. Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs. Enjoy exclusive access to our simulators, lounge area, and personalized support to ensure your event is a winning experience.",
 
-   "dome.title": "DOME",
-  "dome.description": "The ultimate immersive entertainment experience for racing enthusiasts happens at Teleios Dome. State-of-the-art racing simulators, stylish lounge, VIP area, conference space, and gaming area await. Whether you are here for exhilarating races or social gatherings, Teleios Dome delivers an unforgettable experience.",
+   "dome.title": "TELEIOSX",
+  "dome.description": "The Ultimate Racing Experience – Luxury, Speed & Adrenaline Rush Await!",
+  "dome.description1": "TeleiosX—Riyadh’s premier luxury sim racing venue where adrenaline meets elegance. Experience high-tech racing simulators, relaxing lounges, and premium hospitality, redefining motorsport entertainment.",
   "education_title": "F & B",
  
   "EDUCATION & TRAININGS": "F & B",
-  "f&b_des": "Our menu features a selection of handcrafted mocktails, barista-quality specialty coffee, and gourmet light bites to complement your visit.",
+  "f&b_des": "TeleiosX meticulously hosts watch parties showcasing F1 races and football events happening in KSA and globally. We also curate exclusive ladies-only events, ensuring exceptional and sophisticated social gatherings.",
   "FIND OUT MORE": "FIND OUT MORE",
 
     "SIGN_UP_NEWSLETTER": "SIGN UP TO OUR NEWSLETTER",

@@ -90,7 +90,7 @@ const Experience = () => {
         ))}
 
     <div className="card-wrapper5 mx-[30px] md:mx-[10px] lg:mx-[20px] xl:ml-[30px]" style={{ minWidth: '360px'}}>
-             <div className="overflow-hidden bg-[#002718] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
+             <div className="overflow-hidden bg-[#00352F] mt-5 xl:mt-20 flex flex-col items-center h-[600px] w-[363px] mx-auto">
       <div className="flex justify-center items-center w-[363px] h-[282px]">
         <Image src="" alt="Product" width={363} height={282} className="w-[363px] h-[282px] object-cover"  priority={true} />
       </div>
@@ -101,7 +101,7 @@ const Experience = () => {
         </div>
         <div className="pt-[19px] pb-[22px]">
           <Link
-            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#063828] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+            className="button-slanted cursor-pointer w-[280px] lg:w-[310px] h-[44px] font-jura font-normal md:font-bold bg-gradient-to-r from-[#c09e5f] to-[#e3ce90] text-[#00352F] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
             href='/experiencedetails'
             target="_blank" 
             rel="noopener noreferrer"

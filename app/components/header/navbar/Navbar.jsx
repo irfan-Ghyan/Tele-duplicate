@@ -159,7 +159,7 @@ const toggleDropdown = () => {
 
   const handleScroll = () => {
     if (window.scrollY > 40) {
-      setNavbarBg('bg-[#063828] lg:bg-[#063828]');
+      setNavbarBg('bg-[#00352F] lg:bg-[#00352F]');
     } else {
       setNavbarBg('bg-opacity-0');
     }
@@ -239,11 +239,11 @@ const toggleDropdown = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       <nav ref={navbarRef}
-        className={`fixed ${
+        className={`fixed  ${
           isTopBannerVisible ? 'top-0' : 'top-0'
         } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar` }
       >
-        <div className="flex justify-between items-center w-full h-[84px] py-4">
+        <div className="flex justify-between items-center container mx-auto h-[84px] py-4">
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
               <Image
@@ -287,16 +287,16 @@ const toggleDropdown = () => {
 
              {/* Experience Dropdown */}
              <div className="relative" ref={dropdownRef} >
-              <button
+              <Link
                 className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
-                onClick={toggleExperienceDropdown}
+                href="/experience" 
               >
                 {t('EXPERIENCES')}
         
-              </button>
-
+              </Link>
+{/* 
               {isExperienceDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2">
                   <Link href="/experience" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('BOOK NOW')}
                   </Link>
@@ -307,7 +307,7 @@ const toggleDropdown = () => {
                     {t('F&B')}
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
 
 
@@ -322,7 +322,7 @@ const toggleDropdown = () => {
               </button>
 
               {isEventsDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2 ">
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2 ">
                   <Link href="/watchparties" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('watchparties')}
                   </Link>
@@ -338,21 +338,21 @@ const toggleDropdown = () => {
 
 
             <div className="relative" ref={dropdownRef}>
-              <button
+              <Link
                 className="block font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4 flex items-center"
-                onClick={toggleAboutDropdown}
+                href="/teleiosx"
               >
                 {t('ABOUT')}
         
-              </button>
+              </Link>
 
-              {isAboutDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#063828] py-2">
+              {/* {isAboutDropdownOpen && (
+                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2">
                   <Link href="/teleiosx" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
                     {t('VENUE')}
                   </Link>
                 </div>
-              )}
+              )} */}
             </div>
         
           </div>
@@ -379,16 +379,16 @@ const toggleDropdown = () => {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div ref={dropdownRef} className="absolute top-12 left-[-24px] bg-[#063828] border border-[#C09E5F] shadow-md rounded-md w-12">
+              <div ref={dropdownRef} className="absolute top-12 left-[-24px] bg-[#00352F] border border-[#C09E5F] shadow-md rounded-md w-12">
                 <button
                   onClick={() => handleLanguageChange('en')}
-                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#063828] hover:bg-[#C09E5F]"
+                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#00352F] hover:bg-[#C09E5F]"
                 >
                   EN
                 </button>
                 <button
                   onClick={() => handleLanguageChange('ar')}
-                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#063828] hover:bg-[#C09E5F]"
+                  className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#00352F] hover:bg-[#C09E5F]"
                 >
                   العربية
                 </button>
@@ -398,7 +398,7 @@ const toggleDropdown = () => {
          
           <div className="hidden xl:flex items-center">
             <Link
-              href="/experience"
+              href="/bookracingexperience"
               className="button-slanted w-[80px] md:w-[142px] lg:w-[142px] h-[42px] font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               <span className="button-slanted-content font-jura text-[16px] font-bold">{t('BOOK NOW')}</span>
@@ -427,7 +427,7 @@ const toggleDropdown = () => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div ref={menuRef} className="mx-8 xl:hidden bg-[#063828] absolute right-0 top-full w-[300px]">
+          <div ref={menuRef} className="mx-8 xl:hidden bg-[#00352F] absolute right-0 top-full w-[300px]">
             <div className="flex flex-col items-start px-4 py-4">
             <Link
                 href="/"

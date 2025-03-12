@@ -17,7 +17,7 @@ const GroupGathering = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl w-full items-center pt-4">
             
-                <div className="group bg-[#063828] border border-[#C09E5F] duration-300 flex flex-col items-center h-[500px] overflow-hidden">
+                <div className="group bg-[#00352F] border border-[#C09E5F] duration-300 flex flex-col items-center h-[500px] overflow-hidden">
                   <div className="relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2">
                     <Image 
                         src="/assets/images/60mn.jpg" 
@@ -34,7 +34,7 @@ const GroupGathering = () => {
                     </div>
                 </div>
                 
-                <div className="group bg-[#063828] border border-[#C09E5F] duration-300 flex flex-col items-center h-[500px] overflow-hidden">
+                <div className="group bg-[#00352F] border border-[#C09E5F] duration-300 flex flex-col items-center h-[500px] overflow-hidden">
                   <div className="relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2">
                     <Image 
                         src="/assets/images/events/Stage.png" 
@@ -52,7 +52,7 @@ const GroupGathering = () => {
                     </div>
                 </div>
                 
-                <div className="group bg-[#063828] border border-[#C09E5F] flex flex-col items-center h-[500px] duration-300 overflow-hidden">
+                <div className="group bg-[#00352F] border border-[#C09E5F] flex flex-col items-center h-[500px] duration-300 overflow-hidden">
                 <div className="relative object-cover transform transition-all duration-300 ease-in-out group-hover:scale-105 group-hover:rotate-2">
                     <Image 
                         src="/assets/images/celebrations.png" 

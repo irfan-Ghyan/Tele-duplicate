@@ -109,7 +109,7 @@ useEffect(() => {
     setIsMobile(window.innerWidth < 768); // Adjust as needed
   };
 
-  handleResize(); // Check on mount
+  handleResize();
   window.addEventListener('resize', handleResize);
 
   return () => window.removeEventListener('resize', handleResize);
@@ -120,7 +120,7 @@ useEffect(() => {
   return (
     <>
       <Head>
-        <link rel="preload" href="/assets/images/dome/S1.png" as="image" />
+        <link rel="preload" href="/assets/images/dome/teleiosx-s1.png" as="image" />
       </Head>
       <div className="relative w-full h-[700px] xl:h-[1000px] overflow-hidden flex justify-center items-center">
       
@@ -141,44 +141,44 @@ useEffect(() => {
          }}
        >
             <div className="absolute inset-0 bg-[#002718] bg-opacity-80 md:bg-opacity-30% lg:bg-opacity-30% xl:bg-opacity-30% "></div>
-            <div className="relative flex items-end justify-end h-full lg:px-9 max-w-7xl mx-auto lg:pb-28">
-              <div className='w-full p-8'>
-              
-              <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row  '>
-                <div className='w-full md:w-2/3 lg:w-2/3 '>
-              <h2 className=" text-[32px] md:text-[54px] mb-4 text-[#FFFFFF] font-black font-orbitron">
-              {t('dome.title')}
-              </h2>
-              <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura text-justify">
-              {t('dome.description')} 
-              </p>
-              <div className="absolute mt-[100px] md:mt-[20px] lg:mt-[20px]">
-              {domes.map((_, index) => (
-                <button
-                key={`indicator-${index}`} 
-                  onClick={() => setCurrentSlide(index)}
-                  className={`p-[1px] w-[39px] md:w-[39px] lg:w-[39px] xl:w-[39px] h-[5px] ${index === currentSlide ? 'bg-[#C09E5F] rounded-[20px] mr-2' : 'bg-white hover:shadow-black-700 bg-opacity-[26%] rounded-[20px] hover:bg-opacity-100 mr-2'}`}
-                />
-              ))}
-            </div>
+              <div className="relative flex items-end justify-center h-full max-w-7xl mx-auto pb-[80px]">
+                <div className='w-full p-8 lg:mb-[100px] pb-[100px]'>
+                <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row  '>
+                  <div className='w-full md:w-2/3 lg:w-2/3 '>
+                <h2 className=" text-[32px] md:text-[54px] text-[#C09E5F] font-black font-orbitron ">
+                {t('dome.title')}
+                </h2>
+                <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-8 text-[#FFFFFF] font-jura lg:w-[410px] md:w-[410px]">
+                {t('dome.description')} 
+                </p>
+                <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura lg:w-[410px] md:w-[410px] ">
+                {t('dome.description1')} 
+                </p>
+              <div className='w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end mt-[20px] md:mt-[40px] lg:mt-[40px]'>
+                <Link
+                  href="/venue"
+                  className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
+                >
+                  <span className="button-slanted-content">{t('Discover TeleiosX')}</span>
+                </Link>
                 </div>
-              <div className='w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end'>
-              <Link
-                href="/venue"
-                className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
-              >
-                <span className="button-slanted-content">{t('Discover the Dome')}</span>
-              </Link>
-              </div>
+                  </div>
+                </div>
+                </div>
+                
+                <div className="absolute">
+                  {domes.map((_, index) => (
+                    <button
+                    key={`indicator-${index}`} 
+                      onClick={() => setCurrentSlide(index)}
+                      className={`p-[1px] w-[28px] md:w-[28px] lg:w-[28px] xl:w-[39px] h-[4px] ${index === currentSlide ? 'bg-[#C09E5F] rounded-[20px] mr-2' : 'bg-white hover:shadow-black-700 bg-opacity-[26%] rounded-[20px] hover:bg-opacity-100 mr-2'}`}
+                    />
+                  ))}
+                </div>
               
               </div>
-              
-           
-              </div>
-             
-            </div>
-  
-            <button
+    
+            {/* <button
               onClick={prevSlide}
               className="absolute top-[50%] left-0 xl:left-20 transform -translate-y-1/2 z-10"
             >
@@ -190,8 +190,8 @@ useEffect(() => {
             >
               <Image src={rightArrow} alt="Next" width={20} height={20} className="w-5 h-5 lg:w-10 lg:h-10" />
             </button>
-  
-            {/* Slide Indicators */}
+   */}
+          
            
           </div>
         ))}
