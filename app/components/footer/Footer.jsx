@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#022F29] text-white pt-10 lg:pt-20 px-8 lg:px-20 padding-px xl:px-40 max-w-full overflow-hidden">
       <div className="container mx-auto flex flex-col md:flex-row lg:flex-row flex-wrap justify-between">
-        <div className="flex flex-col items-start lg:w-[352px]">
+        <div className="flex flex-col items-center md:items-start lg:w-[352px]">
           <Image
             src={logo}
             alt="Flag Icon"
@@ -20,9 +20,12 @@ const Footer = () => {
             className="w-[185px] h-[126px]"
             priority={true}
           />
-          <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold py-4 flex-wrap">
+          <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold py-4 flex-wrap text-center md:text-start">
             {t('experience')}
           </p>
+          <div className=''>
+            <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold pb-8">{t('all_rights_reserved')}</p>
+          </div>
         </div>
         <div className='flex flex-col md:flex-row lg:flex-row items-start justify-between w-full md:w-[772px] lg:w-[772px]'>
           <div className="flex flex-col">
@@ -112,10 +115,10 @@ const Footer = () => {
 
       </div>
       <div className="mt-[60px] container mx-auto">
-        <div className="md:flex justify-between">
-          <div>
+        <div className="md:flex justify-between ">
+          {/* <div>
             <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold">{t('all_rights_reserved')}</p>
-          </div>
+          </div> */}
           <div className="md:text-end">
             <Link href="/privacy" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold  hover:underline">{t('privacy_policy')}</Link>
             <span className='mx-1 font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] '> | </span>

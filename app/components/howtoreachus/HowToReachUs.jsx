@@ -6,13 +6,13 @@ export default function HowToReachUs() {
       const { t } = useTranslation();
   return (
     <div className="w-full py-16 px-4 md:px-8 lg:px-16">
-      <div className="container mx-auto max-w-7xl px-4 md:px-8">
+      <div className="container mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row justify-between items-start mb-10">
-          <h2 className="text-[32px] md:text-[54px] text-[#C09E5F] font-black font-orbitron mb-6 md:mb-0">
+          <h2 className="text-[54px] text-[#C09E5F] font-black font-orbitron leading-[54px]">
           {t('how.title')}
           </h2>
           
-          <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="text-[#C09E5F] font-jura font-normal text-[18px]">
+          <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="pt-[12px] text-[#C09E5F] font-jura font-normal leading-[15px] md:leading-[28px] text-[15px] md:text-[18px]">
             <p>  {t('how.des')}</p>
             <p>  {t('how.des1')}</p>
           </Link>

@@ -99,14 +99,15 @@ const Faq = () => {
 
   return (
     <div className="w-full px-4 lg:px-[0px] xl:px-[0px] max-w-full overflow-hidden pb-20">
-      <div className="border-solid border-b-[1px] border-[#C09E5F]  border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px] text-end">
-        <h1 className="text-[14px] text-[#C09E5F] font-normal font-orbitron pb-4">{t('FAQ')}</h1>
+      <div className="border-solid border-b-[1px] border-[#C09E5F]  border-opacity-50 pt-[40px] md:pt-[50px] lg:pt-[100px] text-end hidden sm:block ">
+        <h1 className="text-[14px] text-[#C09E5F] font-normal font-orbitron pb-4 hidden md:block ">{t('FAQ')}</h1>
       </div>
       <div className="flex justify-between mt-[36px] mb-[41px]">
-        <div>
-          <h1 className="text-[34px] md:text-[54px] text-[#C09E5F]  font-black font-orbitron">
+        <div className='flex'>
+          <h1 className="text-[24px] md:text-[54px] text-[#C09E5F] font-black font-orbitron leading-[30px] md:leading-[81px]">
             {t('faq.title')}
           </h1>
+          <h3 className="text-[14px] text-[#C09E5F] font-normal font-orbitron pb-4 block md:hidden ">{t('FAQ')}</h3>
         </div>
       </div>
 

@@ -170,10 +170,10 @@ export default function Testimonial() {
     <div className="w-full overflow-hidden relative flex justify-center items-center py-[20px] md:py-[50px] lg:py-[100px]">
       <div className="max-w-7xl w-full px-4 md:px-8">
         <div className="mx-auto py-8">
-          <div className="border-solid border-b-[1px] border-[#C09E5F] border-opacity-50 text-end"></div>
+          <div className="border-solid border-b-[1px] border-[#C09E5F] border-opacity-50 text-end hidden sm:block "></div>
           <div className="md:flex md:justify-between items-center mt-[36px] lg:mb-[41px]">
             <div>
-              <h1 className="text-[32px] md:text-[54px] text-[#C09E5F] font-black font-orbitron">{t('WHAT PEOPLE SAY ABOUT US')}</h1>
+              <h1 className="text-[26px] md:text-[54px] lg:text-[54px] w-[230px] md:w-full lg:w-full font-black font-orbitron text-[#C09E5F] leading-[29px] md:leading-[81px] lg:leading-[81px]">{t('WHAT PEOPLE SAY ABOUT US')}</h1>
             </div>
             <div className="top-buttons flex items-center">
               <div className="mt-[20px] md:mt-[0px] w-68 h-55">
@@ -221,18 +221,6 @@ export default function Testimonial() {
         </div>
       </div>
 
-      <div className="md:hidden lg:hidden flex justify-center gap-4 absolute bottom-2 left-1/2 transform -translate-x-1/2">
-      <button
-        onClick={scrollPrev}
-        className="flex items-center justify-center w-4 h-4 bg-[#fff] rounded-full shadow-md"
-      >
-      </button>
-      <button
-        onClick={scrollNext}
-        className="flex items-center justify-center w-4 h-4 bg-[#fff] rounded-full shadow-md"
-      >
-      </button>
-    </div>
     </div>
   );
 }

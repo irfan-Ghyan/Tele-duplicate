@@ -25,18 +25,18 @@ const PricingTable = () => {
 
   return (
     <div className={`flex flex-col items-center justify-center px-2 mb-8 py-[40px] ${i18n.language === 'ar' ? 'rtl' : ''}`}>
-      <div className="w-full max-w-7xl py-4 md:py-16 lg:py-16">
+      <div className=" md:max-w-7xl py-4 md:py-16 lg:py-16">
         
         {/* Simulator Sessions Table */}
-        <h3 className="text-[18px]  md:text-[40px] lg:text-[40px]  text-[#C09E5F] text-center font-black font-orbitron pb-4">
+        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-start md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal">
           {t("simulatorSessions.title")}
         </h3>
-        <div className="overflow-x-auto">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 px-6">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29] ">
-                <th className="border text-[#C09E5F] border-[#C09E5F] text-[32px] font-orbitron px-6 py-4">Duration</th>
-                <th className="border text-[#C09E5F] border-[#c09e5f] text-[32px] font-orbitron px-6 py-4">Price per person</th>
+                <th className="border text-[#C09E5F] border-[#C09E5F] text-[20px] md:text-[32px] font-orbitron px-6 py-4">Duration</th>
+                <th className="border text-[#C09E5F] border-[#c09e5f] text-[20px] md:text-[32px] font-orbitron px-6 py-4">Price per person</th>
           
               </tr>
             </thead>
@@ -58,15 +58,15 @@ const PricingTable = () => {
           </table>
         </div>
 
-        <h3 className="text-[18px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center font-black font-orbitron pt-8 pb-4">
+        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal pt-[8px] ">
           {t("groupRacing.title")}
         </h3>
-        <div className="overflow-x-auto">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29]">
-                <th className="border border-[#C09E5F] text-[#C09E5F] text-[32px] font-orbitron px-6 py-4">Duration</th>
-                <th className="border  border-[#C09E5F] text-[#C09E5F] text-[32px] font-orbitron px-6 py-4">Price per person</th>
+                <th className="border text-[#C09E5F] border-[#C09E5F] text-[20px] md:text-[32px] font-orbitron px-6 py-4">Duration</th>
+                <th className="border text-[#C09E5F] border-[#C09E5F] text-[20px] md:text-[32px] font-orbitron px-6 py-4">Price per person</th>
                 {/* <th className="border border-[#c09e5f] px-4 py-2">{t("actions")}</th> */}
               </tr>
             </thead>

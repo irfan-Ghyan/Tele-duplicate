@@ -12,19 +12,19 @@ module.exports = {
     domains: ['https://dev.teleiosx.com/'], 
   },
 
-  async headers() {
-    return [
-      {
-        source: '/assets/video/dome.webm',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: '/assets/video/dome.webm',
+  //       headers: [
+  //         {
+  //           key: 'Cache-Control',
+  //           value: 'public, max-age=31536000, immutable',
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 
 };
 

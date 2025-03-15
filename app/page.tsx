@@ -18,6 +18,7 @@ const Content = React.lazy(() => import('./components/content/Content'));
 const Testimonial = React.lazy(() => import('./components/testimonial/Testimonial'));
 const HowToReachUs = React.lazy(() => import('./components/howtoreachus/HowToReachUs'));
 const Faq = React.lazy(() => import('./components/faq/Faq'));
+const HeroSection = React.lazy(() => import('./components/herosection/HeroSection'))
 
 
 // import { ReactGoogleReviews } from "./components/ReactGoogleReviews/ReactGoogleReviews";
@@ -43,6 +44,11 @@ const { t } = useTranslation();
       </Helmet>
       
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
+      <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <div className="w-full">
+          <HeroSection />
+        </div>
+        </Suspense>
       <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
         <div className="w-full px-4 md:px-8">
           <Content />

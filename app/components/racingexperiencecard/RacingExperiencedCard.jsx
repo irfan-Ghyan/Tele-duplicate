@@ -103,10 +103,10 @@ export default function RacingExperienceCards() {
       <div className="container mx-auto mb-[20px] md:mb-[100px] lg:mb-[100px]">
   <div className="flex items-center justify-center px-4 py-4 md:py-16 lg:py-16">
     <div className=" text-[#e3ce90]">
-      <h1 className="font-orbitron text-center text-[34px] lg:text-[54px] text-[#C09E5F] font-black mb-4">
+      <h1 className="font-orbitron text-start md:text-center lg:text-center text-[34px] lg:text-[54px] text-[#C09E5F] font-black mb-4 leading-[54px]">
         {t('Exp_heading')}
       </h1>
-      <p className="text-[#fff] font-jura text-[18px] md:text-center lg:text-center font-bold px-0 lg:px-[20px] xl:px-[20px] opacity-[80%]">
+      <p className="text-[#fff] font-jura text-[20px] font-normal text-start md:text-center lg:text-center px-0 lg:px-[20px] xl:px-[20px] opacity-[80%] leading-tight">
         {t('Exp_des')}
       </p>
     </div>
@@ -117,16 +117,16 @@ export default function RacingExperienceCards() {
     {experiences.map((exp) => (
       <div
         key={exp.id}
-        className="relative border border-[#C09E5F] overflow-hidden flex flex-col h-full"
+        className="relative border border-[#C09E5F] overflow-hidden flex flex-col h-[569px] md:h-[644px] lg:h-[644px]"
         style={{ backgroundColor: "rgba(0, 51, 48, 0.9)" }}
       >
         <div className="absolute inset-0 z-0 w-full h-[286px]">
           <Image src={exp.image || "/placeholder.svg"} alt={exp.title} fill style={{ objectFit: "cover" }} />
         </div>
 
-        <div className="relative z-10 flex flex-col sm:w-full md:w-[360px] md:h-[644px] lg:w-[360px] lg:h-[644px]">
+        <div className="relative z-10 flex flex-col sm:w-full h-[569px] md:w-[360px] md:h-[644px] lg:w-[360px] lg:h-[644px] leadin-[48px]">
           {openDropdown === exp.id ? (
-            <div className="bg-red-600 text-white">
+            <div className="bg-red-600 text-white h=[569px] md:h-[644px] lg:h-[644px]">
               <div className="grid grid-cols-2">
                 <div className="p-2 font-bold border-b border-r border-red-400">Duration</div>
                 <div className="p-2 font-bold border-b border-red-400">Price Per Person</div>

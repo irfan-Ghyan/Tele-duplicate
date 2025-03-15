@@ -280,9 +280,10 @@
 
   "Content": {
     "Title": "Experience Sessions",
-    "Description": "Discover our exciting experience sessions.",
+    "Description": "Step into the driver’s seat and experience racing like never before with our pre-designed simulator sessions.",
     "Sessions": "Sessions",
     "BOOK NOW": "Book Now",
+
     "Entries": [
       {
         "title": "20-Minute Session",

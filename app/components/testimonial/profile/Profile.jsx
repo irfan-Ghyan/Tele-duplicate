@@ -21,8 +21,8 @@ const Profile = ({ imageUrl, title, rating, description }) => {
   };
 
   return (
-    <div className="profile-container relative max-w-sm overflow-hidden mb-6 w-[328px] md:w-[320px] lg:w-[355px] xl:w-[355px] h-[322px] mx-[10px] md:mx-[4px] lg:mx-[4px] xl:mx-[8px] lg:grid-cols-4 gap-x-4">
-      <div className="mb-6 flex border-[1px] border-[#C09E5F] border-opacity-30 h-[322px] flex-col p-[20px] md:p-[32px]">
+    <div className=" relative max-w-sm overflow-hidden mb-6 w-[265px] md:w-[320px] lg:w-[355px] xl:w-[355px] h-[322px] mx-[10px] md:mx-[4px] lg:mx-[4px] xl:mx-[8px] lg:grid-cols-4 gap-x-4">
+      <div className="mb-6 flex border-[1px] border-[#C09E5F] border-opacity-30 h-[322px] flex-col p-[20px] md:p-[32px]  ">
         <div className="flex">
           <div>
             <Image

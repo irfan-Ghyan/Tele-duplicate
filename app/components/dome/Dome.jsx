@@ -145,7 +145,7 @@ useEffect(() => {
                 <div className='w-full p-8 lg:mb-[100px] pb-[100px]'>
                 <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row  '>
                   <div className='w-full md:w-2/3 lg:w-2/3 '>
-                <h2 className=" text-[32px] md:text-[54px] text-[#C09E5F] font-black font-orbitron ">
+                <h2 className=" text-[64px] md:text-[54px] lg:text-[54px] text-[#C09E5F] font-black font-orbitron ">
                 {t('dome.title')}
                 </h2>
                 <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-8 text-[#FFFFFF] font-jura lg:w-[410px] md:w-[410px]">
@@ -154,7 +154,7 @@ useEffect(() => {
                 <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura lg:w-[410px] md:w-[410px] ">
                 {t('dome.description1')} 
                 </p>
-              <div className='w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end mt-[20px] md:mt-[40px] lg:mt-[40px]'>
+              <div className='hidden md:block w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end mt-[20px] md:mt-[40px] lg:mt-[40px]'>
                 <Link
                   href="/venue"
                   className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
@@ -162,6 +162,13 @@ useEffect(() => {
                   <span className="button-slanted-content">{t('Discover TeleiosX')}</span>
                 </Link>
                 </div>
+                
+              <div className="flex py-8 md:py-0 lg:py-0 block lg:hidden">
+              <p className="font-bold font-jura text-[#C09E5F] text-[20px] md:text-[30px] lg:text-[30px] leading-[32px] pt-2 ">Ready to race?</p>
+              <Link href="/bookracingexperience" className="button-slanted w-[162px] h-[51px] font-jura text-[16px] text-white font-bold leading-[24px] bg-[#F13936] cursor-pointer rounded-tl-lg rounded-br-lg flex items-center justify-center mx-2 md:mx-8 lg:mx-8">
+                BOOK NOW
+              </Link>
+              </div>
                   </div>
                 </div>
                 </div>

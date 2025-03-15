@@ -96,29 +96,31 @@ const OfferSpecials = () => {
     setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
   }
 
+  
+
   return (
     <div className="w-full bg-[#00332b] py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-[48px] font-black font-orbitron text-[#C09E5F]">OFFERS & SPECIALS</h2>
+          <h2 className="text-[36px] md:text-[54px] lg:text-[54px]  font-black font-orbitron text-[#C09E5F] leading-[40px] md:leading-[81px]">OFFERS & SPECIALS</h2>
            <div className="top-buttons flex items-center">
-                        <div className="mt-[20px] md:mt-[0px] w-68 h-55">
-                          <button
-                            onClick={prevSlide}
-                            className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#C09E5F] font-jura font-bold text-[#C09E5F] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                  <div className="mt-[20px] md:mt-[0px] w-68 h-55">
+                    <button
+                      onClick={prevSlide}
+                       className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#C09E5F] font-jura font-bold text-[#C09E5F] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                           >
-                            <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
-                          </button>
-                        </div>
-                        <div className="mt-[20px] md:mt-[0px] w-68 h-55">
-                          <button
-                            onClick={nextSlide}
-                            className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#C09E5F]  font-jura font-bold text-[#C09E5F] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
-                          >
-                            <Image src="/assets/images/dome/right.png" alt="arrow" width={30} height={18} />
-                          </button>
-                        </div>
-                      </div>
+                         <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
+                    </button>
+                  </div>
+                  <div className="mt-[20px] md:mt-[0px] w-68 h-55">
+                    <button
+                     onClick={nextSlide}
+                     className="button-slanted cursor-pointer flex items-center justify-center px-2 py-2 lg:px-6 lg:py-4 border-[0.5px] border-opacity-30 border-[#C09E5F]  font-jura font-bold text-[#C09E5F] hover:bg-gradient-to-r ml-2 hover:from-[#c09e5f] hover:to-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+                    >
+                    <Image src="/assets/images/dome/right.png" alt="arrow" width={30} height={18} />
+                  </button>
+                </div>
+             </div>
         </div>
 
         <div className="relative overflow-hidden">
@@ -132,7 +134,7 @@ const OfferSpecials = () => {
           >
             {offers.map((offer) => (
               <div key={offer.id} className="px-2">
-                <div className="border border-[#c9a66b] w-full md:w-[360px] md:h-[644px] lg:w-[360px] lg:h-[644px]">
+                <div className="border border-[#c9a66b] w-[390px] md:w-[360px] md:h-[644px] lg:w-[360px] lg:h-[644px]">
                   <div className="relative h-[200px] md:h-[281px] lg:h-[281px] overflow-hidden">
                     <Image src={offer.image || "/placeholder.svg"} alt={offer.alt} fill className="object-cover" />
                     
@@ -142,7 +144,7 @@ const OfferSpecials = () => {
 
                   <div className="p-4 text-center">
                   <div className=" p-4">
-                      <h3 className="text-[36px] font-black font-orbitron text-center text-[#C09E5F] leading-[48px]">{offer.title}</h3>
+                      <h3 className=" text-[36px] font-black font-orbitron text-center text-[#C09E5F] leading-[40px] md:leading-[48px]">{offer.title}</h3>
                     </div>
                     <p className="text-white text-[24px] font-bold font-orbitron text-center">{offer.day}</p>
                     <p className="text-white text-[24px] font-bold font-orbitron text-center">{offer.date}</p>

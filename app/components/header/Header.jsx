@@ -1,11 +1,11 @@
 
 
 'use client';
-import React, {Suspense} from 'react';
+import React, {Suspense,  useState, useEffect} from 'react';
 import { usePathname } from 'next/navigation';
 import TopBanner from '../header/top/TopBanner';
 import Navbar from './navbar/Navbar';
-import { useState, useEffect } from 'react';
+
 import { Helmet } from 'react-helmet-async';
 import Image from 'next/image';
 // import Corprate from '../../components/corporate/Corprate';
@@ -103,30 +103,30 @@ const Header = () => {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    const fetchVideo = async () => {
-      try {
-        const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-        const url = `${baseUrl}/api/content/getMainVideo`;
-        const response = await fetch(url);
+  // useEffect(() => {
+  //   const fetchVideo = async () => {
+  //     try {
+  //       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  //       const url = `${baseUrl}/api/content/getMainVideo`;
+  //       const response = await fetch(url);
 
-        if (!response.ok) {
-          throw new Error("Failed to fetch video data.");
-        }
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch video data.");
+  //       }
 
-        const data = await response.json();
-        if (data.success && data.data.length > 0) {
-          setVideoUrl(data.data[0].url);
-        } else {
-          console.error("No video data available.");
-        }
-      } catch (error) {
-        console.error("Error fetching video:", error.message);
-      }
-    };
+  //       const data = await response.json();
+  //       if (data.success && data.data.length > 0) {
+  //         setVideoUrl(data.data[0].url);
+  //       } else {
+  //         console.error("No video data available.");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching video:", error.message);
+  //     }
+  //   };
 
-    fetchVideo();
-  }, []);
+  //   fetchVideo();
+  // }, []);
 
   return (
     <>
@@ -153,11 +153,11 @@ const Header = () => {
       </Head>
 
       <div
-        className={`relative max-w-full overflow-hidden ${pathname === '/' ? ' bg-header-bg bg-cover bg-center min-h-screen' : 'h-[80px] lg:h-[140px] '
+        className={`relative max-w-full overflow-hidden ${pathname === '/' ? '  bg-cover bg-center' : 'h-[80px]'
           } text-white flex flex-col justify-between`}
       >
          
-        {pathname === '/' && videoUrl && (
+        {/* {pathname === '/' && videoUrl && (
           <video
             preload="auto"
             autoPlay
@@ -210,9 +210,9 @@ const Header = () => {
           </button>
          
          </>
-        )}
+        )} */}
 
-        {showCorpratePopup && (
+        {/* {showCorpratePopup && (
           <div className="fixed inset-0 bg-[#00352F] bg-opacity-100 z-50 flex items-center justify-center p-4">
              <Suspense fallback={<p className='text-white text-2xl'>This is loading .....</p>}>
             <div className="relative w-full max-w-7xl bg-white px-4 py-4 rounded-lg max-w-custom">
@@ -230,7 +230,7 @@ const Header = () => {
             
           </div>
         )}
-        
+         */}
 
         <div className={`relative z-10 xl:py-[32px] ${isTopBannerVisible ? '' : 'pt-0'}`}>
           {/* {!shouldHideBannersAndBackground && isTopBannerVisible && (

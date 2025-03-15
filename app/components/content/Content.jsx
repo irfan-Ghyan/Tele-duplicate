@@ -94,9 +94,12 @@ const Content = () => {
 
       <div className="flex flex-col items-center overflow-x-hidden  lg:pb-[70px] lg:pt-[80px] py-8 md:py-[80px] lg:py-[80px]">
         <div className="flex items-center justify-center xl:px-40 lg:px-20 sm:px-4 md:flex lg:flex xl:flex xl:justify-center">
-          <div className="text-center text-[#e3ce90]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#fff] font-black ">
+          <div className="text-start md:text-center lg:text-center text-[#C09E5F]">
+            <h1 className="font-orbitron text-[54px] [#C09E5F] font-black ">
               {t('Content.Sessions')}
+            </h1>
+            <h1 className="text-[#ffffff] text-[15px] md:text-[18px] lg:text-[18px] text-start md:text-center lg:text-center font-jura font-bold md:w-[601px] lg:w-[601px] leading-[20px] ">
+              {t('Content.Description')}
             </h1>
           </div>
         </div>
@@ -124,24 +127,24 @@ const Content = () => {
                     />
                     {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
                   </div>
-                   <div className="pt-[19px] pb-[22px] block lg:hidden">
+                   {/* <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[44px] font-jura bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href='/normal'
                       >
                         <span className="button-slanted-content">{t('BOOK SESSION')}</span>
                       </Link>
-                    </div>
+                    </div> */}
                   <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                     <div className=''>
-                      <h1 className="text-[#ffffff] text-[46px] font-orbitron font-bold px-8 ">
+                      <h1 className="text-[#C09E5F] text-[46px] font-orbitron font-bold px-8 ">
                         {experience.title}
                       </h1>
-                      <p className="text-[#ffffff] text-opacity-70 text-[18px] text-start font-jura py-4 px-8">
+                      <p className="text-[#ffffff] text-[18px] text-start font-jura py-4 px-8">
                         {experience.description}
                       </p>
                     </div>
-                    <div className="pt-[19px] pb-[22px] hidden lg:block">
+                    <div className="pt-[19px] pb-[22px] ">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href="/normal"
@@ -173,14 +176,14 @@ const Content = () => {
                    {/* <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div> */}
                 </div>
                 {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
-                <div className="pt-[19px] pb-[22px] block lg:hidden">
+                {/* <div className="pt-[19px] pb-[22px] ">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={index === 0 ? `/vip` : `/lounge`}
                       >
                         <span className="button-slanted-content">{t('BOOK EVENT')}</span>
                       </Link>
-                    </div>
+                    </div> */}
                 <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                   <div className='px-[12px]'>
                     <h1 className="text-[#00352F] text-[48px] font-orbitron font-bold px-8">
@@ -190,7 +193,7 @@ const Content = () => {
                       {experience.description}
                     </p>
                   </div>
-                  <div className="pt-[19px] pb-[22px] hidden lg:block">
+                  <div className="pt-[19px] pb-[22px] ">
                     <Link
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/vip` : `/lounge`}
@@ -219,14 +222,14 @@ const Content = () => {
                   {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
                 </div>
                 {/* First Button: Visible on Small Screens, Hidden on Large Screens */}
-                <div className="pt-[19px] pb-[22px] block lg:hidden">
+                {/* <div className="pt-[19px] pb-[22px] block lg:hidden">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href={index === 0 ? `/vip` : `/lounge`}
                       >
                         <span className="button-slanted-content">{t('BOOK LOUNGE')}</span>
                       </Link>
-                    </div>
+                    </div> */}
                 <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
                   <div>
                     <h1 className="text-[#C09E5F] text-[48px] font-orbitron font-bold px-8">
@@ -236,7 +239,7 @@ const Content = () => {
                       {experience.description}
                     </p>
                   </div>
-                  <div className="pt-[19px] pb-[22px] hidden lg:block">
+                  <div className="pt-[19px] pb-[22px] ">
                     <Link
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura leading-[24px] bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/vip` : `/lounge`}

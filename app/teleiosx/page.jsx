@@ -13,7 +13,9 @@ import TeleiosxFeatures from '../components/teleiosxfeatures/TeleiosxFeatures';
 import SimulatorShowCase from '../components/simulatorshowcase/SimulatorShowCase';
 import HowToReachUs from '../components/howtoreachus/HowToReachUs';
 import Faq from '../components/faq/Faq';
-
+import AboutTeleiosX from '../components/aboutteleiosx/AboutTeleiosX';
+import AboutVenue from '../components/aboutvenue/AboutVenue';
+import AboutSimulator from '../components/aboutsimulator/AboutSimulator'
 
 const Page = () => {
   const { t } = useTranslation();
@@ -35,32 +37,20 @@ const Page = () => {
         <meta property="og:type" content="website" />
         <meta property="og:image" content="/assets/images/dome/overview.png" />
       </Helmet>
-      <div className="w-full flex flex-col items-center justify-center ">
-        <div className="flex items-center justify-center sm:px-4 max-w-7xl">
-          <div className="text-center p-6 text-[#c09e5f] lg:py-[80px] lg:pb-[100px] lg:pt-[50px]">
-            <h1 className="font-orbitron text-[34px] lg:text-[54px] text-[#c09e5f] font-black mb-4">
-              {t('VENUE')}
-            </h1>
-            <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify">
-              {t('Venue.description')}
-            </p>
-            <br/>
-            <p className="text-[#e3ce90] font-jura text-[18px] font-bold lg:px-[40px] xl:px-[65px] text-justify">
-              {t('Venue.description1')}
-            </p>
-          
-          </div>
-        </div>
+
+          <AboutTeleiosX />
+          <AboutVenue />
         {/* <div className="w-full">
        <TeleiosxFeatures />
        </div> */}
 
+      <AboutSimulator />
+
        <SimulatorShowCase />
 
        <HowToReachUs />
-       <div className="w-full max-w-7xl md:px-8">
+       <div className="w-full max-w-7xl mx-auto md:px-8">
         <Faq />
-      </div>
       </div>
     </>
   );
