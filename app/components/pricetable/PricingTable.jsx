@@ -31,7 +31,7 @@ const PricingTable = () => {
         <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-start md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal">
           {t("simulatorSessions.title")}
         </h3>
-        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 px-6">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 px-6 md:px-0 lg:px-0">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29] ">
@@ -61,7 +61,7 @@ const PricingTable = () => {
         <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal pt-[8px] ">
           {t("groupRacing.title")}
         </h3>
-        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto px-6 md:px-0 lg:px-0">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29]">

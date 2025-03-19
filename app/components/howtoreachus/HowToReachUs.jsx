@@ -4,9 +4,11 @@ import Link from 'next/link';
 
 export default function HowToReachUs() {
       const { t } = useTranslation();
+      
   return (
     <div className="w-full py-16 px-4 md:px-8 lg:px-16">
       <div className="container mx-auto max-w-7xl">
+      {/* <div className="w-full h-0.5 bg-[#C09E5F] mt-2"></div> */}
         <div className="flex flex-col md:flex-row justify-between items-start mb-10">
           <h2 className="text-[54px] text-[#C09E5F] font-black font-orbitron leading-[54px]">
           {t('how.title')}
@@ -22,7 +24,7 @@ export default function HowToReachUs() {
         <div className="w-full h-[400px] relative overflow-hidden">
           {/* You can replace this with an actual Google Maps embed */}
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.6554789518113!2d46.6252!3d24.7354!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQ0JzA3LjQiTiA0NsKwMzcnMzAuNyJF!5e0!3m2!1sen!2sus!4v1615200000000!5m2!1sen!2sus" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.189020610688!2d46.652211799999996!3d24.8232087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2ee576f21205dd%3A0x5cc6335a594ae1a4!2sTeleiosX!5e0!3m2!1sen!2sae!4v1742370773180!5m2!1sen!2sae" 
             width="100%" 
             height="100%" 
             style={{ border: 0 }} 

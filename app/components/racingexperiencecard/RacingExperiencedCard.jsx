@@ -33,9 +33,9 @@ export default function RacingExperienceCards() {
       buttonText: "BOOK RACE",
       image: "/assets/images/experience/card1.png",
       pricing: [
-        { duration: "20'", price: "95 SAR" },
-        { duration: "40'", price: "170 SAR" },
-        { duration: "60'", price: "250 SAR" },
+        { duration: "20 min", price: "95 SAR" },
+        { duration: "40 min", price: "170 SAR" },
+        { duration: "60 min", price: "250 SAR" },
       ],
     },
     {
@@ -46,9 +46,9 @@ export default function RacingExperienceCards() {
       buttonText: "BOOK GROUP RACE",
       image: "/assets/images/experience/card2.png",
       pricing: [
-        { duration: "30'", price: "150 SAR" },
-        { duration: "60'", price: "280 SAR" },
-        { duration: "90'", price: "400 SAR" },
+        { duration: "20 min", price: "80 SAR" },
+        { duration: "40 min", price: "140 SAR" },
+        { duration: "60 min", price: "200 SAR" },
       ],
     },
     {
@@ -61,9 +61,9 @@ export default function RacingExperienceCards() {
       buttonText: "BOOK VIP BAYS",
       image: "/assets/images/experience/card3.png",
       pricing: [
-        { duration: "1 hour", price: "350 SAR" },
-        { duration: "2 hours", price: "650 SAR" },
-        { duration: "4 hours", price: "1200 SAR" },
+        { duration: "60 min", price: "400 SAR" },
+        { duration: "90 min", price: "500 SAR" },
+        { duration: "120 min", price: "600 SAR" },
       ],
     },
     {
@@ -76,9 +76,9 @@ export default function RacingExperienceCards() {
       buttonText: "BOOK VIP SUITE",
       image: "/assets/images/experience/card4.png",
       pricing: [
-        { duration: "2 hours", price: "800 SAR" },
-        { duration: "4 hours", price: "1500 SAR" },
-        { duration: "Full day", price: "3000 SAR" },
+        { duration: "60 min", price: "800 SAR" },
+        { duration: "90 min", price: "1000 SAR" },
+        { duration: "120 min", price: "1200 SAR" },
       ],
     },
   ]
@@ -126,15 +126,15 @@ export default function RacingExperienceCards() {
 
         <div className="relative z-10 flex flex-col sm:w-full h-[569px] md:w-[360px] md:h-[644px] lg:w-[360px] lg:h-[644px] leadin-[48px]">
           {openDropdown === exp.id ? (
-            <div className="bg-red-600 text-white h=[569px] md:h-[644px] lg:h-[644px]">
+            <div className="bg-red-600 text-white h-[569px] md:h-[644px] lg:h-[644px]">
               <div className="grid grid-cols-2">
-                <div className="p-2 font-bold border-b border-r border-red-400">Duration</div>
-                <div className="p-2 font-bold border-b border-red-400">Price Per Person</div>
+                <div className="p-2 font-bold border-b border-r font-orbitron border-red-400">Duration</div>
+                <div className="p-2 font-bold border-b font-orbitron border-red-400">Price Per Person</div>
 
                 {exp.pricing.map((price, index) => (
                   <React.Fragment key={index}>
-                    <div className="p-2 border-r border-red-400">{price.duration}</div>
-                    <div className="p-2">{price.price}</div>
+                    <div className="p-2 border-r border-red-400 font-jura ">{price.duration}</div>
+                    <div className="p-2 font-jura ">{price.price}</div>
                   </React.Fragment>
                 ))}
               </div>

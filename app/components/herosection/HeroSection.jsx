@@ -42,13 +42,18 @@ export default function Page() {
         />
       </div>
 
-      <div className="container mx-auto relative z-10 flex flex-col md:items-start justify-center h-[430px] md:h-[1200px] lg:h-[1200px] px-4 md:px-6 ">
-        <h1 className="text-[34px] md:text-[101px] font-black font-orbitron text-[#C09E5F] leading-none">
+      <div className="container mx-auto relative z-10 flex flex-col md:items-start justify-center h-[430px] md:h-[1200px] lg:h-[1200px] px-4 md:px-8 ">
+        <h1 className="text-[34px] md:text-[101px] font-black font-orbitron text-[#C09E5F] leading-none hidden sm:block">
           LUXURY
           <br />
           SIM RACING
           <br />
           IN RIYADH
+        </h1>
+        <h1 className="block sm:hidden text-[34px] md:text-[101px] font-black font-orbitron text-[#C09E5F] leading-none">
+          LUXURY SIM
+          <br />
+           RACING IN RIYADH     
         </h1>
 
         <p className="font-bold font-jura text-white text-opacity-80 text-[16px] md:text-[30px] lg:text-[30px] leading-normal md:leading-[32px] w-full md:w-[796px] py-4 md:py-8 lg:py-8">

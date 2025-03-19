@@ -44,12 +44,12 @@ const { t } = useTranslation();
       </Helmet>
       
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">
-      <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+      <Suspense fallback={<p className='text-white'>loading .....</p>}>
         <div className="w-full">
           <HeroSection />
         </div>
         </Suspense>
-      <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+      <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full px-4 md:px-8">
           <Content />
         </div>
@@ -58,7 +58,7 @@ const { t } = useTranslation();
           <ReserveSeat />
         </div> */}
 
-        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full">
           <Dome />
         </div>
@@ -66,27 +66,27 @@ const { t } = useTranslation();
         {/* <div className="w-full max-w-7xl md:px-8">
           <Corprate />
         </div> */}
-         <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
+         {/* <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
         <div className="w-full">
           <OfferSpecials />
         </div>
-        </Suspense>
+        </Suspense> */}
         {/* <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
         <div className="w-full">
           <Offers />
         </div>
         </Suspense> */}
-        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full bg-[#00352F]">
           <Testimonial />
         </div>
         </Suspense>
-        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full bg-[#00352F]">
           <HowToReachUs />
         </div>
         </Suspense>
-        <Suspense fallback={<p className='text-white'>This is loading .....</p>}>
+        <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full max-w-7xl md:px-8">
           <Faq />
         </div>

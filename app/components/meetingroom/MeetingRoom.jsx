@@ -18,14 +18,14 @@ export default function MeetingRoomsSection() {
               multimedia setup, catering, seamless connectivity, and a setting that fuels productivity and innovation.
               Rooms are customizable with non-permanent branding options.
             </p>
-            <div className="pt-6">
+            {/* <div className="pt-6">
               <Link
                 href="#"
                 className="button-slanted w-[209px] md:w-[233px] lg:w-[233px] h-[51px] text-[#C09E5F] font-jura text-[16px] font-bold leading-[24px] bg-0 border border-[#C09E5F] cursor-pointer rounded-tl-lg rounded-br-lg flex items-center justify-center"
               >
                 SEE MORE DETAILS
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="relative h-[400px] md:h-[500px] flex-1 ">
             <Image

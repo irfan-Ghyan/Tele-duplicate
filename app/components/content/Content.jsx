@@ -104,7 +104,7 @@ const Content = () => {
           </div>
         </div>
 
-        <div className="w-full lg:my-8 my-4">
+        <div className="w-full lg:my-8 my-8">
           <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center gap-[50px] flex-wrap">
             {loading && <p className="text-[#c09e5f]">{t('Loading ...')}</p>}
             {error && <p className="text-red-500">{error}</p>}
@@ -121,8 +121,8 @@ const Content = () => {
                       src={experience.imageUrl}
                       alt={t('Content.Title')}
                       width={300}
-                      height={282}
-                      className="w-full h-[282px] object-cover"
+                      height={281}
+                      className="w-full h-[281px] object-cover"
                       priority={true}
                     />
                     {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
@@ -135,12 +135,12 @@ const Content = () => {
                         <span className="button-slanted-content">{t('BOOK SESSION')}</span>
                       </Link>
                     </div> */}
-                  <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+                  <div className="flex flex-col justify-between  items-center mx-4 flex-1 w-full">
                     <div className=''>
-                      <h1 className="text-[#C09E5F] text-[46px] font-orbitron font-bold px-8 ">
+                      <h1 className="text-[#C09E5F] text-[46px] text-center md:text-start lg:text-start font-orbitron font-bold px-4 ">
                         {experience.title}
                       </h1>
-                      <p className="text-[#ffffff] text-[18px] text-start font-jura py-4 px-8">
+                      <p className="text-[#ffffff] text-[18px] text-center md:text-start lg:text-start font-jura py-2 px-4">
                         {experience.description}
                       </p>
                     </div>
@@ -149,7 +149,7 @@ const Content = () => {
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href="/normal"
                       >
-                        <span className="button-slanted-content">{t('BOOK SESSION')}</span>
+                        <span className="button-slanted-content">{t('BOOK RACE')}</span>
                       </Link>
                     </div>
                   </div>
@@ -169,8 +169,8 @@ const Content = () => {
                     src={experience.imageUrl}
                     alt="Experience Image"
                     width={300}
-                    height={282}
-                    className="w-full h-[282px] object-cover"
+                    height={281}
+                    className="w-full h-[281px] object-cover"
                     priority={true}
                   />
                    {/* <div className="absolute inset-0 bg-gradient-to-t from-[#C09E5F] to-transparent opacity-100"></div> */}
@@ -184,12 +184,12 @@ const Content = () => {
                         <span className="button-slanted-content">{t('BOOK EVENT')}</span>
                       </Link>
                     </div> */}
-                <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+                <div className="flex flex-col justify-between items-center mx-4 flex-1 w-full">
                   <div className='px-[12px]'>
-                    <h1 className="text-[#00352F] text-[48px] font-orbitron font-bold px-8">
+                    <h1 className="text-[#00352F] text-[48px] text-center md:text-start lg:text-start font-orbitron font-bold px-4">
                       {experience.title}
                     </h1>
-                    <p className="text-[#00352F] text-[18px] font-jura font-bold py-4 px-8">
+                    <p className="text-[#00352F] text-[18px] text-center md:text-start lg:text-start font-jura font-bold py-2 px-4">
                       {experience.description}
                     </p>
                   </div>
@@ -198,7 +198,7 @@ const Content = () => {
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/vip` : `/lounge`}
                     >
-                      <span className="button-slanted-content">{t('BOOK EVENT')}</span>
+                      <span className="button-slanted-content">{t('BOOK VIP BAY')}</span>
                     </Link>
                   </div>
                 </div>
@@ -215,8 +215,8 @@ const Content = () => {
                     src={experience.imageUrl}
                     alt="Experience Image"
                     width={300}
-                    height={282}
-                    className="w-full h-[282px] object-cover"
+                    height={281}
+                    className="w-full h-[281px] object-cover"
                     priority={true}
                   />
                   {/* <div className="absolute inset-0 bg-gradient-to-t from-[#063828] to-transparent opacity-100"></div> */}
@@ -230,12 +230,12 @@ const Content = () => {
                         <span className="button-slanted-content">{t('BOOK LOUNGE')}</span>
                       </Link>
                     </div> */}
-                <div className="flex flex-col justify-between items-center mx-4 pt-4 flex-1 w-full">
+                <div className="flex flex-col justify-between items-center mx-4 flex-1 w-full ">
                   <div>
-                    <h1 className="text-[#C09E5F] text-[48px] font-orbitron font-bold px-8">
+                    <h1 className="text-[#C09E5F] text-[48px] text-center md:text-start lg:text-start font-orbitron font-bold px-8">
                       {experience.title}
                     </h1>
-                    <p className="text-[#FAFAFA] text-[18px] font-jura font-bold text-start py-4 px-8">
+                    <p className="text-[#FAFAFA] text-[18px]  font-jura font-bold text-start py-2 px-8">
                       {experience.description}
                     </p>
                   </div>
@@ -244,7 +244,7 @@ const Content = () => {
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura leading-[24px] bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/vip` : `/lounge`}
                     >
-                      <span className="button-slanted-content">{t('BOOK LOUNGE')}</span>
+                      <span className="button-slanted-content">{t('BOOK VIP SUITE')}</span>
                     </Link>
                   </div>
                 </div>

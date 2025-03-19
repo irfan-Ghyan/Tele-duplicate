@@ -12,7 +12,7 @@ const Page = () => {
   
   return (
     <>
-    <div className='w-full bg-cover bg-center bg-no-repeat overflow-hidden' style={{ backgroundImage: 'url(/assets/images/events/herosectionbg.png)' }}>
+    <div className='w-full bg-cover bg-center bg-no-repeat overflow-hidden' style={{ backgroundImage: 'url(/assets/images/events/eventsbg.jpg)' }}>
         <PrivateEventsSection />
         </div>
      <CorporateEvents />

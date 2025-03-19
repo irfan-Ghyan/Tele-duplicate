@@ -380,7 +380,7 @@ const toggleDropdown = () => {
 
             {/* Dropdown Menu */}
             {isDropdownOpen && (
-              <div ref={dropdownRef} className="absolute top-12 left-[-24px] bg-[#00352F] border border-[#C09E5F] shadow-md rounded-md w-12  ">
+              <div ref={dropdownRef} className="absolute top-12  left-[-24px] bg-[#00352F] border border-[#C09E5F] shadow-md rounded-md w-12  ">
                 <button
                   onClick={() => handleLanguageChange('en')}
                   className="w-full px-3 py-2 text-left text-[12px] font-jura hover:text-[#00352F] hover:bg-[#C09E5F]"
@@ -465,14 +465,14 @@ const toggleDropdown = () => {
               </Link>
 
 
-              <button
+              <Link
                href="/teleiosx" 
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90]" 
                 onClick={closeMenu}
                
               >
                 {t('ABOUT')}
-              </button>
+              </Link>
 
               {isMobileAboutDropdownOpen && (
                 <div className="pl-4">

@@ -76,24 +76,28 @@ const Footer = () => {
           <div className="flex flex-col mt-4 md:mt-0 lg:mt-0 ">
             <h3 className="text-[#C09E5F] font-orbitron text-[20px] font-normal mb-4">{t('get_in_touch')}</h3>
             <div className="mb-[10px]">
-              <div className="flex">
+              <div className="flex ">
                 <Image src="/assets/icons/phone.png" alt="Phone Icon" height={12} width={12} className="w-[9px] h-[9px] mt-[5px]" priority={true} />
+                <div className='flex flex-row md:flex-col lg:flex-col'>
                 <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold ml-1">{t('phone')}</p>
+                <Link href="tel:+9715554894679" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold hover:underline mx-4 md:mx-0 lg:mx-0">+966 55 224 9297</Link>
+                </div>
               </div>
-              <div>
-                <Link href="tel:+9715554894679" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold hover:underline">+966 55 224 9297</Link>
-              </div>
+
             </div>
             <div className="mt-[10px]">
               <div className="flex">
                 <Image src="/assets/icons/mail.png" alt="Email Icon" height={12} width={12} className="w-[9px] h-[9px] mt-[5px]" priority={true} />
+                <div className='flex flex-row md:flex-col lg:flex-col'>
                 <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold ml-1">{t('email')}</p>
+                <Link href="mailto:info@teleiosdome.ae" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold hover:underline mx-4 md:mx-0 lg:mx-0">info@teleiosx.com</Link>
+                </div>
               </div>
-              <Link href="mailto:info@teleiosdome.ae" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold hover:underline">info@teleiosx.com</Link>
+
             </div>
           </div>
           </div>
-        <div className="flex mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0">
+        <div className=" mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0 hidden md:block">
             <Link
               href="https://www.instagram.com/teleiosx/"
               target="_blank"
@@ -115,14 +119,33 @@ const Footer = () => {
 
       </div>
       <div className="mt-[60px] container mx-auto">
-        <div className="md:flex justify-between ">
+      <div className="flex mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0 block md:hidden justify-center">
+            <Link
+              href="https://www.instagram.com/teleiosx/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <Image src="/assets/icons/insta.png" width={30} height={30} alt="Instagram" className="h-[30px] w-[30px] lg:mr-4 lg:ml-4 md:mr-2 mr-2"  priority={true}/>
+            </Link>
+            <Link
+              href="https://www.tiktok.com/@teleiosx"
+              target="_blank"
+              rel="noopener noreferrer"
+              className=""
+            >
+              <Image src="/assets/icons/tiktok.png" width={30} height={30} alt="LinkedIn" className="h-[30px] w-[30px]"  priority={true}/>
+            </Link>
+
+          </div>
+        <div className="md:flex justify-between  ">
           {/* <div>
             <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold">{t('all_rights_reserved')}</p>
           </div> */}
-          <div className="md:text-end">
-            <Link href="/privacy" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold  hover:underline">{t('privacy_policy')}</Link>
+          <div className="md:text-end text-center">
+            <Link href="#" className="text-[#C09E5F] text-opacity-[60%] font-jura text-[11px] md:text-[13px] font-bold  hover:underline ">{t('privacy_policy')}</Link>
             <span className='mx-1 font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] '> | </span>
-            <Link href="/terms&conditions" className="font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] hover:underline">{t('terms_conditions')}</Link>
+            <Link href="#" className="font-jura text-[11px] md:text-[13px] font-bold text-[#C09E5F] text-opacity-[60%] hover:underline ">{t('terms_conditions')}</Link>
           </div>
         </div>
       </div>

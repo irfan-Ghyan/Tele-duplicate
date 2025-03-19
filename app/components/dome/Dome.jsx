@@ -140,7 +140,7 @@ useEffect(() => {
            backgroundRepeat: 'no-repeat',
          }}
        >
-            <div className="absolute inset-0 bg-[#002718] bg-opacity-80 md:bg-opacity-30% lg:bg-opacity-30% xl:bg-opacity-30% "></div>
+            <div className="absolute inset-0 bg-[#002718] bg-opacity-80 md:bg-opacity-0 lg:bg-opacity-0 xl:bg-opacity-0 "></div>
               <div className="relative flex items-end justify-center h-full max-w-7xl mx-auto pb-[80px]">
                 <div className='w-full p-8 lg:mb-[100px] pb-[100px]'>
                 <div className='flex flex-col md:flex-row lg:flex-row xl:flex-row  '>
@@ -159,7 +159,7 @@ useEffect(() => {
                   href="/venue"
                   className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
                 >
-                  <span className="button-slanted-content">{t('Discover TeleiosX')}</span>
+                  <span className="button-slanted-content font-jura text-[16px] font-bold">{t('Discover TeleiosX')}</span>
                 </Link>
                 </div>
                 

@@ -28,7 +28,7 @@
 
     "PRIVATE_EVENTS": "Private Events",
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
-    "Exp_heading": "Experiences",
+    "Exp_heading": "EXPERIENCES",
     "Exp_des": "Ready for the ultimate rush? Whether you're racing against friends, hosting a private party, engaging with an office team, or just relaxing and enjoying the thrills of live sports, TeleiosX has something for everyone. Choose your racing experience and get ready for an exclusive high-performance adventure.",
     "Corporate_Events": "CORPORATE EVENTS",
     "Corporate_Events_Heading": "CORPORATE EVENTS",
@@ -281,7 +281,7 @@
   "Content": {
     "Title": "Experience Sessions",
     "Description": "Step into the driver’s seat and experience racing like never before with our pre-designed simulator sessions.",
-    "Sessions": "Sessions",
+    "Sessions": "SESSIONS",
     "BOOK NOW": "Book Now",
 
     "Entries": [
