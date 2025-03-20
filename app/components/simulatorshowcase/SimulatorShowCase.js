@@ -106,10 +106,9 @@
 "use client"
 import { useEffect, useState } from "react"
 import Image from "next/image"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Pagination } from "swiper/modules"
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react"
+import { Pagination } from "swiper/modules"
 import "swiper/css"
-import "swiper/css/navigation"
 import "swiper/css/pagination"
 
 export default function RacingSimulatorShowcase() {
@@ -149,55 +148,78 @@ export default function RacingSimulatorShowcase() {
         </div>
 
         {/* Mobile View - Swiper Slider */}
-        {isMobile ? (
-          <>
-          <Swiper
-            modules={[Navigation, Pagination]}
-            navigation
-       
-            spaceBetween={20}
-            slidesPerView={1}
-            className="w-full h-auto mt-8"
-          >
-            {features.map((feature) => (
-              <SwiperSlide key={feature.number}>
-                <FeaturePoint  number={feature.number} title={feature.title} description={feature.description} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          
-        </>
-        ) : (
-          <>
-            {/* Desktop View - Static Layout */}
-            <div className="absolute left-4 md:left-12 lg:left-24 top-1/4 w-1/3 md:w-1/4 z-20">
-              <FeaturePoint number={1} title="Luxury Design" description="Engineered for elegance and performance with meticulous attention to detail." />
-            </div>
-            <div className="absolute left-4 md:left-12 lg:left-24 top-1/2 w-1/3 md:w-1/4 z-20">
-              <FeaturePoint number={2} title="Premium Materials" description="Crafted with aerospace-grade aluminum and fine Italian Nappa leather." />
-            </div>
-            <div className="absolute left-4 md:left-12 lg:left-24 bottom-1/4 w-1/3 md:w-1/4 z-20">
-              <FeaturePoint number={3} title="Solid Frame" description="Hand-welded stainless steel structure for maximum durability and performance." />
-            </div>
-            <div className="absolute right-4 md:right-12 lg:right-24 top-1/4 w-1/3 md:w-1/4 text-right z-20">
-              <FeaturePoint number={4} title="Comfort Features" description="Designed to provide an immersive and comfortable racing experience." rightAligned={true} />
-            </div>
-            <div className="absolute right-4 md:right-12 lg:right-24 top-1/2 w-1/3 md:w-1/4 text-right z-20">
-              <FeaturePoint number={5} title="Turnkey Solution" description="Delivered and installed by our experts for a hassle-free experience." rightAligned={true} />
-            </div>
-            <div className="absolute right-4 md:right-12 lg:right-24 bottom-1/4 w-1/3 md:w-1/4 text-right z-20">
-              <FeaturePoint number={6} title="Customizable" description="Personalized design, materials, and branding to match your style." rightAligned={true} />
-            </div>
-          </>
-        )}
+        {isMobile ? <FeatureSlider features={features} /> : <FeatureGrid features={features} />}
       </div>
     </div>
   )
 }
 
+function FeatureSlider({ features }) {
+  const [swiper, setSwiper] = useState(null)
+
+  return (
+    <div className="relative w-full">
+      <Swiper
+        modules={[Pagination]}
+        spaceBetween={20}
+        slidesPerView={1}
+        onSwiper={setSwiper}
+        className="w-full h-auto mt-8"
+      >
+        {features.map((feature) => (
+          <SwiperSlide key={feature.number}>
+            <FeaturePoint number={feature.number} title={feature.title} description={feature.description} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* Left Arrow */}
+      <div
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-50 cursor-pointer"
+        onClick={() => swiper && swiper.slidePrev()}
+      >
+        <Image src="/assets/images/about/left.png" width={40} height={40} alt="Previous" />
+      </div>
+
+      {/* Right Arrow */}
+      <div
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-50 cursor-pointer"
+        onClick={() => swiper && swiper.slideNext()}
+      >
+        <Image src="/assets/images/about/right.png" width={40} height={40} alt="Next" />
+      </div>
+    </div>
+  )
+}
+
+function FeatureGrid({ features }) {
+  return (
+    <>
+      <div className="absolute left-4 md:left-12 lg:left-24 top-1/4 w-1/3 md:w-1/4 z-20">
+        <FeaturePoint number={1} title="Luxury Design" description="Engineered for elegance and performance with meticulous attention to detail." />
+      </div>
+      <div className="absolute left-4 md:left-12 lg:left-24 top-1/2 w-1/3 md:w-1/4 z-20">
+        <FeaturePoint number={2} title="Premium Materials" description="Crafted with aerospace-grade aluminum and fine Italian Nappa leather." />
+      </div>
+      <div className="absolute left-4 md:left-12 lg:left-24 bottom-1/4 w-1/3 md:w-1/4 z-20">
+        <FeaturePoint number={3} title="Solid Frame" description="Hand-welded stainless steel structure for maximum durability and performance." />
+      </div>
+      <div className="absolute right-4 md:right-12 lg:right-24 top-1/4 w-1/3 md:w-1/4 text-right z-20">
+        <FeaturePoint number={4} title="Comfort Features" description="Designed to provide an immersive and comfortable racing experience." rightAligned={true} />
+      </div>
+      <div className="absolute right-4 md:right-12 lg:right-24 top-1/2 w-1/3 md:w-1/4 text-right z-20">
+        <FeaturePoint number={5} title="Turnkey Solution" description="Delivered and installed by our experts for a hassle-free experience." rightAligned={true} />
+      </div>
+      <div className="absolute right-4 md:right-12 lg:right-24 bottom-1/4 w-1/3 md:w-1/4 text-right z-20">
+        <FeaturePoint number={6} title="Customizable" description="Personalized design, materials, and branding to match your style." rightAligned={true} />
+      </div>
+    </>
+  )
+}
+
 function FeaturePoint({ number, title, description, rightAligned = false }) {
   return (
-    <div className={`flex flex-col gap-2 px-20 ${rightAligned ? "items-end" : "items-start"}`}>
+    <div className={`flex flex-col px-20 md:px-0 lg:px-0  ${rightAligned ? "items-end" : "items-start"}`}>
       <div className={`flex items-center gap-2 text-center ${rightAligned ? "flex-row-reverse" : "flex-row"}`}>
         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-[#C09E5F] text-[#C09E5F]">
           {number}
@@ -205,13 +227,8 @@ function FeaturePoint({ number, title, description, rightAligned = false }) {
         <h3 className="text-[16px] md:text-[16px] font-orbitron font-bold text-white">{title}</h3>
       </div>
       <p className={`text-[14px] md:text-[14px] font-jura text-[#5F7F7B] ${rightAligned ? "text-right" : "text-left"}`}>{description}</p>
-      <div className="md:hidden custom-prev absolute left-0 top-1/2 transform -translate-y-1/2 z-50 cursor-pointer">
-          <Image src="/assets/images/about/left.png" width={40} height={40} alt="Previous" />
-        </div>
-        <div className="md:hidden custom-next absolute right-0 top-1/2 transform -translate-y-1/2 z-50 cursor-pointer">
-          <Image src="/assets/images/about/right.png" width={40} height={40} alt="Next" />
-        </div>
-      
     </div>
   )
 }
+
+

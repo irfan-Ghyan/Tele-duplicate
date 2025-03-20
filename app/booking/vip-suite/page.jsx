@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../components/calendar/Calendar";
-import PlanSelectorLounge from "../components/planselectorvip/PlanSelectorVip";
-import { doGetCall, doPostCall } from "../utils/api";
+import CalendarComponent from "../../components/calendar/Calendar";
+import PlanSelectorLounge from "../../components/planselectorvip/PlanSelectorVip";
+import { doGetCall, doPostCall } from "../../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
@@ -41,6 +41,7 @@ const Page = ({ params }) => {
   const [generalError, setGeneralError] = useState("");
   const [bookingErrors, setBookingErrors] = useState([]);
   const [availableSIMs, setAvailableSIMs] = useState(null);
+  const [showRadioError, setShowRadioError] = useState(false);
 
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null);
@@ -166,7 +167,14 @@ const Page = ({ params }) => {
     }
   };
 
-
+  const handleSubmitClick = () => {
+    if (validateForm()) {
+  
+      setShowRadioError(false);
+    } else {
+      setShowRadioError(true);
+    }
+  };
   
   useEffect(() => {
     if (generalError || bookingErrors.length > 0) {
@@ -307,43 +315,93 @@ const Page = ({ params }) => {
   const timeEntries = Object.entries(times);
   const timeChunks = chunkArray(timeEntries, 3);
 
-  const fetchBookings = useCallback(async () => {
+//   const fetchBookings = useCallback(async () => {
+//     const payload = {
+//       no_of_people: count.toString(),
+//       date: selectedDate,
+//       duration: slotInterval.toString(),
+//       booking_type: selectedSlotType,
+//     };
+
+//     const queryString = new URLSearchParams(payload).toString();
+
+//     try {
+//       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+//       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
+//       let response = await doGetCall(url);
+//       const data = await response.json();
+//       const data_ = addMissingSlots(data)
+
+//       const allSlots = addMissingSlots(data);
+
+//       console.log(data_)
+//       const fetchedTimes = data_.reduce((acc, slot) => {
+//         if (slot.time) {
+//           acc[`time${slot.time}`] = {
+//             time: String(slot.time),
+//             sims: slot.sims || 0,
+//           };
+//         }
+//         return acc;
+//       }, {});
+//       setTimes(fetchedTimes);
+
+//     } catch (error) {
+//       console.error("Error fetching bookings:", error);
+//     }
+//   }, [count, selectedDate, selectedSlotType, slotInterval]);
+
+//   useEffect(() => {
+//     fetchBookings();
+//   }, [fetchBookings]);
+
+
+const fetchBookings = useCallback(async () => {
     const payload = {
       no_of_people: count.toString(),
       date: selectedDate,
       duration: slotInterval.toString(),
       booking_type: selectedSlotType,
     };
-
+  
     const queryString = new URLSearchParams(payload).toString();
-
+  
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings/availableSlots?${queryString}`;
       let response = await doGetCall(url);
       const data = await response.json();
-      const data_ = addMissingSlots(data)
-      console.log(data_)
-      const fetchedTimes = data_.reduce((acc, slot) => {
+      
+      // Add missing slots (Ensure all slots appear, even past ones)
+      const allSlots = addMissingSlots(data);
+      
+      // Get current time in the same format as slots
+      const now = new Date();
+      const currentTime = now.getHours() * 60 + now.getMinutes(); // Convert to minutes for comparison
+  
+      const fetchedTimes = allSlots.reduce((acc, slot) => {
         if (slot.time) {
+          const slotTime = parseInt(slot.time.replace(":", ""), 10); // Assuming HH:mm format
+          
           acc[`time${slot.time}`] = {
             time: String(slot.time),
             sims: slot.sims || 0,
+            isPast: slotTime < currentTime, // Mark past slots
           };
         }
         return acc;
       }, {});
+  
       setTimes(fetchedTimes);
-
     } catch (error) {
       console.error("Error fetching bookings:", error);
     }
   }, [count, selectedDate, selectedSlotType, slotInterval]);
-
+  
   useEffect(() => {
     fetchBookings();
   }, [fetchBookings]);
-
+  
   const goBack = () => {
     if (activeTab === 1) {
       router.push("/");
@@ -386,8 +444,16 @@ const Page = ({ params }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    if (validateForm()) {
+      setShowRadioError(false);
+    } else {
+      setShowRadioError(true);
+      return;
+    }
+  
     const errors = {};
-
+  
     const bookingData = {
       name: formData.firstName,
       phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
@@ -398,40 +464,71 @@ const Page = ({ params }) => {
       time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
       booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
     };
-
+  
     const paymentData = {
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
     };
-
+  
     if (!formData.firstName.trim()) errors.firstName = "First name is required.";
     if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "A valid email is required.";
     }
-
+  
     setValidationErrors(errors);
-
+  
     if (Object.keys(errors).length > 0) {
       setGeneralError("Please fix the errors above before proceeding.");
       return;
     }
-
+  
     setGeneralError("");
-
+  
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const url = `${baseUrl}/api/bookings`;
-      const response = await doPostCall(url, { ...bookingData, ...paymentData }, { "Content-Type": "application/json" });
-
+      const response = await doPostCall(
+        url,
+        { ...bookingData, ...paymentData },
+        { "Content-Type": "application/json" }
+      );
+  
       const data = await response.json();
-
+  
       if (data.success) {
         console.log("Booking and payment saved successfully:", data);
-        // Proceed to the next tab
+
         handleTabChange(3);
+        console.log({ ...bookingData, ...paymentData });
+  
+        try {
+          const response = await fetch("https://dev.teleiosx.com/email/email.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              customerEmail: formData.email,
+              companyEmail: "no-reply@teleiosx.com",
+              subject: "Booking Confirmation",
+              payload: {
+                bookingData: { ...bookingData },
+                paymentData: { ...paymentData }
+              }
+            }),
+          });
+  
+          if (response.ok) {
+            const result = await response.json();
+            console.log("Success:", result.message);
+          } else {
+            const error = await response.text();
+            console.error("Error response:", error);
+          }
+        } catch (error) {
+          console.error("Error during submission:", error);
+        }
       } else {
         console.error("Error saving booking/payment:", data.message);
         setGeneralError(data.message || "An error occurred. Please try again.");
@@ -441,6 +538,7 @@ const Page = ({ params }) => {
       setGeneralError("An error occurred while processing your request. Please try again.");
     }
   };
+
 
   const handleCreateBooking = () => {
     // You can implement your logic to create the booking here.
@@ -506,42 +604,42 @@ const Page = ({ params }) => {
   return (
     <>
       <div className=" overflow-x-hidden max-w-7xl mx-auto lg:pb-[40px]">
-      <div className="my-[60px] px-4">
-            <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center w-full lg:w-[720px] md:w-[720px] max-w-7xl mx-auto my-8">
-  
-                    <div className="mt-[20px] md:mt-[0px] w-[84px] h-[54px]">
-                      <button
-                        onClick={goBack}
-                        className="button-slanted cursor-pointer flex items-center justify-center px-4 py-3  border-[0.5px] border-opacity-30 border-[#C09E5F]  font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg "
-                      >
-                      <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
-                      </button>
-                    </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
-                    
-                    <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 1 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`} onClick={() => handleTabChange(1)}>
-                        01
-                    </div>
-                    <div className={`text-[14px]  ml-4 ${activeTab === 1 ? 'text-[#C09E5F] ' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('experiences')}</div>
-                    </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
-                    <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 2 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-[#C09E5F]`}>
-                        02
-                    </div>
-                    <div className={`text-[14px] ml-4 ${activeTab === 2 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('confirm')}</div>
-                    {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
-                    </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center px-6 py-2  border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
-                    <div className={`mr-4 w-[30px] mt-1 h-[30px] rounded-full ${activeTab === 3 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}>
-                        03
-                    </div>
-                    <div className={`text-[14px] ml-4 ${activeTab === 3 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
-                    {t('thanks')}
-                    </div>
-                    {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
-                    </div>
-              </div>
-        </div>
+        <div className="my-[60px] px-4">
+                           <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center w-full lg:w-[720px] md:w-[720px] max-w-7xl mx-auto my-8">
+                 
+                                   <div className="mt-[20px] md:mt-[0px] w-[84px] h-[54px]">
+                                     <button
+                                       onClick={goBack}
+                                       className="button-slanted cursor-pointer flex items-center justify-center px-4 py-3  border-[0.5px] border-opacity-30 border-[#C09E5F]  font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg "
+                                     >
+                                     <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
+                                     </button>
+                                   </div>
+                                   <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                                   
+                                   <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 1 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`} onClick={() => handleTabChange(1)}>
+                                       01
+                                   </div>
+                                   <div className={`text-[14px]  ml-4 ${activeTab === 1 ? 'text-[#C09E5F] ' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('experiences')}</div>
+                                   </div>
+                                   <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                                   <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 2 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-[#C09E5F]`}>
+                                       02
+                                   </div>
+                                   <div className={`text-[14px] ml-4 ${activeTab === 2 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('confirm')}</div>
+                                   {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
+                                   </div>
+                                   <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center px-6 py-2  border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                                   <div className={`mr-4 w-[30px] mt-1 h-[30px] rounded-full ${activeTab === 3 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}>
+                                       03
+                                   </div>
+                                   <div className={`text-[14px] ml-4 ${activeTab === 3 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>
+                                   {t('thanks')}
+                                   </div>
+                                   {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
+                                   </div>
+                             </div>
+                       </div>
 
         {activeTab === 1 && (
           <div className="flex flex-col lg:flex-row gap-4 md:gap-0 lg:gap-0 my-20">
@@ -549,7 +647,7 @@ const Page = ({ params }) => {
               <div className="flex max-w-7xl ">
                 <div className="w-full flex">
                   <div className="w-full xl:w-full lg:w-[680px] px-4">
-                    <div className=" bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg">
+                    <div className=" bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('loungeSeats')}</h1>
                       <div className="flex justify-between">
                         <div className="py-4">
@@ -563,7 +661,7 @@ const Page = ({ params }) => {
                     </div>
 
 
-                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
+                    <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
                     <h1 className="text-[23px] text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
@@ -571,14 +669,14 @@ const Page = ({ params }) => {
                   </div>
 
                     <div>
-                      <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto my-[20px] rounded-lg">
+                      <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
                         <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseDate')}</h1>
                         <CalendarComponent onChange={handleDateChange} value={date} minDate={minDate} maxDate={maxDate} />
                       </div>
                     </div>
 
                     {/* Choose Time Section */}
-                    <div className="w-full bg-[#e3ce90] p-[20px] lg:p-[30px] h-auto rounded-lg mt-[20px]">
+                    <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
 
                       {/* User Feedback for No Available Slots */}
@@ -632,7 +730,7 @@ const Page = ({ params }) => {
                                   const hours = Number(match[1]);
                                   const minutes = Number(match[2]);
                                   const slotTime = hours * 60 + minutes;
-                                  const isDisabled = sims === 0 || slotTime < startTime ;
+                                //   const isDisabled = sims === 0 || slotTime < startTime ;
 
                                   return (
                                     <div
@@ -640,15 +738,15 @@ const Page = ({ params }) => {
                                       className={`button-slanted mt-[10px] cursor-pointer w-[180px] lg:w-[240px] h-[40px] font-jura font-normal mx-2
                                         ${timeKey === activeTime 
                                           ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
-                                          : isDisabled
-                                          ? "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
+                                        //   : isDisabled
+                                        //   ? "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
                                           : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
                                         transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                                     >
                                       <button
                                         onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                         className="button-slanted-content w-full h-full flex items-center justify-center"
-                                        disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES || isDisabled }
+                                        // disabled={slotTime < startTime || slotTime > CLOSING_TIME_MINUTES || isDisabled }
                                       >
                                         {formatToAMPM(timeValue)}
                                       </button>
@@ -665,7 +763,7 @@ const Page = ({ params }) => {
             </div>
 
             {/* Booking Details Panel */}
-            <div className="bg-[#e3ce90] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-lg  mt-2 lg:mt-0">
+            <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
                 .filter((detail) => detail.key !== "booking_type"  && detail.key !== "no_of_people")
@@ -679,7 +777,7 @@ const Page = ({ params }) => {
                   </div>
                 ))}
 
-              <div className="max-w-3xl mx-auto bg-[#e3ce90] rounded-lg mt-20">
+              <div className="max-w-3xl mx-auto mt-20">
                 {generalError && <p className="text-red-500 text-sm font-bold mb-4">{generalError}</p>}
                 {bookingErrors.length > 0 && (
                   <ul>
@@ -694,202 +792,206 @@ const Page = ({ params }) => {
                   onClick={() => handleTabChange(2)}
                   className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
                 >
-                  <span className="button-slanted-content py-2">CONTINUE</span>
+                  <span className="button-slanted-content py-2" onClick={handleSubmitClick}>CONTINUE</span>
                 </button>
               </div>
             </div>
           </div>
         )}
 
-        {activeTab === 2 && (
-          <div className="mx-4 mb-8">
-          <div className="bg-[#e3ce90] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16">
-            <h2 className="text-4xl font-black font-jura text-[#063828] mb-4">{t('paymentDetails')}</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="firstName" className="block text-lg font-jura font-bold text-[#063828]">
-                      {t('firstname')}
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="mt-1 px-4 py-2 w-full"
-                    />
-                    {validationErrors.firstName && (
-                      <p className="text-red-500 text-sm">{validationErrors.firstName}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-lg font-medium text-[#063828]">
-                    {t('lastname')}
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="mt-1 px-4 py-2 w-full"
-                    />
-                    {validationErrors.lastName && (
-                      <p className="text-red-500 text-sm">{validationErrors.lastName}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-lg font-jura font-bold text-[#063828]">
-                  {t('emailAddress')}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className="mt-1 px-4 py-2 w-full"
-                  />
-                  {validationErrors.email && (
-                    <p className="text-red-500 text-sm">{validationErrors.email}</p>
-                  )}
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-lg font-jura font-bold text-[#063828]">
-                  {t('phoneNormal')}
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="mt-1 px-4 py-2 w-full"
-                  />
-                  {validationErrors.phone && (
-                    <p className="text-red-500 text-sm">{validationErrors.phone}</p>
-                  )}
-                </div>
-              </div>
-
-              {/* Payment Information */}
-              {/* Uncomment and complete if you plan to collect payment details */}
-              {/* <div className="space-y-4 mt-6">
-                <h1 className="text-4xl font-black font-jura text-[#063828] mt-20">Payment</h1>
-
-                <div>
-                  <label htmlFor="cardNumber" className="block text-lg font-jura font-bold text-[#063828]">
-                    Card Number
-                  </label>
-                  <input
-                    type="text"
-                    id="cardNumber"
-                    name="cardNumber"
-                    value={formData.cardNumber}
-                    onChange={handleChange}
-                    className="mt-1 px-4 py-2 w-full"
-                    placeholder="xxxx xxxx xxxx xxxx"
-                  />
-                  {validationErrors.cardNumber && (
-                    <p className="text-red-500 text-sm">{validationErrors.cardNumber}</p>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="expiryDate" className="block text-lg font-jura font-bold text-[#063828]">
-                      Expiry Date
-                    </label>
-                    <input
-                      type="text"
-                      id="expiryDate"
-                      name="expiryDate"
-                      value={formData.expiryDate}
-                      onChange={handleChange}
-                      className="mt-1 px-4 py-2 w-full"
-                      placeholder="MM/YY"
-                    />
-                    {validationErrors.expiryDate && (
-                      <p className="text-red-500 text-sm">{validationErrors.expiryDate}</p>
-                    )}
-                  </div>
-                  <div>
-                    <label htmlFor="securityCode" className="block text-lg font-jura font-bold text-[#063828]">
-                      Security Code
-                    </label>
-                    <input
-                      type="text"
-                      id="securityCode"
-                      name="securityCode"
-                      value={formData.securityCode}
-                      onChange={handleChange}
-                      className="mt-1 px-4 py-2 w-full"
-                      placeholder="CVV"
-                    />
-                    {validationErrors.securityCode && (
-                      <p className="text-red-500 text-sm">{validationErrors.securityCode}</p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="cardHolderName" className="block text-lg font-jura font-bold text-[#063828]">
-                    Cardholder's Name
-                  </label>
-                  <input
-                    type="text"
-                    id="cardHolderName"
-                    name="cardHolderName"
-                    value={formData.cardHolderName}
-                    onChange={handleChange}
-                    className="mt-1 px-4 py-2 w-full"
-                  />
-                  {validationErrors.cardHolderName && (
-                    <p className="text-red-500 text-sm">{validationErrors.cardHolderName}</p>
-                  )}
-                </div>
-              </div> */}
-
-              <div>
-                {generalError && <p className="text-red-500 text-sm font-bold mb-4">{generalError}</p>}
-                <div className="mt-6 flex justify-center">
-                  <button
-                    type="submit"
-                    className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
-                  >
-                    <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('confirm')}</span>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-          </div>
-        )}
-
-        {activeTab === 3 && (
-          <div className="flex justify-center items-center py-20 px-4">
-            <div className="">
-              <div>
-                <h2 className=" text-[40px] text-center font-jura font-black text-[#e3ce90] mb-4">{t('thankYouMessage')}</h2>
-                <p className=" text-lg text-center font-jura font-bold text-[#e3ce90]">
-                  {t('emailMessage')}
-                </p>
-              </div>
-              <div className="mt-20 w-[320px] lg:w-[360px]">
-                <Link
-                  href="/experience"
-                  className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#002718] bg-gradient-to-r to-[#c09e5f] from-[#e3ce90] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
-                >
-                  <span className="button-slanted-content text-lg font-bold py-2"> {t('continueExperience')}</span>
-                </Link>
-              </div>
+{activeTab === 2 && (
+      <div className="mx-4 mb-8 ">
+      <div className="bg-[#C09E5F] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16 rounded-[15px]">
+        <h2 className="text-[32px] font-black font-orbitron text-[#063828] leading-[28px] mb-4 pb-4">{t('paymentDetails')}</h2>
+        <hr className="border-[#063828] opacity-30"/>
+        <form onSubmit={handleSubmit} >
+        <div className="space-y-4 pt-8">
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="firstName" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+              {t('firstname')}
+              </label>
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="Enter your Firtst Name"
+                value={formData.firstName}
+                onChange={handleChange}
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              />
+              {validationErrors.firstName && (
+                <p className="text-red-500 text-sm">{validationErrors.firstName}</p>
+              )}
+            </div>
+            <div>
+              <label htmlFor="lastName" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+              {t('lastname')}
+              </label>
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                 placeholder="Enter your Last Name"
+                value={formData.lastName}
+                onChange={handleChange}
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              />
+              {validationErrors.lastName && (
+                <p className="text-red-500 text-sm">{validationErrors.lastName}</p>
+              )}
             </div>
           </div>
+
+          <div>
+            <label htmlFor="email" className="block text-[16px] font-orbitron leading-[27px] font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+            {t('emailAddress')}
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828]  rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+            />
+            {validationErrors.email && (
+              <p className="text-red-500 text-sm">{validationErrors.email}</p>
+            )}
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-[16px] font-orbitron font-bold text-[#063828] px-2 md:px-8 lg:px-8">
+            {t('phoneNormal')}
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+                placeholder="+966 241 0002 202"
+              onChange={handleChange}
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+            />
+            {validationErrors.phone && (
+              <p className="text-red-500 text-sm">{validationErrors.phone}</p>
+            )}
+          </div>
+        </div>
+
+  {/* Payment Information */}
+  {/* <div className="space-y-4 mt-6">
+    <h1 className="text-4xl font-black font-jura text-[#063828] mt-20">Payment</h1>
+
+    <div>
+      <label htmlFor="cardNumber" className="block text-lg font-jura font-bold text-[#063828]">
+        Card Number
+      </label>
+      <input
+        type="text"
+        id="cardNumber"
+        name="cardNumber"
+        value={formData.cardNumber}
+        onChange={handleChange}
+        className="mt-1 px-4 py-2 w-full"
+        placeholder="xxxx xxxx xxxx xxxx"
+      />
+      {validationErrors.cardNumber && (
+        <p className="text-red-500 text-sm">{validationErrors.cardNumber}</p>
+      )}
+
+      
+    </div>
+
+    <div className="grid grid-cols-2 gap-4">
+      <div>
+        <label htmlFor="expiryDate" className="block text-lg font-jura font-bold text-[#063828]">
+          Expiry Date
+        </label>
+        <input
+          type="text"
+          id="expiryDate"
+          name="expiryDate"
+          value={formData.expiryDate}
+          onChange={handleChange}
+          className="mt-1 px-4 py-2 w-full"
+          placeholder="MM/YY"
+        />
+        {validationErrors.expiryDate && (
+          <p className="text-red-500 text-sm">{validationErrors.expiryDate}</p>
+        )}
+      </div>
+      <div>
+        <label htmlFor="securityCode" className="block text-lg font-jura font-bold text-[#063828]">
+          Security Code
+        </label>
+        <input
+          type="text"
+          id="securityCode"
+          name="securityCode"
+          value={formData.securityCode}
+          onChange={handleChange}
+          className="mt-1 px-4 py-2 w-full"
+          placeholder="CVV"
+        />
+        {validationErrors.securityCode && (
+          <p className="text-red-500 text-sm">{validationErrors.securityCode}</p>
+        )}
+      </div>
+    </div>
+
+    <div>
+      <label htmlFor="cardHolderName" className="block text-lg font-jura font-bold text-[#063828]">
+        Cardholder's Name
+      </label>
+      <input
+        type="text"
+        id="cardHolderName"
+        name="cardHolderName"
+        value={formData.cardHolderName}
+        onChange={handleChange}
+        className="mt-1 px-4 py-2 w-full"
+      />
+      {validationErrors.cardHolderName && (
+        <p className="text-red-500 text-sm">{validationErrors.cardHolderName}</p>
+      )}
+    </div>
+  </div> */}
+
+  <div>
+  {generalError && (
+    <p className="text-red-500 text-sm font-bold mb-4">{generalError}</p>
+  )}
+    <div className="mt-6 flex justify-center">
+      <button
+      type="submit"
+      className="button-slanted mt-[20px] w-full h-[40px] md:h-[59px] lg:h-[59px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
+    >
+      <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('CONTINUE')}</span>
+      </button>
+      </div>
+    </div>
+        </form>
+
+      </div>
+      </div>
+      )}
+
+        {activeTab === 3 && (
+           <div className="bg-[#C09E5F] flex justify-center items-center py-20 px-4 rounded-[15px] lg:w-[826px] mx-auto mb-[100px]">
+           <div className="">
+           <div>
+             <h2 className=" text-[32px] leading-[28px] text-center font-orbitron font-black text-[#063828] mb-4">{t('thankYouMessage')}</h2>
+             <p className=" text-[20px] leading-[24px] font-jura text-center font-bold text-[#063828]">{t('emailMessage')}</p>
+           </div>
+           <div className="mt-20 w-[320px] lg:w-[725px] ">
+             <Link href="/experience" className="button-slanted w-full  cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-[#063828] rounded-tl-lg rounded-br-lg hover:border-0">
+             <span className="button-slanted-content text-lg font-bold py-2">{t('continueExperience')}</span>
+             </Link>
+           </div>
+           </div>
+           </div>
         )}
       </div>
     </>

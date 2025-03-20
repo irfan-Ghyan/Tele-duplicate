@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../components/calendar/Calendar";
-import PlanSelector from "../components/planselector/PlanSelector";
-import { doGetCall, doPostCall } from "../utils/api";
+import CalendarComponent from "../../components/calendar/Calendar";
+import PlanSelector from "../../components/planselector/PlanSelector";
+import { doGetCall, doPostCall } from "../../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
@@ -48,6 +48,7 @@ const Page = ({ params } ) => {
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
   const [availableSIMs, setAvailableSIMs] = useState(null);
+    const [showRadioError, setShowRadioError] = useState(false);
 
 
   const [minDate, setMinDate] = useState(null);
@@ -432,81 +433,103 @@ const Page = ({ params } ) => {
     return Object.keys(errors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault(); 
-    const errors = {};
-  
-    const bookingData = {
-      // name: bookingDetails.find((detail) => detail.key === "name")?.description || "",
-      name: formData.firstName,
-      phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
-      email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
-      no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
-      duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, 10),
-      price: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, "95 SAR"),
-      date: bookingDetails.find((detail) => detail.key === "date")?.description,
-      time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
-      booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
-    };
-  
-    const paymentData = {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      email: formData.email,
-      phone: formData.phone,
-      // address: formData.address,
-      // city: formData.city,
-  
-      // cardNumber: formData.cardNumber,
-      // expiryDate: formData.expiryDate,
-      // securityCode: formData.securityCode,
-      // cardHolderName: formData.cardHolderName,
-      // billingAddress: formData.billingAddress,
-    };
-  
+ const handleSubmit = async (e) => {
+     e.preventDefault();
+   
+     if (validateForm()) {
+       setShowRadioError(false);
+     } else {
+       setShowRadioError(true);
+       return;
+     }
+   
+     const errors = {};
+   
+     const bookingData = {
+       name: formData.firstName,
+       phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
+       email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
+       no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
+       duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, 10),
+       date: bookingDetails.find((detail) => detail.key === "date")?.description,
+       time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
+       booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
+     };
+   
+     const paymentData = {
+       firstName: formData.firstName,
+       lastName: formData.lastName,
+       email: formData.email,
+       phone: formData.phone,
+     };
+   
+     if (!formData.firstName.trim()) errors.firstName = "First name is required.";
+     if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
+     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
+       errors.email = "A valid email is required.";
+     }
+   
+     setValidationErrors(errors);
+   
+     if (Object.keys(errors).length > 0) {
+       setGeneralError("Please fix the errors above before proceeding.");
+       return;
+     }
+   
+     setGeneralError("");
+   
+     try {
+       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+       const url = `${baseUrl}/api/bookings`;
+       const response = await doPostCall(
+         url,
+         { ...bookingData, ...paymentData },
+         { "Content-Type": "application/json" }
+       );
+   
+       const data = await response.json();
+   
+       if (data.success) {
+         console.log("Booking and payment saved successfully:", data);
+         // Proceed to the next tab
+         handleTabChange(3);
+         console.log({ ...bookingData, ...paymentData });
+   
+         try {
+           const response = await fetch("https://dev.teleiosx.com/email/email.php", {
+             method: "POST",
+             headers: { "Content-Type": "application/json" },
+             body: JSON.stringify({
+               customerEmail: formData.email,
+               companyEmail: "no-reply@teleiosx.com",
+               subject: "Booking Confirmation",
+               payload: {
+                 bookingData: { ...bookingData },
+                 paymentData: { ...paymentData }
+               }
+             }),
+           });
+   
+           if (response.ok) {
+             const result = await response.json();
+             console.log("Success:", result.message);
+           } else {
+             const error = await response.text();
+             console.error("Error response:", error);
+           }
+         } catch (error) {
+           console.error("Error during submission:", error);
+         }
+       } else {
+         console.error("Error saving booking/payment:", data.message);
+         setGeneralError(data.message || "An error occurred. Please try again.");
+       }
+     } catch (error) {
+       console.error("Error with POST request:", error);
+       setGeneralError("An error occurred while processing your request. Please try again.");
+     }
+   };
  
-
-    if (!formData.firstName.trim()) errors.firstName = "First name is required.";
-    if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
-    if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "A valid email is required.";
-    }
-
-    setValidationErrors(errors);
-  
-    if (Object.keys(errors).length > 0) {
-      setGeneralError("Please fix the errors above before proceeding.");
-      return;
-    }
-  
-    setGeneralError("");
-    handleTabChange(3);
-
-  
-    try {
-      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/bookings`; 
-      const response = await doPostCall(url,        
-        { ...bookingData, ...paymentData },
-        {"Content-Type": "application/json"},
-      );
-  
-      const data = await response.json();
- 
-  
-      if (data.success) {
-        console.log("Booking and payment saved successfully:", data);
-        // window.location.reload();
-      } else {
-        console.error("Error saving booking/payment:", data.message);
-        setGeneralError(data.message || "An error occurred. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error with POST request:", error);
-      setGeneralError("An error occurred while processing your request. Please try again.");
-    }
-  };
-
 
 
   useEffect(() => {
@@ -717,60 +740,8 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                {/* <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
-                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
-                  {timeChunks.map((chunk, chunkIndex) => {
-                    const now = new Date();
-                    const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA");
+   
 
-                    return (
-                      <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
-                          const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                          if (!match) {
-                            console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
-                            return null;
-                          }
-                          const hours = Number(match[1]);
-                          const minutes = Number(match[2]);
-                          const slotTime = hours * 60 + minutes;
-                            
-
-                            const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-
-                            return (
-                              <div
-                                key={timeKey}
-                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
-                                  slotTime >= startTime
-                                  ? timeKey === activeTime
-                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                                  : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                            >
-                                 <button
-                                onClick={() => handleButtonClick(timeKey, timeValue, sims)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime}
-                              >
-                                {formatToAMPM(timeValue)}
-                  
-                              </button>
-                              </div>
-                            );
-                          })}
-
-                          </div>
-                        );
-                      }
-                      
-                      )}
-                </div> */}
-
-
-                  
 
 
               <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
@@ -816,7 +787,7 @@ const Page = ({ params } ) => {
                           const minutes = Number(match[2]);
                           const slotTime = hours * 60 + minutes;
 
-                          const isDisabled = sims === 0 || slotTime < startTime ;
+                        //   const isDisabled = sims === 0 || slotTime < startTime ;
 
                           return (
                             <div
@@ -824,8 +795,8 @@ const Page = ({ params } ) => {
                               className={`button-slanted mt-[10px] cursor-pointer w-[180px] lg:w-[240px] h-[40px] font-jura font-normal mx-2
                                 ${timeKey === activeTime 
                                   ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
-                                  : isDisabled
-                                  ? "text-[#C09E5F] border-opacity-80 cursor-not-allowed border border-[#C09E5F]"
+                                //   : isDisabled
+                                //   ? "text-[#C09E5F] border-opacity-80 cursor-not-allowed border border-[#C09E5F]"
                                   : "hover:text-[#C09E5F] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
                                 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
@@ -833,7 +804,7 @@ const Page = ({ params } ) => {
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                 // onClick={() => isDisabled && handleButtonClick(timeKey, timeValue, sims)}
                                 className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime || isDisabled}
+                                // disabled={slotTime < startTime || isDisabled}
                                 
                               
                               >
@@ -1031,84 +1002,6 @@ const Page = ({ params } ) => {
           </div>
         </div>
 
-  {/* Payment Information */}
-  {/* <div className="space-y-4 mt-6">
-    <h1 className="text-4xl font-black font-jura text-[#063828] mt-20">Payment</h1>
-
-    <div>
-      <label htmlFor="cardNumber" className="block text-lg font-jura font-bold text-[#063828]">
-        Card Number
-      </label>
-      <input
-        type="text"
-        id="cardNumber"
-        name="cardNumber"
-        value={formData.cardNumber}
-        onChange={handleChange}
-        className="mt-1 px-4 py-2 w-full"
-        placeholder="xxxx xxxx xxxx xxxx"
-      />
-      {validationErrors.cardNumber && (
-        <p className="text-red-500 text-sm">{validationErrors.cardNumber}</p>
-      )}
-
-      
-    </div>
-
-    <div className="grid grid-cols-2 gap-4">
-      <div>
-        <label htmlFor="expiryDate" className="block text-lg font-jura font-bold text-[#063828]">
-          Expiry Date
-        </label>
-        <input
-          type="text"
-          id="expiryDate"
-          name="expiryDate"
-          value={formData.expiryDate}
-          onChange={handleChange}
-          className="mt-1 px-4 py-2 w-full"
-          placeholder="MM/YY"
-        />
-        {validationErrors.expiryDate && (
-          <p className="text-red-500 text-sm">{validationErrors.expiryDate}</p>
-        )}
-      </div>
-      <div>
-        <label htmlFor="securityCode" className="block text-lg font-jura font-bold text-[#063828]">
-          Security Code
-        </label>
-        <input
-          type="text"
-          id="securityCode"
-          name="securityCode"
-          value={formData.securityCode}
-          onChange={handleChange}
-          className="mt-1 px-4 py-2 w-full"
-          placeholder="CVV"
-        />
-        {validationErrors.securityCode && (
-          <p className="text-red-500 text-sm">{validationErrors.securityCode}</p>
-        )}
-      </div>
-    </div>
-
-    <div>
-      <label htmlFor="cardHolderName" className="block text-lg font-jura font-bold text-[#063828]">
-        Cardholder's Name
-      </label>
-      <input
-        type="text"
-        id="cardHolderName"
-        name="cardHolderName"
-        value={formData.cardHolderName}
-        onChange={handleChange}
-        className="mt-1 px-4 py-2 w-full"
-      />
-      {validationErrors.cardHolderName && (
-        <p className="text-red-500 text-sm">{validationErrors.cardHolderName}</p>
-      )}
-    </div>
-  </div> */}
 
   <div>
   {generalError && (

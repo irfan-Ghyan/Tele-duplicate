@@ -2,9 +2,9 @@
 "use client";
 
 import React, { useState, useCallback, useEffect } from "react";
-import CalendarComponent from "../components/calendar/Calendar";
-import PlanSelector from "../components/planselector/PlanSelector";
-import { doGetCall, doPostCall } from "../utils/api";
+import CalendarComponent from "../../components/calendar/Calendar";
+import PlanSelectorGroupRace from "../../components/planselectorgrouprace/PlanSelectorgrouprace";
+import { doGetCall, doPostCall } from "../../utils/api";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,7 @@ const Page = ({ params } ) => {
   const { id } = params;
   const { t } = useTranslation();
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(4);
   const [date, setDate] = useState(new Date());
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
@@ -25,13 +25,13 @@ const Page = ({ params } ) => {
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
-    { key: "no_of_people", title: "Participants", description: "1" },
+    { key: "no_of_people", title: "Participants", description: "4" },
     // { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
-    { key: "duration", title: "Duration", description: "20" },
-    { key: "price", title: "Price", description: "95 SAR" },
+    { key: "duration", title: "Duration", description: "40" },
+    { key: "price", title: "Price", description: "680 SAR" },
   ]);
   
 
@@ -40,7 +40,7 @@ const Page = ({ params } ) => {
   const [activeTime, setActiveTime] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
-  const [slotInterval, setSlotInterval] = useState(20);
+  const [slotInterval, setSlotInterval] = useState(40);
   const [eventDetails, setEventDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -48,6 +48,7 @@ const Page = ({ params } ) => {
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
   const [availableSIMs, setAvailableSIMs] = useState(null);
+    const [showRadioError, setShowRadioError] = useState(false);
 
 
   const [minDate, setMinDate] = useState(null);
@@ -144,13 +145,11 @@ const Page = ({ params } ) => {
     );
   };
 
-
-  useEffect(() => {
-    if (count > 0) {
-      handlePlanChange(slotInterval);
-    }
-  }, [count, slotInterval]);
-  
+   useEffect(() => {
+      if (count > 0) {
+        handlePlanChange(slotInterval);
+      }
+    }, [count, slotInterval]);
   const increaseCount = async () => { 
     const newCount = count + 1;
 
@@ -199,19 +198,55 @@ const Page = ({ params } ) => {
   };
 
   
-  const handlePlanChange = async (newDuration) => {
+//   const handlePlanChange = async (newDuration) => {
+  
+//     await fetchBookings();
+//     setSlotInterval(newDuration);
+  
+//     updateBookingDetail("duration", `${newDuration}`);
+  
+//     let basePrice;
+  
+//     if (count <= 3) {
+//       if (newDuration === 20) {
+//         basePrice = 95;
+//       } else if (newDuration === 40) {
+//         basePrice = 170;
+//       } else if (newDuration === 60) {
+//         basePrice = 250;
+//       }
+//     } else {
+//       if (newDuration === 20) {
+//         basePrice = 95; 
+//       } else if (newDuration === 40) {
+//         basePrice = 140;
+//       } else if (newDuration === 60) {
+//         basePrice = 200; 
+//       }
+//     }
+  
+//     const updatedPrice = `${basePrice * count} SAR`;
+  
+//     updateBookingDetail("price", updatedPrice);
+  
+//     await fetchBookings();
+//   };
+  
+
+const handlePlanChange = async (newDuration) => {
+  
     await fetchBookings();
     setSlotInterval(newDuration);
-  
+    
     updateBookingDetail("duration", `${newDuration}`);
-  
+    
     let basePrice;
-  
+    
     if (count <= 3) {
       if (newDuration === 20) {
         basePrice = 95;
       } else if (newDuration === 40) {
-        basePrice = 170;
+        basePrice = 175; // Default price for 40 mins
       } else if (newDuration === 60) {
         basePrice = 250;
       }
@@ -219,16 +254,17 @@ const Page = ({ params } ) => {
       if (newDuration === 20) {
         basePrice = 95; 
       } else if (newDuration === 40) {
-        basePrice = 140;
+        basePrice = 175; // Default price for 40 mins
       } else if (newDuration === 60) {
         basePrice = 200; 
       }
     }
   
+    // Adjust the price for multiple persons
     const updatedPrice = `${basePrice * count} SAR`;
-  
+    
     updateBookingDetail("price", updatedPrice);
-  
+    
     await fetchBookings();
   };
   
@@ -433,17 +469,23 @@ const Page = ({ params } ) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
+  
+    if (validateForm()) {
+      setShowRadioError(false);
+    } else {
+      setShowRadioError(true);
+      return;
+    }
+  
     const errors = {};
   
     const bookingData = {
-      // name: bookingDetails.find((detail) => detail.key === "name")?.description || "",
       name: formData.firstName,
       phone: bookingDetails.find((detail) => detail.key === "phone")?.description || "",
       email: bookingDetails.find((detail) => detail.key === "email")?.description || "",
       no_of_people: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
       duration: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, 10),
-      price: parseInt(bookingDetails.find((detail) => detail.key === "duration")?.description, "95 SAR"),
       date: bookingDetails.find((detail) => detail.key === "date")?.description,
       time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
       booking_type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
@@ -454,24 +496,14 @@ const Page = ({ params } ) => {
       lastName: formData.lastName,
       email: formData.email,
       phone: formData.phone,
-      // address: formData.address,
-      // city: formData.city,
-  
-      // cardNumber: formData.cardNumber,
-      // expiryDate: formData.expiryDate,
-      // securityCode: formData.securityCode,
-      // cardHolderName: formData.cardHolderName,
-      // billingAddress: formData.billingAddress,
     };
   
- 
-
     if (!formData.firstName.trim()) errors.firstName = "First name is required.";
     if (!formData.lastName.trim()) errors.lastName = "Last name is required.";
     if (!formData.email.trim() || !/\S+@\S+\.\S+/.test(formData.email)) {
       errors.email = "A valid email is required.";
     }
-
+  
     setValidationErrors(errors);
   
     if (Object.keys(errors).length > 0) {
@@ -480,23 +512,49 @@ const Page = ({ params } ) => {
     }
   
     setGeneralError("");
-    handleTabChange(3);
-
   
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      const url = `${baseUrl}/api/bookings`; 
-      const response = await doPostCall(url,        
+      const url = `${baseUrl}/api/bookings`;
+      const response = await doPostCall(
+        url,
         { ...bookingData, ...paymentData },
-        {"Content-Type": "application/json"},
+        { "Content-Type": "application/json" }
       );
   
       const data = await response.json();
- 
   
       if (data.success) {
         console.log("Booking and payment saved successfully:", data);
-        // window.location.reload();
+        // Proceed to the next tab
+        handleTabChange(3);
+        console.log({ ...bookingData, ...paymentData });
+  
+        try {
+          const response = await fetch("https://dev.teleiosx.com/email/email.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              customerEmail: formData.email,
+              companyEmail: "no-reply@teleiosx.com",
+              subject: "Booking Confirmation",
+              payload: {
+                bookingData: { ...bookingData },
+                paymentData: { ...paymentData }
+              }
+            }),
+          });
+  
+          if (response.ok) {
+            const result = await response.json();
+            console.log("Success:", result.message);
+          } else {
+            const error = await response.text();
+            console.error("Error response:", error);
+          }
+        } catch (error) {
+          console.error("Error during submission:", error);
+        }
       } else {
         console.error("Error saving booking/payment:", data.message);
         setGeneralError(data.message || "An error occurred. Please try again.");
@@ -521,7 +579,14 @@ const Page = ({ params } ) => {
   }, [generalError, bookingErrors]);
 
 
-
+  const handleSubmitClick = () => {
+    if (validateForm()) {
+  
+      setShowRadioError(false);
+    } else {
+      setShowRadioError(true);
+    }
+  };
 
   const handleCreateBooking = () => {
     console.log("Create Booking logic...");
@@ -700,7 +765,7 @@ const Page = ({ params } ) => {
                     <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
-                    <PlanSelector onPlanChange={handlePlanChange} />
+                    <PlanSelectorGroupRace onPlanChange={handlePlanChange} />
                   </div>
                  
                   <div className="my-4">
@@ -717,60 +782,6 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-                {/* <div className="w-[820px] bg-[#e3ce90] p-[30px] h-[740px] rounded-lg">
-                  <h1 className="text-[23px] text-[#063828] font-black font-orbitron">Choose Time</h1>
-                  {timeChunks.map((chunk, chunkIndex) => {
-                    const now = new Date();
-                    const currentDate = now.toLocaleDateString("en-CA");
-                    const selectedDateStr = date.toLocaleDateString("en-CA");
-
-                    return (
-                      <div key={chunkIndex} className="flex">
-                        {chunk.map(([timeKey, { time: timeValue = "", sims }], index) => {
-                          const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                          if (!match) {
-                            console.warn(`Invalid time format for key ${timeKey}:`, timeValue);
-                            return null;
-                          }
-                          const hours = Number(match[1]);
-                          const minutes = Number(match[2]);
-                          const slotTime = hours * 60 + minutes;
-                            
-
-                            const startTime = selectedDateStr === currentDate ? now.getHours() * 60 + now.getMinutes() : 540;
-
-                            return (
-                              <div
-                                key={timeKey}
-                                className={`button-slanted mt-[20px] cursor-pointer w-[110px] h-[51px] font-jura font-normal text-[#002718] hover:bg-[#002718] hover:text-[#c09e5f] mx-2 ${
-                                  slotTime >= startTime
-                                  ? timeKey === activeTime
-                                    ? "bg-[#002718] text-white font-bold border-2 border-[#002718] "
-                                    : "hover:text-[#c09e5f] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"
-                                  : "text-[#c09e5f] border-opacity-80 cursor-not-allowed border border-[#c09e5f]"
-                              } transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
-                            >
-                                 <button
-                                onClick={() => handleButtonClick(timeKey, timeValue, sims)}
-                                className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime}
-                              >
-                                {formatToAMPM(timeValue)}
-                  
-                              </button>
-                              </div>
-                            );
-                          })}
-
-                          </div>
-                        );
-                      }
-                      
-                      )}
-                </div> */}
-
-
-                  
 
 
               <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
@@ -816,7 +827,7 @@ const Page = ({ params } ) => {
                           const minutes = Number(match[2]);
                           const slotTime = hours * 60 + minutes;
 
-                          const isDisabled = sims === 0 || slotTime < startTime ;
+                        //   const isDisabled = sims === 0 || slotTime < startTime ;
 
                           return (
                             <div
@@ -824,8 +835,8 @@ const Page = ({ params } ) => {
                               className={`button-slanted mt-[10px] cursor-pointer w-[180px] lg:w-[240px] h-[40px] font-jura font-normal mx-2
                                 ${timeKey === activeTime 
                                   ? "bg-[#002718] text-white font-bold border-2 border-[#002718]" 
-                                  : isDisabled
-                                  ? "text-[#C09E5F] border-opacity-80 cursor-not-allowed border border-[#C09E5F]"
+                                //   : isDisabled
+                                //   ? "text-[#C09E5F] border-opacity-80 cursor-not-allowed border border-[#C09E5F]"
                                   : "hover:text-[#C09E5F] md:font-bold border-[0.5px] border-opacity-100 border-[#002718] text-[#002718]"}
                                 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden`}
                             >
@@ -833,7 +844,7 @@ const Page = ({ params } ) => {
                                 onClick={() => handleButtonClick(timeKey, timeValue, sims)}
                                 // onClick={() => isDisabled && handleButtonClick(timeKey, timeValue, sims)}
                                 className="button-slanted-content w-full h-full flex items-center justify-center"
-                                disabled={slotTime < startTime || isDisabled}
+                                // disabled={slotTime < startTime || isDisabled}
                                 
                               
                               >
@@ -940,7 +951,7 @@ const Page = ({ params } ) => {
               onClick={() => handleTabChange(2)}
               className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
             >
-              <span className="button-slanted-content py-2">CONTINUE</span>
+              <span className="button-slanted-content py-2"  onClick={handleSubmitClick}>CONTINUE</span>
             </button>
           </div>
           </div>

@@ -13,7 +13,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuEventsOpen, setMenuEventsOpen] = useState(false);
   const [menuAboutOpen, setMenuAboutOpen] = useState(false);
-  const [navbarBg, setNavbarBg] = useState('bg-opacity-0');
+  const [navbarBg, setNavbarBg] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isExperienceDropdownOpen, setIsExperienceDropdownOpen] = useState(false);
@@ -161,7 +161,7 @@ const toggleDropdown = () => {
     if (window.scrollY > 40) {
       setNavbarBg('bg-[#00352F] lg:bg-[#00352F]');
     } else {
-      setNavbarBg('bg-opacity-0');
+      setNavbarBg('');
     }
   };
 
@@ -239,7 +239,7 @@ const toggleDropdown = () => {
         <meta property="og:type" content="website" />
       </Helmet>
       <nav ref={navbarRef}
-        className={`fixed  ${
+        className={`fixed bg-[#00352F] h-[80px] ${
           isTopBannerVisible ? 'top-0' : 'top-0'
         } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar` }
       >
@@ -276,14 +276,7 @@ const toggleDropdown = () => {
             >
               {t('HOME')}
             </Link>
-            {/* <Link
-              href="/experience"
-              className="font-jura text-[12px] md:text-[14px] lg:text-[18px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90] mt-1 ml-4"
-              onClick={closeMenu}
-            >
-              {t('EXPERIENCES')}
-            </Link> */}
-
+   
 
              {/* Experience Dropdown */}
              <div className="relative" ref={dropdownRef} >
@@ -294,20 +287,8 @@ const toggleDropdown = () => {
                 {t('EXPERIENCES')}
         
               </Link>
-{/* 
-              {isExperienceDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2">
-                  <Link href="/experience" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('BOOK NOW')}
-                  </Link>
-                  <Link href="/executivelounge" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('EXECUTIVE LOUNGE')}
-                  </Link>
-                  <Link href="/f&b" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('F&B')}
-                  </Link>
-                </div>
-              )} */}
+
+
             </div>
 
 

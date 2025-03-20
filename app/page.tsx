@@ -87,7 +87,7 @@ const { t } = useTranslation();
         </div>
         </Suspense>
         <Suspense fallback={<p className='text-white'></p>}>
-        <div className="w-full max-w-7xl md:px-8">
+        <div className="w-full max-w-7xl">
           <Faq />
         </div>
         </Suspense>

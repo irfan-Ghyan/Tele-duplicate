@@ -153,7 +153,7 @@ const Header = () => {
       </Head>
 
       <div
-        className={`relative max-w-full overflow-hidden ${pathname === '/' ? '  bg-cover bg-center' : 'h-[80px]'
+        className={`relative max-w-full overflow-hidden ${pathname === '/' ? ' bg-cover bg-center h-[80px]' : 'h-[80px]'
           } text-white flex flex-col justify-between`}
       >
          

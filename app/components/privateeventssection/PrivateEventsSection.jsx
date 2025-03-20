@@ -5,7 +5,7 @@ export default function PrivateEventsSection() {
   return (
     <section className="relative">
       <div className="max-w-7xl relative mx-auto px-4 md:py-24 h-[900px] flex flex-col md:flex-row mt-[140px]">
-        <div className="flex flex-col justify-center space-y-8 mb-12 md:mb-0 ">
+        <div className="flex flex-col justify-center space-y-8 mb-12 md:mb-0 px-8">
           <div className="space-y-6">
             <h2 className="text-[34px] md:text-[34px] lg:text-[54px] font-black tracking-wide font-orbitron text-[#C09E5F]">PRIVATE EVENTS</h2>
             <p className="text-white text-[18px] max-w-xl font-bold font-jura text-opacity-80 pb-4">

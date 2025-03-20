@@ -6,7 +6,7 @@ export default function CorporateEvents() {
     <div className="bg-[#0a3330] text-white p-4 md:p-20">
       {/* Header */}
       <div className="container mx-auto py-16 flex flex-col md:flex-row lg:flex-row">
-        <div className="w-full md:w-[40%] lg:w-[40%]"><h1 className="text-[50px] md:text-[50px] lg:text-[50px] font-extrabold font-orbitron text-[#C09E5F] leading-[50px]">CORPORATE EVENTS</h1></div>
+        <div className="w-full md:w-[40%] lg:w-[40%]"><h1 className="text-[50px] md:text-[50px] lg:text-[50px] font-extrabold font-orbitron text-[#C09E5F] leading-[50px]">Corporate Events</h1></div>
         <div className="w-full md:w-[60%] lg:w-[60%] pl-0 md:pl-8 lg:pl-8">
         <p className="text-[17px] font-bold font-jura text-opacity-80 pt-10 md:pt-0 lg:pt-0">
           Team team building activities is another level by blending competition with professional networking.
@@ -101,9 +101,9 @@ export default function CorporateEvents() {
 
 
       {/* Activations Section */}
-      <div className="container mx-auto border border-[#d4af37]/30  p-4 md:p-12">
+      <div className="container mx-auto border border-[#d4af37]/30 p-4 md:p-12">
         <div className="grid md:grid-cols-2 justify-between gap-6">
-        <div className="relative h-[300px] md:h-full overflow-hidden flex-1 block md:hidden">
+        <div className="relative h-[300px] md:h-full overflow-hidden flex-1 md:order-last block md:hidden">
             <Image
               src="/assets/images/events/activation.png"
               alt="Gaming simulation setup with red and green lighting"
@@ -115,8 +115,8 @@ export default function CorporateEvents() {
               <span className="text-white text-xs">+</span>
             </div> */}
           </div>
-          <div className="space-y-4 w-[350px]">
-            <h2 className="text-[45px] font-bold font-orbitron text-[#C09E5F]">ACTIVATIONS</h2>
+          <div className="space-y-4 w-[330px] md:[350px]">
+            <h2 className="text-[41px] font-bold font-orbitron text-[#C09E5F]">ACTIVATIONS</h2>
             <p className="text-[16px] font-bold font-jura text-white ">
               Bring the "teleport" experience to your venue with our portable simulators. With effective branding, these
               units provide unforgettable and energy excitement to any event.

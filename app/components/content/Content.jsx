@@ -147,7 +147,7 @@ const Content = () => {
                     <div className="pt-[19px] pb-[22px] ">
                       <Link
                         className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                        href="/normal"
+                        href="/booking/race/"
                       >
                         <span className="button-slanted-content">{t('BOOK RACE')}</span>
                       </Link>
@@ -196,7 +196,7 @@ const Content = () => {
                   <div className="pt-[19px] pb-[22px] ">
                     <Link
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                      href={index === 0 ? `/vip` : `/lounge`}
+                      href={index === 0 ? `booking/vip-bays/` : `/booking/vip-suite/`}
                     >
                       <span className="button-slanted-content">{t('BOOK VIP BAY')}</span>
                     </Link>
@@ -242,7 +242,7 @@ const Content = () => {
                   <div className="pt-[19px] pb-[22px] ">
                     <Link
                       className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura leading-[24px] bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
-                      href={index === 0 ? `/vip` : `/lounge`}
+                      href={index === 0 ? `/booking/vip-suite/` : `/booking/vip-suite/`}
                     >
                       <span className="button-slanted-content">{t('BOOK VIP SUITE')}</span>
                     </Link>

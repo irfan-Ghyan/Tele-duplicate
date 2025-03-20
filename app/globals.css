@@ -454,8 +454,8 @@ border: none !important;
 
 .react-calendar__tile:disabled {
   background: none !important;
-  color: #c09e5f !important;
-  border: 0.5px solid #c09e5f !important;
+  color: #A3854E !important;
+  border: 1px solid #A3854E!important;
 }
 .react-calendar__tile {
   width: 47px;

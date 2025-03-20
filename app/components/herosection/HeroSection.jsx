@@ -35,7 +35,7 @@ export default function Page() {
     <main className="relative mt-[80px] md:mt-[0px] lg:mt-[0px]">
       <div className="absolute inset-0 z-0 ">
         <Image
-          src="/assets/images/herosectionbg.png"
+          src="/assets/images/bghero.png"
           alt="Luxury racing simulators"
           fill
           priority

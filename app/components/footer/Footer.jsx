@@ -97,7 +97,8 @@ const Footer = () => {
             </div>
           </div>
           </div>
-        <div className=" mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0 hidden md:block">
+        <div className="flex mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0 hidden md:block ">
+          <div className="flex mt-4 sm:mt-4 md:mt-4 lg:mt-0 xl:mt-0 justify-center">
             <Link
               href="https://www.instagram.com/teleiosx/"
               target="_blank"
@@ -114,7 +115,7 @@ const Footer = () => {
             >
               <Image src="/assets/icons/tiktok.png" width={30} height={30} alt="LinkedIn" className="h-[30px] w-[30px]"  priority={true}/>
             </Link>
-
+            </div>
           </div>
 
       </div>

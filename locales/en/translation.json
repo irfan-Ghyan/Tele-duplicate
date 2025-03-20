@@ -30,7 +30,7 @@
     "PRIVATE_EVENTS_DESC": "Whether it's a corporate event, birthday party, or team-building exercise, we offer fully customizable packages tailored to your needs",
     "Exp_heading": "EXPERIENCES",
     "Exp_des": "Ready for the ultimate rush? Whether you're racing against friends, hosting a private party, engaging with an office team, or just relaxing and enjoying the thrills of live sports, TeleiosX has something for everyone. Choose your racing experience and get ready for an exclusive high-performance adventure.",
-    "Corporate_Events": "CORPORATE EVENTS",
+    "Corporate_Events": "Corporate Events",
     "Corporate_Events_Heading": "CORPORATE EVENTS",
     "Corporate_Events_Description": "The Teleios Dome is a unique corporate event venue combining luxurious surroundings with state-of-the-art technology. Our stunning open-plan Reception and Lounge area is complemented by a Cafeteria and Private Conference Room. You and your guests can then step into our spacious Gaming Room and experience exhilarating simulator racing. For the select few, enjoy the exclusivity of our VIP room. A blend of advanced technology with refined surroundings, book The Teleios Dome for your next Corporate Event.",
     
@@ -45,24 +45,24 @@
 
     "testimonial": {
       "testimonials1":{
-      "title": "3ain 3osha", 
-      "description": "You can only give this place a high rating. This place for car racing games, new and up to date. The hardware is very advanced. "
+      "title": "Heba Alnaseer", 
+      "description": "It is one of the best sim racing you can do in Riyadh of its staffs hospitality and the unique features ,I would  recommend coming here "
      },
      "testimonials2":{
-      "title": "Ammar Al Tayara", 
-      "description": "Amazing place to enjoy you time, the atmosphere the food and the experience are great. You can driver your favorite Formula 1 car on your favorite track. "
+      "title": "Sebastiano Scifo", 
+      "description": "Guys… an AMAZING experience! It felt like being inside a Formula One car 🏁 woooooowwww … "
      },
      "testimonials3":{
-      "title": "Alaa Tarawneh", 
-      "description": "One of the best places in UAE if not the whole world for real Sim Racing enthusiasts"
+      "title": "هدى الزهراني", 
+      "description": "Mashallah, one of the most beautiful places for entertainment for young people, beyond your imagination. "
      },
      "testimonials4":{
-      "title": "Ivan Daka", 
-      "description": "Looks amazing! Recommend to visit and play some racings🏎️ it feels like you are inside the real sport car! Stuff is great and atmosphere looks amazing"
+      "title": "تجارب شرق الرياض", 
+      "description": "A destination that reflects excitement, fun and a love of adventure with a sophisticated and luxurious character"
      },
      "testimonials5":{
-      "title": "Yahia Al Ayat", 
-      "description": "The perfect racing simulation in UAE"
+      "title": "Om thamer Alajmi", 
+      "description": "The place is excellent and elegant, the prices are good, and the drinks were delicious"
      },
      "testimonials6":{
       "title": "Sone leh", 
@@ -70,7 +70,7 @@
      },
      "testimonials7":{
       "title": "Sam caward", 
-      "description": "Amazing place, great atmosphere and the simulators were so fun would definitely recommend for a day out with friends"
+      "description": "A very enjoyable experience, helpful staff, and it will not be the last time 👍🏼 …"
      },
      "testimonials8":{
       "title": "Mirko Popovic", 

@@ -16,7 +16,7 @@ const Page = ({ params } ) => {
   const { id } = params;
   const { t } = useTranslation();
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(4);
   const [date, setDate] = useState(new Date());
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
@@ -25,13 +25,13 @@ const Page = ({ params } ) => {
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
-    { key: "no_of_people", title: "Participants", description: "1" },
+    { key: "no_of_people", title: "Participants", description: "4" },
     // { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
     { key: "date", title: "Date", description: "" },
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
-    { key: "duration", title: "Duration", description: "20" },
-    { key: "price", title: "Price", description: "95 SAR" },
+    { key: "duration", title: "Duration", description: "40" },
+    { key: "price", title: "Price", description: "680 SAR" },
   ]);
   
 
@@ -40,7 +40,7 @@ const Page = ({ params } ) => {
   const [activeTime, setActiveTime] = useState(null);
   const [selectedDate, setSelectedDate] = useState("");
   const [selectedSlotType, setSelectedSlotType] = useState("normal");
-  const [slotInterval, setSlotInterval] = useState(20);
+  const [slotInterval, setSlotInterval] = useState(40);
   const [eventDetails, setEventDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -144,13 +144,11 @@ const Page = ({ params } ) => {
     );
   };
 
-
-  useEffect(() => {
-    if (count > 0) {
-      handlePlanChange(slotInterval);
-    }
-  }, [count, slotInterval]);
-  
+   useEffect(() => {
+      if (count > 0) {
+        handlePlanChange(slotInterval);
+      }
+    }, [count, slotInterval]);
   const increaseCount = async () => { 
     const newCount = count + 1;
 
@@ -200,6 +198,7 @@ const Page = ({ params } ) => {
 
   
   const handlePlanChange = async (newDuration) => {
+  
     await fetchBookings();
     setSlotInterval(newDuration);
   
