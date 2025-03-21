@@ -28,7 +28,7 @@ export default function CorporateEvents() {
 
       <div className="container mx-auto border border-[#d4af37]/30 p-4 md:p-12 mb-8">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div className="relative h-[250px] md:h-full overflow-hidden flex-1 md:order-last  block md:hidden">
+  <div className="relative w-full min-h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden flex-1 md:order-last  block md:hidden">
       {/* <Image
         src="/assets/images/events/sim.png"
         alt="Modern venue space for corporate events"
@@ -44,12 +44,12 @@ export default function CorporateEvents() {
       >
         {images.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center items-center">
-            <div className="relative w-full h-full">
+            <div className="relative w-full min-h-[250px] md:h-[400px] ">
               <Image
                 src={src}
                 alt={`Carousel image ${index + 1}`}
                 fill
-                className="object-cover w-full h-full "
+                className="object-cover w-full min-h-[250px] md:h-[400px] "
               />
             </div>
           </SwiperSlide>
@@ -117,7 +117,7 @@ export default function CorporateEvents() {
       </Link>
     </div>
 
-    <div className="relative w-full min-h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden flex hidden md:block ">
+    <div className="relative w-full min-h-[250px] md:h-[400px] overflow-hidden flex hidden md:block ">
       <Swiper
         spaceBetween={10}
         slidesPerView={1}
@@ -127,12 +127,12 @@ export default function CorporateEvents() {
       >
         {images.map((src, index) => (
           <SwiperSlide key={index} className="flex justify-center items-center">
-            <div className="relative w-full h-full">
+            <div className="relative w-full min-h-[250px] md:h-[400px] lg:h-[500px]">
               <Image
                 src={src}
                 alt={`Carousel image ${index + 1}`}
                 fill
-                className="object-cover w-full h-full "
+                className="object-cover w-full min-h-[250px] md:h-[400px]  "
               />
             </div>
           </SwiperSlide>
