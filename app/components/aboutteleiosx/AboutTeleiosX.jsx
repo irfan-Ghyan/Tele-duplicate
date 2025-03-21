@@ -31,7 +31,7 @@ export default function AboutTeleiosX() {
               </h2>
             </div>
             <div className="md:absolute lg:absolute bottom-0 w-full h-[84px] block md:hidden ">
-              <h2 className="text-[#C09E5F] text-[83px] md:text-[136.91px] font-orbitron font-black text-start md:text-center leading-[83px]"
+              <h2 className="text-[#C09E5F] text-[70px] md:text-[136.91px] font-orbitron font-black md:text-center leading-[83px] text-start px-4 md:px-0 lg:px-0"
                 style={{
                   WebkitTextStroke: "2px #E9B872",
                   WebkitTextFillColor: "transparent",

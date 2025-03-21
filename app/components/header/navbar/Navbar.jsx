@@ -202,11 +202,6 @@ const toggleDropdown = () => {
 
   const { title, description } = getDynamicMeta();
 
-  // const handleLanguageChange = (lng) => {
-  //   i18n.changeLanguage(lng);
-  //   switchLanguage(lng);
-  // };
-
 
 
   return (
@@ -241,7 +236,7 @@ const toggleDropdown = () => {
                 width={185}
                 height={120}
                 priority={true}
-                className="block xl:hidden sm:w-[100px] sm:h-[52px] md:w-[170px] md:h-[92px] lg:w-[165px] lg:h-[92px]"
+                className="block xl:hidden sm:w-[100px] sm:h-[52px] md:w-[170px] md:h-[48px] lg:w-[165px] lg:h-[48px] xl:h-[92px]"
               />
             </Link>
           </div>

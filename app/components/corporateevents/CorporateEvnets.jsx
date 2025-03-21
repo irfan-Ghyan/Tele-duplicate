@@ -1,7 +1,18 @@
 import Image from "next/image"
 import Link from "next/link"
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Pagination } from "swiper/modules";
+
 
 export default function CorporateEvents() {
+  const images = [
+    "/assets/images/about/aboutvenue.png",
+    "/assets/images/about/aboutvenue.png",
+    "/assets/images/about/aboutvenue.png",
+  ];
+
   return (
     <div className="bg-[#0a3330] text-white p-4 md:p-20">
       {/* Header */}
@@ -15,16 +26,35 @@ export default function CorporateEvents() {
         </div>
       </div>
 
-      {/* Venue Hire Section */}
       <div className="container mx-auto border border-[#d4af37]/30 p-4 md:p-12 mb-8">
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-  <div className="relative h-[250px] md:h-full overflow-hidden flex-1 md:order-last block md:hidden">
-      <Image
+  <div className="relative h-[250px] md:h-full overflow-hidden flex-1 md:order-last  block md:hidden">
+      {/* <Image
         src="/assets/images/events/sim.png"
         alt="Modern venue space for corporate events"
         fill
         className="object-cover w-full"
-      />
+      /> */}
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        modules={[Pagination]}
+        className="w-full h-full"
+      >
+        {images.map((src, index) => (
+          <SwiperSlide key={index} className="flex justify-center items-center">
+            <div className="relative w-full h-full">
+              <Image
+                src={src}
+                alt={`Carousel image ${index + 1}`}
+                fill
+                className="object-cover w-full h-full "
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
     {/* Text Section (Will be First on Mobile, Left on Larger Screens) */}
     <div className="space-y-4 w-full md:w-[350px]">
@@ -87,23 +117,35 @@ export default function CorporateEvents() {
       </Link>
     </div>
 
-    {/* Image (Top on Mobile, Right on Larger Screens) */}
-    <div className="relative h-[250px] md:h-full overflow-hidden flex-1 md:order-last hidden md:block">
-      <Image
-        src="/assets/images/events/sim.png"
-        alt="Modern venue space for corporate events"
-        fill
-        className="object-cover w-full"
-      />
+    <div className="relative w-full min-h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden flex hidden md:block ">
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        pagination={{ clickable: true }}
+        modules={[Pagination]}
+        className="w-full h-full"
+      >
+        {images.map((src, index) => (
+          <SwiperSlide key={index} className="flex justify-center items-center">
+            <div className="relative w-full h-full">
+              <Image
+                src={src}
+                alt={`Carousel image ${index + 1}`}
+                fill
+                className="object-cover w-full h-full "
+              />
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   </div>
 </div>
 
 
-      {/* Activations Section */}
-      <div className="container mx-auto border border-[#d4af37]/30 p-4 md:p-12">
-        <div className="grid md:grid-cols-2 justify-between gap-6">
-        <div className="relative h-[300px] md:h-full overflow-hidden flex-1 md:order-last block md:hidden">
+      <div className="container mx-auto border border-[#d4af37]/30 p-4 md:p-12 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="relative h-[250px] md:h-full overflow-hidden flex-1 md:order-last hidden md:block">
             <Image
               src="/assets/images/events/activation.png"
               alt="Gaming simulation setup with red and green lighting"
@@ -142,7 +184,7 @@ export default function CorporateEvents() {
               GET DETAILS
             </Link>
           </div>
-          <div className="relative h-[300px] md:h-full overflow-hidden flex-1 hidden md:block">
+          <div className="relative w-full min-h-[250px] md:h-[400px] lg:h-[500px] overflow-hidden flex block md:hidden ">
             <Image
               src="/assets/images/events/activation.png"
               alt="Gaming simulation setup with red and green lighting"

@@ -232,7 +232,7 @@ const Header = () => {
         )}
          */}
 
-        <div className={`relative z-10 xl:py-[32px] ${isTopBannerVisible ? '' : 'pt-0'}`}>
+        <div className={`xl:py-[32px] ${isTopBannerVisible ? '' : 'pt-0'}`}>
           {/* {!shouldHideBannersAndBackground && isTopBannerVisible && (
             <TopBanner onClose={handleCloseTopBanner} />
           )} */}
