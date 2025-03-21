@@ -197,41 +197,6 @@ const Page = ({ params } ) => {
     }
   };
 
-  
-//   const handlePlanChange = async (newDuration) => {
-  
-//     await fetchBookings();
-//     setSlotInterval(newDuration);
-  
-//     updateBookingDetail("duration", `${newDuration}`);
-  
-//     let basePrice;
-  
-//     if (count <= 3) {
-//       if (newDuration === 20) {
-//         basePrice = 95;
-//       } else if (newDuration === 40) {
-//         basePrice = 170;
-//       } else if (newDuration === 60) {
-//         basePrice = 250;
-//       }
-//     } else {
-//       if (newDuration === 20) {
-//         basePrice = 95; 
-//       } else if (newDuration === 40) {
-//         basePrice = 140;
-//       } else if (newDuration === 60) {
-//         basePrice = 200; 
-//       }
-//     }
-  
-//     const updatedPrice = `${basePrice * count} SAR`;
-  
-//     updateBookingDetail("price", updatedPrice);
-  
-//     await fetchBookings();
-//   };
-  
 
 const handlePlanChange = async (newDuration) => {
   

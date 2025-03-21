@@ -74,26 +74,6 @@ useEffect(() => {
 }, []);
 
 
-
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (
-  //       dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-  //       buttonRef.current && !buttonRef.current.contains(event.target)
-  //     ) {
-  //       closeMenu();
-  //       setIsDropdownOpen(false);
-        
-  //     }
-  //   };
-
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
-  
-
 const toggleDropdown = () => {
   setIsDropdownOpen(!isDropdownOpen);
   setOpenDropdown(openDropdown === "dropdown" ? null : "dropdown");
@@ -303,19 +283,6 @@ const toggleDropdown = () => {
         
               </Link>
 
-              {/* {isEventsDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2 ">
-                  <Link href="/watchparties" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('watchparties')}
-                  </Link>
-                  <Link href="/privateevents" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('privateevents')}
-                  </Link>
-                  <Link href="/corporateevents" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('corporateevents')}
-                  </Link>
-                </div>
-              )} */}
             </div>
 
 
@@ -328,18 +295,12 @@ const toggleDropdown = () => {
         
               </Link>
 
-              {/* {isAboutDropdownOpen && (
-                <div className="absolute left-4 right-0 mt-2 w-[180px] bg-[#00352F] py-2">
-                  <Link href="/teleiosx" className="block px-4 py-2 font-jura text-[12px] lg:text-[14px] font-normal lg:font-bold text-[#c09e5f] hover:text-[#e3ce90]" onClick={closeMenu}>
-                    {t('VENUE')}
-                  </Link>
-                </div>
-              )} */}
+    
             </div>
         
           </div>
 
-          <div className="relative ml-[31px] mr-[31px]" ref={dropdownRef}>
+          {/* <div className="relative ml-[31px] mr-[31px]" ref={dropdownRef}>
             <button 
             ref={buttonRef}
               onClick={toggleDropdown}
@@ -359,7 +320,7 @@ const toggleDropdown = () => {
               </div>
             </button>
 
-            {/* Dropdown Menu */}
+    
             {isDropdownOpen && (
               <div ref={dropdownRef} className="absolute top-12  left-[-24px] bg-[#00352F] border border-[#C09E5F] shadow-md rounded-md w-12  ">
                 <button
@@ -376,7 +337,7 @@ const toggleDropdown = () => {
                 </button>
               </div>
             )}
-          </div>
+          </div> */}
          
       
 

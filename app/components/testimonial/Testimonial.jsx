@@ -55,52 +55,7 @@ export default function Testimonial() {
       description: t('testimonial.testimonials8.description'),
       imageUrl: '/assets/images/dome/s.png'
     },
-    {
-      title: t('testimonial.testimonials9.title'),
-      description: t('testimonial.testimonials9.description'),
-      imageUrl: '/assets/images/dome/m.png' 
-    },
-    {
-      title: t('testimonial.testimonials10.title'),
-      description: t('testimonial.testimonials10.description'),
-      imageUrl: '/assets/images/dome/a.png'
-    },
-    {
-      title: t('testimonial.testimonials11.title'),
-      description: t('testimonial.testimonials11.description'),
-      imageUrl: '/assets/images/dome/jadh.png'
-    },
-    {
-      title: t('testimonial.testimonials12.title'),
-      description: t('testimonial.testimonials12.description'),
-      imageUrl: '/assets/images/dome/rami.png' 
-    },
-    {
-      title: t('testimonial.testimonials13.title'),
-      description: t('testimonial.testimonials13.description'),
-      imageUrl: '/assets/images/dome/mateen.png'
-    },
-    {
-      title: t('testimonial.testimonials14.title'),
-      description: t('testimonial.testimonials14.description'),
-      imageUrl: '/assets/images/dome/dharmesh.png' 
-    },
-    {
-      title: t('testimonial.testimonials15.title'),
-      description: t('testimonial.testimonials15.description'),
-      imageUrl: '/assets/images/dome/giorgio.png'
-    },
-    {
-      title: t('testimonial.testimonials16.title'),
-      description: t('testimonial.testimonials16.description'),
-      imageUrl: '/assets/images/dome/mohammed.png'
-    },
-  
-    {
-      title: t('testimonial.testimonials17.title'),
-      description: t('testimonial.testimonials17.description'),
-     imageUrl: '/assets/images/dome/s.png'
-    },
+ 
 
   ];
 

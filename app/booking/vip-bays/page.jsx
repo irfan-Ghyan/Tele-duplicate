@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import CalendarComponent from "../../components/calendar/Calendar";
+
 import PlanSelectorVip from "../../components/planselectorvip/PlanSelectorVip";
 import { doGetCall, doPostCall } from "../../utils/api";
 import Image from "next/image";
@@ -22,13 +23,6 @@ const Page = ({ params }) => {
   const [count, setCount] = useState(1);
   const [date, setDate] = useState(new Date());
 
-  // const [bookingDetails, setBookingDetails] = useState([
-  //   { key: "no_of_people", title: "Participants", description: "1" },
-  //   { key: "date", title: "Date", description: new Date().toLocaleDateString("en-CA") },
-  //   { key: "time", title: "Time", description: "" },
-  //   { key: "booking_type", title: "Booking Type", description: "VIP" },
-  //   { key: "duration", title: "Duration", description: "60" },
-  // ]);
 
   const [bookingDetails, setBookingDetails] = useState([
       { key: "no_of_people", title: "Participants", description: "1" },
@@ -50,6 +44,8 @@ const Page = ({ params }) => {
   const [generalError, setGeneralError] = useState("");
   const [bookingErrors, setBookingErrors] = useState([]);
   const [availableSIMs, setAvailableSIMs] = useState(null);
+  const [isPopupVisible, setIsPopupVisible] = useState(false);
+  const [seatError, setSeatError] = useState("");
 
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null);
@@ -62,10 +58,6 @@ const Page = ({ params }) => {
     lastName: "",
     email: "",
     phone: "",
-    // cardNumber: "",
-    // expiryDate: "",
-    // securityCode: "",
-    // cardHolderName: "",
   });
   const [validationErrors, setValidationErrors] = useState({});
 
@@ -136,6 +128,13 @@ const Page = ({ params }) => {
     );
   }, []);
 
+
+  useEffect(() => {
+    if (count > 0) {
+      handlePlanChange(slotInterval);
+    }
+  }, [count, slotInterval]);
+
   const increaseCount = async () => {
     const newCount = count + 1;
 
@@ -143,13 +142,17 @@ const Page = ({ params }) => {
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
 
-      setGeneralError(""); // Reset general error
-      setBookingErrors([]); // Reset booking errors
+      setGeneralError(""); 
+      setBookingErrors([]); 
 
       if (activeTime && times[activeTime]?.sims < newCount) {
         setGeneralError(`Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`);
         return;
       }
+
+      let basePrice = slotInterval === 60 ? 400 : slotInterval === 90 ? 500 : 600;
+        const finalPrice = basePrice * newCount;
+        updateBookingDetail("price", `${finalPrice} SAR`);
 
       await fetchBookings();
     } else {
@@ -162,6 +165,11 @@ const Page = ({ params }) => {
       const newCount = count - 1;
       setCount(newCount);
       updateBookingDetail("no_of_people", newCount.toString());
+
+      let basePrice = slotInterval === 60 ? 400 : slotInterval === 90 ? 500 : 600;
+      const finalPrice = basePrice * newCount;
+      updateBookingDetail("price", `${finalPrice} SAR`);
+
       setGeneralError("");
 
       // Fetch fresh slots
@@ -170,24 +178,23 @@ const Page = ({ params }) => {
   };
 
   const handlePlanChange = async (newDuration) => {
-    // updateBookingDetail("duration", newDuration);
+
     await fetchBookings();
     setSlotInterval(newDuration);
-  
     updateBookingDetail("duration", `${newDuration}`);
   
-    let updatedPrice;
+    let basePrice = 400; 
   
-    // Pricing logic based on the newDuration
     if (newDuration === 60) {
-      updatedPrice = "400 SAR";
-    } else if (newDuration === 90) {
-      updatedPrice = "500 SAR";
-    } else if (newDuration === 120) {
-      updatedPrice = "600 SAR";
-    }
+      basePrice = 400;
+  } else if (newDuration === 90) {
+      basePrice = 500;
+  } else if (newDuration === 120) {
+      basePrice = 600;
+  }
   
-    updateBookingDetail("price", updatedPrice);
+  const finalPrice = basePrice * count;
+  updateBookingDetail("price", `${finalPrice} SAR`);
   
     await fetchBookings();
   };
@@ -228,6 +235,14 @@ const Page = ({ params }) => {
     await fetchBookings();
   };
 
+
+
+
+  
+
+
+ 
+
   const addMissingSlots = (data) => {
     const timeToMinutes = (time) => {
         const [hours, minutes] = time.split(":").map(Number);
@@ -238,22 +253,22 @@ const Page = ({ params }) => {
     const startTime = timeToMinutes(data[0].time);
     const endTime = timeToMinutes(data[data.length - 1].time);
 
-    // Generate all 20-minute slots
+  
     for (let time = startTime; time <= endTime; time += 20) {
         const hours = String(Math.floor(time / 60)).padStart(2, "0");
         const minutes = String(time % 60).padStart(2, "0");
         timeSlots.push(`${hours}:${minutes}`);
     }
 
-    // Identify missing slots and add them to the data
+
     const missingSlots = timeSlots
         .filter((slot) => !data.some((entry) => entry.time === slot))
         .map((slot) => ({ time: slot, sims: 0 }));
 
-    // Combine original data with missing slots
+  
     const updatedData = [...data, ...missingSlots];
 
-    // Sort the data by time
+   
     updatedData.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
 
     return updatedData;
@@ -598,7 +613,7 @@ const handleSubmit = async (e) => {
                 <div className="w-full flex">
                   <div className="w-full xl:w-full lg:w-[680px] px-4">
 
-                    <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
+                    {/* <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
                       <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('vipSeats')}</h1>
                       <div className="flex justify-between">
                         <div className="py-4">
@@ -609,7 +624,51 @@ const handleSubmit = async (e) => {
                           </p>
                         </div>
                       </div>
+                    </div> */}
+
+                <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
+                    <h1 className="text-lg text-[#063828] font-black font-orbitron">
+                    {t('normalSeats')}
+                    </h1>
+                    <div className="flex justify-between">
+                      <div className="py-4">
+                        <p className="text-md text-[#063828] font-bold font-jura mb-4">
+                        {t('selectSeats')}
+                        </p>
+                        {isPopupVisible && (
+                            <>
+                            <p className="text-red-600 font-bold">{popupMessage}</p>
+                            </>
+                            )}
+                      </div>
+                     
+                      <div className="flex items-center justify-center mb-4 ">
+                        <button
+                          onClick={decreaseCount}
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                        >
+                          <span className="button-slanted-content text-[#063828] hover:text-[#C09E5F] font-jura text-[18px] font-bold">
+                            -
+                          </span>
+                        </button>
+                        <span className="px-8 py-2 text-[23px] text-[#063828] font-jura font-black">
+                          {count}
+                        </span>
+                        <button
+                          onClick={increaseCount}
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                        >
+                          <span className="button-slanted-content font-jura text-[18px] font-bold">
+                            +
+                          </span>
+                        </button>
+                      </div>
+
                     </div>
+                    {seatError && (
+                        <p className="text-red-500 text-sm mt-2">{seatError}</p>
+                      )}
+                  </div>
 
 
                     <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
@@ -626,16 +685,11 @@ const handleSubmit = async (e) => {
                       </div>
                     </div>
 
-                    {/* Choose Time Section */}
+                  
                     <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
+                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
 
-                      {/* User Feedback for No Available Slots */}
-                      {/* {timeChunks.length === 0 && (
-                        <p className="text-red-500 text-center">No available time slots for the selected date.</p>
-                      )} */}
-
-                      {/* Time Slots Rendering */}
+              
                       {timeChunks
                         .filter((chunk) => {
                           const now = new Date();
@@ -644,14 +698,13 @@ const handleSubmit = async (e) => {
                           const isToday = selectedDateStr === currentDate;
                           const startTime = isToday ? now.getHours() * 60 + now.getMinutes() : OPENING_TIME_MINUTES;
 
-                          // Check if at least one slot in the chunk is still available and before or at 11:00 PM
                           return chunk.some(([_, { time: timeValue = "" }]) => {
                             const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                            if (!match) return false; // Invalid time format
+                            if (!match) return false; t
                             const hours = Number(match[1]);
                             const minutes = Number(match[2]);
                             const slotTime = hours * 60 + minutes;
-                            return slotTime >= startTime && slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
+                            return slotTime >= startTime && slotTime <= CLOSING_TIME_MINUTES;
                           });
                         })
                         .map((chunk, chunkIndex) => {
@@ -666,11 +719,11 @@ const handleSubmit = async (e) => {
                               {chunk
                                 .filter(([_, { time: timeValue = "" }]) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
-                                  if (!match) return false; // Invalid time format
+                                  if (!match) return false; 
                                   const hours = Number(match[1]);
                                   const minutes = Number(match[2]);
                                   const slotTime = hours * 60 + minutes;
-                                  return slotTime <= CLOSING_TIME_MINUTES; // 11:00 PM
+                                  return slotTime <= CLOSING_TIME_MINUTES;
                                 })
                                 .map(([timeKey, { time: timeValue = "", sims }], index) => {
                                   const match = timeValue.match(/^(\d{1,2}):(\d{2})$/);
@@ -713,7 +766,7 @@ const handleSubmit = async (e) => {
             </div>
 
            
-            <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
+            {/* <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
               <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
               {bookingDetails
                 .filter((detail) => detail.key !== "booking_type" && detail.key !== "no_of_people")
@@ -747,7 +800,50 @@ const handleSubmit = async (e) => {
                   <span className="button-slanted-content py-2">CONTINUE</span>
                 </button>
               </div>
+            </div> */}
+
+          <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
+          <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
+          {t('bookingDetails')}
+          </h2>
+          {bookingDetails
+            .filter((detail) => detail.key !== "booking_type") 
+            .map((detail, index) => (
+              <div
+                className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+                key={detail.key}
+              >
+                <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+                  {detail.title}
+                </h3>
+                <p className="text-[18px] text-[#063828] font-jura py-2">
+                  {detail.description}
+                </p>
+                
+              </div>
+            ))}
+
+            <div className="max-w-3xl mx-auto bg-[#C09E5F] rounded-lg mt-20">
+              {generalError && (
+                <p className="text-red-500 text-md font-normal">{generalError}</p>
+              )}
+              {bookingErrors.length > 0 && (
+                <ul>
+                  {bookingErrors.map((error, index) => (
+                    <li key={index} className="text-red-500 text-md font-normal ">
+                      {error}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button
+                onClick={() => handleTabChange(2)}
+                className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+              >
+                <span className="button-slanted-content py-2">CONTINUE</span>
+              </button>
             </div>
+          </div>
           </div>
         )}
 

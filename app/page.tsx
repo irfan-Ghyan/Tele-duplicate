@@ -54,28 +54,13 @@ const { t } = useTranslation();
           <Content />
         </div>
         </Suspense>
-        {/* <div className="w-full">
-          <ReserveSeat />
-        </div> */}
-
+    
         <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full">
           <Dome />
         </div>
         </Suspense>
-        {/* <div className="w-full max-w-7xl md:px-8">
-          <Corprate />
-        </div> */}
-         {/* <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
-        <div className="w-full">
-          <OfferSpecials />
-        </div>
-        </Suspense> */}
-        {/* <Suspense fallback={<p className='text-white'> This is loading .....</p>}>
-        <div className="w-full">
-          <Offers />
-        </div>
-        </Suspense> */}
+      
         <Suspense fallback={<p className='text-white'></p>}>
         <div className="w-full bg-[#00352F]">
           <Testimonial />
@@ -91,9 +76,7 @@ const { t } = useTranslation();
           <Faq />
         </div>
         </Suspense>
-        {/* <div className="w-full max-w-7xl md:px-8">
-          <Newsletter />
-        </div> */}
+
     
         
       </main>

@@ -62,55 +62,28 @@
      },
      "testimonials5":{
       "title": "Om thamer Alajmi", 
-      "description": "The place is excellent and elegant, the prices are good, and the drinks were delicious"
+      "description": "The place is excellent and elegant, the prices are good, and the drinks were delicious. "
      },
      "testimonials6":{
       "title": "Sone leh", 
       "description": "Amazing experience can’t wait to be back again 👊👊👊💯"
      },
      "testimonials7":{
-      "title": "Sam caward", 
+      "title": "فارس محمد", 
       "description": "A very enjoyable experience, helpful staff, and it will not be the last time 👍🏼 …"
      },
      "testimonials8":{
-      "title": "Mirko Popovic", 
-      "description": "What a fantastic place to spend time and try an insanely real racing simulator. Gt races were so good."
+      "title": "wxgf A", 
+      "description": "A very enjoyable experience, helpful staff, and it will not be the last time 👍🏼 …"
      },
-     "testimonials9":{ "title": "Alois vieujot", 
-     "description": "Incredible place to spend countless hours with friends and family! Absolutely loved it!" 
+     "testimonials9":{ "title": "Fares Rayes", 
+     "description": "The place is luxurious, the staff are helpful, and all thanks to the shop staff ⭐️❤️" 
     },
     "testimonials10":{ 
       "title": "JADH BIN", 
-     "description": "The best simulatiom experience. You can feel the race. This place is worth on money. The staffs are very friendly" 
-    },
-    "testimonials11":{ 
-      "title": "Rami Hamad", 
-     "description": "An amazing F1 experience !!! Certainly going back again. Highly recommended for groups and  adrenaline rush" 
-    },
-    "testimonials12":{ 
-      "title": "Mateen Mohammed", 
-     "description": "Very good experience" 
-    },
-    "testimonials13":{ 
-      "title": "Dharmesh Rathod", 
-     "description": "Wonderful and amazing place for fun with racing Simulators...." 
-    },
-    "testimonials14":{ 
-      "title": "Giorgio Max", 
-     "description": "Great simulators, amazing retro-futuristic gaming arena!!" 
-    },
-    "testimonials15":{ 
-      "title": "Federico Rossi", 
-     "description": "Best way to spend a sunday in Dubai." 
-    },
-    "testimonials16":{ 
-      "title": "Muhammad Shahzad", 
-     "description": "Amazing experience, Hats off" 
-    },
-    "testimonials17":{ 
-      "title": "Seun Ayoola", 
-     "description": "The location is easy to locate, and the simulators are amazing . Thanks Teleios" 
+     "description": "The experience was excellent and the treatment was upscale. God willing, I will repeat the experience" 
     }
+  
     },
 
     "Fun_For_Everyone": "Fun for everyone at Teleios Dome! Come race with your friends or enjoy a work day out with colleagues through our exciting experiences. Choose from a variety of famous cars and world-renowned circuits, no matter your skill level, and get ready for non-stop excitement!",
@@ -511,6 +484,7 @@
 "Simulator_Sessions_Person40": "250 SAR per person",
 
 "Racing_Sessions_Title": "Group Racing 4 people and above :",
+
 
 "Racing_Sessions_Price40": "40’",
 "Racing_Sessions_Person40": "140 SAR per person",

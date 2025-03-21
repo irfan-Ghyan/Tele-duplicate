@@ -42,6 +42,8 @@ const Page = ({ params }) => {
   const [bookingErrors, setBookingErrors] = useState([]);
   const [availableSIMs, setAvailableSIMs] = useState(null);
   const [showRadioError, setShowRadioError] = useState(false);
+    const [isPopupVisible, setIsPopupVisible] = useState(false);
+    const [seatError, setSeatError] = useState("");
 
   const [minDate, setMinDate] = useState(null);
   const [maxDate, setMaxDate] = useState(null);
@@ -127,45 +129,78 @@ const Page = ({ params }) => {
     );
   }, []);
 
-  const increaseCount = async () => {
-    const newCount = count + 1;
-
-    if (count < 14) {
-      setCount(newCount);
-      updateBookingDetail("no_of_people", newCount.toString());
-
-      setSeatError("");
-      setIsPopupVisible(true);
-
-      if (activeTime && times[activeTime]?.sims < newCount) {
-        setPopupMessage(
-          `Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`
-        );
-        setIsPopupVisible(true);
+  
+    useEffect(() => {
+      if (count > 0) {
+        handlePlanChange(slotInterval);
       }
+    }, [count, slotInterval]);
+  
+    const increaseCount = async () => {
+      const newCount = count + 1;
+  
+      if (count < 14) {
+        setCount(newCount);
+        updateBookingDetail("no_of_people", newCount.toString());
+  
+        setGeneralError(""); 
+        setBookingErrors([]); 
+  
+        if (activeTime && times[activeTime]?.sims < newCount) {
+          setGeneralError(`Only ${times[activeTime]?.sims || 0} seats are available for the selected time slot.`);
+          return;
+        }
+  
+        let basePrice = slotInterval === 60 ? 400 : slotInterval === 90 ? 500 : 600;
+          const finalPrice = basePrice * newCount;
+          updateBookingDetail("price", `${finalPrice} SAR`);
+  
+        await fetchBookings();
+      } else {
+        setGeneralError("Maximum limit of 14 seats reached.");
+      }
+    };
+  
+    const decreaseCount = async () => {
+      if (count > 1) {
+        const newCount = count - 1;
+        setCount(newCount);
+        updateBookingDetail("no_of_people", newCount.toString());
+  
+        let basePrice = slotInterval === 60 ? 400 : slotInterval === 90 ? 500 : 600;
+        const finalPrice = basePrice * newCount;
+        updateBookingDetail("price", `${finalPrice} SAR`);
+  
+        setGeneralError("");
+  
+        // Fetch fresh slots
+        await fetchBookings();
+      }
+    };
 
+  
+    const handlePlanChange = async (newDuration) => {
+  
       await fetchBookings();
-    } else {
-      setSeatError("Maximum limit of 14 seats reached.");
+      setSlotInterval(newDuration);
+      updateBookingDetail("duration", `${newDuration}`);
+    
+      let basePrice = 800; 
+    
+      if (newDuration === 60) {
+        basePrice = 800;
+    } else if (newDuration === 90) {
+        basePrice = 1000;
+    } else if (newDuration === 120) {
+        basePrice = 1200;
     }
-  };
-
-  const decreaseCount = async () => {
-    if (count > 1) {
-      const newCount = count - 1;
-      setCount(newCount);
-      updateBookingDetail("no_of_people", newCount.toString());
-      setSeatError("");
-
-      // Fetch fresh slots
+    
+    const finalPrice = basePrice * count;
+    updateBookingDetail("price", `${finalPrice} SAR`);
+    
       await fetchBookings();
-    }
-    if (count > 1) {
-      const newCount = count - 1;
-      setCount(newCount);
-      updateBookingDetail("no_of_people", newCount.toString());
-    }
-  };
+    };
+
 
   const handleSubmitClick = () => {
     if (validateForm()) {
@@ -189,27 +224,6 @@ const Page = ({ params }) => {
 
 
 
-  const handlePlanChange = async (newDuration) => {
-    // updateBookingDetail("duration", newDuration);
-    await fetchBookings();
-    setSlotInterval(newDuration);
-  
-    updateBookingDetail("duration", `${newDuration}`);
-  
-    let updatedPrice;
-  
-    if (newDuration === 60) {
-      updatedPrice = "800 SAR";
-    } else if (newDuration === 90) {
-      updatedPrice = "1000 SAR";
-    } else if (newDuration === 120) {
-      updatedPrice = "1200 SAR";
-    }
-  
-    updateBookingDetail("price", updatedPrice);
-  
-    await fetchBookings();
-  };
   
 
   const handleDateChange = async (newDate) => {
@@ -647,18 +661,49 @@ const fetchBookings = useCallback(async () => {
               <div className="flex max-w-7xl ">
                 <div className="w-full flex">
                   <div className="w-full xl:w-full lg:w-[680px] px-4">
-                    <div className=" bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('loungeSeats')}</h1>
-                      <div className="flex justify-between">
-                        <div className="py-4">
-                          <p className="text-[18px] text-[#063828] font-bold font-jura mb-4">
-                          {t('chooseloungeSeats')}
-                            <br />
-                            {t('chooseloungeSeats1')}
-                          </p>
-                        </div>
+                  <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
+                    <h1 className="text-lg text-[#063828] font-black font-orbitron">
+                    {t('normalSeats')}
+                    </h1>
+                    <div className="flex justify-between">
+                      <div className="py-4">
+                        <p className="text-md text-[#063828] font-bold font-jura mb-4">
+                        {t('selectSeats')}
+                        </p>
+                        {isPopupVisible && (
+                            <>
+                            <p className="text-red-600 font-bold">{popupMessage}</p>
+                            </>
+                            )}
                       </div>
+                     
+                      <div className="flex items-center justify-center mb-4 ">
+                        <button
+                          onClick={decreaseCount}
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                        >
+                          <span className="button-slanted-content text-[#063828] hover:text-[#C09E5F] font-jura text-[18px] font-bold">
+                            -
+                          </span>
+                        </button>
+                        <span className="px-8 py-2 text-[23px] text-[#063828] font-jura font-black">
+                          {count}
+                        </span>
+                        <button
+                          onClick={increaseCount}
+                          className=" button-slanted text-[18px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] border-[0.5px] border-opacity-30 border-[#063828] ml-2 font-jura font-bold text-[#063828] hover:text-[#C09E5F] hover:bg-gradient-to-r hover:from-[#063828] hover:to-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+                        >
+                          <span className="button-slanted-content font-jura text-[18px] font-bold">
+                            +
+                          </span>
+                        </button>
+                      </div>
+
                     </div>
+                    {seatError && (
+                        <p className="text-red-500 text-sm mt-2">{seatError}</p>
+                      )}
+                  </div>
 
 
                     <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
@@ -677,7 +722,7 @@ const fetchBookings = useCallback(async () => {
 
                     {/* Choose Time Section */}
                     <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
-                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}e</h1>
+                      <h1 className="text-[23px] text-[#063828] font-black font-orbitron">{t('chooseTime')}</h1>
 
                       {/* User Feedback for No Available Slots */}
                       {/* {timeChunks.length === 0 && (
@@ -762,40 +807,48 @@ const fetchBookings = useCallback(async () => {
               </div>
             </div>
 
-            {/* Booking Details Panel */}
             <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
-              <h2 className="text-[30px] text-[#063828] font-black font-orbitron mb-[24px]">{t('bookingDetails')}</h2>
-              {bookingDetails
-                .filter((detail) => detail.key !== "booking_type"  && detail.key !== "no_of_people")
-                .map((detail, index) => (
-                  <div
-                    className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
-                    key={detail.key}
-                  >
-                    <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">{detail.title}</h3>
-                    <p className="text-[18px] text-[#063828] font-jura py-2">{detail.description}</p>
-                  </div>
-                ))}
-
-              <div className="max-w-3xl mx-auto mt-20">
-                {generalError && <p className="text-red-500 text-sm font-bold mb-4">{generalError}</p>}
-                {bookingErrors.length > 0 && (
-                  <ul>
-                    {bookingErrors.map((error, index) => (
-                      <li key={index} className="text-red-500 text-md font-normal ">
-                        {error}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <button
-                  onClick={() => handleTabChange(2)}
-                  className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
-                >
-                  <span className="button-slanted-content py-2" onClick={handleSubmitClick}>CONTINUE</span>
-                </button>
+          <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
+          {t('bookingDetails')}
+          </h2>
+          {bookingDetails
+            .filter((detail) => detail.key !== "booking_type") 
+            .map((detail, index) => (
+              <div
+                className="border-b-[0.5px] border-opacity-[50%] border-[#063828] py-[12px]"
+                key={detail.key}
+              >
+                <h3 className="text-[18px] text-[#063828] font-bold font-orbitron">
+                  {detail.title}
+                </h3>
+                <p className="text-[18px] text-[#063828] font-jura py-2">
+                  {detail.description}
+                </p>
+                
               </div>
+            ))}
+
+            <div className="max-w-3xl mx-auto bg-[#C09E5F] rounded-lg mt-20">
+              {generalError && (
+                <p className="text-red-500 text-md font-normal">{generalError}</p>
+              )}
+              {bookingErrors.length > 0 && (
+                <ul>
+                  {bookingErrors.map((error, index) => (
+                    <li key={index} className="text-red-500 text-md font-normal ">
+                      {error}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              <button
+                onClick={() => handleTabChange(2)}
+                className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+              >
+                <span className="button-slanted-content py-2">CONTINUE</span>
+              </button>
             </div>
+          </div>
           </div>
         )}
 
