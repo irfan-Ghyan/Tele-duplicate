@@ -43,7 +43,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <HelmetProvider>
       <html lang="en">
         <body className={inter.className}>
-          {!hideHeaderFooter && <Header />}
+          {!hideHeaderFooter && <Header />} 
 
           {children}
 

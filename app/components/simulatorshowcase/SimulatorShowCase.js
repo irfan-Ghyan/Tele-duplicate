@@ -133,14 +133,14 @@ export default function RacingSimulatorShowcase() {
   ]
 
   return (
-    <div className="relative container mx-auto w-full overflow-hidden">
+    <div className="relative  container mx-auto w-full overflow-hidden">
       <div className="max-w-7xl mx-auto">
         {/* Central Product Image */}
         <div className="relative flex justify-center items-center">
           <Image
             src="/assets/images/about/simulator.png"
             width={800}
-            height={500}
+            height={300}
             className="object-contain z-10 w-[900px] h-[480px] md:h-[800px]"
             priority
             alt="simulator"
@@ -219,14 +219,14 @@ function FeatureGrid({ features }) {
 
 function FeaturePoint({ number, title, description, rightAligned = false }) {
   return (
-    <div className={`flex flex-col px-20 md:px-0 lg:px-0  ${rightAligned ? "items-end" : "items-start"}`}>
+    <div className={`flex flex-col px-20 md:px-0 lg:px-0  ${rightAligned ? "items-center md:items-end" : "items-center md:items-start"}`}>
       <div className={`flex items-center gap-2 text-center ${rightAligned ? "flex-row-reverse" : "flex-row"}`}>
         <div className="flex items-center justify-center w-8 h-8 rounded-full border border-[#C09E5F] text-[#C09E5F]">
           {number}
         </div>
-        <h3 className="text-[16px] md:text-[16px] font-orbitron font-bold text-white">{title}</h3>
+        <h3 className="text-[16px] md:text-[16px] font-orbitron font-bold text-white ">{title}</h3>
       </div>
-      <p className={`text-[14px] md:text-[14px] font-jura text-[#5F7F7B] ${rightAligned ? "text-right" : "text-left"}`}>{description}</p>
+      <p className={`text-[14px] md:text-[14px] font-jura text-[#5F7F7B] ${rightAligned ? "text-center md:text-right " : "text-center md:text-left"}`}>{description}</p>
     </div>
   )
 }

@@ -589,7 +589,7 @@
     "experiences": "Experiences",
     "confirm": "Confirm",
     "thanks": "Thanks",
-    "vipSeats": "VIP SEATS",
+    "vipSeats": "VIP BAY",
     "chooseDate": "Select Date",
     "chooseTime": "Choose Time",
     "bookingDetails": "Your booking details",
@@ -597,7 +597,7 @@
     "thankYouMessage": "Thank you for confirmation",
     "emailMessage": "Check your e-mail inbox, Your ticket is waiting for you there!",
     "continueExperience": "CONTINUE EXPERIENCE",
-    "loungeSeats": "LOUNGE SEATS",
+    "loungeSeats": "LOUNGE",
     "normalSeats": "Select Seats",
     "selectSeats": "Select your seats",
 

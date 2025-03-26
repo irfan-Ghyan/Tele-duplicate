@@ -11,8 +11,6 @@ import { useTranslation } from 'react-i18next';
 const Navbar = ({ isTopBannerVisible }) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuEventsOpen, setMenuEventsOpen] = useState(false);
-  const [menuAboutOpen, setMenuAboutOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('en');
@@ -42,23 +40,13 @@ const Navbar = ({ isTopBannerVisible }) => {
     '/experiencedetails',
   ];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
-
-// States for dropdowns
 const [openDropdown, setOpenDropdown] = useState(null);
-
-// Refs for click detection
 const navbarRef = useRef(null);
-
-
-// Close all dropdowns
 const closeAllDropdowns = () => {
   setOpenDropdown(null);
 };
 
 
-
-
-// Click outside handler
 useEffect(() => {
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target) ) {
@@ -125,8 +113,6 @@ const toggleDropdown = () => {
     setIsAboutDropdownOpen(false);
     
   };
-  
-
   
   
   const handleLanguageChange = (lng) => {
@@ -203,7 +189,6 @@ const toggleDropdown = () => {
   const { title, description } = getDynamicMeta();
 
 
-
   return (
     <>
       <Helmet>
@@ -216,9 +201,9 @@ const toggleDropdown = () => {
       <nav ref={navbarRef}
         className={`fixed bg-[#00352F] h-[80px] ${
           isTopBannerVisible ? 'top-0' : 'top-0'
-        } w-full z-40 transition-all duration-300 px-[20px] md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar` }
+        } w-full z-40 transition-all duration-300 px-4 md:px-[20px] lg:px-[20px] xl:px-[40px] py-[5px]  ${navbarBg} navbar` }
       >
-        <div className="flex justify-between items-center container mx-auto h-[84px] py-4">
+        <div className="flex justify-between items-center container mx-auto h-[84px] pb-4 ">
           <div className="flex items-center">
             <Link href="/" onClick={closeMenu} className="flex items-center">
               <Image
@@ -374,16 +359,7 @@ const toggleDropdown = () => {
                 {t('HOME')}
               </Link>
 
-              {/* <Link
-                href="/experience"
-                className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#063828]"
-                onClick={closeMenu}
-              >
-                {t('EXPERIENCES')}
-              </Link> */}
-
                <Link
-                // onClick={toggleMobileExperienceDropdown}
                 href="/experience"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90] "
                 onClick={closeMenu}
@@ -393,7 +369,6 @@ const toggleDropdown = () => {
 
 
               <Link
-                // onClick={toggleMobileEventsDropdown}
                  href="/events"
                 className="block w-full text-left px-4 py-4 text-[#c09e5f] text-[14px] font-bold font-jura hover:text-[#e3ce90] "
                 onClick={closeMenu}

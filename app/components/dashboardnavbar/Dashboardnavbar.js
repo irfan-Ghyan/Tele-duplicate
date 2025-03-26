@@ -53,6 +53,8 @@ const DashboardNavbar = () => {
     <div className="flex items-center justify-between bg-[#00352F] text-[#e3ce90] p-4">
       <div className="flex items-center space-x-4 px-8">
         <Image
+        width={165}
+        height={100}
           src="/assets/images/dome/logo.png"
           alt="Logo"
           className="sm:w-[185px] sm:h-[52px] md:w-[185px] md:h-[52px] lg:w-[165px] lg:h-[100px] xl:w-[165px] xl:h-[100px]"

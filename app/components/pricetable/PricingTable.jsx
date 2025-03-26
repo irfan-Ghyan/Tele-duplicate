@@ -28,7 +28,7 @@ const PricingTable = () => {
       <div className=" md:max-w-7xl py-4 md:py-16 lg:py-16">
         
         {/* Simulator Sessions Table */}
-        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-start md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal">
+        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal">
           {t("simulatorSessions.title")}
         </h3>
         <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 px-6 md:px-0 lg:px-0">
@@ -73,8 +73,8 @@ const PricingTable = () => {
             <tbody>
               {groupRacing.map((race, index) => (
                 <tr key={index} className="hover:bg-[#022F29] transition duration-300">
-                  <td className="border text-[#C09E5F] border-[#c09e5f] text-[24px] px-4 py-4">{race.duration}</td>
-                  <td className="border text-[#C09E5F] border-[#c09e5f] text-[24px]  px-4 py-4">{race.price}</td>
+                  <td className="border text-[#C09E5F] border-[#c09e5f] text-[24px] font-orbitron px-4 py-4">{race.duration}</td>
+                  <td className="border text-[#C09E5F] border-[#c09e5f] text-[24px] font-orbitron px-4 py-4">{race.price}</td>
                   {/* <td className="border border-[#c09e5f] px-4 py-2">
                     <button 
                       onClick={handleClick} 

@@ -40,7 +40,6 @@ const { t } = useTranslation();
           content="Experience the thrill at Teleios Dome with our immersive simulators, VIP areas, and private events. Perfect for races, corporate gatherings, and personal celebrations."
         />
         <meta property="og:type" content="website" />
-        {/* <link rel="canonical" href="/" /> */}
       </Helmet>
       
       <main className="flex flex-col min-h-screen items-center overflow-x-hidden">

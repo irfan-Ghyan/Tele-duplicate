@@ -9,11 +9,11 @@ export default function AboutSimulators() {
         <div className="container mx-auto px-4 md:px-0">
           <div className="flex flex-col xl:flex-row justify-between">
             <div className="space-y-4">
-            <div className="border-t border-[#E5C992]/40 w-full mb-8 md:hidden lg:hidden"></div>
+            <div className="border-t border-[#E5C992]/40  w-full mb-8 "></div>
               <h2
                 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-transparent bg-clip-text"
                 style={{
-                  WebkitTextStroke: "2.05px #C09E5F",
+                  WebkitTextStroke: "1.5px #C09E5F",
                   color: "transparent",
                 }}
               >

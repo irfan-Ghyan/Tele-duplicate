@@ -154,14 +154,14 @@ useEffect(() => {
                 <p className="text-[18px] text-opacity-[80%] leading-[20px] mb-4 text-[#FFFFFF] font-jura lg:w-[410px] md:w-[410px] ">
                 {t('dome.description1')} 
                 </p>
-              <div className='hidden md:block w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end mt-[20px] md:mt-[40px] lg:mt-[40px]'>
+              {/* <div className='hidden md:block w-full md:w-1/3 lg:w-1/3 flex justify-start items-start md:justify-end md:items-end lg:justify-end lg:items-end mt-[20px] md:mt-[40px] lg:mt-[40px]'>
                 <Link
                   href="/venue"
                   className="w-[233px] h-[51px] px-8 py-6 button-slanted font-jura leading-[24px] bg-[#C09E5F] font-bold text-[#002718]  rounded-tl-lg rounded-br-lg flex items-center justify-center transition duration-300"
                 >
                   <span className="button-slanted-content font-jura text-[16px] font-bold">{t('Discover TeleiosX')}</span>
                 </Link>
-                </div>
+                </div> */}
                 
               <div className="flex py-8 md:py-0 lg:py-0 block lg:hidden">
               <p className="font-bold font-jura text-[#C09E5F] text-[20px] md:text-[30px] lg:text-[30px] leading-[32px] pt-2 ">Ready to race?</p>

@@ -1,3 +1,8 @@
+
+
+"use client"
+
+import { useState, useRef } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -6,17 +11,29 @@ import { Pagination } from "swiper/modules";
 
 export default function AboutVenue() {
   const images = [
-    "/assets/images/about/aboutvenue.png",
-    "/assets/images/about/aboutvenue.png",
-    "/assets/images/about/aboutvenue.png",
+    "/assets/images/events/bg1.jpg",
+    "/assets/images/events/bg2.jpg",
+    "/assets/images/events/bg3.jpg",
+    "/assets/images/events/bg4.jpg",
+    "/assets/images/events/bg5.jpg",
   ];
+
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const swiperRef = useRef(null); // Reference to Swiper
+
+  const goToSlide = (index) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index);
+    }
+    setCurrentSlide(index);
+  };
 
   return (
     <div className="text-[#C09E5F] p-4 pb-12 md:p-16">
-      <div className="container mx-auto md:pt-8">
+      <div className="relative container mx-auto md:pt-8">
         <div className="flex flex-col md:flex-row lg:flex-row md:gap-8 lg:gap-8">
           <div className="flex flex-col justify-center">
-            <div className="border-t border-[#E5C992]/40 w-full mb-8"></div>
+            <div className="border-t border-[#E5C992]/40 w-full mb-8 hidden md:block"></div>
             <h1 className="text-[55px] md:text-[88.96px] lg:text-[88.96px] font-black font-orbitron mb-8 leading-tight hidden md:block">
               ABOUT
               <br />
@@ -53,37 +70,47 @@ export default function AboutVenue() {
           </div>
         </div>
 
-        <div className="mt-12 relative rounded-lg overflow-hidden ">
-          <Image
-            src="/assets/images/about/aboutvenue.png"
-            alt="TeleiosX luxury venue interior with large screen and comfortable seating"
-            width={1200}
-            height={600}
-            className="w-full object-cover rounded-lg"
-          />
-        </div>
+        {/* Swiper Section */}
+        <div className="mt-12 relative rounded-lg overflow-hidden">
+          {/* Custom Navigation Buttons */}
+          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10 flex space-x-2">
+            {images.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`w-[28px] h-[4px] ${
+                  index === currentSlide
+                    ? "bg-[#C09E5F] rounded-[20px]"
+                    : "bg-white bg-opacity-[26%] rounded-[20px] hover:bg-opacity-100"
+                }`}
+              />
+            ))}
+          </div>
 
-        {/* <div className="mt-12 relative rounded-lg overflow-hidden block md:hidden">
+          {/* Swiper Component */}
           <Swiper
             spaceBetween={10}
             slidesPerView={1}
-            pagination={{ clickable: true }}
-            modules={[Pagination]} // Removed Navigation
-            className="w-full"
+            pagination={{ clickable: true, el: null }}
+            modules={[Pagination]}
+            className="w-full h-full"
+            onSwiper={(swiper) => (swiperRef.current = swiper)} // Store Swiper instance
+            onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)} // Update active slide state
           >
             {images.map((src, index) => (
-              <SwiperSlide key={index}>
-                <Image
-                  src={src}
-                  alt={`Carousel image ${index + 1}`}
-                  width={1200}
-                  height={600}
-                  className="w-full object-cover rounded-lg"
-                />
+              <SwiperSlide key={index} className="flex justify-center items-center">
+                <div className="relative w-full min-h-[250px] md:h-[718px] lg:h-[818px]">
+                  <Image
+                    src={src}
+                    alt={`Carousel image ${index + 1}`}
+                    fill
+                    className="object-cover w-full min-h-[250px] md:h-[718px] lg:h-[818px]"
+                  />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
-        </div> */}
+        </div>
       </div>
     </div>
   );

@@ -8,21 +8,34 @@ export default function PrivateEventsSection() {
         <div className="flex flex-col justify-center space-y-8 mb-12 md:mb-0 px-8">
           <div className="space-y-6">
             <h2 className="text-[34px] md:text-[34px] lg:text-[54px] font-black tracking-wide font-orbitron text-[#C09E5F]">PRIVATE EVENTS</h2>
-            <p className="text-white text-[18px] max-w-xl font-bold font-jura text-opacity-80 pb-4">
+            <div className="hidden md:block">
+            <p className="text-[#fff] text-[18px] max-w-xl font-bold font-jura text-opacity-80  leading-normal">
               Make your private events unforgettable at TeleiosX! Whether it's a birthday, anniversary, or exclusive
               party, we've got you covered. Enjoy a luxurious private setting combined with state-of-the-art racing
-              simulators for an unparalleled experience.
+            simulators for an unparalleled experience.
             </p>
+            </div>
+            <div className="block md:hidden">
+            <p className="text-white text-[18px] max-w-xl font-bold font-jura text-opacity-80 ">
+              Make your private events unforgettable at TeleiosX! Whether it's a birthday, anniversary, or exclusive
+              party, we've got you covered. 
+            </p>
+            <br />
+            <p className="text-white text-[18px] max-w-xl font-bold font-jura text-opacity-80 pb-4">
+            Enjoy a luxurious private setting combined with state-of-the-art racing
+            simulators for an unparalleled experience.
+            </p>
+            </div>
           </div>
 
-          <div>
+          {/* <div>
             <Link
               href="/discover"
               className="button-slanted w-[233px] h-[51px] font-jura text-[16px] font-bold leading-[24px] bg-[#C09E5F] cursor-pointer rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               Discover TeleiosX
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
      

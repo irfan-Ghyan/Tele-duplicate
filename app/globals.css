@@ -802,4 +802,23 @@ border: none !important;
   }
 }
 
+/* 
+@keyframes scrollText {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 
+.animate-scroll {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 10s linear infinite;
+} */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .custom-width {
+    width: 280px !important;
+  }
+}

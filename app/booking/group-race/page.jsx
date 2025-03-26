@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
 import Image from "next/image";
-
+import CustomPhoneInput from "../../components/phoneinput/Phone-Input"
 
 const Page = ({ params } ) => {
   const router = useRouter();
@@ -31,7 +31,7 @@ const Page = ({ params } ) => {
     { key: "time", title: "Time", description: "" },
     { key: "booking_type", title: "Booking Type", description: "Normal" },
     { key: "duration", title: "Duration", description: "40" },
-    { key: "price", title: "Price", description: "680 SAR" },
+    { key: "price", title: "Price", description: "320 SAR" },
   ]);
   
 
@@ -48,7 +48,8 @@ const Page = ({ params } ) => {
   const [bookingErrors, setBookingErrors] = useState([]);
   const [seatError, setSeatError] = useState("");
   const [availableSIMs, setAvailableSIMs] = useState(null);
-    const [showRadioError, setShowRadioError] = useState(false);
+  const [showRadioError, setShowRadioError] = useState(false);
+
 
 
   const [minDate, setMinDate] = useState(null);
@@ -211,15 +212,15 @@ const handlePlanChange = async (newDuration) => {
       if (newDuration === 20) {
         basePrice = 95;
       } else if (newDuration === 40) {
-        basePrice = 175; // Default price for 40 mins
+        basePrice = 175; 
       } else if (newDuration === 60) {
         basePrice = 250;
       }
     } else {
       if (newDuration === 20) {
-        basePrice = 95; 
+        basePrice = 80; 
       } else if (newDuration === 40) {
-        basePrice = 175; // Default price for 40 mins
+        basePrice = 175; 
       } else if (newDuration === 60) {
         basePrice = 200; 
       }
@@ -638,7 +639,7 @@ const handlePlanChange = async (newDuration) => {
      
       <div>
         <div className="my-[60px] px-4">
-            <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center w-full lg:w-[720px] md:w-[720px] max-w-7xl mx-auto my-8">
+            <div className="flex flex-col md:flex-row lg:flex-row justify-between items-center w-full lg:w-[720px] md:w-[720px] max-w-7xl mx-auto gap-y-4 px-4">
   
                     <div className="mt-[20px] md:mt-[0px] w-[84px] h-[54px]">
                       <button
@@ -648,21 +649,21 @@ const handlePlanChange = async (newDuration) => {
                       <Image src="/assets/images/dome/left.png" alt="arrow" width={30} height={18} />
                       </button>
                     </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer mx-1 flex items-center px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
                     
                     <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 1 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`} onClick={() => handleTabChange(1)}>
                         01
                     </div>
                     <div className={`text-[14px]  ml-4 ${activeTab === 1 ? 'text-[#C09E5F] ' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('experiences')}</div>
                     </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center  px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted mx-1 cursor-pointer flex items-center px-6 py-2 border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
                     <div className={`w-[30px] h-[30px] mt-1 rounded-full ${activeTab === 2 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-[#C09E5F]`}>
                         02
                     </div>
                     <div className={`text-[14px] ml-4 ${activeTab === 2 ? 'text-[#C09E5F]' : 'text-[#0e4b25]'} font-bold font-orbitron`}>{t('confirm')}</div>
                     {/* <div className="absolute top-[22px] right-full h-1 w-[120px] bg-[#c09e5f]"></div> */}
                     </div>
-                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted cursor-pointer flex items-center px-6 py-2  border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
+                    <div className="relative w-full md:w-[200px] lg:w-[200px] button-slanted mx-1 cursor-pointer flex items-center px-6 py-2  border-[0.5px] border-opacity-30 border-[#C09E5F] hover:border-[#C09E5F] font-jura font-bold  duration-300 rounded-tl-lg rounded-br-lg">
                     <div className={`mr-4 w-[30px] mt-1 h-[30px] rounded-full ${activeTab === 3 ? 'bg-[#C09E5F]' : 'bg-[#C09E5F] opacity-30'} text-[#002718] flex items-center justify-center mb-2 font-bold hover:bg-gradient-to-r hover:from-[#002718] hover:to-[#002718]`}>
                         03
                     </div>
@@ -679,9 +680,9 @@ const handlePlanChange = async (newDuration) => {
           <div className="w-full left">
             <div className="flex max-w-7xl ">
               <div className="w-full flex">
-                <div className="w-full xl:w-full lg:w-[680px] px-4">
+                <div className="w-full xl:w-full lg:w-[680px] md:px-4">
 
-                  <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
+                  <div className="bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto md:rounded-[15px]">
                     <h1 className="text-lg text-[#063828] font-black font-orbitron">
                     {t('normalSeats')}
                     </h1>
@@ -726,7 +727,7 @@ const handlePlanChange = async (newDuration) => {
                   </div>
                   
 
-                  <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
+                  <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto md:rounded-[15px] mt-[20px]">
                     <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('duration')}
                     </h1>
@@ -734,7 +735,7 @@ const handlePlanChange = async (newDuration) => {
                   </div>
                  
                   <div className="my-4">
-                    <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px]">
+                    <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto md:rounded-[15px]">
                       <h1 className="text-md text-[#063828] font-black font-orbitron">
                       {t('chooseDate')}
                       </h1>
@@ -749,7 +750,7 @@ const handlePlanChange = async (newDuration) => {
 
 
 
-              <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto rounded-[15px] mt-[20px]">
+              <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto md:rounded-[15px] mt-[20px]">
                 <h1 className="text-lg text-[#00352F] font-black font-orbitron">{t('chooseTime')}</h1>
                 
                 {timeChunks
@@ -878,7 +879,7 @@ const handlePlanChange = async (newDuration) => {
               </button>
             </div>
           </div> */}
-          <div className="bg-[#C09E5F] mx-[20px] p-[30px] w-[340px] md:w-[730px] lg:w-full exp-width h-[750px] rounded-[15px] mt-2 lg:mt-0">
+          <div className="bg-[#C09E5F] md:mx-[20px] p-[20px] w-full md:w-[730px] lg:w-full h-[750px]  md:rounded-[15px] mt-2 lg:mt-0">
           <h2 className="text-lg text-[#063828] font-black font-orbitron mb-[24px]">
           {t('bookingDetails')}
           </h2>
@@ -914,9 +915,9 @@ const handlePlanChange = async (newDuration) => {
             )}
             <button
               onClick={() => handleTabChange(2)}
-              className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
+              className="button-slanted mt-[20px] w-full cursor-pointer flex items-center justify-center px-[20px] py-[8px]  font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg  rounded-br-lg hover:border-0"
             >
-              <span className="button-slanted-content py-2"  onClick={handleSubmitClick}>CONTINUE</span>
+              <span className="button-slanted-content py-2">CONTINUE</span>
             </button>
           </div>
           </div>
@@ -927,8 +928,8 @@ const handlePlanChange = async (newDuration) => {
 
 
     {activeTab === 2 && (
-      <div className="mx-4 mb-8 ">
-      <div className="bg-[#C09E5F] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16 rounded-[15px]">
+      <div className="md:mx-4 mb-8 ">
+      <div className="bg-[#C09E5F] shadow-lg w-full max-w-4xl mx-auto p-4 lg:p-16 md:rounded-[15px]">
         <h2 className="text-[32px] font-black font-orbitron text-[#063828] leading-[28px] mb-4 pb-4">{t('paymentDetails')}</h2>
         <hr className="border-[#063828] opacity-30"/>
         <form onSubmit={handleSubmit} >
@@ -945,7 +946,7 @@ const handlePlanChange = async (newDuration) => {
                 placeholder="Enter your Firtst Name"
                 value={formData.firstName}
                 onChange={handleChange}
-                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
               />
               {validationErrors.firstName && (
                 <p className="text-red-500 text-sm">{validationErrors.firstName}</p>
@@ -962,7 +963,7 @@ const handlePlanChange = async (newDuration) => {
                  placeholder="Enter your Last Name"
                 value={formData.lastName}
                 onChange={handleChange}
-                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+                className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] font-jura font-bold text-[#063828] bg-[#C09E5F] border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
               />
               {validationErrors.lastName && (
                 <p className="text-red-500 text-sm">{validationErrors.lastName}</p>
@@ -981,7 +982,7 @@ const handlePlanChange = async (newDuration) => {
               placeholder="Enter your Email"
               value={formData.email}
               onChange={handleChange}
-              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828]  rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828]  rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
             />
             {validationErrors.email && (
               <p className="text-red-500 text-sm">{validationErrors.email}</p>
@@ -989,6 +990,24 @@ const handlePlanChange = async (newDuration) => {
           </div>
 
           <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-[16px] font-orbitron font-bold text-[#063828] px-2 md:px-8 lg:px-8"
+                    >
+                      {t("phoneNormal")}
+                    </label>
+                    <CustomPhoneInput
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                   
+                    />
+                    {validationErrors.phone && (
+                    <p className="text-red-500 text-sm">{validationErrors.phone}</p>
+                  )}
+                  </div>
+
+          {/* <div>
             <label htmlFor="phone" className="block text-[16px] font-orbitron font-bold text-[#063828] px-2 md:px-8 lg:px-8">
             {t('phoneNormal')}
             </label>
@@ -999,12 +1018,12 @@ const handlePlanChange = async (newDuration) => {
               value={formData.phone}
                 placeholder="+966 241 0002 202"
               onChange={handleChange}
-              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
+              className="button-slanted mt-[8px] w-full h-[40px] md:h-[61px] lg:h-[61px] flex items-center justify-center px-[20px] py-[8px] font-jura font-bold text-[#063828] bg-[#C09E5F]  border border-[#063828] rounded-tl-lg rounded-br-lg placeholder-[#063828] placeholder-opacity-30"
             />
             {validationErrors.phone && (
               <p className="text-red-500 text-sm">{validationErrors.phone}</p>
             )}
-          </div>
+          </div> */}
         </div>
 
   {/* Payment Information */}
@@ -1113,7 +1132,7 @@ const handlePlanChange = async (newDuration) => {
             <p className=" text-[20px] leading-[24px] font-jura text-center font-bold text-[#063828]">{t('emailMessage')}</p>
           </div>
           <div className="mt-20 w-[320px] lg:w-[725px] ">
-            <Link href="/experience" className="button-slanted w-full  cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-[#063828] rounded-tl-lg rounded-br-lg hover:border-0">
+            <Link href="/experience" className="button-slanted w-full  cursor-pointer flex items-center justify-center px-[20px] py-[8px] font-jura font-bold text-[#c09e5f] bg-[#063828] rounded-tl-lg rounded-br-lg hover:border-0">
             <span className="button-slanted-content text-lg font-bold py-2">{t('continueExperience')}</span>
             </Link>
           </div>

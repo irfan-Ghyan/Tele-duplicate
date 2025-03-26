@@ -1,25 +1,44 @@
-import Image from "next/image"
+
+"use client"
+
+import { useState, useEffect } from "react"
 import Link from "next/link"
 
 export default function CoffeeBar() {
+  const [bgImage, setBgImage] = useState("/assets/images/dome/offers.png") 
+
+  useEffect(() => {
+    const updateBackground = () => {
+      if (window.innerWidth < 768) {
+        setBgImage("/assets/images/experience/meetingmob.png")
+      } else {
+        setBgImage("/assets/images/dome/offers.png")
+      }
+    }
+
+    updateBackground() 
+    window.addEventListener("resize", updateBackground) 
+
+    return () => window.removeEventListener("resize", updateBackground)
+  }, [])
+
   return (
-    <div className="relative w-full h-[550px] overflow-hidden lg:bg-cover bg-left lg:bg-right xl:bg-center  " style={{ backgroundImage: "url('/assets/images/dome/offers.png')" }}>
-
-
+    <div
+      className="relative w-full h-[430px] md:h-[850px] overflow-hidden md:bg-cover lg:bg-cover bg-center"
+      style={{ backgroundImage: `url(${bgImage})` }} 
+    >
       <div className="relative h-full w-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center">
         <div className="hidden md:block md:w-1/2"></div>
 
-        <div className="w-full md:w-1/2 flex flex-col justify-center h-full space-y-8 md:py-[50px] lg:py-[50px]">
-       
+        <div className="w-full md:w-1/2 flex flex-col justify-center h-full space-y-8">
           <div className="self-end">
-          
             <p className="font-orbitron text-[#C09E5F] text-normal font-[14px] tracking-wider hidden sm:block">F&B</p>
           </div>
           <div className="border-t border-[#E5C992]/40 w-full border-opacity-20 hidden sm:block"></div>
           {/* Main Heading */}
           <div className="flex justify-between">
-          <h1 className="text-[#C09E5F] font-orbitron text-[34px] md:text-[54px] lg:text-[54px] font-black tracking-wider">F&B</h1>
-          <p className="font-orbitron text-[#C09E5F] text-normal font-[14px] tracking-wider sm:hidden">F&B</p>
+            <h1 className="text-[#C09E5F] font-orbitron text-[34px] md:text-[54px] lg:text-[54px] font-black tracking-wider">F&B</h1>
+            <p className="font-orbitron text-[#C09E5F] text-normal font-[14px] tracking-wider sm:hidden">F&B</p>
           </div>
           {/* Description */}
           <p className="text-[#C09E5F] font-jura text-[18px] lg:text-[18px] font-normal leading-[20px]">
@@ -41,4 +60,3 @@ export default function CoffeeBar() {
     </div>
   )
 }
-

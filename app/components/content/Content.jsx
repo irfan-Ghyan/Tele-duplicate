@@ -46,11 +46,11 @@ const Content = () => {
               );
 
               const staticImageUrls = [
-                "/assets/images/experience/race.png",
+                "/assets/images/experience/session01.png",
                 "/assets/images/experience/30mn.png",
                 "/assets/images/experience/60mn.png",
-                "/assets/images/experience/vipbay.png",
-                "/assets/images/experience/vipsoute.png",
+                "/assets/images/experience/session2.png",
+                "/assets/images/experience/session03.png",
               ];
 
               return {
@@ -146,7 +146,7 @@ const Content = () => {
                     </div>
                     <div className="pt-[19px] pb-[22px] ">
                       <Link
-                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                        className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura  bg-[#F13936] text-[16px] text-[#ffffff] transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                         href="/booking/race/"
                       >
                         <span className="button-slanted-content">{t('BOOK RACE')}</span>
@@ -185,7 +185,7 @@ const Content = () => {
                       </Link>
                     </div> */}
                 <div className="flex flex-col justify-between items-center mx-4 flex-1 w-full">
-                  <div className='px-[12px]'>
+                  <div className='px-[12px] md:py-8'>
                     <h1 className="text-[#00352F] text-[48px] text-center md:text-start lg:text-start font-orbitron font-bold px-4">
                       {experience.title}
                     </h1>
@@ -195,7 +195,7 @@ const Content = () => {
                   </div>
                   <div className="pt-[19px] pb-[22px] ">
                     <Link
-                      className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                      className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] leading-[24px] font-jura bg-[#F13936] text-[16px] text-[#ffffff]  transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `booking/vip-bays/` : `/booking/vip-suite/`}
                     >
                       <span className="button-slanted-content">{t('BOOK VIP BAY')}</span>
@@ -241,7 +241,7 @@ const Content = () => {
                   </div>
                   <div className="pt-[19px] pb-[22px] ">
                     <Link
-                      className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura leading-[24px] bg-[#F13936] text-[16px] text-[#ffffff] ml-2 transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
+                      className="button-slanted cursor-pointer w-[250px] lg:w-[250px] h-[46px] font-jura leading-[24px] bg-[#F13936] text-[16px] text-[#ffffff]  transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center relative overflow-hidden"
                       href={index === 0 ? `/booking/vip-suite/` : `/booking/vip-suite/`}
                     >
                       <span className="button-slanted-content">{t('BOOK VIP SUITE')}</span>
