@@ -10,6 +10,7 @@ import Footer from "./components/footer/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import "../i18n";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,16 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   const [showNotice, setShowNotice] = useState(false);
   const pathname = usePathname() || "";
+  const [cookiesAccepted, setCookiesAccepted] = useState<string | null>(null);
+  
+  useEffect(() => {
+    const accepted = localStorage.getItem("cookiesAccepted");
+    setCookiesAccepted(accepted);
+    if (accepted === null) {
+      setShowNotice(true);
+    }
+  }, []);
+
 
   useEffect(() => {
     if (!localStorage.getItem("cookiesAccepted")) {
@@ -29,20 +40,39 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   const acceptCookies = () => {
     localStorage.setItem("cookiesAccepted", "true");
+    setCookiesAccepted("true");
     setShowNotice(false);
+
   };
 
   const declineCookies = () => {
     localStorage.setItem("cookiesAccepted", "false");
+    setCookiesAccepted("false");
     setShowNotice(false);
   };
 
   const hideHeaderFooter = (pathname || "").startsWith("/login") || (pathname || "").startsWith("/dashboard");
 
+ 
+  
   return (
     <HelmetProvider>
       <html lang="en">
         <body className={inter.className}>
+        {cookiesAccepted === "true" && (
+            <Script
+              src="https://cdn.moengage.com/webpush/moe_webSdk.min.latest.js"
+              strategy="afterInteractive"
+              id="moengage-script"
+              attributes={{
+                "data-moe-wid": "13NE3FE15UA8RHU1I8WF0RK4",
+                "data-moe-dc": "dc_2",
+                "data-moe-dl": "1",
+                "data-moe-sdk-v": "2",
+              }}
+            />
+          )}
+
           {!hideHeaderFooter && <Header />} 
 
           {children}
@@ -87,3 +117,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </HelmetProvider>
   );
 }
+
+

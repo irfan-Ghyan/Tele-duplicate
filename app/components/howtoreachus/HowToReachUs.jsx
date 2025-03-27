@@ -15,8 +15,8 @@ export default function HowToReachUs() {
           </h2>
           
           <Link href="https://maps.app.goo.gl/tpvShamGjXZv6rVq8" target="_blank" rel="noopener noreferrer" className="pt-[12px] text-[#C09E5F] font-jura font-normal leading-[15px] md:leading-[28px] text-[15px] md:text-[18px]">
-            <p>  {t('how.des')}</p>
-            <p>  {t('how.des1')}</p>
+            <p className="text-[18px] text-[#C09E5F] font-bold font-jura ">  {t('how.des')}</p>
+            <p className="text-[18px] text-[#C09E5F] font-bold font-jura ">  {t('how.des1')}</p>
           </Link>
         </div>
         

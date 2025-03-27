@@ -25,13 +25,13 @@ const PricingTable = () => {
 
   return (
     <div className={`flex flex-col items-center justify-center px-2 mb-8 py-[40px] ${i18n.language === 'ar' ? 'rtl' : ''}`}>
-      <div className=" md:max-w-7xl py-4 md:py-16 lg:py-16">
+      <div className=" md:max-w-7xl py-4">
         
         {/* Simulator Sessions Table */}
-        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal">
+        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-8 leading-normal">
           {t("simulatorSessions.title")}
         </h3>
-        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 px-6 md:px-0 lg:px-0">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto8 mx-auto px-2 md:px-0 lg:px-0">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29] ">
@@ -57,11 +57,11 @@ const PricingTable = () => {
             </tbody>
           </table>
         </div>
-
-        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-6 leading-normal pt-[8px] ">
+        <div className="mt-10">
+        <h3 className="text-[30px] md:text-[40px] lg:text-[40px] text-[#C09E5F] text-center md:text-center lg:text-center font-black font-orbitron pb-4 px-20 leading-normal pt-[8px] ">
           {t("groupRacing.title")}
         </h3>
-        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto px-6 md:px-0 lg:px-0">
+        <div className="w-[390px] md:w-[1200px] lg:w-[1200px] overflow-x-auto mx-auto px-2 md:px-0 lg:px-0">
           <table className="w-full border-collapse border border-[#C09E5F] text-center">
             <thead>
               <tr className="bg-[#022F29]">
@@ -87,7 +87,7 @@ const PricingTable = () => {
             </tbody>
           </table>
         </div>
-
+        </div>
       </div>
     </div>
   );

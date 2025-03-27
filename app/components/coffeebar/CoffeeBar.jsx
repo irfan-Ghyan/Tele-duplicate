@@ -24,7 +24,7 @@ export default function CoffeeBar() {
 
   return (
     <div
-      className="relative w-full h-[430px] md:h-[850px] overflow-hidden md:bg-cover lg:bg-cover bg-center"
+      className="relative w-full h-[430px] md:h-[800px] overflow-hidden md:bg-cover lg:bg-cover md:bg-left bg-center"
       style={{ backgroundImage: `url(${bgImage})` }} 
     >
       <div className="relative h-full w-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center">
