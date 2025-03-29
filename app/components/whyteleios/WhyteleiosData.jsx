@@ -1,7 +1,7 @@
 
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo} from 'react';
 import Image from 'next/image';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
@@ -13,11 +13,11 @@ const WhyteleiosData = () => {
   const [loading, setLoading] = useState(true);  // Loading state
   const [error, setError] = useState(null);      // Error state
 
-  const domes = [
+  const domes = useMemo([
     { imageUrl: '/assets/images/education/edu1.png' },
     { imageUrl: '/assets/images/education/edu2.png' },
     { imageUrl: '/assets/images/education/edu3.png' },
-  ];
+  ], []); 
 
   useEffect(() => {
     if (domes.length > 0) {

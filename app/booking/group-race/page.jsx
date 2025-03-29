@@ -9,12 +9,14 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useTranslation } from 'react-i18next';
 import Image from "next/image";
-import CustomPhoneInput from "../../components/phoneinput/Phone-Input"
+import CustomPhoneInput from "../../components/phoneinput/Phone-Input";
+import { trackBookingEvent, trackBookingStep } from "../../utils/moengage"
 
 const Page = ({ params } ) => {
   const router = useRouter();
   const { id } = params;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const currentLanguage = i18n.language;
 
   const [count, setCount] = useState(4);
   const [date, setDate] = useState(new Date());
@@ -78,14 +80,7 @@ const Page = ({ params } ) => {
     setPopupMessage("");
   };
   
-  useEffect(() => {
-    if (id) fetchEventDetails();
-    setBookingDetails((prevDetails) =>
-      prevDetails.map((detail) =>
-        detail.title === "name" ? { ...detail, description: formData.firstName } : detail
-      )
-    );
-  }, [id, formData.firstName]);
+ 
 
   useEffect(() => {
     setBookingDetails((prevDetails) =>
@@ -97,7 +92,7 @@ const Page = ({ params } ) => {
     );
   }, []);
 
-  const fetchEventDetails = async () => {
+  const fetchEventDetails = useCallback(async () => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL; 
       const response = await fetch(`${baseUrl}/api/content/sections/${id}`);
@@ -107,8 +102,15 @@ const Page = ({ params } ) => {
     } catch (error) {
       console.error("Error fetching event details:", error);
     }
-  };
-
+  }, [id]);
+  useEffect(() => {
+    if (id) fetchEventDetails();
+    setBookingDetails((prevDetails) =>
+      prevDetails.map((detail) =>
+        detail.title === "name" ? { ...detail, description: formData.firstName } : detail
+      )
+    );
+  }, [id, formData.firstName, fetchEventDetails]);
 
   const handleBookingTypeChange = (type) => {
     setBookingDetails((prevDetails) =>
@@ -118,6 +120,8 @@ const Page = ({ params } ) => {
     );
     setBookingType(type);
   };
+
+  
 
   const handleTimeChange = (value) => {
     setTimes((prevTimes) => ({
@@ -146,11 +150,7 @@ const Page = ({ params } ) => {
     );
   };
 
-   useEffect(() => {
-      if (count > 0) {
-        handlePlanChange(slotInterval);
-      }
-    }, [count, slotInterval]);
+
   const increaseCount = async () => { 
     const newCount = count + 1;
 
@@ -199,41 +199,16 @@ const Page = ({ params } ) => {
   };
 
 
-const handlePlanChange = async (newDuration) => {
+
   
-    await fetchBookings();
-    setSlotInterval(newDuration);
-    
-    updateBookingDetail("duration", `${newDuration}`);
-    
-    let basePrice;
-    
-    if (count <= 3) {
-      if (newDuration === 20) {
-        basePrice = 95;
-      } else if (newDuration === 40) {
-        basePrice = 175; 
-      } else if (newDuration === 60) {
-        basePrice = 250;
-      }
-    } else {
-      if (newDuration === 20) {
-        basePrice = 80; 
-      } else if (newDuration === 40) {
-        basePrice = 175; 
-      } else if (newDuration === 60) {
-        basePrice = 200; 
-      }
-    }
-  
-    // Adjust the price for multiple persons
-    const updatedPrice = `${basePrice * count} SAR`;
-    
-    updateBookingDetail("price", updatedPrice);
-    
-    await fetchBookings();
+  const handleInputChange = (field, value) => {
+    setFormData({
+      ...formData,
+      [field]: value,
+    });
+
+    trackBookingStep(field, { [field]: value });
   };
-  
 
   const handleDateChange = async (newDate) => {
     updateBookingDetail("date", newDate.toLocaleDateString("en-CA"));
@@ -386,7 +361,49 @@ const handlePlanChange = async (newDuration) => {
       console.error("Error fetching bookings:", error);
       
     }
-  }, [count, selectedDate, selectedSlotType, slotInterval, activeTime]);
+  }, [count, selectedDate, selectedSlotType, slotInterval]);
+
+  const handlePlanChange = useCallback(async (newDuration) => {
+  
+    await fetchBookings();
+    setSlotInterval(newDuration);
+    
+    updateBookingDetail("duration", `${newDuration}`);
+    
+    let basePrice;
+    
+    if (count <= 3) {
+      if (newDuration === 20) {
+        basePrice = 95;
+      } else if (newDuration === 40) {
+        basePrice = 175; 
+      } else if (newDuration === 60) {
+        basePrice = 250;
+      }
+    } else {
+      if (newDuration === 20) {
+        basePrice = 80; 
+      } else if (newDuration === 40) {
+        basePrice = 175; 
+      } else if (newDuration === 60) {
+        basePrice = 200; 
+      }
+    }
+  
+    // Adjust the price for multiple persons
+    const updatedPrice = `${basePrice * count} SAR`;
+    
+    updateBookingDetail("price", updatedPrice);
+    
+    await fetchBookings();
+  }, [count, fetchBookings]);
+  
+  useEffect(() => {
+      if (count > 0) {
+        handlePlanChange(slotInterval);
+      }
+    }, [count, slotInterval, handlePlanChange]); 
+
 
   useEffect(() => {
     fetchBookings();
@@ -494,7 +511,13 @@ const handlePlanChange = async (newDuration) => {
         console.log("Booking and payment saved successfully:", data);
         // Proceed to the next tab
         handleTabChange(3);
+        
         console.log({ ...bookingData, ...paymentData });
+        trackBookingEvent({
+          ...formData,
+          status: "Success",
+          language: currentLanguage,
+        });
   
         try {
           const response = await fetch("https://dev.teleiosx.com/email/email.php", {
@@ -520,6 +543,11 @@ const handlePlanChange = async (newDuration) => {
           }
         } catch (error) {
           console.error("Error during submission:", error);
+          trackBookingEvent({
+            ...formData,
+            status: "Failure",
+            language: currentLanguage,
+          });
         }
       } else {
         console.error("Error saving booking/payment:", data.message);

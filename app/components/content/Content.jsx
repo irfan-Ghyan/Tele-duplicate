@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback} from 'react';
 import { Helmet } from 'react-helmet-async';
 import Head from 'next/head';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,7 @@ const Content = () => {
   const [error, setError] = useState('');
 
 
-  const fetchData = async () => {
+  const fetchData =  useCallback(async () => {
     setLoading(true);
     setError("");
 
@@ -69,13 +69,13 @@ const Content = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [t]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       fetchData();
     }
-  }, []);
+  }, [fetchData]);
   
   return (
     <>
@@ -105,7 +105,7 @@ const Content = () => {
         </div>
 
         <div className="w-full lg:my-8 my-8">
-          <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center gap-[50px] flex-wrap">
+          <div className="flex flex-col md:flex-row lg:flex-row xl:flex-row justify-center gap-[50px] ">
             {loading && <p className="text-[#c09e5f]">{t('Loading ...')}</p>}
             {error && <p className="text-red-500">{error}</p>}
 

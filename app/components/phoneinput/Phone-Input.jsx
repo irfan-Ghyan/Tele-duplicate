@@ -11,7 +11,7 @@ export default function CustomPhoneInput({ value, onChange, name, error }) {
     if (value !== phone) {
       setPhone(value)
     }
-  }, [value])
+  }, [value, phone])
 
   const handleChange = (value) => {
     setPhone(value)

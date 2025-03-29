@@ -822,3 +822,16 @@ border: none !important;
     width: 280px !important;
   }
 }
+
+
+
+
+/* .shadow-overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: linear-gradient(to left, rgba(2, 61, 37, 0.25) 0%, transparent 100%);
+} */
+

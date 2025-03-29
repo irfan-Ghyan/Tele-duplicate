@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -12,6 +12,7 @@ const Navbar = ({ isTopBannerVisible }) => {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [navbarBg, setNavbarBg] = useState();
+  const [openDropdown, setOpenDropdown] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('en');
   const [isExperienceDropdownOpen, setIsExperienceDropdownOpen] = useState(false);
@@ -40,11 +41,7 @@ const Navbar = ({ isTopBannerVisible }) => {
     '/experiencedetails',
   ];
   const isHiddenRoute = hiddenRoutes.includes(pathname);
-const [openDropdown, setOpenDropdown] = useState(null);
 const navbarRef = useRef(null);
-const closeAllDropdowns = () => {
-  setOpenDropdown(null);
-};
 
 
 useEffect(() => {
@@ -62,7 +59,7 @@ useEffect(() => {
 }, []);
 
 
-const toggleDropdown = () => {
+const toggleDropdown = (dropdown) => {
   setIsDropdownOpen(!isDropdownOpen);
   setOpenDropdown(openDropdown === "dropdown" ? null : "dropdown");
 };
@@ -101,8 +98,13 @@ const toggleDropdown = () => {
     setIsMobileExperienceDropdownOpen(false);
     setIsMobileEventsDropdownOpen(false);
   };
+
+  const closeAllDropdowns =  useCallback(() => {
+    setOpenDropdown(null);
+  }, []);
   
-  const closeMenu = () => {
+  
+  const closeMenu = useCallback(() => {
     setMenuOpen(false);
     closeAllDropdowns();
     setIsMobileExperienceDropdownOpen(false);
@@ -111,8 +113,32 @@ const toggleDropdown = () => {
     setIsExperienceDropdownOpen(false);
     setIsEventsDropdownOpen(false);
     setIsAboutDropdownOpen(false);
+     setOpenDropdown(null);
     
-  };
+  }, [closeAllDropdowns]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        closeMenu();
+        setIsDropdownOpen(false);
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [closeMenu]);
+  
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        closeMenu();
+      }
+    };
+  
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [closeMenu]); 
   
   
   const handleLanguageChange = (lng) => {
@@ -138,18 +164,7 @@ const toggleDropdown = () => {
     };
   }, [pathname, isHiddenRoute]);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        closeMenu();
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+ 
 
   const getDynamicMeta = () => {
     switch (pathname) {

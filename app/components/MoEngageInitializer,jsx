@@ -1,0 +1,58 @@
+"use client";
+
+import { useEffect } from "react";
+
+export default function MoEngageInitializer() {
+  useEffect(() => {
+    // Function to process any pending events
+    const processPendingEvents = () => {
+      if (
+        typeof window !== "undefined" &&
+        window.Moengage &&
+        typeof window.Moengage.track_event === "function" &&
+        window._moePendingEvents &&
+        window._moePendingEvents.length > 0
+      ) {
+        console.log(`Processing ${window._moePendingEvents.length} pending MoEngage events`);
+
+        window._moePendingEvents.forEach((event) => {
+          try {
+            window.Moengage.track_event(event.name, event.attributes);
+            console.log(`Processed pending event: ${event.name}`);
+          } catch (error) {
+            console.error(`Failed to process pending event: ${event.name}`, error);
+          }
+        });
+
+        // Clear the pending events
+        window._moePendingEvents = [];
+      }
+    };
+
+    // Set up an observer to detect when MoEngage is loaded
+    const observer = new MutationObserver(() => {
+      if (typeof window !== "undefined" && window.Moengage) {
+        processPendingEvents();
+        observer.disconnect();
+      }
+    });
+
+    // Start observing
+    observer.observe(document, { childList: true, subtree: true });
+
+    // Also check periodically
+    const interval = setInterval(() => {
+      if (typeof window !== "undefined" && window.Moengage) {
+        processPendingEvents();
+        clearInterval(interval);
+      }
+    }, 1000);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
+  }, []);
+
+  return null; 
+}
