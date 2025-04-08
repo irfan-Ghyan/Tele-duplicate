@@ -15,9 +15,9 @@ const Footer = () => {
           <Image
             src={logo}
             alt="Flag Icon"
-            width={185}
+            width={170}
             height={126}
-            className="w-[185px] h-[126px]"
+            className="w-[170px] h-[126px]"
             priority={true}
           />
           <p className="text-[#C09E5F] text-opacity-[60%] font-jura text-[13px] font-bold py-4 flex-wrap text-center md:text-start">

@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import EducationData from '../components/educationdata/EducationData';
 import DrivingData from '../components/drivingdata/DrivingData';
@@ -12,10 +12,18 @@ import FoodMenu from '../components/foodmenu/FoodMenu';
 import Link from 'next/link';
 import MenuSlider from '../components/menuslider/MenuSlider';
 import FoodSlider from  '../components/foodslider/FoodSlider';
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const Page = () => {
   const { t, i18n } = useTranslation();
   
+  useEffect(()=>{
+    try {
+      sendGTMEvent({ event: 'fnb_page_visit', value: 'f&b page visit' });
+    } catch (error) {
+      console.error('Error sending GTM event:', error);
+    }
+  }, [])
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);

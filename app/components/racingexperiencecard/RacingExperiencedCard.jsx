@@ -135,7 +135,7 @@ export default function RacingExperienceCards() {
                 <Image src={exp.image || "/placeholder.svg"} alt={exp.title} fill style={{ objectFit: "cover" }} />
               </div>
 
-              <div className="relative z-10 flex flex-col sm:w-full h-[569px] custom-width md:h-[744px] lg:w-[300px] xl:w-[360px] lg:h-[644px]"
+              <div className="relative z-10 flex flex-col sm:w-full h-[569px]  md:h-[744px] lg:w-[230px] xl:w-[360px] xl:h-[744px]"
               onMouseEnter={() => setOpenDropdown(exp.id)}
               onMouseLeave={() => setOpenDropdown(null)}>
                 {openDropdown === exp.id ? (
@@ -168,7 +168,7 @@ export default function RacingExperienceCards() {
                   </button>
                 )}
 
-                <div className="relative z-10 flex flex-col sm:w-full p-4 pt-0 flex-grow ">
+                <div className="relative z-10 flex flex-col md:flex-row sm:w-full p-4 pt-0 flex-grow ">
                   <div className="mt-20 md:mt-[120px] lg:mt-[120px]">
                   <h2 className="text-[42px] font-black font-orbitron text-[#C09E5F] leading-none py-4" >{exp.title}</h2>
                   <p className="text-white font-normal w-full font-jura text-[15px] mb-4 leading-normal">{exp.description}</p>
@@ -178,7 +178,7 @@ export default function RacingExperienceCards() {
           
                 <div className="p-4 pt-0 mb-6 flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center">
                   <Link href={`/booking/${exp.id}`} passHref>
-                    <button className="button-slanted w-[250px] h-[47px]  font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                    <button className="button-slanted w-[200px] xl:w-[250px] h-[47px]  font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                       {exp.buttonText}
                     </button>
                   </Link>
@@ -197,12 +197,12 @@ export default function RacingExperienceCards() {
                 <Image src={exp.image || "/placeholder.svg"} alt={exp.title} fill style={{ objectFit: "cover" }} />
               </div>
 
-              <div className="relative z-10 flex flex-col sm:w-full h-[569px] custom-width md:h-[744px] lg:w-[30px] xl:w-[360px] lg:h-[644px]"
+              <div className="relative z-10 flex flex-col sm:w-full md:h-[744px] lg:w-[230px] xl:w-[360px] h-screen"
               onMouseEnter={() => setOpenDropdownVip(exp.id)}
               onMouseLeave={() => setOpenDropdownVip(null)}
               >
                 {openDropdownVip === exp.id ? (
-                  <div className="bg-red-600 text-white ">
+                  <div className="bg-red-600 text-white  ">
                     <div className="grid grid-cols-2">
                       <div className="p-2 font-bold border-b border-r font-orbitron border-red-400">Duration</div>
                       <div className="p-2 font-bold border-b font-orbitron border-red-400">Price </div>
@@ -216,7 +216,7 @@ export default function RacingExperienceCards() {
                     </div>
                     <button
                       onClick={() => toggleDropdownVip(exp.id)}
-                      className="w-full flex justify-center p-2 hover:bg-red-700 transition-colors"
+                      className="w-full flex justify-center p-2 custom-width hover:bg-red-700 transition-colors"
                     >
                       <ChevronUp className="h-5 w-5" />
                     </button>
@@ -231,16 +231,18 @@ export default function RacingExperienceCards() {
                   </button>
                 )}
 
-                <div className="relative z-10 flex flex-col sm:w-full p-4 pt-0 mt-20 md:mt-[120px] lg:mt-[120px] flex-grow ">
+                <div className="relative z-10 flex flex-col md:flex-row sm:w-full p-4 pt-0 flex-grow ">
+                <div className="mt-20 md:mt-[120px] lg:mt-[120px]">
                   <h2 className="text-[42px]  font-black font-orbitron text-[#C09E5F] leading-none py-4" >{exp.title}</h2>
                   <p className="text-white font-normal w-full font-jura text-[15px] mb-4 leading-normal">{exp.description}</p>
                   <p className="text-white font-normal w-full font-jura text-[15px] mb-4 leading-normal">{exp.description1}</p>
+                  </div>
                 </div>
 
           
                 <div className="p-4 pt-0 mb-6 flex flex-col md:flex-row items-start justify-start md:items-center md:justify-center">
                   <Link href={`/booking/${exp.id}`} passHref>
-                    <button className="button-slanted w-[250px] h-[47px]  font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
+                    <button className="button-slanted w-[200px] xl:w-[250px] h-[47px]  font-jura text-[16px] font-bold leading-[24px] bg-gradient-to-r cursor-pointer from-[#df2a27e3] to-[#df2a27] text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center">
                       {exp.buttonText}
                     </button>
                   </Link>

@@ -145,7 +145,7 @@ export default function CorporateEvents() {
         console.log({ ...venueData });
   
         try {
-          const response = await fetch("https://dev.teleiosx.com/email/email.php", {
+          const response = await fetch("https://teleiosx.com/email/email.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -308,7 +308,7 @@ useEffect(() => {
 
       <Link
             // onClick={() => setIsModalOpen(true)}
-              href="https://wa.me/966552249297?text=I%27m%20interested%20in%20renting%20simulators%20for%20an%20activation%2C%20can%20I%20have%20more%20details%3F"
+              href="https://wa.me/966552249297?text=I'm%20interested%20in%20hiring%20the%20venue%20for%20an%20event,%20can%20I%20have%20more%20details?"
               className="button-slanted mt-[60px] w-[250px] h-[42px] font-jura text-[16px] font-bold leading-[24px] bg-[#F13936] cursor-pointer  text-white transition duration-300 rounded-tl-lg rounded-br-lg flex items-center justify-center"
             >
               GET DETAILS

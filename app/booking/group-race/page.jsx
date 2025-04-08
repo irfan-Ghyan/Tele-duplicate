@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Image from "next/image";
 import CustomPhoneInput from "../../components/phoneinput/Phone-Input";
 import { trackBookingEvent, trackBookingStep } from "../../utils/moengage"
+import { sendGTMEvent } from '@next/third-parties/google';
 
 const Page = ({ params } ) => {
   const router = useRouter();
@@ -22,8 +23,10 @@ const Page = ({ params } ) => {
   const [date, setDate] = useState(new Date());
   const [isPopupVisible, setIsPopupVisible] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
-  
-
+  const [time, setTime] = useState('');
+  const [numOfPeople, setNumOfPeople] = useState(0);
+  const [price, setPrice] = useState(0);
+  const [type, setType] = useState('');
 
   const [bookingDetails, setBookingDetails] = useState([
     // { key: "name", title: "Name", description: "" },
@@ -36,6 +39,48 @@ const Page = ({ params } ) => {
     { key: "price", title: "Price", description: "320 SAR" },
   ]);
   
+  const handleClick = () => {
+    if (!bookingDetails || !Array.isArray(bookingDetails)) {
+      console.log("No booking details available for tracking")
+      router.push("/booking/thankyou")
+      return
+    }
+
+    const dateValue = bookingDetails.find((detail) => detail.key === "date")?.description || "Not specified"
+    const timeValue = bookingDetails.find((detail) => detail.key === "time")?.description || "00:00"
+    const numOfPeopleValue = bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0"
+    const priceValue = bookingDetails.find((detail) => detail.key === "price")?.description || ""
+    const typeValue = bookingDetails.find((detail) => detail.key === "booking_type")?.description || ""
+
+    console.log("Extracted booking details:", {
+      dateValue,
+      timeValue,
+      numOfPeopleValue,
+      priceValue,
+      typeValue,
+    })
+
+    try {
+      if (typeof window !== "undefined") {
+        window.dataLayer = window.dataLayer || []
+
+        window.dataLayer.push({
+          event: "continue_button_clicked",
+          date: dateValue,
+          time: timeValue,
+          numOfPeople: numOfPeopleValue,
+          price: priceValue,
+          type: typeValue,
+        })
+
+        console.log("GTM dataLayer push successful with event: continue_button_clicked")
+      }
+    } catch (error) {
+      console.error("Error sending GTM event:", error)
+    }
+
+    router.push("/booking/thankyou")
+  }
 
   const [times, setTimes] = useState({});
   const [showTimePicker, setShowTimePicker] = useState(false);
@@ -72,7 +117,10 @@ const Page = ({ params } ) => {
   });
   const [validationErrors, setValidationErrors] = useState({});
 
-  
+  const handleClickGtm = () => {
+    sendGTMEvent({ event: 'continue_button_clicked', value: 'User clicked continue' });
+   
+  };
 
 
   const closePopup = () => {
@@ -453,6 +501,26 @@ const Page = ({ params } ) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+     const trackingData = {
+        date: bookingDetails.find((detail) => detail.key === "date")?.description,
+        time: bookingDetails.find((detail) => detail.key === "time")?.description || "00:00",
+        numOfPeople: bookingDetails.find((detail) => detail.key === "no_of_people")?.description || "0",
+        price: bookingDetails.find((detail) => detail.key === "price")?.description || "",
+        type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
+      };
+    
+      console.log("Tracking Data:", trackingData);
+    
+      try {
+        sendGTMEvent({ 
+          event: 'continue_button_clicked', 
+          value: 'User submitted form to continue',
+          ...trackingData
+        });
+      } catch (error) {
+        console.error('Error sending GTM event:', error);
+      }
   
     if (validateForm()) {
       setShowRadioError(false);
@@ -520,7 +588,7 @@ const Page = ({ params } ) => {
         });
   
         try {
-          const response = await fetch("https://dev.teleiosx.com/email/email.php", {
+          const response = await fetch("https://teleiosx.com/email/email.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -604,7 +672,7 @@ const Page = ({ params } ) => {
       updateBookingDetail("time", timeValue);
       setSeatError("");
     } else {
-      setPopupMessage("The selected time slot is not available for the selected number of people.");
+  
       setIsPopupVisible(true);
     }
   };
@@ -1140,6 +1208,7 @@ const Page = ({ params } ) => {
     <div className="mt-6 flex justify-center">
       <button
       type="submit"
+      onClick={handleClick}
       className="button-slanted mt-[20px] w-full h-[40px] md:h-[59px] lg:h-[59px] cursor-pointer flex items-center justify-center px-[20px] py-[8px] ml-2 font-jura font-bold text-[#c09e5f] bg-gradient-to-r to-[#063828] from-[#002718] transition duration-300 rounded-tl-lg rounded-br-lg hover:border-0"
     >
       <span className="button-slanted-content py-2 font-jura font-bold text-[#c09e5f]">{t('CONTINUE')}</span>

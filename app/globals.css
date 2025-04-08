@@ -802,36 +802,11 @@ border: none !important;
   }
 }
 
-/* 
-@keyframes scrollText {
-  0% {
-    transform: translateX(100%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
-}
 
-.animate-scroll {
-  display: inline-block;
-  white-space: nowrap;
-  animation: scrollText 10s linear infinite;
-} */
+
 @media (min-width: 1024px) and (max-width: 1366px) {
   .custom-width {
-    width: 280px !important;
+    width: 400px !important;
+    height: auto;
   }
 }
-
-
-
-
-/* .shadow-overlay {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  background: linear-gradient(to left, rgba(2, 61, 37, 0.25) 0%, transparent 100%);
-} */
-

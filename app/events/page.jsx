@@ -6,6 +6,8 @@ import PrivateEventsSection from "../components/privateeventssection/PrivateEven
 import ForBooking from "../components/forbooking/Forbooking";
 
 const Page = () => {
+
+  
   return (
     <>
       <div 
