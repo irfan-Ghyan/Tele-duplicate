@@ -141,8 +141,6 @@ export default function CorporateEvents() {
       if (data.success) {
         console.log("Venur hire saved successfully:", data);
         // Proceed to the next tab
-
-        console.log({ ...venueData });
   
         try {
           const response = await fetch("https://teleiosx.com/email/email.php", {
@@ -153,7 +151,7 @@ export default function CorporateEvents() {
               companyEmail: "no-reply@teleiosx.com",
               subject: "Booking Confirmation",
               payload: {
-                bookingData: { ...bookingData },
+                bookingData: { amount : trackingData['price'],...bookingData },
                 venueData: { ...venueData }
               }
             }),

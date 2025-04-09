@@ -23,7 +23,7 @@ const Experience = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+    
 
         if (data.success) {
           const faqSection = data.data.sections.find((section) => section.title === "Session");

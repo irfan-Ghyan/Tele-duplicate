@@ -547,7 +547,7 @@ const handleSubmit = async (e) => {
               companyEmail: "no-reply@teleiosx.com",
               subject: "Booking Confirmation",
               payload: {
-                bookingData: { ...bookingData },
+                bookingData: { amount : trackingData['price'],...bookingData },
                 paymentData: { ...paymentData }
               }
 

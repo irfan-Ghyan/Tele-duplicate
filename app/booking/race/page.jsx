@@ -52,8 +52,20 @@ const Page = ({ params } ) => {
     }
   }, [])
 
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      trackAbandonedBooking({
+        step: 'User abandoned booking form',
+        timestamp: new Date().toISOString(),
+      });
+    };
+  
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, []);
+  
+
   const handleClick = () => {
-    // Check if bookingDetails exists and is an array
     if (!bookingDetails || !Array.isArray(bookingDetails)) {
       console.log("No booking details available for tracking")
       router.push("/booking/thankyou")
@@ -419,8 +431,6 @@ const Page = ({ params } ) => {
     //   }
     // }
 
-    console.log("Available slots fetched:", fetchedTimes);
-
 
     } catch (error) {
       console.error("Error fetching bookings:", error);
@@ -613,7 +623,7 @@ const Page = ({ params } ) => {
                companyEmail: "no-reply@teleiosx.com",
                subject: "Booking Confirmation",
                payload: {
-                 bookingData: { ...bookingData },
+                 bookingData: { amount : trackingData['price'],...bookingData },
                  paymentData: { ...paymentData }
                }
              }),
@@ -858,9 +868,7 @@ const Page = ({ params } ) => {
                     </div>
                   </div>
 
-   
-
-
+  
 
               <div className="w-full bg-[#C09E5F] p-[20px] lg:p-[30px] h-auto  md:rounded-[15px] mt-[20px]">
                 <h1 className="text-lg text-[#00352F] font-black font-orbitron">{t('chooseTime')}</h1>

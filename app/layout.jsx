@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer','GTM-569DRT96');`,
+            })(window,document,'script','dataLayer','GTM-MZJ2CHKT');`,
           }}
         />
 
@@ -76,7 +76,7 @@ export default function RootLayout({ children }) {
         <body className={inter.className}>
         <noscript>
           <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-569DRT96"
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MZJ2CHKT"
             height="0"
             width="0"
             style={{ display: "none", visibility: "hidden" }}
@@ -147,9 +147,12 @@ export default function RootLayout({ children }) {
 
           Moengage = moe({
             app_id: "13NE3FE15UA8RHU1I8WF0RK4",
-            debug_logs: 0
-          });`
+            debug_logs: 1
+          }); 
+          console.log("MoEngage SDK initialized with debug logs enabled");`
+          
         }}
+        
   ></Script>
 
           {!hideHeaderFooter && <Header />} 

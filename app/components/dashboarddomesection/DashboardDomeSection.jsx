@@ -137,7 +137,7 @@ const DashboardDomeSection = () => {
     // Append metadata
     formData.append('section', section);
     formData.append('imageName', imageName);
-  console.log(formData)
+
   
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -155,9 +155,7 @@ const DashboardDomeSection = () => {
       }
   
       const result = await response.json();
-      console.log('Image Upload Successful:', result);
-  
-      // Return uploaded file paths
+
       return result.file_paths || [];
     } catch (error) {
       console.error('Error during image upload:', error);

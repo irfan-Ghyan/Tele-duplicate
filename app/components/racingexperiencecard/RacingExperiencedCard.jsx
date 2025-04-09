@@ -128,14 +128,14 @@ export default function RacingExperienceCards() {
           {experiences.map((exp) => (
             <div
               key={exp.id}
-              className="relative border border-[#C09E5F] overflow-hidden flex flex-col h-full"
+              className="relative border border-[#C09E5F] overflow-hidden flex flex-col sm:h-[484px] md:h-[644px] lg:h-[744px] xl:h-[644px]"
               style={{ backgroundColor: "rgba(0, 51, 48, 0.9)" }}
             >
               <div className="absolute inset-0 z-0 w-full h-[286px]">
                 <Image src={exp.image || "/placeholder.svg"} alt={exp.title} fill style={{ objectFit: "cover" }} />
               </div>
 
-              <div className="relative z-10 flex flex-col sm:w-full h-[569px]  md:h-[744px] lg:w-[230px] xl:w-[360px] xl:h-[744px]"
+              <div className="relative z-10 flex flex-col sm:w-full md:h-[644px] lg:w-[230px] xl:w-[300px] 2xl:w-[360px]"
               onMouseEnter={() => setOpenDropdown(exp.id)}
               onMouseLeave={() => setOpenDropdown(null)}>
                 {openDropdown === exp.id ? (
@@ -190,14 +190,14 @@ export default function RacingExperienceCards() {
           {experiencesvip.map((exp) => (
             <div
               key={exp.id}
-              className="relative border border-[#C09E5F] overflow-hidden flex flex-col h-full"
+              className="relative border border-[#C09E5F] overflow-hidden flex flex-col sm:h-[444px] md:h-[644px] lg:h-[744px] xl:h-[644px]"
               style={{ backgroundColor: "rgba(0, 51, 48, 0.9)" }}
             >
               <div className="absolute inset-0 z-0 w-full h-[286px]">
                 <Image src={exp.image || "/placeholder.svg"} alt={exp.title} fill style={{ objectFit: "cover" }} />
               </div>
 
-              <div className="relative z-10 flex flex-col sm:w-full md:h-[744px] lg:w-[230px] xl:w-[360px] h-screen"
+              <div className="relative z-10 flex flex-col sm:w-full md:h-[644px] lg:w-[230px] xl:w-[300px] 2xl:w-[360px] "
               onMouseEnter={() => setOpenDropdownVip(exp.id)}
               onMouseLeave={() => setOpenDropdownVip(null)}
               >

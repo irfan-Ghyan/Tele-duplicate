@@ -530,7 +530,7 @@ const fetchBookings = useCallback(async () => {
       type: bookingDetails.find((detail) => detail.key === "booking_type")?.description || "",
     };
 
-    console.log("Tracking Data:", trackingData);
+
   
     try {
       sendGTMEvent({ 
@@ -598,11 +598,9 @@ const fetchBookings = useCallback(async () => {
       if (data.success) {
         bookingData.no_of_people = 1;
         paymentData.no_of_people = 1;
-        console.log("Booking and payment saved successfully:", data);
-
+  
         handleTabChange(3);
-        console.log({ ...bookingData, ...paymentData });
-
+      
          trackBookingEvent({
                         ...formData,
                         status: "Success",
@@ -618,7 +616,7 @@ const fetchBookings = useCallback(async () => {
               companyEmail: "no-reply@teleiosx.com",
               subject: "Booking Confirmation",
               payload: {
-                bookingData: { ...bookingData },
+                bookingData: { amount : trackingData['price'],...bookingData },
                 paymentData: { ...paymentData }
               }
             }),
@@ -669,7 +667,7 @@ const fetchBookings = useCallback(async () => {
     setActiveTime(timeKey);
     updateBookingDetail("time", timeValue);
     setAvailableSIMs(sims);
-    console.log(`Available SIMs for slot ${timeValue}:`, sims);
+
   };
 
   const validateBookingDetails = () => {

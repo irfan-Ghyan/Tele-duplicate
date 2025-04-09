@@ -23,9 +23,7 @@ const CorporateBuilding = () => {
 
     try {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-      console.log('Base URL:', baseUrl); // Debugging
-
-      // Fetch the section data
+     
       const sectionResponse = await fetch(`${baseUrl}/api/content/sections/Corporate Events`);
       if (!sectionResponse.ok) {
         throw new Error('Failed to fetch section data from the server.');

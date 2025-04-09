@@ -1,12 +1,19 @@
 'use client'
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import CorporateEvents from "../components/corporateevents/CorporateEvnets";
 import PrivateEventsSection from "../components/privateeventssection/PrivateEventsSection";
 import ForBooking from "../components/forbooking/Forbooking";
+import { trackEventInterest } from '../utils/moengage'; 
 
 const Page = () => {
-
+  
+  useEffect(() => {
+    trackEventInterest({
+      action: "Visited Events Page",
+      timestamp: new Date().toISOString(),
+    });
+  }, []);
   
   return (
     <>

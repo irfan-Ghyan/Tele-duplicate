@@ -443,8 +443,6 @@ const Page = ({ params } ) => {
       }
     }
 
-    console.log("Available slots fetched:", fetchedTimes);
-
 
     } catch (error) {
       console.error("Error fetching bookings:", error);

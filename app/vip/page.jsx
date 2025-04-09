@@ -81,7 +81,7 @@ const Page = ({ params }) => {
       const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
       const response = await fetch(`${baseUrl}/api/content/sections/${id}`);
       const data = await response.json();
-      console.log("Fetched Event Details:", data);
+
       setEventDetails(data);
     } catch (error) {
       console.error("Error fetching event details:", error);
@@ -308,7 +308,7 @@ const Page = ({ params }) => {
       let response = await doGetCall(url);
       const data = await response.json();
       const data_ = addMissingSlots(data)
-      console.log(data_)
+  
       const fetchedTimes = data_.reduce((acc, slot) => {
         if (slot.time) {
           acc[`time${slot.time}`] = {
@@ -432,7 +432,7 @@ const Page = ({ params }) => {
       const data = await response.json();
 
       if (data.success) {
-        console.log("Booking and payment saved successfully:", data);
+  
         // Proceed to the next tab
         handleTabChange(3);
       } else {

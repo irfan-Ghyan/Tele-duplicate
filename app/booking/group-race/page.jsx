@@ -402,7 +402,6 @@ const Page = ({ params } ) => {
     //   }
     // }
 
-    console.log("Available slots fetched:", fetchedTimes);
 
 
     } catch (error) {
@@ -586,7 +585,7 @@ const Page = ({ params } ) => {
           status: "Success",
           language: currentLanguage,
         });
-  
+      
         try {
           const response = await fetch("https://teleiosx.com/email/email.php", {
             method: "POST",
@@ -596,7 +595,7 @@ const Page = ({ params } ) => {
               companyEmail: "no-reply@teleiosx.com",
               subject: "Booking Confirmation",
               payload: {
-                bookingData: { ...bookingData },
+                bookingData: { amount : trackingData['price'],...bookingData },
                 paymentData: { ...paymentData }
               }
             }),

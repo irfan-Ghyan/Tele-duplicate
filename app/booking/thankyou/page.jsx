@@ -76,7 +76,7 @@ const Page = ({ params } ) => {
 
   const handleClickGtm = () => {
     sendGTMEvent({ event: 'continue_button_clicked', value: 'User clicked continue' });
-    console.log('GTM Event Sent: continue_button_clicked'); // Debugging ke liye
+    console.log('GTM Event Sent: continue_button_clicked');
   };
 
 
@@ -359,7 +359,6 @@ const Page = ({ params } ) => {
     //   }
     // }
 
-    console.log("Available slots fetched:", fetchedTimes);
 
 
     } catch (error) {
@@ -533,7 +532,7 @@ const Page = ({ params } ) => {
               companyEmail: "no-reply@teleiosx.com",
               subject: "Booking Confirmation",
               payload: {
-                bookingData: { ...bookingData },
+                bookingData: { amount : trackingData['price'],...bookingData },
                 paymentData: { ...paymentData }
               }
             }),
