@@ -123,7 +123,6 @@ export default function RacingExperienceCards() {
           </div>
         </div>
 
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 justify-center p-4 bg-[#003330]">
           {experiences.map((exp) => (
             <div
